@@ -4,7 +4,6 @@ import DashboardFooter from "./shared/components/DashboardFooter";
 const App = () => {
   return (
     <>
-      <DashboardFooter></DashboardFooter>
       <ToastContainer
         position={"top-right"}
         autoClose={1000}
