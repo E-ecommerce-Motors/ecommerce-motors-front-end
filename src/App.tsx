@@ -1,6 +1,4 @@
 import { ToastContainer } from "react-toastify";
-import DashboardFooter from "./shared/components/DashboardFooter";
-import TextAreaInput from "./shared/components/TextAreaInput";
 
 const App = () => {
   return (
