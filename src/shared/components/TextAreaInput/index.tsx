@@ -1,10 +1,16 @@
 import Textarea from "@mui/material/TextareaAutosize";
 import { ContentTextAreaInput } from "./styles";
 
-const TextAreaInput = () => {
+interface Props {
+  labelText: string;
+  placeholderText: string;
+}
+
+const TextAreaInput:React.FC<Props> = ({labelText, placeholderText}) => {
   return (
     <ContentTextAreaInput>
-      <Textarea className="textInput" maxRows={4} placeholder="Digite algo..."/>
+      <label htmlFor="textAreaId">{labelText}</label>
+      <Textarea id="textAreaId" className="textInput" placeholder={placeholderText} maxRows={4}/>
     </ContentTextAreaInput>
   );
 };
