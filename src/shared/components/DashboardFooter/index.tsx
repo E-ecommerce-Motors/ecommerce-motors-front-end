@@ -5,7 +5,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 const DashboardFooter = () => {
   return (
     <ContentFooter>
-      <img src="../../../../public/assets/Motors shop.png" alt="motors-shop" />
+      <img src="../../../assets/Motors shop.png" alt="motors-shop" />
       <p>© 2022 - Todos os direitos reservados.</p>
 
       <IconButton

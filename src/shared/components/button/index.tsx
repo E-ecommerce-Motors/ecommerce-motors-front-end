@@ -1,4 +1,4 @@
-import { ButtonBig } from "./style";
+import { ButtonBig } from "./styles";
 
 interface Props {
   bg: string;
