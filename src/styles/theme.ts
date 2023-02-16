@@ -1,3 +1,6 @@
+import "@fontsource/inter";
+import "@fontsource/lexend";
+
 export const theme = {
   colors: {
     brand1: "#4529E6",
@@ -80,6 +83,10 @@ export const theme = {
     brand: true,
     commun: false,
   },
+  fonts: {
+    inter: '"Inter","sans-serif"',
+    lexend: '"Lexend", sans-serif',
+  },
 };
 
 export type HeadingProps = {
@@ -91,6 +98,6 @@ export type HeadingProps = {
   bg?: keyof typeof theme.colors;
   border?: keyof typeof theme.colors;
   colorHover?: keyof typeof theme.colors;
-  backgroundHover?: keyof typeof theme.colors;
+  bgHover?: keyof typeof theme.colors;
   borderHover?: keyof typeof theme.colors;
 };

@@ -1,18 +1,41 @@
-import { theme } from "../../../styles/theme";
+import { HeadingProps, theme } from "../../../styles/theme";
 import { ButtonBig } from "./style";
 
-export const Button = () => {
+interface Props {
+  bg: string;
+  button: string;
+  color: string;
+  border: string;
+  weight: number;
+  size: string;
+  colorHover: string;
+  bgHover: string;
+  borderHover: string;
+  disable?: boolean;
+}
+
+export const ButtonComponent = ({
+  bg,
+  button,
+  color,
+  border,
+  size,
+  weight,
+  colorHover,
+  bgHover,
+  borderHover,
+}: Props) => {
   return (
     <ButtonBig
-      bg={theme.colors.brand1}
-      button={theme.button.big}
-      color={theme.colors.whiteFixed}
-      border={theme.colors.brand1}
-      font_size={theme.size.button_big_text}
-      font_weight={theme.weight.button_big_text}
-      colorHover={theme.colors.brand4}
-      backgroundHover={theme.colors.brand2}
-      borderHover={theme.colors.brand4}
+      bg={bg}
+      button={button}
+      color={color}
+      border={border}
+      size={size}
+      weight={weight}
+      colorHover={colorHover}
+      bgHover={bgHover}
+      borderHover={borderHover}
     >
       TEXT
     </ButtonBig>
