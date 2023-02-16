@@ -1,6 +1,7 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TextAreaInput from "./shared/components/TextAreaInput";
+import TextFieldInput from "./shared/components/TextInput";
 
 
 const App = () => {
