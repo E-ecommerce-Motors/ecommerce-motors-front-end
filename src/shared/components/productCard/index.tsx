@@ -12,7 +12,7 @@ import {
   Saler,
   Name,
   Active,
-} from "./style";
+} from "./styles";
 
 interface Props {
   img?: any;
