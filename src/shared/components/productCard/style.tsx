@@ -111,6 +111,7 @@ export const Price = styled.span`
   font-style: normal;
   font-weight: ${theme.weight.Heading_7_500};
   font-size: ${theme.size.Heading_7};
+  color: ${theme.colors.grey1};
   line-height: 20px;
 `;
 

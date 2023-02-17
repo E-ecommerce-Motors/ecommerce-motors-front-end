@@ -1,4 +1,3 @@
-import { HeadingProps, theme } from "../../../styles/theme";
 import { ButtonBig } from "./style";
 
 interface Props {
