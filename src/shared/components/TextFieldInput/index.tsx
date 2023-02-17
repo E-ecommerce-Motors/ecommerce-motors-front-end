@@ -21,9 +21,9 @@ const TextFieldInput: React.FC<Props> = ({
 }) => {
   return (
     <ContentTextAreaInput>
-      <InputLabel htmlFor="textAreaId">{labelText}</InputLabel>
+      <InputLabel htmlFor="textFieldId">{labelText}</InputLabel>
       <CustomTextField
-        id="textAreaId"
+        id="textFieldId"
         type={typeInput}
         className="textInput"
         placeholder={placeholderText}
