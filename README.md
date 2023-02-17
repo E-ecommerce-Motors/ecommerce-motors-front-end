@@ -1,4 +1,5 @@
-##
+
+<a name="tabela-de-conteúdos"></a>
 
 <h1 align="center">
   Motors shop
@@ -24,11 +25,11 @@ Comércio eletrônico de veículos: Compra e venda de carros e motos online
 
 - O comércio eletrônico de carros e motos é uma alternativa popular para aqueles que desejam comprar ou vender veículos. Através de plataformas online, é possível encontrar informações detalhadas sobre os veículos disponíveis para venda, entrar em contato com o vendedor e agendar uma visita para avaliar o veículo.
 
-Uma das vantagens de utilizar uma plataforma online para encontrar um carro ou moto é a conveniência, pois o usuário pode acessar diversas opções de veículos sem sair de casa. Além disso, o processo de contato e negociação com o vendedor é mais ágil e prático, possibilitando que o comprador encontre o veículo ideal em menos tempo.
+- Uma das vantagens de utilizar uma plataforma online para encontrar um carro ou moto é a conveniência, pois o usuário pode acessar diversas opções de veículos sem sair de casa. Além disso, o processo de contato e negociação com o vendedor é mais ágil e prático, possibilitando que o comprador encontre o veículo ideal em menos tempo.
 
-Porém, é importante lembrar que é necessário tomar cuidado ao comprar um veículo pela internet, pois nem sempre as informações fornecidas pelos vendedores são precisas ou confiáveis. Por isso, é recomendado que o comprador solicite um relatório de histórico do veículo e faça uma inspeção completa antes de finalizar a compra.
+- Porém, é importante lembrar que é necessário tomar cuidado ao comprar um veículo pela internet, pois nem sempre as informações fornecidas pelos vendedores são precisas ou confiáveis. Por isso, é recomendado que o comprador solicite um relatório de histórico do veículo e faça uma inspeção completa antes de finalizar a compra.
 
-Em resumo, o comércio eletrônico de carros e motos é uma opção conveniente para encontrar um veículo para comprar, mas é importante estar atento e tomar as precauções necessárias para garantir uma compra segura e bem-sucedida.
+- Em resumo, o comércio eletrônico de carros e motos é uma opção conveniente para encontrar um veículo para comprar, mas é importante estar atento e tomar as precauções necessárias para garantir uma compra segura e bem-sucedida.
 
 <a name="links"></a>
 
