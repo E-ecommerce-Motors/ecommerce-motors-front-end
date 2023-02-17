@@ -22,14 +22,19 @@ Comércio eletrônico de veículos: Compra e venda de carros e motos online
 
 ## 1. Sobre
 
-- A finalidade desta API é criar um sistema de cadastro simplificado de clientes, onde será possível vincular contatos a cada cliente. A Api permitirá a visualização dos clientes e dos contatos vinculados a eles de forma organizada e fácil de acessar. Além disso, essa Api fornecerá as funcionalidades básicas de um CRUD (criação, leitura, atualização e exclusão) para gerenciar esses dados de forma eficiente e segura, permitindo que você mantenha seu cadastro de clientes atualizado e sempre à mão. Em resumo, a Api de cadastro de clientes com vínculo de contatos oferece uma solução simplificada e prática para gerenciar seus dados de clientes e contatos.
+- O comércio eletrônico de carros e motos é uma alternativa popular para aqueles que desejam comprar ou vender veículos. Através de plataformas online, é possível encontrar informações detalhadas sobre os veículos disponíveis para venda, entrar em contato com o vendedor e agendar uma visita para avaliar o veículo.
+
+Uma das vantagens de utilizar uma plataforma online para encontrar um carro ou moto é a conveniência, pois o usuário pode acessar diversas opções de veículos sem sair de casa. Além disso, o processo de contato e negociação com o vendedor é mais ágil e prático, possibilitando que o comprador encontre o veículo ideal em menos tempo.
+
+Porém, é importante lembrar que é necessário tomar cuidado ao comprar um veículo pela internet, pois nem sempre as informações fornecidas pelos vendedores são precisas ou confiáveis. Por isso, é recomendado que o comprador solicite um relatório de histórico do veículo e faça uma inspeção completa antes de finalizar a compra.
+
+Em resumo, o comércio eletrônico de carros e motos é uma opção conveniente para encontrar um veículo para comprar, mas é importante estar atento e tomar as precauções necessárias para garantir uma compra segura e bem-sucedida.
 
 <a name="links"></a>
 
 ## 2. Links relevantes
 
-- <a name="deploy-da-aplicação" href ="https://get-in-touch-snowy.vercel.app" target="_blank">Link da aplicação front-end</a>
-- <a name="deploy-da-aplicação" href ="https://customer-registration-api.onrender.com" target="_blank">Link da aplicação back-end</a>
+- <a name="deploy-da-aplicação" href ="" target="_blank">Link da aplicação no vercel</a>
 
 <a align="left" name="techs"></a>
 
@@ -60,9 +65,7 @@ Visão Geral das tecnologias usadas no projeto.
 - Rodar a aplicação Back-end localmente
 
 ### 4.2 Instalação
-4.2.1 - Para executar a aplicação localmente, siga os passos descritos na documentação da [Api](https://github.com/GabrielFray/customer-registration-with-contact-link-api), disponível em GitHub. Se desejar utilizar o deploy, utilize o link https://customer-registration-api.onrender.com e insira-o na variável ```baseUrl``` na pasta ```services```. No entanto, é importante ressaltar que a versão em deploy pode apresentar problemas de lentidão, sendo recomendado o uso da aplicação rodada localmente.
-
-4.2.2 - Após o clone no repositório para adicionar todas as dependências do package json execute o comando: 
+4.2.1 - Após o clone no repositório para adicionar todas as dependências do package json execute o comando: 
 `yarn install` 
 
 4.2.2 - Para rodar projeto utilize o comando `yarn dev` no terminal, caso de tudo certo receberá uma mensagem parecida com essa:
@@ -75,8 +78,6 @@ VITE v4.0.4  ready in 4915 ms
   ➜  Network: use --host to expose  
   ➜  press h to show help
 ```
-4.2.3 - O deploy do seu projeto foi realizado no Vercel e pode ser acessado pelo link [Get in touch](https://get-in-touch-snowy.vercel.app). No entanto, é necessário rodar o back-end localmente para garantir que todas as requisições funcionem corretamente.
-
 <a name="devs"></a>
 
 ## 5. Desenvolvedores
