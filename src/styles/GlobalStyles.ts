@@ -19,9 +19,7 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         vertical-align: baseline;
         box-sizing: border-box;
-        font-family: 'Inter', sans-serif;
-     
-    
+        font-family: 'Lexend', sans-serif;
     }
     body{
         background-color: var(--whiteFixed);
