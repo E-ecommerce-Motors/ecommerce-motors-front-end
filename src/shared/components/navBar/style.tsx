@@ -4,6 +4,7 @@ import { theme } from "../../../styles/theme";
 export interface Props {
   authenticaded?: string;
   open?: boolean;
+  mobile?: boolean;
 }
 
 export const Container = styled.section`
@@ -12,17 +13,38 @@ export const Container = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 0px 60px;
-  gap: 690px;
   position: fixed;
   width: 100vw;
   height: 80px;
   background: ${theme.colors.grey10};
   border-bottom: 2px solid ${theme.colors.grey6};
+  @media (max-width: 1000px) {
+    flex-direction: ${(props: Props) => (props.mobile ? "column" : "row")};
+    height: ${(props: Props) => (props.mobile ? "100vh" : "80px")};
+    justify-content: ${(props: Props) => (props.mobile ? "flex-start" : "")};
+    padding: 0px 30px;
+  }
+`;
+
+export const ContainerMobile = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  border-bottom: 0px solid ${theme.colors.grey6};
+  @media (max-width: 1000px) {
+    border-bottom: ${(props: Props) =>
+      props.mobile ? "2px solid #DEE2E6" : "0px"};
+    padding: ${(props: Props) => (props.mobile ? "0px 30px" : "0px")};
+  }
 `;
 
 export const Text = styled.image`
   width: 153.02px;
   height: 26.34px;
+
   background-image: url(src/assets/Motors_shop.png);
 `;
 
@@ -52,6 +74,11 @@ export const Line = styled.div`
   height: 79px;
   background-color: ${theme.colors.grey6};
   flex: none;
+  @media (max-width: 1000px) {
+    width: 100vw;
+    margin-left: -30px;
+    height: 2px;
+  }
 `;
 
 export const SignUp = styled.button`
@@ -80,7 +107,12 @@ export const SignUp = styled.button`
     border: 1.5px solid ${theme.colors.grey4};
     color: ${theme.colors.grey0};
   }
+  @media (max-width: 1000px) {
+    width: 80vw;
+    border: 1.5px solid ${theme.colors.grey4};
+  }
 `;
+
 export const SignIn = styled.button`
   box-sizing: border-box;
   display: flex;
@@ -106,6 +138,10 @@ export const SignIn = styled.button`
     border: 1.5px solid ${theme.colors.grey4};
     color: ${theme.colors.grey0};
   }
+
+  @media (max-width: 1000px) {
+    margin-left: -20px;
+  }
 `;
 
 export const Urls = styled.div`
@@ -121,6 +157,16 @@ export const Urls = styled.div`
   flex: none;
   order: 1;
   flex-grow: 0;
+
+  @media (max-width: 1000px) {
+    display: ${(props: Props) => (props.mobile ? "flex" : "none")};
+    flex-direction: ${(props: Props) => (props.mobile ? "column" : "row")};
+    width: 100%;
+    height: unset;
+    padding: 30px 0px;
+    gap: 35px;
+    align-items: flex-start;
+  }
 `;
 
 export const Icon = styled.div`
@@ -167,6 +213,11 @@ export const MenuBox = styled.div`
   background: ${theme.colors.grey9};
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  @media (max-width: 1000px) {
+    position: relative;
+    top: 15px;
+    width: 88vw;
+  }
 `;
 
 export const User = styled.div`
@@ -174,6 +225,9 @@ export const User = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 1000px) {
+    justify-content: flex-start;
+  }
 `;
 
 export const OptionsProfile = styled.a`
@@ -200,4 +254,65 @@ export const Profile = styled.div`
   /* :hover ${MenuBox} {
     display: flex;
   } */
+`;
+
+export const Mobile = styled.div`
+  display: none;
+  input {
+    position: absolute;
+    opacity: 0;
+  }
+  label {
+    display: none;
+    position: absolute;
+    width: 35px;
+    height: 40px;
+    z-index: 1;
+    margin-top: -18px;
+    margin-left: -2px;
+    cursor: pointer;
+  }
+  span {
+    display: none;
+    position: absolute;
+    background-color: ${theme.colors.grey1};
+    width: 30px;
+    height: 7px;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    transform: scale(0.7);
+  }
+  span::after,
+  span::before {
+    content: "";
+    position: absolute;
+    background-color: ${theme.colors.grey1};
+    width: 30px;
+    height: 7px;
+    top: -14px;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+  }
+  span::before {
+    top: 14px;
+  }
+  input:checked ~ span {
+    background-color: transparent;
+  }
+  input:checked ~ span::before {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+  input:checked ~ span::after {
+    transform: rotate(45deg);
+    top: 0;
+  }
+  @media (max-width: 1000px) {
+    margin-right: 30px;
+    display: flex;
+    label,
+    span {
+      display: block;
+    }
+  }
 `;

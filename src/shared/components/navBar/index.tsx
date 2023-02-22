@@ -13,6 +13,8 @@ import {
   MenuBox,
   Profile,
   OptionsProfile,
+  Mobile,
+  ContainerMobile,
 } from "./style";
 
 interface Props {
@@ -25,11 +27,23 @@ export const NavBar = ({ auth, user }: Props) => {
   //   const user: string = "Lucas Galvs";
   const name = user.split(" ");
   const [openProfile, setOpenProfile] = useState(false);
+  const [navMobile, setNavMobile] = useState(false);
 
   return (
-    <Container>
-      <Text></Text>
-      <Urls authenticaded={auth}>
+    <Container mobile={navMobile}>
+      <ContainerMobile mobile={navMobile}>
+        <Text></Text>
+        <Mobile>
+          <input
+            onClick={() => setNavMobile(!navMobile)}
+            type="checkbox"
+            id="mobile"
+          />
+          <label htmlFor="mobile" />
+          <span />
+        </Mobile>
+      </ContainerMobile>
+      <Urls authenticaded={auth} mobile={navMobile}>
         <Option authenticaded={auth}>Carros</Option>
         <Option authenticaded={auth}>Motos</Option>
         <Option authenticaded={auth}>Leilão</Option>
