@@ -15,7 +15,7 @@ import {
   OptionsProfile,
   Mobile,
   ContainerMobile,
-} from "./style";
+} from "./styles";
 
 interface Props {
   auth: "default" | "authenticated";
