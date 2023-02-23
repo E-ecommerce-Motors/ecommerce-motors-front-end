@@ -1,13 +1,16 @@
 import styled from "styled-components"
 
 export const ContentFooter = styled.footer`
+position: fixed;
+left: 0;
+bottom: 0;
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: space-between;
 
 min-width: 100vw;
-height: 20rem;
+height: 15rem;
 padding: 1.8rem;
 
 background-color: var(--grey0);
@@ -17,9 +20,9 @@ background-color: var(--grey0);
         color: var(--whiteFixed);
     }
 
-    @media(min-width: 1024px){
+    @media(min-width: 768px){
         flex-direction: row;
-        height: 8rem;
+        height: 5rem;
 
     }
 `
