@@ -20,10 +20,10 @@ export const Container = styled.section`
   border-bottom: 2px solid ${theme.colors.grey6};
 `;
 
-export const Text = styled.image`
+export const Text = styled.img`
   width: 153.02px;
   height: 26.34px;
-  background-image: url(src/assets/Motors_shop.png);
+  background-image: url(../../../../public/assets/motors-shop-dark.png);
 `;
 
 export const Option = styled.a`

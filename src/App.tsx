@@ -1,10 +1,12 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { NavBar } from "./shared/components/navBar";
+import DashboardFooter from "./shared/components/DashboardFooter";
+import { NavBar } from "./shared/components/NavBar";
 
 const App = () => {
   return (
     <>
+      <DashboardFooter />
       <ToastContainer
         position={"top-right"}
         autoClose={1000}

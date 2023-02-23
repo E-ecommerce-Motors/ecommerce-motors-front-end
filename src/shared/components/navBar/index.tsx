@@ -13,7 +13,7 @@ import {
   MenuBox,
   Profile,
   OptionsProfile,
-} from "./style";
+} from "./styles";
 
 interface Props {
   auth: "default" | "authenticated";
