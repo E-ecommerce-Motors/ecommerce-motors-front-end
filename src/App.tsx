@@ -1,14 +1,11 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import DashboardFooter from "./shared/components/DashboardFooter";
-import { NavBar } from "./shared/components/NavBar";
-import TextFieldInput from "./shared/components/TextFieldInput";
+import { RoutesMain } from "./shared/routes";
 
 
 const App = () => {
   return (
     <>
-      <DashboardFooter />
       <ToastContainer
         position={"top-right"}
         autoClose={1000}
@@ -17,7 +14,7 @@ const App = () => {
         pauseOnHover={true}
         draggable={true}
       />
-      <NavBar auth={"authenticated"} user={"Lucas Galvs"} />
+      <RoutesMain></RoutesMain>
     </>
   );
 };

@@ -20,7 +20,7 @@ background-color: var(--grey0);
         color: var(--whiteFixed);
     }
 
-    @media(min-width: 1024px){
+    @media(min-width: 768px){
         flex-direction: row;
         height: 5rem;
 

@@ -41,10 +41,9 @@ export const ContainerMobile = styled.div`
   }
 `;
 
-export const Text = styled.img`
+export const Text = styled.div`
   width: 153.02px;
   height: 26.34px;
-
   background-image: url(../../../../public/assets/motors-shop-dark.png);
 `;
 
