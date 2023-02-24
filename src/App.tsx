@@ -1,5 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CreateAnnouncementModal from "./shared/components/CreateAnnouncementModal";
 import DetailedAnnouncement from "./shared/components/DetailedAnnouncement";
 import { RoutesMain } from "./shared/routes";
 
@@ -17,7 +18,8 @@ const App = () => {
       />
       {/* <RoutesMain></RoutesMain> */}
       {/* <NavBar auth={"authenticated"} user={"Lucas Galvs"} /> */}
-      <DetailedAnnouncement nameCar="Prisma" />
+      {/* <DetailedAnnouncement nameCar="Prisma" /> */}
+      <CreateAnnouncementModal/>
     </>
   );
 };
