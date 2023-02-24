@@ -13,7 +13,6 @@ export const Container = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 0px 60px;
-  position: fixed;
   width: 100vw;
   height: 80px;
   background: ${theme.colors.grey10};
