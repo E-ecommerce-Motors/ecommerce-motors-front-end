@@ -8,6 +8,7 @@ interface Props {
 }
 
 interface Announcement {
+  id: number;
   name: string;
   saler?: boolean;
   title: string;
@@ -53,6 +54,7 @@ export const Carousel = ({ type }: Props) => {
             let date = element.year.split("-");
             return (
               <ProductCard
+                id={element.id}
                 km={element.mileage}
                 heading={element.title}
                 name={name}
@@ -61,6 +63,7 @@ export const Carousel = ({ type }: Props) => {
                 text={element.description}
                 key={index}
                 year={Number(date[0])}
+                type={element.typeVehicle}
               />
             );
           })}

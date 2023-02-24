@@ -1,3 +1,9 @@
+import { Box, Modal } from "@mui/material";
+import { refType } from "@mui/utils";
+import { useState } from "react";
+import { ButtonBig } from "../Button/styles";
+import { EditAnnouncement } from "../Modal/editAnnouncement";
+import { ProductCardAuction } from "../ProductCardAuction";
 import {
   Heading7,
   Icon,
@@ -24,6 +30,8 @@ interface Props {
   price: number;
   name: string;
   active?: boolean;
+  type: string;
+  id: number;
 }
 
 export const ProductCard = ({
@@ -35,15 +43,35 @@ export const ProductCard = ({
   year,
   price,
   name,
+  type,
+  id,
 }: Props) => {
   const priceformat: string = price.toLocaleString(`pt-BR`, {
     style: "currency",
     currency: "BRL",
   });
 
+  const announcement = {
+    heading,
+    text,
+    saler,
+    km,
+    year,
+    price,
+    name,
+    type,
+    id,
+  };
+
   const active: boolean = true;
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Container>
+    <Container onClick={() => handleOpen()}>
       <ImgContainer>
         <Active saler={saler} active={active}>
           {active ? `Ativo` : "Inativo"}
@@ -67,6 +95,16 @@ export const ProductCard = ({
         </Infos>
         <Price>{priceformat}</Price>
       </Footer>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+      >
+        <Box>
+          <EditAnnouncement {...announcement} />
+        </Box>
+      </Modal>
     </Container>
   );
 };

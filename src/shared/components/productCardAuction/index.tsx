@@ -18,7 +18,7 @@ import {
   Product,
   Time,
   Clock,
-} from "./style";
+} from "./styles";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import EastIcon from "@mui/icons-material/East";
 import { theme } from "../../../styles/theme";

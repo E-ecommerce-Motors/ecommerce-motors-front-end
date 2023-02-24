@@ -1,5 +1,5 @@
 import { Container, Auction, Frame, Title } from "./styles";
-import { ProductCardAuction } from "../productCardAuction";
+import { ProductCardAuction } from "../ProductCardAuction";
 
 interface Props {
   type: "car" | "motorcycle";
