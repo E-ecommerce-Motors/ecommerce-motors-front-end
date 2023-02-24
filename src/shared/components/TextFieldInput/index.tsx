@@ -29,8 +29,7 @@ const TextFieldInput: React.FC<Props> = ({
         placeholder={placeholderText}
         maxRows={maxRowsNumber}
         multiline={multilineOption}
-        InputProps={{sx: {height: inputHeight}}}
-      />
+        InputProps={{sx: {height: inputHeight} }}/>
     </ContentTextAreaInput>
   );
 };
