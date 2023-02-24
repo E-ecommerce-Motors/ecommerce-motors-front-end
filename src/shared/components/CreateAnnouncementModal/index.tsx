@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import TextFieldInput from "../TextFieldInput";
+import { useForm } from "react-hook-form";
+import {api} from "../../services/api"
 import {
   ModalWrapper,
   ModalContent,
@@ -8,6 +10,7 @@ import {
 } from "./style";
 
 const CreateAnnouncementModal = () => {
+const { register, handleSubmit, reset } = useForm();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
 
@@ -17,6 +20,16 @@ const CreateAnnouncementModal = () => {
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
+  };
+
+  const onSubmit = async (data: any) => {
+    try {
+      const response = await api.post("announcements", data);
+      console.log(data);
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -36,13 +49,13 @@ const CreateAnnouncementModal = () => {
               <SelectableButton
                 onClick={() => handleOptionClick("buy")}
                 isSelected={selectedOption === "buy"}
-              >
+                >
                 Leilão
               </SelectableButton>
               <SelectableButton
                 onClick={() => handleOptionClick("sell")}
                 isSelected={selectedOption === "sell"}
-              >
+                >
                 Venda
               </SelectableButton>
             </div>
@@ -51,13 +64,15 @@ const CreateAnnouncementModal = () => {
               <TextFieldInput
                 labelText="Título"
                 placeholderText="Digitar título"
-              />
+                {...register("title")}
+                />
               <div className="yearKmPrice">
-                <TextFieldInput labelText="Ano" placeholderText="Digitar ano" />
-                <TextFieldInput labelText="Quilometragem" placeholderText="0" />
+                <TextFieldInput labelText="Ano" placeholderText="Digitar ano" {...register("year")}/>
+                <TextFieldInput labelText="Quilometragem" placeholderText="0" {...register("kilometer")}/>
                 <TextFieldInput
                   labelText="Preço"
                   placeholderText="Digitar Preço"
+                  {...register("price")}
                 />
               </div>
               <TextFieldInput
@@ -66,12 +81,14 @@ const CreateAnnouncementModal = () => {
                 multilineOption={true}
                 maxRowsNumber={2}
                 inputHeight={80}
+                {...register("description")}
               />
               <h5>Tipo de veículo</h5>
               <div className="selectableContainer">
                 <SelectableButton
                   onClick={() => handleOptionClick("Carro")}
                   isSelected={selectedOption === "Carro"}
+
                 >
                   Carro
                 </SelectableButton>
@@ -84,7 +101,7 @@ const CreateAnnouncementModal = () => {
                 
               </div>
                 <div className="createCancel">
-                    <button>Criar Anúncio</button>
+                    <button onClick={handleSubmit(onSubmit)}>Criar Anúncio</button>
                     <button>Cancelar</button>
                 </div>
             </div>
