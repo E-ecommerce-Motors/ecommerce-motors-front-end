@@ -26,6 +26,7 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalContent = styled.div`
+position: absolute;
   display: flex;
   flex-direction: column;
   background-color: white;

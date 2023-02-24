@@ -1,5 +1,5 @@
 import { theme } from "../../../styles/theme";
-import { ButtonBig } from "../Button/styles";
+import { ButtonBig } from "../button/styles";
 import {
   ContentButtons,
   ContentFilter,

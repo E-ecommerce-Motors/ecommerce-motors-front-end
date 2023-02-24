@@ -7,6 +7,7 @@ import { RoutesMain } from "./shared/routes";
 const App = () => {
   return (
     <>
+    <CreateAnnouncementModal/>
       <ToastContainer
         position={"top-right"}
         autoClose={1000}
