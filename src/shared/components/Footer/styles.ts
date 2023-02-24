@@ -1,9 +1,6 @@
 import styled from "styled-components"
 
 export const ContentFooter = styled.footer`
-position: fixed;
-left: 0;
-bottom: 0;
 display: flex;
 flex-direction: column;
 align-items: center;
