@@ -1,8 +1,4 @@
-import { useEffect, useState } from "react";
-import { Container, Auction, Frame, Title } from "./style";
-import { ProductCard } from "../productCard";
-import { api } from "../../services/api";
-import { User } from "../navBar/styles";
+import { Container, Auction, Frame, Title } from "./styles";
 import { ProductCardAuction } from "../productCardAuction";
 
 interface Props {
