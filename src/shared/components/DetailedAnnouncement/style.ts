@@ -7,7 +7,7 @@ export const DetailedAnnouncementContent = styled.section`
   justify-content: center;
   /* margin-top: 80px; */
   background: linear-gradient(to top, var(--grey9) 10%, var(--brand2) 10%);
-  .purple{
+  .purple {
     background-color: red;
     width: 100vw;
     height: 80px;
@@ -19,19 +19,18 @@ export const DetailedAnnouncementContent = styled.section`
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    ;
     /* background-color: var(--grey9); */
     width: 95%;
     gap: 15px;
-    .radius{
-        border-radius: 5px;
-    background-color: var(--grey9);
-    width: 95%;
-    gap: 15px;
-    .radius{
+    .radius {
+      border-radius: 5px;
+      background-color: var(--grey9);
+      width: 95%;
+      gap: 15px;
+      .radius {
         border-radius: 3px;
-    }
-    .carImage{
+      }
+      .carImage {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -39,31 +38,33 @@ export const DetailedAnnouncementContent = styled.section`
         background-color: white;
         height: 355px;
         padding: 15px;
-        img{
-            max-width: 300px;
-            max-height: 300px; 
-        background-color: var(--brand2);
-        width: 100vw;
-        img{
+        img {
+          max-width: 300px;
+          max-height: 300px;
+          background-color: var(--brand2);
+          width: 100vw;
+          img {
             width: 30%;
             height: 30%;
+          }
         }
-    }
 
-    .carModel{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
-        width: 100%;
-    }
+        .carModel {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          width: 100%;
+        }
 
-    .carDescription{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
-        width: 100%;
+        .carDescription {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          width: 100%;
+        }
+      }
     }
   }
 `;
