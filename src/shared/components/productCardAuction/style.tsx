@@ -7,6 +7,10 @@ export const Card = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  @media (max-width: 1650px) {
+    width: 328px;
+    height: 435px;
+  }
 `;
 
 export const Container = styled.section`
@@ -17,6 +21,10 @@ export const Container = styled.section`
   gap: 16px;
   width: 663px;
   height: 177px;
+  @media (max-width: 1650px) {
+    width: 275px;
+    height: 298px;
+  }
 `;
 
 export const Content = styled.div`
@@ -30,6 +38,10 @@ export const Content = styled.div`
   gap: 69px;
   width: 735px;
   height: 330px;
+  @media (max-width: 1650px) {
+    width: 328px;
+    height: 435px;
+  }
 `;
 
 export const ImgContainer = styled.section`
@@ -38,6 +50,12 @@ export const ImgContainer = styled.section`
   width: 735px;
   height: 326px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  @media (max-width: 1650px) {
+    width: 328px;
+    height: 435px;
+  }
 `;
 export const Bg = styled.section`
   z-index: 1;
@@ -45,6 +63,12 @@ export const Bg = styled.section`
   width: 734px;
   height: 325.89px;
   background: #e9ecef;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  @media (max-width: 1650px) {
+    width: 328px;
+    height: 435px;
+  }
 `;
 
 export const Img = styled.div`
@@ -54,9 +78,14 @@ export const Img = styled.div`
   width: 581.96px;
   height: 315.11px;
   order: 0;
-  background-image: url(src/assets/land-rover-range-rover-car-png-25.png);
+  background-image: url(/assets/land-rover-range-rover-car-png-25.png);
   background-repeat: no-repeat;
   background-size: contain;
+  @media (max-width: 1650px) {
+    width: 287px;
+    height: 155.4px;
+    top: 116px;
+  }
 `;
 
 export const Heading = styled.h2`
@@ -68,6 +97,10 @@ export const Heading = styled.h2`
   color: ${theme.colors.grey10};
   width: 658px;
   height: 25px;
+  @media (max-width: 1650px) {
+    width: 275px;
+    height: 50px;
+  }
 `;
 
 export const Paragraph = styled.p`
@@ -79,6 +112,10 @@ export const Paragraph = styled.p`
   font-weight: ${theme.weight.body_1_400};
   font-size: ${theme.size.body_1};
   line-height: 28px;
+  @media (max-width: 1650px) {
+    width: 275px;
+    height: 84px;
+  }
 `;
 
 export const Icon = styled.div`
@@ -136,7 +173,11 @@ export const Footer = styled.section`
   width: 658px;
   height: 32px;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 15px;
+  @media (max-width: 1650px) {
+    flex-direction: column;
+  }
 `;
 
 export const Infos = styled.aside`
@@ -187,7 +228,6 @@ export const Clock = styled.div`
   line-height: 36px;
   text-align: center;
   position: absolute;
-  left: 36px;
   top: 24px;
   background: ${theme.colors.whiteFixed};
   border-radius: 32px;
@@ -212,6 +252,11 @@ export const Button = styled.button`
   border-bottom-right-radius: 4px;
   border-style: none;
   color: ${theme.colors.whiteFixed};
+  @media (max-width: 1650px) {
+    width: 328px;
+    height: 61px;
+    gap: 40px;
+  }
 `;
 
 export const Product = styled.section`
@@ -222,5 +267,13 @@ export const Product = styled.section`
   }
   :hover ${Button} {
     background: ${theme.colors.brand2};
+  }
+
+  @media (max-width: 1650px) {
+    width: 328px;
+    height: 496px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
   }
 `;
