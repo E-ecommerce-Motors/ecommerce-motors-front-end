@@ -15,6 +15,7 @@ export interface Props {
 }
 
 export const ButtonBig = styled.button`
+  cursor: pointer;
   box-sizing: border-box;
   gap: 10px;
   padding: 12px 28px;
@@ -41,5 +42,6 @@ export const ButtonBig = styled.button`
       props.disable ? "#B0A6f0" : "#CED4DA"};
     color: ${(props: Props) => (props.disable ? "#EDEAFD" : "#FFFFFF")};
     border: ${(props: Props) => (props.disable ? "#B0A6f0" : "#CED4DA")};
+    
   }
 `;

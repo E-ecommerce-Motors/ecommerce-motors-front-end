@@ -23,9 +23,9 @@ const { register, handleSubmit, reset } = useForm();
   };
 
   const onSubmit = async (data: any) => {
+    console.log(data);
     try {
       const response = await api.post("announcements", data);
-      console.log(data);
       reset();
     } catch (error) {
       console.error(error);
