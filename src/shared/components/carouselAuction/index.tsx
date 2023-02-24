@@ -54,6 +54,33 @@ export const CarouselAuction = () => {
             text={text}
             saler={saler}
           />
+          <ProductCardAuction
+            heading={heading}
+            km={km}
+            year={year}
+            price={price}
+            name={name}
+            text={text}
+            saler={saler}
+          />
+          <ProductCardAuction
+            heading={heading}
+            km={km}
+            year={year}
+            price={price}
+            name={name}
+            text={text}
+            saler={saler}
+          />
+          <ProductCardAuction
+            heading={heading}
+            km={km}
+            year={year}
+            price={price}
+            name={name}
+            text={text}
+            saler={saler}
+          />
         </Frame>
       </Auction>
     </Container>

@@ -54,7 +54,7 @@ export const ProductCard = ({
         {heading.length > 41 ? `${heading.slice(0, 38)}...` : heading}
       </Heading7>
       <Paragraph>
-        {text.length > 87 ? `${text.slice(0, 84)}...` : text}
+        {text.length > 74 ? `${text.slice(0, 71)}...` : text}
       </Paragraph>
       <Saler>
         <Icon>{name.slice(0, 1)}</Icon>
