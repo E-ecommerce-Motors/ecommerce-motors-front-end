@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Container, Auction, Frame, Title } from "./style";
+import { Container, Auction, Frame, Title } from "./styles";
 import { ProductCard } from "../ProductCard";
 import { api } from "../../services/api";
-import { ProductCardAuction } from "../productCardAuction";
+import { User } from "../NavBar/styles";
+import { ProductCardAuction } from "../ProductCardAuction";
 
 interface Props {
   type: "car" | "motorcycle";
