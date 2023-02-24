@@ -34,7 +34,7 @@ export const ImgContainer = styled.section`
 export const Img = styled.div`
   width: 262px;
   height: 150.28px;
-  background-image: url(src/assets/land-rover-range-rover-car-png-25.png);
+  background-image: url(/assets/land-rover-range-rover-car-png-25.png);
   background-repeat: no-repeat;
   background-size: contain;
   transition: 0.5s;
@@ -92,7 +92,7 @@ export const KM_Year = styled.div`
   align-items: center;
   padding: 4px 8px;
   gap: 10px;
-  width: 51px;
+  width: 57px;
   height: 32px;
   font-size: ${theme.size.body_2};
   font-weight: ${theme.weight.body_2_500};
@@ -127,7 +127,7 @@ export const Infos = styled.aside`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  width: 37%;
+  width: 39%;
 `;
 
 export const Saler = styled.aside`
@@ -160,7 +160,7 @@ export const Active = styled.div`
   gap: 10px;
   width: max-content;
   height: 24px;
-  position: absolute;
+  position: relative;
   color: ${theme.colors.whiteFixed};
   left: 16px;
   top: 11px;
