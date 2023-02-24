@@ -9,6 +9,7 @@ const DetailedAnnouncement: React.FC<IDetailedAnnouncement> = ({ nameCar }) => {
     <DetailedAnnouncementContent>
       <div className="purple"></div>
       <div></div>
+
       <div className="carStats">
         <div className="carImage radius">
           <img
@@ -32,6 +33,9 @@ const DetailedAnnouncement: React.FC<IDetailedAnnouncement> = ({ nameCar }) => {
             fuga ipsum doloremque ducimus dignissimos minus ea molestias rerum
             libero aliquam autem cupiditate possimus, ipsa maxime impedit
             magnam?
+            Espaço interno amplo Porta-malas generoso Motorização eficiente
+            Baixo custo de manutenção Confiança Substituído pelo Chevrolet Onix
+            Plus em 2020.
           </p>
         </div>
       </div>

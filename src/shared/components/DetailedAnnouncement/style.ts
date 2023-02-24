@@ -13,6 +13,7 @@ export const DetailedAnnouncementContent = styled.section`
     height: 80px;
     z-index: -1;
   }
+
   .carStats {
     display: flex;
     align-items: center;
@@ -24,6 +25,11 @@ export const DetailedAnnouncementContent = styled.section`
     gap: 15px;
     .radius{
         border-radius: 5px;
+    background-color: var(--grey9);
+    width: 95%;
+    gap: 15px;
+    .radius{
+        border-radius: 3px;
     }
     .carImage{
         display: flex;
@@ -36,6 +42,11 @@ export const DetailedAnnouncementContent = styled.section`
         img{
             max-width: 300px;
             max-height: 300px; 
+        background-color: var(--brand2);
+        width: 100vw;
+        img{
+            width: 30%;
+            height: 30%;
         }
     }
 

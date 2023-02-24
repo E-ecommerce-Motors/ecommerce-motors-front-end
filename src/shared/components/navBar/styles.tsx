@@ -13,11 +13,11 @@ export const Container = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 0px 60px;
-  position: fixed;
   width: 100vw;
   height: 80px;
   background: ${theme.colors.grey10};
   border-bottom: 2px solid ${theme.colors.grey6};
+  z-index: 99;
   @media (max-width: 1000px) {
     flex-direction: ${(props: Props) => (props.mobile ? "column" : "row")};
     height: ${(props: Props) => (props.mobile ? "100vh" : "80px")};

@@ -4,7 +4,6 @@ import CreateAnnouncementModal from "./shared/components/CreateAnnouncementModal
 import DetailedAnnouncement from "./shared/components/DetailedAnnouncement";
 import { RoutesMain } from "./shared/routes";
 
-
 const App = () => {
   return (
     <>
@@ -16,10 +15,7 @@ const App = () => {
         pauseOnHover={true}
         draggable={true}
       />
-      {/* <RoutesMain></RoutesMain> */}
-      {/* <NavBar auth={"authenticated"} user={"Lucas Galvs"} /> */}
-      {/* <DetailedAnnouncement nameCar="Prisma" /> */}
-      <CreateAnnouncementModal/>
+    <RoutesMain></RoutesMain>
     </>
   );
 };
