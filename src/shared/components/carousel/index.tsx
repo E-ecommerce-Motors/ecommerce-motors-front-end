@@ -8,6 +8,7 @@ interface Props {
 }
 
 interface Announcement {
+  id: number;
   name: string;
   saler?: boolean;
   title: string;
@@ -16,24 +17,17 @@ interface Announcement {
   price: number;
   description: string;
   typeVehicle: "car" | "motorcycle";
+  typeAnnouncement: "sale" | "auction";
 }
 
 export const Carousel = ({ type }: Props) => {
   const saler: boolean = true;
   const name: string = "Antonio";
 
-  const [announcements, setAnnouncements] = useState<any>([]);
+  const { getAnn, announcements } = updateAuth();
 
-  const getAnn = async () => {
-    await api
-      .get("announcements")
-      .then((response) =>
-        setAnnouncements(JSON.parse(response.request.response))
-      )
-      .catch((response) => console.log(response));
-  };
   useEffect(() => {
-    getAnn();
+    getAnn;
   }, []);
 
   const typeFilter: Announcement[] = [];
@@ -51,8 +45,10 @@ export const Carousel = ({ type }: Props) => {
         <Frame>
           {typeFilter.map((element: Announcement, index: number) => {
             let date = element.year.split("-");
+
             return (
               <ProductCard
+                id={element.id}
                 km={element.mileage}
                 heading={element.title}
                 name={name}
@@ -61,6 +57,8 @@ export const Carousel = ({ type }: Props) => {
                 text={element.description}
                 key={index}
                 year={Number(date[0])}
+                type={element.typeVehicle}
+                tA={element.typeAnnouncement}
               />
             );
           })}

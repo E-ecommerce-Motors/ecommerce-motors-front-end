@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Container, Auction, Frame, Title } from "./styles";
 import { ProductCard } from "../ProductCard";
 import { api } from "../../services/api";
@@ -36,6 +35,33 @@ export const CarouselAuction = () => {
       <Auction>
         <Title>Leilão</Title>
         <Frame>
+          <ProductCardAuction
+            heading={heading}
+            km={km}
+            year={year}
+            price={price}
+            name={name}
+            text={text}
+            saler={saler}
+          />
+          <ProductCardAuction
+            heading={heading}
+            km={km}
+            year={year}
+            price={price}
+            name={name}
+            text={text}
+            saler={saler}
+          />
+          <ProductCardAuction
+            heading={heading}
+            km={km}
+            year={year}
+            price={price}
+            name={name}
+            text={text}
+            saler={saler}
+          />
           <ProductCardAuction
             heading={heading}
             km={km}
