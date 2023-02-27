@@ -14,6 +14,7 @@ export const Container = styled.section`
   gap: 16px;
   width: max-content;
   height: 350px;
+  cursor: pointer;
 `;
 export const ImgContainer = styled.section`
   box-sizing: border-box;

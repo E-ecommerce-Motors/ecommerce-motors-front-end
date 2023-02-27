@@ -1,3 +1,10 @@
+import { Box, Modal } from "@mui/material";
+import { refType } from "@mui/utils";
+import { useEffect, useState } from "react";
+import { updateAuth } from "../../providers/authProvider";
+import { ButtonBig } from "../Button/styles";
+import { EditAnnouncement } from "../Modal/editAnnouncement";
+import { ProductCardAuction } from "../ProductCardAuction";
 import {
   Heading7,
   Icon,
@@ -24,6 +31,9 @@ interface Props {
   price: number;
   name: string;
   active?: boolean;
+  type: string;
+  id: number;
+  tA: "sale" | "auction";
 }
 
 export const ProductCard = ({
@@ -35,16 +45,46 @@ export const ProductCard = ({
   year,
   price,
   name,
+  type,
+  id,
+  tA,
 }: Props) => {
   const priceformat: string = price.toLocaleString(`pt-BR`, {
     style: "currency",
     currency: "BRL",
   });
 
+  const { getAnn } = updateAuth();
+
+  const announcement = {
+    tA,
+    heading,
+    text,
+    saler,
+    km,
+    year,
+    price,
+    name,
+    type,
+    id,
+  };
+
   const active: boolean = true;
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    getAnn();
+    setOpen(false);
+  };
+
   return (
     <Container>
-      <ImgContainer>
+      <Modal open={open} onClose={handleClose}>
+        <Box>
+          <EditAnnouncement announcement={announcement} close={handleClose} />
+        </Box>
+      </Modal>
+      <ImgContainer onClick={handleOpen}>
         <Active saler={saler} active={active}>
           {active ? `Ativo` : "Inativo"}
         </Active>
@@ -54,7 +94,7 @@ export const ProductCard = ({
         {heading.length > 41 ? `${heading.slice(0, 38)}...` : heading}
       </Heading7>
       <Paragraph>
-        {text.length > 87 ? `${text.slice(0, 84)}...` : text}
+        {text.length > 74 ? `${text.slice(0, 71)}...` : text}
       </Paragraph>
       <Saler>
         <Icon>{name.slice(0, 1)}</Icon>
