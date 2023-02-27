@@ -23,10 +23,11 @@ export const ModalWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  
 `;
 
 export const ModalContent = styled.div`
-position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -34,8 +35,33 @@ position: absolute;
   border-radius: 5px;
   position: relative;
   width: 90%;
+  height: 90%;
+  overflow-y: scroll;
   max-width: 520px;
   gap: 20px;
+  z-index: 10;
+  &::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+  margin: 3px;
+}
+
+&::-webkit-scrollbar
+{
+	width: 7px;
+	background-color: #F5F5F5;
+  margin: 3px;
+}
+
+&::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: lightgrey;
+}
+
   .headerContent {
     display: flex;
     justify-content: space-between;
@@ -45,12 +71,12 @@ position: absolute;
   .selectableContainer {
     display: flex;
     font-size: 16px;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
   }
   .carInfo {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     width: 100%;
     flex-direction: column;
     .yearKmPrice {
@@ -60,8 +86,8 @@ position: absolute;
       flex-wrap: wrap;
     }
     .carImage {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
   }
 `;

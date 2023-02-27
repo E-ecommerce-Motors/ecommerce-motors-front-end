@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { useForm } from "react-hook-form";
 
 type AnnouncementType = string;
 type VehicleType = string;
@@ -24,11 +25,17 @@ export const CreateAnnouncementContext = createContext(
 );
 
 export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
+  const { register, handleSubmit, setValue, watch } = useForm();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("Carro");
-  const [selectedOffer, setSelectedOffer] = useState("Leilao");
+  const [selectedOffer, setSelectedOffer] = useState("Venda");
   const toggleModal = () => {
     setIsOpen(!isOpen);
+    if (!isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
   };
 
   const handleTypeClick = (option: string) => {
@@ -37,6 +44,7 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
 
   const handleOfferClick = (offer: string) => {
     setSelectedOffer(offer);
+    setValue("typeAnnouncement", offer === "Leilao" ? "auction" : "sale");
   };
 
   return (
