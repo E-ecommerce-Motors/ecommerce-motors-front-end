@@ -1,4 +1,7 @@
 import { Container, Auction, Frame, Title } from "./styles";
+import { ProductCard } from "../ProductCard";
+import { api } from "../../services/api";
+import { User } from "../NavBar/styles";
 import { ProductCardAuction } from "../ProductCardAuction";
 
 interface Props {

@@ -7,12 +7,13 @@ import { api } from "../../shared/services/api";
 
 export const Dashboard = () => {
   return (
-    <>
-      <NavBar auth={"default"} user={"Lucas Galvs"} />
+    <ContentDashboard>
+      <NavBar auth={"authenticated"} user={"Lucas Galvs"} />
+      <VehiclesFilter auth={"authenticated"} user={"Lucas Galvs"} />
       <CarouselAuction />
       <Carousel type={"car"} />
       <Carousel type={"motorcycle"} />
       <Footer />
-    </>
+    </ContentDashboard>
   );
 };

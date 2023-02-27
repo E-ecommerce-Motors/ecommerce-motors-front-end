@@ -1,4 +1,3 @@
-import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import { ContentTextAreaInput, CustomTextField } from "./styles";
 
@@ -29,8 +28,7 @@ const TextFieldInput: React.FC<Props> = ({
         placeholder={placeholderText}
         maxRows={maxRowsNumber}
         multiline={multilineOption}
-        InputProps={{sx: {height: inputHeight}}}
-      />
+        InputProps={{sx: {height: inputHeight} }}/>
     </ContentTextAreaInput>
   );
 };
