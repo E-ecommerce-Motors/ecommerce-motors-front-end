@@ -25,6 +25,7 @@ export const Container = styled.section`
   justify-content: center;
   align-items: flex-start;
   padding: 100px 0px;
+  overflow: hidden;
   gap: 10px;
   @media (max-width: 1650px) {
     margin-bottom: 30px;
@@ -32,7 +33,7 @@ export const Container = styled.section`
 `;
 export const Frame = styled.div`
   position: relative;
-  width: max-content;
+  width: 96vw;
   height: 388px;
   left: 0px;
   top: 100px;
