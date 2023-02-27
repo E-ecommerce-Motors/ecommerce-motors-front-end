@@ -18,8 +18,9 @@ import {
 } from "./styles";
 import { api } from "../../../services/api";
 import { useState } from "react";
+import { updateAuth } from "../../../providers/authProvider";
 
-interface Props {
+interface Announcement {
   id: number;
   img?: any;
   heading: string;
@@ -31,32 +32,42 @@ interface Props {
   name: string;
   active?: boolean;
   type: string;
+  tA: string;
+}
+
+interface Props {
+  announcement: Announcement;
+  close: any;
 }
 
 interface Update {
-  title: string;
-  year: string;
-  mileage: number;
-  price: number;
-  description: string;
-  typeAnnouncement: string;
+  title?: string;
+  year?: string;
+  mileage?: number;
+  price?: number;
+  description?: string;
+  typeAnnouncement?: string;
+  typeVehicle?: string;
 }
 
-export const EditAnnouncement = (announcement: Props) => {
+export const EditAnnouncement = ({ announcement, close }: Props) => {
   const [title, setTitle] = useState(announcement.heading);
   const [year, setYear] = useState(announcement.year);
   const [mileage, setMileage] = useState(announcement.km);
   const [price, setPrice] = useState(announcement.price);
   const [description, setDescription] = useState(announcement.text);
   const [type, setType] = useState(announcement.type);
+  const [tA, setTA] = useState(announcement.tA);
+  const [change, setChange] = useState(true);
+
   const schema = yup.object().shape({
-    title: yup.string(),
-    year: yup.string(),
-    mileage: yup.number(),
-    price: yup.number(),
-    description: yup.string(),
-    typeAnnouncement: yup.string(),
-    // type: yup.string(),
+    title: yup.string().optional(),
+    year: yup.string().optional(),
+    mileage: yup.number().notRequired(),
+    price: yup.number().optional(),
+    description: yup.string().optional(),
+    typeAnnouncement: yup.string().optional(),
+    typeVehicle: yup.string(),
   });
 
   const {
@@ -67,32 +78,12 @@ export const EditAnnouncement = (announcement: Props) => {
     resolver: yupResolver(schema),
   });
 
-  const UpdateAnn = async (data: Update) => {
-    await api
-      .patch(`announcements/${announcement.id}`, data)
-      .then((response) => console.log(response))
-      .catch((response) => console.log(response));
-  };
+  const { UpdateAnn } = updateAuth();
 
-  const submit = ({
-    title,
-    description,
-    mileage,
-    price,
-    typeAnnouncement,
-    year,
-  }: // type,
-  Update) => {
-    let data = {
-      title,
-      description,
-      mileage,
-      price,
-      typeAnnouncement,
-      year,
-    };
-
-    UpdateAnn(data);
+  const submit = (data: Update) => {
+    data.typeAnnouncement = tA;
+    data.typeVehicle = type;
+    UpdateAnn(data, announcement.id);
   };
 
   return (
@@ -103,36 +94,77 @@ export const EditAnnouncement = (announcement: Props) => {
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Tipo de anúncio</Type>
         <FlexBtn>
-          <ButtonBig
-            bg={theme.colors.brand1}
-            button={theme.button.big}
-            color={theme.colors.whiteFixed}
-            size={theme.size.button_big_text}
-            weight={theme.weight.button_big_text}
-            border={theme.colors.brand1}
-            bgHover={theme.colors.brand2}
-            borderHover={theme.colors.brand2}
-            colorHover={theme.colors.whiteFixed}
-            value={"sale"}
-            {...register("typeAnnouncement")}
-          >
-            Venda
-          </ButtonBig>
-          <ButtonBig
-            bg={theme.colors.whiteFixed}
-            button={theme.button.big}
-            color={theme.colors.grey0}
-            size={theme.size.button_big_text}
-            weight={theme.weight.button_big_text}
-            border={theme.colors.grey4}
-            bgHover={theme.colors.whiteFixed}
-            borderHover={theme.colors.grey4}
-            colorHover={theme.colors.grey0}
-            value={"auction"}
-            {...register("typeAnnouncement")}
-          >
-            Leilão
-          </ButtonBig>
+          {tA == "sale" ? (
+            <>
+              <ButtonBig
+                bg={theme.colors.brand1}
+                button={theme.button.big}
+                color={theme.colors.whiteFixed}
+                size={theme.size.button_big_text}
+                weight={theme.weight.button_big_text}
+                border={theme.colors.brand1}
+                bgHover={theme.colors.brand2}
+                borderHover={theme.colors.brand2}
+                colorHover={theme.colors.whiteFixed}
+                value={"sale"}
+                {...register("typeAnnouncement")}
+                onClick={() => setTA("sale")}
+              >
+                Venda
+              </ButtonBig>
+              <ButtonBig
+                bg={theme.colors.whiteFixed}
+                button={theme.button.big}
+                color={theme.colors.grey0}
+                size={theme.size.button_big_text}
+                weight={theme.weight.button_big_text}
+                border={theme.colors.grey4}
+                bgHover={theme.colors.whiteFixed}
+                borderHover={theme.colors.grey4}
+                colorHover={theme.colors.grey0}
+                value={"auction"}
+                {...register("typeAnnouncement")}
+                onClick={() => setTA("auction")}
+              >
+                Leilão
+              </ButtonBig>
+            </>
+          ) : (
+            <>
+              <ButtonBig
+                bg={theme.colors.whiteFixed}
+                button={theme.button.big}
+                color={theme.colors.grey0}
+                size={theme.size.button_big_text}
+                weight={theme.weight.button_big_text}
+                border={theme.colors.grey4}
+                bgHover={theme.colors.whiteFixed}
+                borderHover={theme.colors.grey4}
+                colorHover={theme.colors.grey0}
+                value={"sale"}
+                {...register("typeAnnouncement")}
+                onClick={() => setTA("sale")}
+              >
+                Venda
+              </ButtonBig>
+              <ButtonBig
+                bg={theme.colors.brand1}
+                button={theme.button.big}
+                color={theme.colors.whiteFixed}
+                size={theme.size.button_big_text}
+                weight={theme.weight.button_big_text}
+                border={theme.colors.brand1}
+                bgHover={theme.colors.brand2}
+                borderHover={theme.colors.brand2}
+                colorHover={theme.colors.whiteFixed}
+                value={"auction"}
+                {...register("typeAnnouncement")}
+                onClick={() => setTA("auction")}
+              >
+                Leilão
+              </ButtonBig>
+            </>
+          )}
         </FlexBtn>
         <Type>Informações do veículo</Type>
         <Title>Título</Title>
@@ -140,7 +172,11 @@ export const EditAnnouncement = (announcement: Props) => {
           placeholder={announcement.heading}
           width={"big"}
           {...register("title")}
-          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          onChange={(e) => {
+            setChange(false);
+            setTitle(e.target.value);
+          }}
         />
         <Infos>
           <Single>
@@ -149,7 +185,12 @@ export const EditAnnouncement = (announcement: Props) => {
               placeholder={`${announcement.year}`}
               width={"none"}
               {...register("year")}
-              onChange={(e) => setYear(Number(e.target.value))}
+              value={year}
+              type="number"
+              onChange={(e) => {
+                setChange(false);
+                setYear(Number(e.target.value));
+              }}
             />
           </Single>
           <Single>
@@ -158,7 +199,12 @@ export const EditAnnouncement = (announcement: Props) => {
               placeholder={`${announcement.km} km`}
               width={"none"}
               {...register("mileage")}
-              onChange={(e) => setMileage(Number(e.target.value))}
+              value={mileage}
+              type="number"
+              onChange={(e) => {
+                setChange(false);
+                setMileage(Number(e.target.value));
+              }}
             />
           </Single>
           <Single>
@@ -167,14 +213,27 @@ export const EditAnnouncement = (announcement: Props) => {
               placeholder={`R$ ${announcement.price}`}
               width={"none"}
               {...register("price")}
-              onChange={(e) => setPrice(Number(e.target.value))}
+              value={price}
+              type="number"
+              onChange={(e) => {
+                setChange(false);
+                setPrice(Number(e.target.value));
+              }}
             />
           </Single>
         </Infos>
         <Title>Descrição</Title>
-        <TextArea placeholder={announcement.text} />
+        <TextArea
+          placeholder={announcement.text}
+          {...register("description")}
+          value={description}
+          onChange={(e) => {
+            setChange(false);
+            setDescription(e.target.value);
+          }}
+        />
         <Type>Tipo de veículo</Type>
-        {announcement.type == "car" ? (
+        {type == "car" ? (
           <FlexBtn>
             <ButtonBig
               bg={theme.colors.brand1}
@@ -186,8 +245,9 @@ export const EditAnnouncement = (announcement: Props) => {
               bgHover={theme.colors.brand2}
               borderHover={theme.colors.brand2}
               colorHover={theme.colors.whiteFixed}
-              //   {...register("type")}
-              //   value={"car"}
+              {...register("typeVehicle")}
+              value={"car"}
+              onClick={() => setType("car")}
             >
               Carro
             </ButtonBig>
@@ -201,8 +261,9 @@ export const EditAnnouncement = (announcement: Props) => {
               bgHover={theme.colors.whiteFixed}
               borderHover={theme.colors.grey4}
               colorHover={theme.colors.grey0}
-              //   {...register("type")}
-              //   value={"motorcycle"}
+              {...register("typeVehicle")}
+              value={"motorcycle"}
+              onClick={() => setType("motorcycle")}
             >
               Moto
             </ButtonBig>
@@ -219,8 +280,9 @@ export const EditAnnouncement = (announcement: Props) => {
               bgHover={theme.colors.whiteFixed}
               borderHover={theme.colors.grey4}
               colorHover={theme.colors.grey0}
-              //   {...register("type")}
-              //   value={"car"}
+              {...register("typeVehicle")}
+              value={"car"}
+              onClick={() => setType("car")}
             >
               Carro
             </ButtonBig>
@@ -234,8 +296,9 @@ export const EditAnnouncement = (announcement: Props) => {
               bgHover={theme.colors.brand2}
               borderHover={theme.colors.brand2}
               colorHover={theme.colors.whiteFixed}
-              //   {...register("type")}
-              //   value={"motorcycle"}
+              {...register("typeVehicle")}
+              value={"motorcycle"}
+              onClick={() => setType("motorcycle")}
             >
               Moto
             </ButtonBig>
@@ -290,18 +353,23 @@ export const EditAnnouncement = (announcement: Props) => {
             Excluir anúncio
           </ButtonBig>
           <ButtonBig
-            bg={theme.colors.grey6}
+            bg={theme.colors.brand1}
             button={theme.button.big}
-            color={theme.colors.grey2}
+            color={theme.colors.whiteFixed}
             size={theme.size.button_big_text}
             weight={theme.weight.button_big_text}
-            border={theme.colors.grey6}
-            bgHover={theme.colors.grey5}
-            borderHover={theme.colors.grey5}
-            colorHover={theme.colors.grey2}
-            // disabled
-            // disable="sim"
+            border={theme.colors.brand1}
+            bgHover={theme.colors.brand2}
+            borderHover={theme.colors.brand2}
+            colorHover={theme.colors.whiteFixed}
+            disabled={change}
+            disable="sim"
             type="submit"
+            onClick={() =>
+              setTimeout(() => {
+                close();
+              }, 200)
+            }
           >
             Salvar alterações
           </ButtonBig>

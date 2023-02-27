@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Auction, Frame, Title } from "./styles";
 import { ProductCard } from "../ProductCard";
 import { api } from "../../services/api";
+import { updateAuth } from "../../providers/authProvider";
 
 interface Props {
   type: "car" | "motorcycle";
@@ -17,24 +18,17 @@ interface Announcement {
   price: number;
   description: string;
   typeVehicle: "car" | "motorcycle";
+  typeAnnouncement: "sale" | "auction";
 }
 
 export const Carousel = ({ type }: Props) => {
   const saler: boolean = true;
   const name: string = "Antonio";
 
-  const [announcements, setAnnouncements] = useState<any>([]);
+  const { getAnn, announcements } = updateAuth();
 
-  const getAnn = async () => {
-    await api
-      .get("announcements")
-      .then((response) =>
-        setAnnouncements(JSON.parse(response.request.response))
-      )
-      .catch((response) => console.log(response));
-  };
   useEffect(() => {
-    getAnn();
+    getAnn;
   }, []);
 
   const typeFilter: Announcement[] = [];
@@ -52,6 +46,7 @@ export const Carousel = ({ type }: Props) => {
         <Frame>
           {typeFilter.map((element: Announcement, index: number) => {
             let date = element.year.split("-");
+
             return (
               <ProductCard
                 id={element.id}
@@ -64,6 +59,7 @@ export const Carousel = ({ type }: Props) => {
                 key={index}
                 year={Number(date[0])}
                 type={element.typeVehicle}
+                tA={element.typeAnnouncement}
               />
             );
           })}

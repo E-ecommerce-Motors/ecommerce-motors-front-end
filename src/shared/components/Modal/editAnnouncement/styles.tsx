@@ -9,14 +9,15 @@ interface Props {
 export const Container = styled.section`
   position: absolute;
   width: 520px;
-  height: 1252px;
+  height: max-content;
   left: 40%;
-  /* top: 80px; */
+  top: -5%;
   background: ${theme.colors.whiteFixed};
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: scale(0.9);
 `;
 export const Header = styled.div`
   display: flex;
@@ -91,6 +92,20 @@ export const Input = styled.input`
   gap: 10px;
   border: 1.5px solid ${theme.colors.grey7};
   border-radius: 4px;
+  font-family: ${theme.fonts.inter};
+  font-style: normal;
+  font-weight: ${theme.weight.input_placeholder};
+  font-size: ${theme.size.input_placeholder};
+  line-height: 0px;
+  color: ${theme.colors.grey3};
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
   ::placeholder {
     font-family: ${theme.fonts.inter};
     font-style: normal;
@@ -111,6 +126,12 @@ export const TextArea = styled.textarea`
   padding: 8px 16px 8px 16px;
   border: 1.5px solid ${theme.colors.grey7};
   border-radius: 4px;
+  gap: 10px;
+  font-family: ${theme.fonts.inter};
+  font-style: normal;
+  font-weight: ${theme.weight.input_placeholder};
+  font-size: ${theme.size.input_placeholder};
+  color: ${theme.colors.grey3};
   ::placeholder {
     gap: 10px;
     font-family: ${theme.fonts.inter};

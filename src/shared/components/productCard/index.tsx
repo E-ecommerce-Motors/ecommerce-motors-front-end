@@ -1,6 +1,7 @@
 import { Box, Modal } from "@mui/material";
 import { refType } from "@mui/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { updateAuth } from "../../providers/authProvider";
 import { ButtonBig } from "../Button/styles";
 import { EditAnnouncement } from "../Modal/editAnnouncement";
 import { ProductCardAuction } from "../ProductCardAuction";
@@ -32,6 +33,7 @@ interface Props {
   active?: boolean;
   type: string;
   id: number;
+  tA: "sale" | "auction";
 }
 
 export const ProductCard = ({
@@ -45,13 +47,17 @@ export const ProductCard = ({
   name,
   type,
   id,
+  tA,
 }: Props) => {
   const priceformat: string = price.toLocaleString(`pt-BR`, {
     style: "currency",
     currency: "BRL",
   });
 
+  const { getAnn } = updateAuth();
+
   const announcement = {
+    tA,
     heading,
     text,
     saler,
@@ -67,12 +73,18 @@ export const ProductCard = ({
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
+    getAnn();
     setOpen(false);
   };
 
   return (
-    <Container onClick={() => handleOpen()}>
-      <ImgContainer>
+    <Container>
+      <Modal open={open} onClose={handleClose}>
+        <Box>
+          <EditAnnouncement announcement={announcement} close={handleClose} />
+        </Box>
+      </Modal>
+      <ImgContainer onClick={handleOpen}>
         <Active saler={saler} active={active}>
           {active ? `Ativo` : "Inativo"}
         </Active>
@@ -95,16 +107,6 @@ export const ProductCard = ({
         </Infos>
         <Price>{priceformat}</Price>
       </Footer>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
-        <Box>
-          <EditAnnouncement {...announcement} />
-        </Box>
-      </Modal>
     </Container>
   );
 };
