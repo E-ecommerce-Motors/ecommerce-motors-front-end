@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, ChangeEvent } from "react";
 import TextFieldInput from "../TextFieldInput";
 import { useForm } from "react-hook-form";
 import { api } from "../../services/api";
@@ -12,6 +12,7 @@ import CreateAnnouncementProvider, {
   CreateAnnouncementContext,
 } from "../../providers/AnnouncementContext";
 import { toast } from "react-toastify";
+import { IntrinsicElementsKeys } from "styled-components";
 
 // typeAnnouncement,
 //         title,
@@ -45,8 +46,6 @@ const CreateAnnouncementModal = () => {
     isOpen,
   } = useContext(CreateAnnouncementContext);
 
-  
-
   return (
     <>
       <button className="normalButton" onClick={toggleModal}>
@@ -58,7 +57,9 @@ const CreateAnnouncementModal = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="headerContent">
                 <h4>Criar Anúncio</h4>
-                <CloseButton onClick={toggleModal} type="button">x</CloseButton>
+                <CloseButton onClick={toggleModal} type="button">
+                  x
+                </CloseButton>
               </div>
               <h5>Tipo de Anúncio</h5>
               <div className="selectableContainer">
@@ -85,6 +86,9 @@ const CreateAnnouncementModal = () => {
                   labelText="Título"
                   placeholderText="Digitar título"
                   {...register("title")}
+                  onChange={(e) => {
+                    e.target.value;
+                  }}
                 />
                 <div className="yearKmPrice">
                   <TextFieldInput
@@ -95,7 +99,7 @@ const CreateAnnouncementModal = () => {
                   <TextFieldInput
                     labelText="Quilometragem"
                     placeholderText="0"
-                    {...register("kilometer")}
+                    {...register("mileage")}
                   />
                   <TextFieldInput
                     labelText="Preço"
@@ -130,7 +134,7 @@ const CreateAnnouncementModal = () => {
                     Moto
                   </SelectableButton>
                 </div>
-                <TextFieldInput
+                {/* <TextFieldInput
                   labelText="Descrição"
                   placeholderText="Digitar Descrição"
                   
@@ -144,7 +148,7 @@ const CreateAnnouncementModal = () => {
                   
                   
                   {...register("description")}
-                />
+                /> */}
                 <div className="createCancel">
                   <button type="submit">Criar Anúncio</button>
                   <button type="button">Cancelar</button>

@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { ChangeEvent } from "react";
 
 type AnnouncementType = string;
 type VehicleType = string;
@@ -25,7 +26,7 @@ export const CreateAnnouncementContext = createContext(
 );
 
 export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
-  const { register, handleSubmit, setValue, watch } = useForm();
+  const { setValue } = useForm();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("Carro");
   const [selectedOffer, setSelectedOffer] = useState("Venda");

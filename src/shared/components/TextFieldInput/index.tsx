@@ -1,5 +1,6 @@
 import InputLabel from "@mui/material/InputLabel";
 import { ContentTextAreaInput, CustomTextField } from "./styles";
+import { ChangeEvent } from "react";
 
 interface Props {
   labelText: string;
@@ -8,6 +9,7 @@ interface Props {
   typeInput?: string;
   inputHeight?: number;
   multilineOption?: boolean;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextFieldInput: React.FC<Props> = ({
@@ -17,6 +19,7 @@ const TextFieldInput: React.FC<Props> = ({
   typeInput,
   inputHeight,
   multilineOption,
+  onChange
 }) => {
   return (
     <ContentTextAreaInput>
@@ -28,7 +31,9 @@ const TextFieldInput: React.FC<Props> = ({
         placeholder={placeholderText}
         maxRows={maxRowsNumber}
         multiline={multilineOption}
-        InputProps={{sx: {height: inputHeight} }}/>
+        InputProps={{sx: {height: inputHeight} }}
+        onChange={onChange}
+        />
     </ContentTextAreaInput>
   );
 };
