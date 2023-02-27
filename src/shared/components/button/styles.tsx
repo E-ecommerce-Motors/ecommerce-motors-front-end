@@ -25,7 +25,7 @@ export const ButtonBig = styled.button`
   align-items: center;
   border: 1.5px solid ${(props: Props) => props.border};
   border-radius: 4px;
-  width: ${(props: Props) => (props.button == "big" ? "146px" : "119px")};
+  width: ${(props: Props) => (props.button == "big" ? "228px" : "119px")};
   height: ${(props: Props) => (props.button == "big" ? "48px" : "38px")};
   background-color: ${(props: Props) => props.bg};
   color: ${(props: Props) => props.color};
