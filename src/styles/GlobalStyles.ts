@@ -117,4 +117,5 @@ export const GlobalStyles = createGlobalStyle`
         --random12: #30007D;
     }
     
+    
 `;

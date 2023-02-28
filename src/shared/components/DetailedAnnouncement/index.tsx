@@ -7,6 +7,9 @@ interface IDetailedAnnouncement {
 const DetailedAnnouncement: React.FC<IDetailedAnnouncement> = ({ nameCar }) => {
   return (
     <DetailedAnnouncementContent>
+      <div className="purple"></div>
+      <div></div>
+
       <div className="carStats">
         <div className="carImage radius">
           <img
@@ -19,6 +22,17 @@ const DetailedAnnouncement: React.FC<IDetailedAnnouncement> = ({ nameCar }) => {
         </div>
         <div className="carDescription radius">
           <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique
+            unde ut quis, deleniti eaque, sunt repudiandae maxime provident,
+            praesentium sapiente porro cumque nobis ab deserunt? Officiis aut
+            adipisci maiores libero. Lorem ipsum dolor, sit amet consectetur
+            adipisicing elit. Exercitationem quae esse vel, libero iure dolorum.
+            Natus aut vitae quibusdam magni quisquam quae at, iste perferendis,
+            excepturi eum, consectetur assumenda optio? Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Nam, dignissimos? Sed quisquam,
+            fuga ipsum doloremque ducimus dignissimos minus ea molestias rerum
+            libero aliquam autem cupiditate possimus, ipsa maxime impedit
+            magnam?
             Espaço interno amplo Porta-malas generoso Motorização eficiente
             Baixo custo de manutenção Confiança Substituído pelo Chevrolet Onix
             Plus em 2020.
