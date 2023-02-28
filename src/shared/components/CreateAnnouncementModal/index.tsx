@@ -29,17 +29,13 @@ interface Create {
   description: string;
   typeAnnouncement: string;
   typeVehicle: string;
+  img: string;
 }
 
 const CreateAnnouncementModal = () => {
-  const [year, setYear] = useState<number>();
   const [change, setChange] = useState(true);
-  const [mileage, setMileage] = useState<number>();
-  const [title, setTitle] = useState<string>();
-  const [price, setPrice] = useState<number>();
-  const [description, setDescription] = useState<string>();
-  const [type, setType] = useState<string>();
-  const [tA, setTA] = useState<string>();
+
+  useState<string>();
 
   const schema = yup.object().shape({
     title: yup.string().required(),
@@ -66,26 +62,183 @@ const CreateAnnouncementModal = () => {
     CreateAnn(data);
   };
 
-  const { toggleModal, isOpen, CreateAnn } = useContext(
-    CreateAnnouncementContext
-  );
+  const {
+    toggleModal,
+    isOpen,
+    CreateAnn,
+    year,
+    setYear,
+    mileage,
+    setMileage,
+    title,
+    setTitle,
+    price,
+    setPrice,
+    description,
+    setDescription,
+    type,
+    setType,
+    tA,
+    setTA,
+    handleAddFieldsClick,
+    handleAdditionalFieldChange,
+    additionalFields,
+    numAdditionalFields,
+    img,
+    setImg
+  } = useContext(CreateAnnouncementContext);
 
   return (
     <>
       {/* {isOpen && ( */}
-        <Container>
-          <Content onSubmit={handleSubmit(submit)}>
-            <Header>
-              <Heading>Editar anúncio</Heading>
-              <CloseButton onClick={toggleModal} type="button">
-                x
-              </CloseButton>
-            </Header>
+      <Container>
+        <Content onSubmit={handleSubmit(submit)}>
+          <Header>
+            <Heading>Editar anúncio</Heading>
+            <CloseButton onClick={toggleModal} type="button">
+              x
+            </CloseButton>
+          </Header>
 
-            <Type>Tipo de anúncio</Type>
-            <FlexBtn>
+          <Type>Tipo de anúncio</Type>
+          <FlexBtn>
             {tA == "sale" ? (
-            <>
+              <>
+                <ButtonBig
+                  bg={theme.colors.brand1}
+                  button={theme.button.big}
+                  color={theme.colors.whiteFixed}
+                  size={theme.size.button_big_text}
+                  weight={theme.weight.button_big_text}
+                  border={theme.colors.brand1}
+                  bgHover={theme.colors.brand2}
+                  borderHover={theme.colors.brand2}
+                  colorHover={theme.colors.whiteFixed}
+                  value={"sale"}
+                  {...register("typeAnnouncement")}
+                  onClick={() => setTA("sale")}
+                >
+                  Venda
+                </ButtonBig>
+                <ButtonBig
+                  bg={theme.colors.whiteFixed}
+                  button={theme.button.big}
+                  color={theme.colors.grey0}
+                  size={theme.size.button_big_text}
+                  weight={theme.weight.button_big_text}
+                  border={theme.colors.grey4}
+                  bgHover={theme.colors.whiteFixed}
+                  borderHover={theme.colors.grey4}
+                  colorHover={theme.colors.grey0}
+                  value={"auction"}
+                  {...register("typeAnnouncement")}
+                  onClick={() => setTA("auction")}
+                >
+                  Leilão
+                </ButtonBig>
+              </>
+            ) : (
+              <>
+                <ButtonBig
+                  bg={theme.colors.whiteFixed}
+                  button={theme.button.big}
+                  color={theme.colors.grey0}
+                  size={theme.size.button_big_text}
+                  weight={theme.weight.button_big_text}
+                  border={theme.colors.grey4}
+                  bgHover={theme.colors.whiteFixed}
+                  borderHover={theme.colors.grey4}
+                  colorHover={theme.colors.grey0}
+                  value={"sale"}
+                  {...register("typeAnnouncement")}
+                  onClick={() => setTA("sale")}
+                >
+                  Venda
+                </ButtonBig>
+                <ButtonBig
+                  bg={theme.colors.brand1}
+                  button={theme.button.big}
+                  color={theme.colors.whiteFixed}
+                  size={theme.size.button_big_text}
+                  weight={theme.weight.button_big_text}
+                  border={theme.colors.brand1}
+                  bgHover={theme.colors.brand2}
+                  borderHover={theme.colors.brand2}
+                  colorHover={theme.colors.whiteFixed}
+                  value={"auction"}
+                  {...register("typeAnnouncement")}
+                  onClick={() => setTA("auction")}
+                >
+                  Leilão
+                </ButtonBig>
+              </>
+            )}
+          </FlexBtn>
+          <Type>Informações do veículo</Type>
+          <Title>Título</Title>
+          <Input
+            placeholder={"Digite o Título do anúncio"}
+            width={"big"}
+            {...register("title")}
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <Infos>
+            <Single>
+
+              <Title>Ano</Title>
+              <Input
+                placeholder={"Digite o ano do veículo"}
+                width={"none"}
+                {...register("year")}
+                value={year}
+                type="number"
+                onChange={(e) => {
+                  setYear(Number(e.target.value));
+                }}
+              />
+            </Single>
+            <Single>
+              <Title>Quilometragem</Title>
+              <Input
+                placeholder={`Digite a quilometragem do veículo`}
+                width={"none"}
+                {...register("mileage")}
+                value={mileage}
+                type="number"
+                onChange={(e) => {
+                  setMileage(Number(e.target.value));
+                }}
+              />
+            </Single>
+            <Single>
+              <Title>Preço</Title>
+              <Input
+                placeholder={`Digite o preço`}
+                width={"none"}
+                {...register("price")}
+                value={price}
+                type="number"
+                onChange={(e) => {
+                  setPrice(Number(e.target.value));
+                }}
+              />
+            </Single>
+          </Infos>
+          <Title>Descrição</Title>
+          <TextArea
+            placeholder={"Digite a descrição"}
+            {...register("description")}
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
+          <Type>Tipo de veículo</Type>
+          {type == "car" ? (
+            <FlexBtn>
               <ButtonBig
                 bg={theme.colors.brand1}
                 button={theme.button.big}
@@ -96,11 +249,11 @@ const CreateAnnouncementModal = () => {
                 bgHover={theme.colors.brand2}
                 borderHover={theme.colors.brand2}
                 colorHover={theme.colors.whiteFixed}
-                value={"sale"}
-                {...register("typeAnnouncement")}
-                onClick={() => setTA("sale")}
+                {...register("typeVehicle")}
+                value={"car"}
+                onClick={() => setType("car")}
               >
-                Venda
+                Carro
               </ButtonBig>
               <ButtonBig
                 bg={theme.colors.whiteFixed}
@@ -112,15 +265,15 @@ const CreateAnnouncementModal = () => {
                 bgHover={theme.colors.whiteFixed}
                 borderHover={theme.colors.grey4}
                 colorHover={theme.colors.grey0}
-                value={"auction"}
-                {...register("typeAnnouncement")}
-                onClick={() => setTA("auction")}
+                {...register("typeVehicle")}
+                value={"motorcycle"}
+                onClick={() => setType("motorcycle")}
               >
-                Leilão
+                Moto
               </ButtonBig>
-            </>
+            </FlexBtn>
           ) : (
-            <>
+            <FlexBtn>
               <ButtonBig
                 bg={theme.colors.whiteFixed}
                 button={theme.button.big}
@@ -131,11 +284,11 @@ const CreateAnnouncementModal = () => {
                 bgHover={theme.colors.whiteFixed}
                 borderHover={theme.colors.grey4}
                 colorHover={theme.colors.grey0}
-                value={"sale"}
-                {...register("typeAnnouncement")}
-                onClick={() => setTA("sale")}
+                {...register("typeVehicle")}
+                value={"car"}
+                onClick={() => setType("car")}
               >
-                Venda
+                Carro
               </ButtonBig>
               <ButtonBig
                 bg={theme.colors.brand1}
@@ -147,161 +300,65 @@ const CreateAnnouncementModal = () => {
                 bgHover={theme.colors.brand2}
                 borderHover={theme.colors.brand2}
                 colorHover={theme.colors.whiteFixed}
-                value={"auction"}
-                {...register("typeAnnouncement")}
-                onClick={() => setTA("auction")}
+                {...register("typeVehicle")}
+                value={"motorcycle"}
+                onClick={() => setType("motorcycle")}
               >
-                Leilão
+                Moto
               </ButtonBig>
-            </>
+            </FlexBtn>
           )}
-          </FlexBtn>
-            <Infos>
-              <Single>
-                <Title>Ano</Title>
-                <Input
-                  placeholder={"Digite o ano do veículo"}
-                  width={"none"}
-                  {...register("year")}
-                  value={year}
-                  type="number"
-                  onChange={(e) => {
-                    setYear(Number(e.target.value));
-                  }}
-                />
-              </Single>
-              <Single>
-                <Title>Quilometragem</Title>
-                <Input
-                  placeholder={`Digite a quilometragem do veículo`}
-                  width={"none"}
-                  {...register("mileage")}
-                  value={mileage}
-                  type="number"
-                  onChange={(e) => {
-                    setMileage(Number(e.target.value));
-                  }}
-                />
-              </Single>
-              <Single>
-                <Title>Preço</Title>
-                <Input
-                  placeholder={`Digite o preço`}
-                  width={"none"}
-                  {...register("price")}
-                  value={price}
-                  type="number"
-                  onChange={(e) => {
-                    setPrice(Number(e.target.value));
-                  }}
-                />
-              </Single>
-            </Infos>
-            <Title>Descrição</Title>
-            <TextArea
-              placeholder={"Digite a descrição"}
-              {...register("description")}
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
+          <Single>
+            <Title>Link da imagem 1</Title>
+            <Input
+              width={"big"}
+              {...register("img")}
+              value={img}
+              onChange={(e) => e.target.value}
             />
-            <Type>Tipo de veículo</Type>
-            {type == "car" ? (
-          <FlexBtn>
-            <ButtonBig
-              bg={theme.colors.brand1}
-              button={theme.button.big}
-              color={theme.colors.whiteFixed}
-              size={theme.size.button_big_text}
-              weight={theme.weight.button_big_text}
-              border={theme.colors.brand1}
-              bgHover={theme.colors.brand2}
-              borderHover={theme.colors.brand2}
-              colorHover={theme.colors.whiteFixed}
-              {...register("typeVehicle")}
-              value={"car"}
-              onClick={() => setType("car")}
-            >
-              Carro
-            </ButtonBig>
-            <ButtonBig
-              bg={theme.colors.whiteFixed}
-              button={theme.button.big}
-              color={theme.colors.grey0}
-              size={theme.size.button_big_text}
-              weight={theme.weight.button_big_text}
-              border={theme.colors.grey4}
-              bgHover={theme.colors.whiteFixed}
-              borderHover={theme.colors.grey4}
-              colorHover={theme.colors.grey0}
-              {...register("typeVehicle")}
-              value={"motorcycle"}
-              onClick={() => setType("motorcycle")}
-            >
-              Moto
-            </ButtonBig>
-          </FlexBtn>
-        ) : (
-          <FlexBtn>
-            <ButtonBig
-              bg={theme.colors.whiteFixed}
-              button={theme.button.big}
-              color={theme.colors.grey0}
-              size={theme.size.button_big_text}
-              weight={theme.weight.button_big_text}
-              border={theme.colors.grey4}
-              bgHover={theme.colors.whiteFixed}
-              borderHover={theme.colors.grey4}
-              colorHover={theme.colors.grey0}
-              {...register("typeVehicle")}
-              value={"car"}
-              onClick={() => setType("car")}
-            >
-              Carro
-            </ButtonBig>
-            <ButtonBig
-              bg={theme.colors.brand1}
-              button={theme.button.big}
-              color={theme.colors.whiteFixed}
-              size={theme.size.button_big_text}
-              weight={theme.weight.button_big_text}
-              border={theme.colors.brand1}
-              bgHover={theme.colors.brand2}
-              borderHover={theme.colors.brand2}
-              colorHover={theme.colors.whiteFixed}
-              {...register("typeVehicle")}
-              value={"motorcycle"}
-              onClick={() => setType("motorcycle")}
-            >
-              Moto
-            </ButtonBig>
-          </FlexBtn>
-        )}
-            <ButtonBig
-              bg={theme.colors.brand1}
-              button={theme.button.big}
-              color={theme.colors.whiteFixed}
-              size={theme.size.button_big_text}
-              weight={theme.weight.button_big_text}
-              border={theme.colors.brand1}
-              bgHover={theme.colors.brand2}
-              borderHover={theme.colors.brand2}
-              colorHover={theme.colors.whiteFixed}
-              disabled={change}
-              disable="sim"
-              type="submit"
-              onClick={() =>
-                setTimeout(() => {
-                  close();
-                }, 200)
-              }
-            >
-              Criar Anúncio
-            </ButtonBig>
-            {/* </div> */}
-          </Content>
-        </Container>
+          </Single>
+          {additionalFields.map((index: number) => (
+            <div key={index}>
+              <Title>{`Link de imagem ${index + 2}:`}</Title>
+              <Input
+                width={"big"}
+                {...register("img")}
+                value={img}
+                onChange={(e) => handleAdditionalFieldChange(index, e)}
+              />
+            </div>
+          ))}
+
+          {numAdditionalFields < 5 && (
+            <button type="button" onClick={handleAddFieldsClick}>
+              Adicionar mais campos
+            </button>
+          )}
+          <ButtonBig
+            bg={theme.colors.brand1}
+            button={theme.button.big}
+            color={theme.colors.whiteFixed}
+            size={theme.size.button_big_text}
+            weight={theme.weight.button_big_text}
+            border={theme.colors.brand1}
+            bgHover={theme.colors.brand2}
+            borderHover={theme.colors.brand2}
+            colorHover={theme.colors.whiteFixed}
+            disabled={change}
+            disable="sim"
+            type="submit"
+            onClick={() =>
+              setTimeout(() => {
+                close();
+              }, 200)
+            }
+          >
+            Criar Anúncio
+          </ButtonBig>
+
+          {/* </div> */}
+        </Content>
+      </Container>
       {/* )} */}
     </>
   );
