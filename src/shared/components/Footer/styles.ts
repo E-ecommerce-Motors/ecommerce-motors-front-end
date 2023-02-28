@@ -6,7 +6,7 @@ flex-direction: column;
 align-items: center;
 justify-content: space-between;
 
-min-width: 100vw;
+width: 100%;
 height: 15rem;
 padding: 1.8rem;
 
