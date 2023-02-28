@@ -4,7 +4,8 @@ import { theme } from "../../../styles/theme";
 export interface Props {
   authenticaded?: string;
   open?: boolean;
-  mobile?: boolean;
+  mobile?: boolean
+  
 }
 
 export const Auction = styled.div`
