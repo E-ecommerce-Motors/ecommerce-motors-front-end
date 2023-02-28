@@ -5,6 +5,7 @@ export interface Props {
   authenticaded?: string;
   open?: boolean;
   mobile?: boolean;
+  
 }
 
 export const Auction = styled.div`
