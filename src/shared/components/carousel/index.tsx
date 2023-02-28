@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Auction, Frame, Title } from "./styles";
-import { ProductCard } from "../productCard";
+import { ProductCard } from "../ProductCard";
 import { api } from "../../services/api";
 import { updateAuth } from "../../providers/authProvider";
 
