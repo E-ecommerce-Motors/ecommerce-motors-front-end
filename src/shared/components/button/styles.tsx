@@ -15,6 +15,8 @@ export interface Props {
 }
 
 export const ButtonBig = styled.button`
+  transition: 0.2s;
+  cursor: pointer;
   box-sizing: border-box;
   gap: 10px;
   padding: 12px 28px;
@@ -31,6 +33,7 @@ export const ButtonBig = styled.button`
   font-size: ${(props: Props) => props.size};
   font-weight: ${(props: Props) => props.weight};
   font-family: ${theme.fonts.inter};
+
   :hover {
     background-color: ${(props: Props) => props.bgHover};
     color: ${(props: Props) => props.colorHover};

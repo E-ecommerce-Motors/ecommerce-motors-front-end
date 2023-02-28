@@ -1,163 +1,308 @@
-import React, { useContext, ChangeEvent } from "react";
-import TextFieldInput from "../TextFieldInput";
+import React, { useContext, useState } from "react";
+import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
-import { api } from "../../services/api";
-import {
-  ModalWrapper,
-  ModalContent,
-  CloseButton,
-  SelectableButton,
-} from "./style";
-import CreateAnnouncementProvider, {
-  CreateAnnouncementContext,
-} from "../../providers/AnnouncementContext";
+import { CloseButton } from "./style";
+import { CreateAnnouncementContext } from "../../providers/AnnouncementContext";
 import { toast } from "react-toastify";
-import { IntrinsicElementsKeys } from "styled-components";
+import * as yup from "yup";
+import {
+  Container,
+  Content,
+  FlexBtn,
+  Header,
+  Heading,
+  Title,
+  Type,
+  Input,
+  Infos,
+  Single,
+  TextArea,
+} from "../Modal/editAnnouncement/styles";
+import { ButtonBig } from ".././Button/styles";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-// typeAnnouncement,
-//         title,
-//         year,
-//         mileage,
-//         price,
-//         description,
-//         typeVehicle,
+interface Create {
+  title: string;
+  year: string;
+  mileage: number;
+  price: number;
+  description: string;
+  typeAnnouncement: string;
+  typeVehicle: string;
+}
 
 const CreateAnnouncementModal = () => {
-  const { register, handleSubmit } = useForm();
+  const [year, setYear] = useState<number>();
+  const [change, setChange] = useState(true);
+  const [mileage, setMileage] = useState<number>();
+  const [title, setTitle] = useState<string>();
+  const [price, setPrice] = useState<number>();
+  const [description, setDescription] = useState<string>();
+  const [type, setType] = useState<string>();
+  const [tA, setTA] = useState<string>();
 
-  const onSubmit = async (data: any) => {
-    console.log(data);
-    api
-      .post("announcements", data)
-      .then((res) => {
-        toast.success("Aoba, bão?");
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
-  };
+  const schema = yup.object().shape({
+    title: yup.string().required(),
+    year: yup.string().required(),
+    mileage: yup.number().required(),
+    price: yup.number().required(),
+    description: yup.string().required(),
+    typeAnnouncement: yup.string().required(),
+    typeVehicle: yup.string().required(),
+  });
 
   const {
-    selectedType,
-    selectedOffer,
-    toggleModal,
-    handleTypeClick,
-    handleOfferClick,
-    isOpen,
-  } = useContext(CreateAnnouncementContext);
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Create>({
+    resolver: yupResolver(schema),
+  });
+
+  const submit = async (data: any) => {
+    console.log(data);
+    data.typeAnnouncement = tA;
+    data.typeVehicle = type;
+    CreateAnn(data);
+  };
+
+  const { toggleModal, isOpen, CreateAnn } = useContext(
+    CreateAnnouncementContext
+  );
 
   return (
     <>
-      <button className="normalButton" onClick={toggleModal}>
-        Open Modal
-      </button>
-      {isOpen && (
-        <ModalWrapper>
-          <ModalContent>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="headerContent">
-                <h4>Criar Anúncio</h4>
-                <CloseButton onClick={toggleModal} type="button">
-                  x
-                </CloseButton>
-              </div>
-              <h5>Tipo de Anúncio</h5>
-              <div className="selectableContainer">
-                <SelectableButton
-                  onClick={() => handleOfferClick("Leilao")}
-                  isSelected={selectedOffer === "Leilao"}
-                  {...register("auction")}
-                  type="button"
-                >
-                  Leilão
-                </SelectableButton>
-                <SelectableButton
-                  onClick={() => handleOfferClick("Venda")}
-                  isSelected={selectedOffer === "Venda"}
-                  {...register("sale")}
-                  type="button"
-                >
-                  Venda
-                </SelectableButton>
-              </div>
-              <div className="carInfo">
-                <h5>Informações do veículo</h5>
-                <TextFieldInput
-                  labelText="Título"
-                  placeholderText="Digitar título"
-                  {...register("title")}
+      {/* {isOpen && ( */}
+        <Container>
+          <Content onSubmit={handleSubmit(submit)}>
+            <Header>
+              <Heading>Editar anúncio</Heading>
+              <CloseButton onClick={toggleModal} type="button">
+                x
+              </CloseButton>
+            </Header>
+
+            <Type>Tipo de anúncio</Type>
+            <FlexBtn>
+            {tA == "sale" ? (
+            <>
+              <ButtonBig
+                bg={theme.colors.brand1}
+                button={theme.button.big}
+                color={theme.colors.whiteFixed}
+                size={theme.size.button_big_text}
+                weight={theme.weight.button_big_text}
+                border={theme.colors.brand1}
+                bgHover={theme.colors.brand2}
+                borderHover={theme.colors.brand2}
+                colorHover={theme.colors.whiteFixed}
+                value={"sale"}
+                {...register("typeAnnouncement")}
+                onClick={() => setTA("sale")}
+              >
+                Venda
+              </ButtonBig>
+              <ButtonBig
+                bg={theme.colors.whiteFixed}
+                button={theme.button.big}
+                color={theme.colors.grey0}
+                size={theme.size.button_big_text}
+                weight={theme.weight.button_big_text}
+                border={theme.colors.grey4}
+                bgHover={theme.colors.whiteFixed}
+                borderHover={theme.colors.grey4}
+                colorHover={theme.colors.grey0}
+                value={"auction"}
+                {...register("typeAnnouncement")}
+                onClick={() => setTA("auction")}
+              >
+                Leilão
+              </ButtonBig>
+            </>
+          ) : (
+            <>
+              <ButtonBig
+                bg={theme.colors.whiteFixed}
+                button={theme.button.big}
+                color={theme.colors.grey0}
+                size={theme.size.button_big_text}
+                weight={theme.weight.button_big_text}
+                border={theme.colors.grey4}
+                bgHover={theme.colors.whiteFixed}
+                borderHover={theme.colors.grey4}
+                colorHover={theme.colors.grey0}
+                value={"sale"}
+                {...register("typeAnnouncement")}
+                onClick={() => setTA("sale")}
+              >
+                Venda
+              </ButtonBig>
+              <ButtonBig
+                bg={theme.colors.brand1}
+                button={theme.button.big}
+                color={theme.colors.whiteFixed}
+                size={theme.size.button_big_text}
+                weight={theme.weight.button_big_text}
+                border={theme.colors.brand1}
+                bgHover={theme.colors.brand2}
+                borderHover={theme.colors.brand2}
+                colorHover={theme.colors.whiteFixed}
+                value={"auction"}
+                {...register("typeAnnouncement")}
+                onClick={() => setTA("auction")}
+              >
+                Leilão
+              </ButtonBig>
+            </>
+          )}
+          </FlexBtn>
+            <Infos>
+              <Single>
+                <Title>Ano</Title>
+                <Input
+                  placeholder={"Digite o ano do veículo"}
+                  width={"none"}
+                  {...register("year")}
+                  value={year}
+                  type="number"
                   onChange={(e) => {
-                    e.target.value;
+                    setYear(Number(e.target.value));
                   }}
                 />
-                <div className="yearKmPrice">
-                  <TextFieldInput
-                    labelText="Ano"
-                    placeholderText="Digitar ano"
-                    {...register("year")}
-                  />
-                  <TextFieldInput
-                    labelText="Quilometragem"
-                    placeholderText="0"
-                    {...register("mileage")}
-                  />
-                  <TextFieldInput
-                    labelText="Preço"
-                    placeholderText="Digitar Preço"
-                    {...register("price")}
-                  />
-                </div>
-                <TextFieldInput
-                  labelText="Descrição"
-                  placeholderText="Digitar Descrição"
-                  multilineOption={true}
-                  maxRowsNumber={2}
-                  inputHeight={80}
-                  {...register("description")}
+              </Single>
+              <Single>
+                <Title>Quilometragem</Title>
+                <Input
+                  placeholder={`Digite a quilometragem do veículo`}
+                  width={"none"}
+                  {...register("mileage")}
+                  value={mileage}
+                  type="number"
+                  onChange={(e) => {
+                    setMileage(Number(e.target.value));
+                  }}
                 />
-                <h5>Tipo de veículo</h5>
-                <div className="selectableContainer">
-                  <SelectableButton
-                    onClick={() => handleTypeClick("Carro")}
-                    isSelected={selectedType === "Carro"}
-                    {...register("car")}
-                    type="button"
-                  >
-                    Carro
-                  </SelectableButton>
-                  <SelectableButton
-                    onClick={() => handleTypeClick("Moto")}
-                    isSelected={selectedType === "Moto"}
-                    {...register("motorcycle")}
-                    type="button"
-                  >
-                    Moto
-                  </SelectableButton>
-                </div>
-                {/* <TextFieldInput
-                  labelText="Descrição"
-                  placeholderText="Digitar Descrição"
-                  
-                  
-                  inputHeight={80}
-                  {...register("description")}
+              </Single>
+              <Single>
+                <Title>Preço</Title>
+                <Input
+                  placeholder={`Digite o preço`}
+                  width={"none"}
+                  {...register("price")}
+                  value={price}
+                  type="number"
+                  onChange={(e) => {
+                    setPrice(Number(e.target.value));
+                  }}
                 />
-                <TextFieldInput
-                  labelText="Descrição"
-                  placeholderText="Digitar Descrição"
-                  
-                  
-                  {...register("description")}
-                /> */}
-                <div className="createCancel">
-                  <button type="submit">Criar Anúncio</button>
-                  <button type="button">Cancelar</button>
-                </div>
-              </div>
-            </form>
-          </ModalContent>
-        </ModalWrapper>
-      )}
+              </Single>
+            </Infos>
+            <Title>Descrição</Title>
+            <TextArea
+              placeholder={"Digite a descrição"}
+              {...register("description")}
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
+            <Type>Tipo de veículo</Type>
+            {type == "car" ? (
+          <FlexBtn>
+            <ButtonBig
+              bg={theme.colors.brand1}
+              button={theme.button.big}
+              color={theme.colors.whiteFixed}
+              size={theme.size.button_big_text}
+              weight={theme.weight.button_big_text}
+              border={theme.colors.brand1}
+              bgHover={theme.colors.brand2}
+              borderHover={theme.colors.brand2}
+              colorHover={theme.colors.whiteFixed}
+              {...register("typeVehicle")}
+              value={"car"}
+              onClick={() => setType("car")}
+            >
+              Carro
+            </ButtonBig>
+            <ButtonBig
+              bg={theme.colors.whiteFixed}
+              button={theme.button.big}
+              color={theme.colors.grey0}
+              size={theme.size.button_big_text}
+              weight={theme.weight.button_big_text}
+              border={theme.colors.grey4}
+              bgHover={theme.colors.whiteFixed}
+              borderHover={theme.colors.grey4}
+              colorHover={theme.colors.grey0}
+              {...register("typeVehicle")}
+              value={"motorcycle"}
+              onClick={() => setType("motorcycle")}
+            >
+              Moto
+            </ButtonBig>
+          </FlexBtn>
+        ) : (
+          <FlexBtn>
+            <ButtonBig
+              bg={theme.colors.whiteFixed}
+              button={theme.button.big}
+              color={theme.colors.grey0}
+              size={theme.size.button_big_text}
+              weight={theme.weight.button_big_text}
+              border={theme.colors.grey4}
+              bgHover={theme.colors.whiteFixed}
+              borderHover={theme.colors.grey4}
+              colorHover={theme.colors.grey0}
+              {...register("typeVehicle")}
+              value={"car"}
+              onClick={() => setType("car")}
+            >
+              Carro
+            </ButtonBig>
+            <ButtonBig
+              bg={theme.colors.brand1}
+              button={theme.button.big}
+              color={theme.colors.whiteFixed}
+              size={theme.size.button_big_text}
+              weight={theme.weight.button_big_text}
+              border={theme.colors.brand1}
+              bgHover={theme.colors.brand2}
+              borderHover={theme.colors.brand2}
+              colorHover={theme.colors.whiteFixed}
+              {...register("typeVehicle")}
+              value={"motorcycle"}
+              onClick={() => setType("motorcycle")}
+            >
+              Moto
+            </ButtonBig>
+          </FlexBtn>
+        )}
+            <ButtonBig
+              bg={theme.colors.brand1}
+              button={theme.button.big}
+              color={theme.colors.whiteFixed}
+              size={theme.size.button_big_text}
+              weight={theme.weight.button_big_text}
+              border={theme.colors.brand1}
+              bgHover={theme.colors.brand2}
+              borderHover={theme.colors.brand2}
+              colorHover={theme.colors.whiteFixed}
+              disabled={change}
+              disable="sim"
+              type="submit"
+              onClick={() =>
+                setTimeout(() => {
+                  close();
+                }, 200)
+              }
+            >
+              Criar Anúncio
+            </ButtonBig>
+            {/* </div> */}
+          </Content>
+        </Container>
+      {/* )} */}
     </>
   );
 };
