@@ -15,14 +15,16 @@ import {
   Infos,
   Single,
   TextArea,
+  Btn,
 } from "./styles";
 import { api } from "../../../services/api";
 import { useState } from "react";
 import { updateAuth } from "../../../providers/authProvider";
+import { Img } from "../../ProductCardAuction/styles";
 
 interface Announcement {
   id: number;
-  img?: any;
+  img?: Array<any>;
   heading: string;
   text: string;
   saler: boolean;
@@ -33,6 +35,10 @@ interface Announcement {
   active?: boolean;
   type: string;
   tA: string;
+}
+
+interface Img {
+  announcementImgs: string;
 }
 
 interface Props {
@@ -48,6 +54,7 @@ interface Update {
   description?: string;
   typeAnnouncement?: string;
   typeVehicle?: string;
+  announcementImgs?: Array<string>;
 }
 
 export const EditAnnouncement = ({ announcement, close }: Props) => {
@@ -59,6 +66,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
   const [type, setType] = useState(announcement.type);
   const [tA, setTA] = useState(announcement.tA);
   const [change, setChange] = useState(true);
+  const [images, setImages] = useState(announcement.img);
 
   const schema = yup.object().shape({
     title: yup.string().optional(),
@@ -68,6 +76,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     description: yup.string().optional(),
     typeAnnouncement: yup.string().optional(),
     typeVehicle: yup.string(),
+    announcementImgs: yup.array().optional(),
   });
 
   const {
@@ -83,7 +92,33 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
   const submit = (data: Update) => {
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
+    const imageValidation: Array<string> = [];
+    images?.map((e) => {
+      e != "" ? imageValidation.push(e) : "";
+    });
+    data.announcementImgs = imageValidation;
     UpdateAnn(data, announcement.id);
+  };
+
+  const handleIncrementClick = (data: string, index: number) => {
+    const nextImages = images?.map((c, i) => {
+      if (i === index) {
+        return (c = data);
+      } else {
+        return c;
+      }
+    });
+    setImages(nextImages);
+  };
+
+  const handleIncrementImages = () => {
+    const newInput = images;
+    if (newInput) {
+      if (newInput?.length <= 5) {
+        newInput?.push("");
+        setImages(newInput);
+      }
+    }
   };
 
   return (
@@ -333,11 +368,30 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
             Não
           </ButtonBig>
         </FlexBtn>
-        <Single>
-          <Title>Imagem da capa</Title>
-          <Input width={"big"} />
-        </Single>
+        {images?.map((e: any, index: number) => {
+          return (
+            <Single key={index}>
+              {index == 0 ? (
+                <Title>Imagem da capa</Title>
+              ) : (
+                <Title>{index}° Imagem da galeria</Title>
+              )}
+              <Input
+                width={"big"}
+                value={e}
+                placeholder={e}
+                onChange={(element) => {
+                  setChange(false);
+                  handleIncrementClick(element.target.value, index);
+                }}
+              />
+            </Single>
+          );
+        })}
 
+        <Btn onClick={() => handleIncrementImages()}>
+          Adicionar campo para imagem da galeria
+        </Btn>
         <FlexBtn>
           <ButtonBig
             bg={theme.colors.grey6}

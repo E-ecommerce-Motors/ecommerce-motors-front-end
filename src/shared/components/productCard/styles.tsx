@@ -4,6 +4,7 @@ import { theme } from "../../../styles/theme";
 export interface Props {
   saler?: boolean;
   active?: boolean;
+  image?: any;
 }
 
 export const Container = styled.section`
@@ -35,7 +36,7 @@ export const ImgContainer = styled.section`
 export const Img = styled.div`
   width: 262px;
   height: 150.28px;
-  background-image: url(/assets/land-rover-range-rover-car-png-25.png);
+  background-image: url(${(props: Props) => props.image});
   background-repeat: no-repeat;
   background-size: contain;
   transition: 0.5s;

@@ -18,6 +18,11 @@ interface Announcement {
   description: string;
   typeVehicle: "car" | "motorcycle";
   typeAnnouncement: "sale" | "auction";
+  announcementImgs: Array<Img>;
+}
+
+interface Img {
+  announcementImgs: string;
 }
 
 export const Carousel = ({ type }: Props) => {
@@ -59,6 +64,7 @@ export const Carousel = ({ type }: Props) => {
                 year={Number(date[0])}
                 type={element.typeVehicle}
                 tA={element.typeAnnouncement}
+                img={element.announcementImgs}
               />
             );
           })}
