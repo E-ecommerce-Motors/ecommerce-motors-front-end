@@ -20,7 +20,7 @@ import {
 import { api } from "../../../services/api";
 import { useState } from "react";
 import { updateAuth } from "../../../providers/authProvider";
-import { Img } from "../../productCardAuction/styles";
+import { Img } from "../../ProductCardAuction/styles";
 
 interface Announcement {
   id: number;
