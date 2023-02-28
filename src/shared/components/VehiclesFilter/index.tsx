@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { theme } from "../../../styles/theme";
-import { ButtonBig } from "../button/styles";
+import { ButtonBig } from "../Button/styles"; 
 import {
   ContentButtons,
   ContentFilter,

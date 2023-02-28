@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Container, Auction, Frame, Title } from "./styles";
-import { ProductCard } from "../ProductCard";
+import { ProductCard } from "../productCard";
 import { api } from "../../services/api";
+import { updateAuth } from "../../providers/authProvider";
 
 interface Props {
   type: "car" | "motorcycle";
