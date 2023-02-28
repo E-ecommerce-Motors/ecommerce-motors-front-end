@@ -93,7 +93,11 @@ background: ${theme.colors.brand1};
 border-radius: 150px;
 `;
 
-export const Name = styled.p`
+export const Name = styled.div`
+display: flex;
+align-items: center;
+gap: 10px;
+
 font-family: ${theme.fonts.lexend};
 font-weight: ${theme.weight.body_1_600};
 font-size: ${theme.size.body_1};
