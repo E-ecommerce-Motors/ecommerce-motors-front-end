@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
-import { CloseButton, Container } from "./style";
+import { CloseButton, Container, ModalWrapper } from "./style";
 import { CreateAnnouncementContext } from "../../providers/AnnouncementContext";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -29,24 +29,26 @@ interface Create {
   description: string;
   typeAnnouncement: string;
   typeVehicle: string;
-  img: string;
+  coverImage: string;
+  img: string|undefined;
 }
 
 export const CreateAnnouncementModal = () => {
   const [change, setChange] = useState(true);
+  const [coverImage, setCoverImage] = useState<string>(String);
 
-  const onSubmit = async (data: any) => {
-    api
-      .post("announcements", data)
-      .then((res) => {
-        toast.success("Aoba, bão?");
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
-    useState<string>();
-  };
-  
+  // const onSubmit = async (data: any) => {
+  //   api
+  //     .post("announcements", data)
+  //     .then((res) => {
+  //       toast.success("Aoba, bão?");
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error.response.data.message);
+  //     });
+  //   useState<string>();
+  // };
+
   const schema = yup.object().shape({
     title: yup.string().required(),
     year: yup.string().required(),
@@ -98,16 +100,15 @@ export const CreateAnnouncementModal = () => {
   } = useContext(CreateAnnouncementContext);
 
   return (
-    <>
-      <Container>
+      <ModalWrapper>
+    <Container>
+        <Header>
+          <Heading>Criar anúncio</Heading>
+          <CloseButton onClick={toggleModal} type="button">
+            x
+          </CloseButton>
+        </Header>
         <Content onSubmit={handleSubmit(submit)}>
-          <Header>
-            <Heading>Editar anúncio</Heading>
-            <CloseButton onClick={toggleModal} type="button">
-              x
-            </CloseButton>
-          </Header>
-
           <Type>Tipo de anúncio</Type>
           <FlexBtn>
             {tA == "sale" ? (
@@ -125,6 +126,7 @@ export const CreateAnnouncementModal = () => {
                   value={"sale"}
                   {...register("typeAnnouncement")}
                   onClick={() => setTA("sale")}
+                  type="button"
                 >
                   Venda
                 </ButtonBig>
@@ -141,6 +143,7 @@ export const CreateAnnouncementModal = () => {
                   value={"auction"}
                   {...register("typeAnnouncement")}
                   onClick={() => setTA("auction")}
+                  type="button"
                 >
                   Leilão
                 </ButtonBig>
@@ -160,6 +163,7 @@ export const CreateAnnouncementModal = () => {
                   value={"sale"}
                   {...register("typeAnnouncement")}
                   onClick={() => setTA("sale")}
+                  type="button"
                 >
                   Venda
                 </ButtonBig>
@@ -176,6 +180,7 @@ export const CreateAnnouncementModal = () => {
                   value={"auction"}
                   {...register("typeAnnouncement")}
                   onClick={() => setTA("auction")}
+                  type="button"
                 >
                   Leilão
                 </ButtonBig>
@@ -259,6 +264,7 @@ export const CreateAnnouncementModal = () => {
                 {...register("typeVehicle")}
                 value={"car"}
                 onClick={() => setType("car")}
+                type="button"
               >
                 Carro
               </ButtonBig>
@@ -275,6 +281,7 @@ export const CreateAnnouncementModal = () => {
                 {...register("typeVehicle")}
                 value={"motorcycle"}
                 onClick={() => setType("motorcycle")}
+                type="button"
               >
                 Moto
               </ButtonBig>
@@ -294,6 +301,7 @@ export const CreateAnnouncementModal = () => {
                 {...register("typeVehicle")}
                 value={"car"}
                 onClick={() => setType("car")}
+                type="button"
               >
                 Carro
               </ButtonBig>
@@ -310,6 +318,7 @@ export const CreateAnnouncementModal = () => {
                 {...register("typeVehicle")}
                 value={"motorcycle"}
                 onClick={() => setType("motorcycle")}
+                type="button"
               >
                 Moto
               </ButtonBig>
@@ -319,20 +328,24 @@ export const CreateAnnouncementModal = () => {
             <Title>Link da imagem 1</Title>
             <Input
               width={"big"}
-              {...register("img")}
-              value={img}
-              onChange={(e) => e.target.value}
+              {...register("coverImage")}
+              value={coverImage}
+              onChange={(e) => {
+                setCoverImage(String(e.target.value));
+              }}
             />
           </Single>
-          {additionalFields.map((index: number) => (
-            <div key={index}>
-              <Title>{`Link de imagem ${index + 2}:`}</Title>
+          {additionalFields.map((element: string, index: number) => (
+              
+            <div key={index+1}>
+              <Title>{`URL da imagem ${index + 2}:`}</Title>
               <Input
                 width={"big"}
+                placeholder={`URL da imagem ${index + 2}`}
                 {...register("img")}
                 value={img}
                 onChange={(e) => handleAdditionalFieldChange(index, e)}
-              />
+                />
             </div>
           ))}
 
@@ -351,20 +364,14 @@ export const CreateAnnouncementModal = () => {
             bgHover={theme.colors.brand2}
             borderHover={theme.colors.brand2}
             colorHover={theme.colors.whiteFixed}
-            disabled={change}
             disable="sim"
+            // disabled={change}
             type="submit"
-            onClick={() =>
-              setTimeout(() => {
-                close();
-              }, 200)
-            }
           >
             Criar Anúncio
           </ButtonBig>
-
         </Content>
-      </Container>
-    </>
+    </Container>
+      </ModalWrapper>
   );
 };
