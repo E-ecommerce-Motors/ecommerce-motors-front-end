@@ -29,23 +29,25 @@ interface Create {
   description: string;
   typeAnnouncement: string;
   typeVehicle: string;
+  coverImage: string;
   img: string|undefined;
 }
 
 export const CreateAnnouncementModal = () => {
   const [change, setChange] = useState(true);
+  const [coverImage, setCoverImage] = useState<string>(String);
 
-  const onSubmit = async (data: any) => {
-    api
-      .post("announcements", data)
-      .then((res) => {
-        toast.success("Aoba, bão?");
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
-    useState<string>();
-  };
+  // const onSubmit = async (data: any) => {
+  //   api
+  //     .post("announcements", data)
+  //     .then((res) => {
+  //       toast.success("Aoba, bão?");
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error.response.data.message);
+  //     });
+  //   useState<string>();
+  // };
 
   const schema = yup.object().shape({
     title: yup.string().required(),
@@ -326,9 +328,11 @@ export const CreateAnnouncementModal = () => {
             <Title>Link da imagem 1</Title>
             <Input
               width={"big"}
-              {...register("img")}
-              value={img}
-              onChange={(e) => e.target.value}
+              {...register("coverImage")}
+              value={coverImage}
+              onChange={(e) => {
+                setCoverImage(String(e.target.value));
+              }}
             />
           </Single>
           {additionalFields.map((element: string, index: number) => (

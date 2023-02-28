@@ -13,27 +13,27 @@ type CreateAnnouncementContextType = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   CreateAnn: any;
   year: number | undefined;
-  setYear: Dispatch<SetStateAction<number | undefined>>;
+  setYear: Dispatch<SetStateAction<number>>;
   mileage: number | undefined;
-  setMileage: Dispatch<SetStateAction<number | undefined>>;
+  setMileage: Dispatch<SetStateAction<number>>;
   title: string | undefined;
-  setTitle: Dispatch<SetStateAction<string | undefined>>;
+  setTitle: Dispatch<SetStateAction<string>>;
   price: number | undefined;
-  setPrice: Dispatch<SetStateAction<number | undefined>>;
+  setPrice: Dispatch<SetStateAction<number>>;
   description: string | undefined;
   setDescription: Dispatch<SetStateAction<string | undefined>>;
   type: string | undefined;
-  setType: Dispatch<SetStateAction<string | undefined>>;
+  setType: Dispatch<SetStateAction<string>>;
   tA: string | undefined;
-  setTA: Dispatch<SetStateAction<string | undefined>>;
+  setTA: Dispatch<SetStateAction<string>>;
   handleAddFieldsClick: () => void;
   handleAdditionalFieldChange: any;
   additionalFields: any;
   setAdditionalFields: any;
   numAdditionalFields: number;
   setNumAdditionalFields: any;
-  img: string | undefined;
-  setImg: Dispatch<SetStateAction<string | undefined>>;
+  img: string[];
+  setImg: Dispatch<SetStateAction<string[]>>;
 };
 
 interface Create {
@@ -56,17 +56,17 @@ export const CreateAnnouncementContext = createContext(
 
 export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [numAdditionalFields, setNumAdditionalFields] = useState<number>(0);
+  const [numAdditionalFields, setNumAdditionalFields] = useState<number>(Number);
   const [additionalFields, setAdditionalFields] = useState<string[]>([]);
-  const [year, setYear] = useState<number>();
+  const [year, setYear] = useState<number>(Number);
   const [change, setChange] = useState(true);
-  const [mileage, setMileage] = useState<number>();
-  const [title, setTitle] = useState<string>();
-  const [price, setPrice] = useState<number>();
+  const [mileage, setMileage] = useState<number>(Number);
+  const [title, setTitle] = useState<string>("");
+  const [price, setPrice] = useState<number>(Number);
   const [description, setDescription] = useState<string>();
-  const [type, setType] = useState<string>();
-  const [tA, setTA] = useState<string>();
-  const [img, setImg] = useState<string>();
+  const [type, setType] = useState<string>("car");
+  const [tA, setTA] = useState<string>("sale");
+  const [img, setImg] = useState<string[]>([""]);
 
   const handleAddFieldsClick = () => {
     setNumAdditionalFields(numAdditionalFields + 1);
