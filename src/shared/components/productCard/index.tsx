@@ -22,7 +22,7 @@ import {
 } from "./styles";
 
 interface Props {
-  img?: any;
+  img?: Array<Img>;
   heading: string;
   text: string;
   saler: boolean;
@@ -34,6 +34,10 @@ interface Props {
   type: string;
   id: number;
   tA: "sale" | "auction";
+}
+
+interface Img {
+  announcementImgs: string;
 }
 
 export const ProductCard = ({
@@ -57,6 +61,7 @@ export const ProductCard = ({
   const { getAnn } = updateAuth();
 
   const announcement = {
+    img,
     tA,
     heading,
     text,
@@ -88,7 +93,7 @@ export const ProductCard = ({
         <Active saler={saler} active={active}>
           {active ? `Ativo` : "Inativo"}
         </Active>
-        <Img />
+        <Img image={img ? img[0] : ""} />
       </ImgContainer>
       <Heading7>
         {heading.length > 41 ? `${heading.slice(0, 38)}...` : heading}
