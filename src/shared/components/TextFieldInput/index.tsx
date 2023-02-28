@@ -1,34 +1,33 @@
-import InputLabel from "@mui/material/InputLabel";
+
 import { ContentTextAreaInput, CustomTextField } from "./styles";
+import { ChangeEvent } from "react";
 
 interface Props {
   labelText: string;
   placeholderText: string;
-  maxRowsNumber?: number;
-  typeInput?: string;
-  inputHeight?: number;
-  multilineOption?: boolean;
+  type?: string;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: any;
 }
 
 const TextFieldInput: React.FC<Props> = ({
   labelText,
   placeholderText,
-  maxRowsNumber,
-  typeInput,
-  inputHeight,
-  multilineOption,
+  type,
+  onChange,
+  value,
 }) => {
   return (
     <ContentTextAreaInput>
-      <InputLabel htmlFor="textFieldId">{labelText}</InputLabel>
-      <CustomTextField
+      <label htmlFor="textFieldId">{labelText}</label>
+      <input
         id="textFieldId"
-        type={typeInput}
+        type={type}
         className="textInput"
         placeholder={placeholderText}
-        maxRows={maxRowsNumber}
-        multiline={multilineOption}
-        InputProps={{sx: {height: inputHeight} }}/>
+        onChange={onChange}
+        value={value}
+        />
     </ContentTextAreaInput>
   );
 };

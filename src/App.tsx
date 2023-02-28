@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CreateAnnouncementProvider from "./shared/providers/AnnouncementContext";
 import { RoutesMain } from "./shared/routes";
+import CreateAnnouncementProvider from "./shared/providers/AnnouncementContext";
+import { CreateAnnouncementContext } from "./shared/providers/AnnouncementContext";
 
 const App = () => {
   return (
@@ -16,7 +18,6 @@ const App = () => {
       />
       <RoutesMain></RoutesMain>
     </CreateAnnouncementProvider>
-
   );
 };
 
