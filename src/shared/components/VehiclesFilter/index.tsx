@@ -1,5 +1,8 @@
+import { useContext } from "react";
 import { theme } from "../../../styles/theme";
+import { CreateAnnouncementContext } from "../../providers/AnnouncementContext";
 import { ButtonBig } from "../Button/styles";
+import { CreateAnnouncementModal } from "../CreateAnnouncementModal";
 import {
   ContentButtons,
   ContentFilter,
@@ -17,8 +20,11 @@ interface Props {
 export const VehiclesFilter = ({ auth, user }: Props) => {
   const name = user.split(" ");
 
+  const { toggleModal, isOpen } = useContext(CreateAnnouncementContext);
+
   return (
     <>
+      {isOpen && <CreateAnnouncementModal />}
       {auth == "default" ? (
         <ContentFilter>
           <ContentText>
@@ -60,14 +66,13 @@ export const VehiclesFilter = ({ auth, user }: Props) => {
             <User>
               <Icon>{`${name[0].slice(0, 1)}${name[1].slice(0, 1)}`}</Icon>
               <Name>
-                {user}
+                <p>{user}</p>
                 <span>Anunciante</span>
               </Name>
             </User>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
               impedit earum est perferendis repellendus autem, vel reprehenderit
-             
             </p>
             <ButtonBig
               bg={theme.colors.whiteFixed}
@@ -79,6 +84,7 @@ export const VehiclesFilter = ({ auth, user }: Props) => {
               colorHover={theme.colors.whiteFixed}
               bgHover={theme.colors.brand1}
               borderHover={theme.colors.brand1}
+              onClick={() => toggleModal()}
             >
               Criar anúncio
             </ButtonBig>

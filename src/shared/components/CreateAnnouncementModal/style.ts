@@ -1,4 +1,19 @@
 import styled from "styled-components";
+import { theme } from "../../../styles/theme";
+
+export const Container = styled.section`
+  position: absolute;
+  width: 520px;
+  height: 100vh;
+  left: 40%;
+  z-index: 11;
+  background: ${theme.colors.whiteFixed};
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.9);
+`;
 
 export const SelectableButton = styled.button<{ isSelected?: boolean }>`
   background-color: ${(props) =>
