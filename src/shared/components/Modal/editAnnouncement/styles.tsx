@@ -17,6 +17,7 @@ export const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   transform: scale(0.9);
 `;
 export const Header = styled.div`
@@ -45,6 +46,7 @@ export const Heading = styled.h2`
 `;
 
 export const Content = styled.form`
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -159,6 +161,8 @@ export const TextArea = styled.textarea`
   font-weight: ${theme.weight.input_placeholder};
   font-size: ${theme.size.input_placeholder};
   color: ${theme.colors.grey3};
+  resize: none;
+  width: 100%;
   ::placeholder {
     gap: 10px;
     font-family: ${theme.fonts.inter};
