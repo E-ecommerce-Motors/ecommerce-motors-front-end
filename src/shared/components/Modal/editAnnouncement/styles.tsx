@@ -9,9 +9,9 @@ interface Props {
 export const Container = styled.section`
   position: absolute;
   width: 520px;
-  height: max-content;
+  height: 100vh;
   left: 40%;
-  top: -5%;
+
   background: ${theme.colors.whiteFixed};
   border-radius: 8px;
   display: flex;
@@ -51,7 +51,12 @@ export const Content = styled.form`
   padding: 0px;
   gap: 24px;
   width: 466px;
-  height: 1042px;
+  height: 100vh;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  margin-bottom: 25px;
 `;
 
 export const Type = styled.h3`
@@ -69,7 +74,7 @@ export const Title = styled.label`
   font-weight: ${theme.weight.input_label};
   font-size: ${theme.size.input_label};
   line-height: 17px;
-  color: ${theme.colors.grey0};
+  color: ${theme.colors.grey1};
 `;
 
 export const FlexBtn = styled.div`
@@ -82,13 +87,35 @@ export const FlexBtn = styled.div`
   width: 466px;
 `;
 
+export const Btn = styled.button`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  width: 315px;
+  min-height: 38px;
+  max-height: 38px;
+  border: 1.5px solid ${theme.colors.brand4};
+  border-radius: 4px;
+  font-family: ${theme.fonts.inter};
+  font-style: normal;
+  font-weight: ${theme.weight.button_medium_text};
+  font-size: ${theme.size.button_medium_text};
+  line-height: 0px;
+  color: ${theme.colors.brand1};
+`;
+
 export const Input = styled.input`
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 0px 16px;
   width: ${(props: Props) => (props.width == "big" ? "466px" : "148px")};
-  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
   gap: 10px;
   border: 1.5px solid ${theme.colors.grey7};
   border-radius: 4px;
@@ -120,9 +147,9 @@ export const TextArea = styled.textarea`
   display: flex;
   flex-direction: row;
   align-items: center;
-
   width: 436px;
-  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
   padding: 8px 16px 8px 16px;
   border: 1.5px solid ${theme.colors.grey7};
   border-radius: 4px;

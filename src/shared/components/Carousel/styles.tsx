@@ -34,12 +34,14 @@ export const Frame = styled.div`
   left: 0px;
   top: 100px;
   overflow-x: scroll;
-  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
   gap: 48px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   @media (max-width: 1000px) {
     gap: 12px;
   }
