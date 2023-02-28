@@ -27,12 +27,13 @@ type CreateAnnouncementContextType = {
   tA: string | undefined;
   setTA: Dispatch<SetStateAction<string | undefined>>;
   handleAddFieldsClick: () => void;
-  handleAdditionalFieldChange:any;
+  handleAdditionalFieldChange: any;
   additionalFields: any;
   setAdditionalFields: any;
-  numAdditionalFields: number, setNumAdditionalFields:any;
-  img: string|undefined;
-  setImg: Dispatch<SetStateAction<string|undefined>>
+  numAdditionalFields: number;
+  setNumAdditionalFields: any;
+  img: string | undefined;
+  setImg: Dispatch<SetStateAction<string | undefined>>;
 };
 
 interface Create {
@@ -65,7 +66,7 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
   const [description, setDescription] = useState<string>();
   const [type, setType] = useState<string>();
   const [tA, setTA] = useState<string>();
-  const[img, setImg] = useState<string>();
+  const [img, setImg] = useState<string>();
 
   const handleAddFieldsClick = () => {
     setNumAdditionalFields(numAdditionalFields + 1);
@@ -80,7 +81,7 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
-    if (isOpen) {
+    if (!isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "scroll";
@@ -122,7 +123,7 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
         numAdditionalFields,
         setNumAdditionalFields,
         img,
-        setImg
+        setImg,
       }}
     >
       {children}
