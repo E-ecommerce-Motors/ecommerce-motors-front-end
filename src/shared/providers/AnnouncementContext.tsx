@@ -5,6 +5,7 @@ import React, {
   useState,
 } from "react";
 import { useForm } from "react-hook-form";
+import { Create } from "../interfaces/announcement";
 import { api } from "../services/api";
 
 type CreateAnnouncementContextType = {
@@ -36,15 +37,11 @@ type CreateAnnouncementContextType = {
   setImg: Dispatch<SetStateAction<string[]>>;
 };
 
-interface Create {
-  title: string;
-  year: string;
-  mileage: number;
-  price: number;
-  description: string;
-  typeAnnouncement: string;
-  typeVehicle: string;
-}
+
+
+
+
+
 
 interface ChildrenProp {
   children: React.ReactNode;
