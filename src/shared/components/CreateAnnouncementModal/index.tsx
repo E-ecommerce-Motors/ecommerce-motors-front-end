@@ -23,10 +23,6 @@ import { api } from "../../services/api";
 import { Create } from "../../interfaces/announcement";
 
 export const CreateAnnouncementModal = () => {
-  const [change, setChange] = useState(true);
-  const [coverImage, setCoverImage] = useState<string>(String);
-  const [imageGallery, setImageGallery] = useState<string[]>([""]);
-
   const schema = yup.object().shape({
     title: yup.string().required(),
     year: yup.string().required(),
@@ -36,16 +32,6 @@ export const CreateAnnouncementModal = () => {
     typeAnnouncement: yup.string().required(),
     typeVehicle: yup.string().required(),
   });
-
-  function handleInputChange(event: any) {
-    const inputId = event.target.id;
-    const inputValue = event.target.value;
-    const newImageGallery = [...imageGallery];
-    newImageGallery[inputId] = inputValue;
-    
-    setImageGallery(newImageGallery);
-    
-  }
 
   const {
     register,
@@ -63,6 +49,7 @@ export const CreateAnnouncementModal = () => {
     data.announcementImgs = { create: { coverImage, imageGallery } };
 
     CreateAnn(data);
+    
   };
 
   const {
@@ -83,11 +70,12 @@ export const CreateAnnouncementModal = () => {
     tA,
     setTA,
     handleAddFieldsClick,
-    handleAdditionalFieldChange,
     additionalFields,
     numAdditionalFields,
-    img,
-    setImg,
+    coverImage,
+    setCoverImage,
+    imageGallery,
+    handleInputChange,
   } = useContext(CreateAnnouncementContext);
 
   return (
@@ -199,7 +187,7 @@ export const CreateAnnouncementModal = () => {
                 value={year}
                 type="number"
                 onChange={(e) => {
-                  setYear(Number(e.target.value));
+                  setYear(e.target.value);
                 }}
               />
             </Single>
@@ -212,7 +200,7 @@ export const CreateAnnouncementModal = () => {
                 value={mileage}
                 type="number"
                 onChange={(e) => {
-                  setMileage(Number(e.target.value));
+                  setMileage(e.target.value);
                 }}
               />
             </Single>
@@ -225,7 +213,7 @@ export const CreateAnnouncementModal = () => {
                 value={price}
                 type="number"
                 onChange={(e) => {
-                  setPrice(Number(e.target.value));
+                  setPrice(e.target.value);
                 }}
               />
             </Single>
@@ -320,7 +308,6 @@ export const CreateAnnouncementModal = () => {
             {
               <Input
                 width={"big"}
-                // {...register("coverImage")}
                 value={coverImage}
                 onChange={(e) => {
                   setCoverImage(String(e.target.value));
@@ -332,12 +319,9 @@ export const CreateAnnouncementModal = () => {
             <div key={index + 1}>
               <Title>{`URL da imagem ${index + 2}:`}</Title>
               <Input
-                
                 id={`${index}`}
                 width={"big"}
                 placeholder={`URL da imagem ${index + 2}`}
-                // {...register("create:imageGallery")}
-                
                 onChange={handleInputChange}
               />
             </div>
@@ -359,7 +343,6 @@ export const CreateAnnouncementModal = () => {
             borderHover={theme.colors.brand2}
             colorHover={theme.colors.whiteFixed}
             disable="sim"
-            // disabled={change}
             type="submit"
           >
             Criar Anúncio
