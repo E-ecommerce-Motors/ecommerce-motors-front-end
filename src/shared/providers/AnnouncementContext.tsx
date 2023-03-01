@@ -5,6 +5,7 @@ import React, {
   useState,
 } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { Create } from "../interfaces/announcement";
 import { api } from "../services/api";
 
@@ -13,14 +14,14 @@ type CreateAnnouncementContextType = {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   CreateAnn: any;
-  year: number | undefined;
-  setYear: Dispatch<SetStateAction<number>>;
-  mileage: number | undefined;
-  setMileage: Dispatch<SetStateAction<number>>;
+  year: number | string;
+  setYear: Dispatch<SetStateAction<number | string>>;
+  mileage: number | string;
+  setMileage: Dispatch<SetStateAction<number | string>>;
   title: string | undefined;
   setTitle: Dispatch<SetStateAction<string>>;
-  price: number | undefined;
-  setPrice: Dispatch<SetStateAction<number>>;
+  price: number | string;
+  setPrice: Dispatch<SetStateAction<number | string>>;
   description: string | undefined;
   setDescription: Dispatch<SetStateAction<string | undefined>>;
   type: string | undefined;
@@ -35,13 +36,12 @@ type CreateAnnouncementContextType = {
   setNumAdditionalFields: any;
   img: string[];
   setImg: Dispatch<SetStateAction<string[]>>;
+  coverImage: string;
+  setCoverImage: Dispatch<SetStateAction<string>>;
+  imageGallery: string[];
+  setImageGallery: Dispatch<SetStateAction<string[]>>;
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
-
-
-
-
-
-
 
 interface ChildrenProp {
   children: React.ReactNode;
@@ -55,15 +55,16 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
   const [isOpen, setIsOpen] = useState(false);
   const [numAdditionalFields, setNumAdditionalFields] = useState(Number);
   const [additionalFields, setAdditionalFields] = useState<string[]>([]);
-  const [year, setYear] = useState(Number);
-  const [change, setChange] = useState(true);
-  const [mileage, setMileage] = useState<number>(Number);
+  const [year, setYear] = useState<number | string>("");
+  const [mileage, setMileage] = useState<number | string>("");
   const [title, setTitle] = useState<string>("");
-  const [price, setPrice] = useState(Number);
-  const [description, setDescription] = useState<string>();
+  const [price, setPrice] = useState<number | string>("");
+  const [description, setDescription] = useState<string | undefined>("");
   const [type, setType] = useState<string>("car");
   const [tA, setTA] = useState<string>("sale");
   const [img, setImg] = useState<string[]>([""]);
+  const [coverImage, setCoverImage] = useState<string>("");
+  const [imageGallery, setImageGallery] = useState<string[]>([""]);
 
   const handleAddFieldsClick = () => {
     setNumAdditionalFields(numAdditionalFields + 1);
@@ -75,6 +76,15 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
     newFields[index] = e.target.value;
     setAdditionalFields(newFields);
   };
+
+  function handleInputChange(event: any) {
+    const inputId = event.target.id;
+    const inputValue = event.target.value;
+    const newImageGallery = [...imageGallery];
+    newImageGallery[inputId] = inputValue;
+
+    setImageGallery(newImageGallery);
+  }
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -90,6 +100,8 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
       .post(`announcements`, data)
       .then()
       .catch((response) => console.log(response));
+      toast.success("Anúncio criado com sucesso!")
+      toggleModal()
   };
 
   return (
@@ -121,6 +133,11 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
         setNumAdditionalFields,
         img,
         setImg,
+        coverImage,
+        setCoverImage,
+        imageGallery,
+        setImageGallery,
+        handleInputChange,
       }}
     >
       {children}

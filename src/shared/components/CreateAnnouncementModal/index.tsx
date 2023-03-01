@@ -23,9 +23,6 @@ import { api } from "../../services/api";
 import { Create } from "../../interfaces/announcement";
 
 export const CreateAnnouncementModal = () => {
-  const [change, setChange] = useState(true);
-  const [coverImage, setCoverImage] = useState<string>();
-
   const schema = yup.object().shape({
     title: yup.string().required(),
     year: yup.string().required(),
@@ -49,9 +46,10 @@ export const CreateAnnouncementModal = () => {
     data.userId = 1;
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
-    data.announcementImgs = {create:{coverImage}};
+    data.announcementImgs = { create: { coverImage, imageGallery } };
 
     CreateAnn(data);
+    
   };
 
   const {
@@ -72,11 +70,12 @@ export const CreateAnnouncementModal = () => {
     tA,
     setTA,
     handleAddFieldsClick,
-    handleAdditionalFieldChange,
     additionalFields,
     numAdditionalFields,
-    img,
-    setImg,
+    coverImage,
+    setCoverImage,
+    imageGallery,
+    handleInputChange,
   } = useContext(CreateAnnouncementContext);
 
   return (
@@ -188,7 +187,7 @@ export const CreateAnnouncementModal = () => {
                 value={year}
                 type="number"
                 onChange={(e) => {
-                  setYear(Number(e.target.value));
+                  setYear(e.target.value);
                 }}
               />
             </Single>
@@ -201,7 +200,7 @@ export const CreateAnnouncementModal = () => {
                 value={mileage}
                 type="number"
                 onChange={(e) => {
-                  setMileage(Number(e.target.value));
+                  setMileage(e.target.value);
                 }}
               />
             </Single>
@@ -214,7 +213,7 @@ export const CreateAnnouncementModal = () => {
                 value={price}
                 type="number"
                 onChange={(e) => {
-                  setPrice(Number(e.target.value));
+                  setPrice(e.target.value);
                 }}
               />
             </Single>
@@ -309,7 +308,6 @@ export const CreateAnnouncementModal = () => {
             {
               <Input
                 width={"big"}
-                // {...register("coverImage")}
                 value={coverImage}
                 onChange={(e) => {
                   setCoverImage(String(e.target.value));
@@ -317,15 +315,14 @@ export const CreateAnnouncementModal = () => {
               />
             }
           </Single>
-          {/* {additionalFields.map((element: string, index: number) => (
+          {additionalFields.map((element: string, index: number) => (
             <div key={index + 1}>
               <Title>{`URL da imagem ${index + 2}:`}</Title>
               <Input
+                id={`${index}`}
                 width={"big"}
                 placeholder={`URL da imagem ${index + 2}`}
-                {...register("img")}
-                value={img}
-                onChange={(e) => handleAdditionalFieldChange(index, e)}
+                onChange={handleInputChange}
               />
             </div>
           ))}
@@ -334,7 +331,7 @@ export const CreateAnnouncementModal = () => {
             <button type="button" onClick={handleAddFieldsClick}>
               Adicionar mais campos
             </button>
-          )} */}
+          )}
           <ButtonBig
             bg={theme.colors.brand1}
             button={theme.button.big}
@@ -346,7 +343,6 @@ export const CreateAnnouncementModal = () => {
             borderHover={theme.colors.brand2}
             colorHover={theme.colors.whiteFixed}
             disable="sim"
-            // disabled={change}
             type="submit"
           >
             Criar Anúncio
