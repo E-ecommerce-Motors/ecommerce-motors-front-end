@@ -50,7 +50,62 @@ gap: 21px;
 `
 
 export const ContentProfile = styled.div`
- width: 90%;
- height: 500px;
- background-color: #ffff;
+display: flex;
+justify-content: center;
+margin-bottom: 150px;
+width: 100%;
+height: 200px;
+background-color: ${theme.colors.brand1};
 `
+
+export const Profile = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+margin-top: 50px;
+width: 90%;
+height: 400px;
+border-radius: 4px;
+background-color: ${theme.colors.whiteFixed};
+padding: 40px 0px 10px 29px;
+`
+
+export const User = styled.div`
+display: flex;
+flex-direction: column;
+@media (max-width: 1000px) {
+}
+`;
+
+export const Icon = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 104px;
+height: 104px;
+font-family: ${theme.fonts.inter};
+font-size: ${theme.size.Heading_3};
+font-weight: ${theme.weight.body_2_500};
+color: ${theme.colors.whiteFixed};
+line-height: 0px;
+background: ${theme.colors.brand1};
+border-radius: 150px;
+`;
+
+export const Name = styled.div`
+display: flex;
+align-items: center;
+gap: 10px;
+
+font-family: ${theme.fonts.lexend};
+font-weight: ${theme.weight.body_1_600};
+font-size: ${theme.size.body_1};
+color: ${theme.colors.grey1};
+    span {
+        color: ${theme.colors.brand1};
+        background-color: ${theme.colors.brand4};
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+`;

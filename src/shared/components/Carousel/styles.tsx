@@ -5,10 +5,11 @@ export interface Props {
   authenticaded?: string;
   open?: boolean;
   mobile?: boolean;
+  
 }
 
 export const Auction = styled.div`
-  width: 100vw;
+  width: max-content;
   height: 458px;
   flex: none;
   order: 0;
@@ -26,9 +27,6 @@ export const Container = styled.section`
   align-items: flex-start;
   padding: 100px 0px;
   gap: 10px;
-  @media (max-width: 1650px) {
-    margin-bottom: 30px;
-  }
 `;
 export const Frame = styled.div`
   position: relative;
@@ -37,15 +35,16 @@ export const Frame = styled.div`
   left: 0px;
   top: 100px;
   overflow-x: scroll;
-  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
   gap: 48px;
-  @media (max-width: 1650px) {
-    height: max-content;
-    width: 96%;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: 1000px) {
+    gap: 12px;
   }
 `;
 

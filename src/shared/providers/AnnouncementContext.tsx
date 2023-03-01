@@ -1,19 +1,47 @@
-import React, { createContext, useState } from "react";
-
-type AnnouncementType = string;
-type VehicleType = string;
+import React, {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+} from "react";
+import { useForm } from "react-hook-form";
+import { Create } from "../interfaces/announcement";
+import { api } from "../services/api";
 
 type CreateAnnouncementContextType = {
-  selectedType: AnnouncementType;
-  setSelectedType: React.Dispatch<React.SetStateAction<string>>;
-  selectedOffer: VehicleType;
-  setSelectedOffer: React.Dispatch<React.SetStateAction<string>>;
   toggleModal: () => void;
-  handleTypeClick: any;
-  handleOfferClick: any;
   isOpen: boolean;
-  setIsOpen: any;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  CreateAnn: any;
+  year: number | undefined;
+  setYear: Dispatch<SetStateAction<number>>;
+  mileage: number | undefined;
+  setMileage: Dispatch<SetStateAction<number>>;
+  title: string | undefined;
+  setTitle: Dispatch<SetStateAction<string>>;
+  price: number | undefined;
+  setPrice: Dispatch<SetStateAction<number>>;
+  description: string | undefined;
+  setDescription: Dispatch<SetStateAction<string | undefined>>;
+  type: string | undefined;
+  setType: Dispatch<SetStateAction<string>>;
+  tA: string | undefined;
+  setTA: Dispatch<SetStateAction<string>>;
+  handleAddFieldsClick: () => void;
+  handleAdditionalFieldChange: any;
+  additionalFields: any;
+  setAdditionalFields: any;
+  numAdditionalFields: number;
+  setNumAdditionalFields: any;
+  img: string[];
+  setImg: Dispatch<SetStateAction<string[]>>;
 };
+
+
+
+
+
+
 
 interface ChildrenProp {
   children: React.ReactNode;
@@ -25,32 +53,74 @@ export const CreateAnnouncementContext = createContext(
 
 export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedType, setSelectedType] = useState("Carro");
-  const [selectedOffer, setSelectedOffer] = useState("Leilao");
+  const [numAdditionalFields, setNumAdditionalFields] = useState(Number);
+  const [additionalFields, setAdditionalFields] = useState<string[]>([]);
+  const [year, setYear] = useState(Number);
+  const [change, setChange] = useState(true);
+  const [mileage, setMileage] = useState<number>(Number);
+  const [title, setTitle] = useState<string>("");
+  const [price, setPrice] = useState(Number);
+  const [description, setDescription] = useState<string>();
+  const [type, setType] = useState<string>("car");
+  const [tA, setTA] = useState<string>("sale");
+  const [img, setImg] = useState<string[]>([""]);
+
+  const handleAddFieldsClick = () => {
+    setNumAdditionalFields(numAdditionalFields + 1);
+    setAdditionalFields([...additionalFields, ""]);
+  };
+
+  const handleAdditionalFieldChange = (index: number, e: any) => {
+    const newFields = [...additionalFields];
+    newFields[index] = e.target.value;
+    setAdditionalFields(newFields);
+  };
+
   const toggleModal = () => {
     setIsOpen(!isOpen);
+    if (!isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
   };
 
-  const handleTypeClick = (option: string) => {
-    setSelectedType(option);
-  };
-
-  const handleOfferClick = (offer: string) => {
-    setSelectedOffer(offer);
+  const CreateAnn = async (data: Create) => {
+    await api
+      .post(`announcements`, data)
+      .then()
+      .catch((response) => console.log(response));
   };
 
   return (
     <CreateAnnouncementContext.Provider
       value={{
-        selectedType,
-        setSelectedType,
-        selectedOffer,
-        setSelectedOffer,
         toggleModal,
-        handleTypeClick,
-        handleOfferClick,
         isOpen,
         setIsOpen,
+        CreateAnn,
+        year,
+        setYear,
+        mileage,
+        setMileage,
+        title,
+        setTitle,
+        price,
+        setPrice,
+        description,
+        setDescription,
+        type,
+        setType,
+        tA,
+        setTA,
+        handleAddFieldsClick,
+        handleAdditionalFieldChange,
+        additionalFields,
+        setAdditionalFields,
+        numAdditionalFields,
+        setNumAdditionalFields,
+        img,
+        setImg,
       }}
     >
       {children}

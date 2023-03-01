@@ -3,12 +3,10 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useEffect, useState } from "react";
 
-const Footer = () => {
-  const [showButton, setShowButton] = useState(false);
+export const Footer = () => {
 
   const handleScroll = () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    setShowButton(scrollTop > 0);
   };
 
   const handleButtonClick = () => {
@@ -31,22 +29,18 @@ const Footer = () => {
       />
       <p>© 2022 - Todos os direitos reservados.</p>
 
-      {showButton && (
-        <IconButton
-          sx={{
+      <IconButton
+        sx={{
+          backgroundColor: "#212529",
+          borderRadius: 1,
+          "&:hover": {
             backgroundColor: "#212529",
-            borderRadius: 1,
-            "&:hover": {
-              backgroundColor: "#212529",
-            },
-          }}
-          onClick={handleButtonClick}
-        >
-          <KeyboardArrowUpIcon sx={{ color: "#fff" }} />
-        </IconButton>
-      )}
+          },
+        }}
+        onClick={handleButtonClick}
+      >
+        <KeyboardArrowUpIcon sx={{ color: "#fff" }} />
+      </IconButton>
     </ContentFooter>
   );
 };
- 
-export default Footer;

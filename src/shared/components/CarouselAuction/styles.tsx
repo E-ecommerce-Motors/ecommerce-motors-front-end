@@ -4,11 +4,12 @@ import { theme } from "../../../styles/theme";
 export interface Props {
   authenticaded?: string;
   open?: boolean;
-  mobile?: boolean;
+  mobile?: boolean
+  
 }
 
 export const Auction = styled.div`
-  width: max-content;
+  width: 100vw;
   height: 458px;
   flex: none;
   order: 0;
@@ -25,23 +26,30 @@ export const Container = styled.section`
   justify-content: center;
   align-items: flex-start;
   padding: 100px 0px;
+  overflow: hidden;
   gap: 10px;
+  @media (max-width: 1650px) {
+    margin-bottom: 30px;
+  }
 `;
 export const Frame = styled.div`
   position: relative;
-  width: max-content;
+  width: 96vw;
   height: 388px;
   left: 0px;
   top: 100px;
   overflow-x: scroll;
-  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
   gap: 48px;
-  @media (max-width: 1000px) {
-    gap: 12px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: 1650px) {
+    height: max-content;
+    width: 96%;
   }
 `;
 
