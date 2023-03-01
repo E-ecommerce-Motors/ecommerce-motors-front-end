@@ -31,24 +31,12 @@ interface Create {
   typeVehicle: string;
   coverImage: string;
   img: string|undefined;
+  userId: number;
 }
 
 export const CreateAnnouncementModal = () => {
   const [change, setChange] = useState(true);
-  const [coverImage, setCoverImage] = useState<string>(String);
-
-  // const onSubmit = async (data: any) => {
-  //   api
-  //     .post("announcements", data)
-  //     .then((res) => {
-  //       toast.success("Aoba, bão?");
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.response.data.message);
-  //     });
-  //   useState<string>();
-  // };
-
+  // const [coverImage, setCoverImage] = useState<string>(String);
   const schema = yup.object().shape({
     title: yup.string().required(),
     year: yup.string().required(),
@@ -69,6 +57,7 @@ export const CreateAnnouncementModal = () => {
 
   const submit = async (data: any) => {
     console.log(data);
+    data.userId = 1 
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
     CreateAnn(data);
@@ -325,15 +314,15 @@ export const CreateAnnouncementModal = () => {
             </FlexBtn>
           )}
           <Single>
-            <Title>Link da imagem 1</Title>
-            <Input
+            {/* <Title>Link da imagem 1</Title> */}
+            {/* <Input
               width={"big"}
               {...register("coverImage")}
               value={coverImage}
               onChange={(e) => {
                 setCoverImage(String(e.target.value));
               }}
-            />
+            /> */}
           </Single>
           {additionalFields.map((element: string, index: number) => (
               
