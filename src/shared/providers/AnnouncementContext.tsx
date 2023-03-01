@@ -5,6 +5,7 @@ import React, {
   useState,
 } from "react";
 import { useForm } from "react-hook-form";
+import { Create } from "../interfaces/announcement";
 import { api } from "../services/api";
 
 type CreateAnnouncementContextType = {
@@ -36,15 +37,11 @@ type CreateAnnouncementContextType = {
   setImg: Dispatch<SetStateAction<string[]>>;
 };
 
-interface Create {
-  title: string;
-  year: string;
-  mileage: number;
-  price: number;
-  description: string;
-  typeAnnouncement: string;
-  typeVehicle: string;
-}
+
+
+
+
+
 
 interface ChildrenProp {
   children: React.ReactNode;
@@ -56,13 +53,13 @@ export const CreateAnnouncementContext = createContext(
 
 export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [numAdditionalFields, setNumAdditionalFields] = useState<number>(Number);
+  const [numAdditionalFields, setNumAdditionalFields] = useState(Number);
   const [additionalFields, setAdditionalFields] = useState<string[]>([]);
-  const [year, setYear] = useState<number>(Number);
+  const [year, setYear] = useState(Number);
   const [change, setChange] = useState(true);
   const [mileage, setMileage] = useState<number>(Number);
   const [title, setTitle] = useState<string>("");
-  const [price, setPrice] = useState<number>(Number);
+  const [price, setPrice] = useState(Number);
   const [description, setDescription] = useState<string>();
   const [type, setType] = useState<string>("car");
   const [tA, setTA] = useState<string>("sale");

@@ -20,34 +20,11 @@ import {
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { api } from "../../services/api";
-
-interface Create {
-  title: string;
-  year: string;
-  mileage: number;
-  price: number;
-  description: string;
-  typeAnnouncement: string;
-  typeVehicle: string;
-  coverImage: string;
-  img: string|undefined;
-}
+import { Create } from "../../interfaces/announcement";
 
 export const CreateAnnouncementModal = () => {
   const [change, setChange] = useState(true);
-  const [coverImage, setCoverImage] = useState<string>(String);
-
-  // const onSubmit = async (data: any) => {
-  //   api
-  //     .post("announcements", data)
-  //     .then((res) => {
-  //       toast.success("Aoba, bão?");
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.response.data.message);
-  //     });
-  //   useState<string>();
-  // };
+  const [coverImage, setCoverImage] = useState<string>();
 
   const schema = yup.object().shape({
     title: yup.string().required(),
@@ -69,8 +46,11 @@ export const CreateAnnouncementModal = () => {
 
   const submit = async (data: any) => {
     console.log(data);
+    data.userId = 1;
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
+    data.announcementImgs = {create:{coverImage}};
+
     CreateAnn(data);
   };
 
@@ -100,8 +80,8 @@ export const CreateAnnouncementModal = () => {
   } = useContext(CreateAnnouncementContext);
 
   return (
-      <ModalWrapper>
-    <Container>
+    <ModalWrapper>
+      <Container>
         <Header>
           <Heading>Criar anúncio</Heading>
           <CloseButton onClick={toggleModal} type="button">
@@ -326,18 +306,19 @@ export const CreateAnnouncementModal = () => {
           )}
           <Single>
             <Title>Link da imagem 1</Title>
-            <Input
-              width={"big"}
-              {...register("coverImage")}
-              value={coverImage}
-              onChange={(e) => {
-                setCoverImage(String(e.target.value));
-              }}
-            />
+            {
+              <Input
+                width={"big"}
+                // {...register("coverImage")}
+                value={coverImage}
+                onChange={(e) => {
+                  setCoverImage(String(e.target.value));
+                }}
+              />
+            }
           </Single>
-          {additionalFields.map((element: string, index: number) => (
-              
-            <div key={index+1}>
+          {/* {additionalFields.map((element: string, index: number) => (
+            <div key={index + 1}>
               <Title>{`URL da imagem ${index + 2}:`}</Title>
               <Input
                 width={"big"}
@@ -345,7 +326,7 @@ export const CreateAnnouncementModal = () => {
                 {...register("img")}
                 value={img}
                 onChange={(e) => handleAdditionalFieldChange(index, e)}
-                />
+              />
             </div>
           ))}
 
@@ -353,7 +334,7 @@ export const CreateAnnouncementModal = () => {
             <button type="button" onClick={handleAddFieldsClick}>
               Adicionar mais campos
             </button>
-          )}
+          )} */}
           <ButtonBig
             bg={theme.colors.brand1}
             button={theme.button.big}
@@ -371,7 +352,7 @@ export const CreateAnnouncementModal = () => {
             Criar Anúncio
           </ButtonBig>
         </Content>
-    </Container>
-      </ModalWrapper>
+      </Container>
+    </ModalWrapper>
   );
 };
