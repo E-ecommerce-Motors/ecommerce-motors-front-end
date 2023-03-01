@@ -76,6 +76,8 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
     setAdditionalFields(newFields);
   };
 
+  
+
   const toggleModal = () => {
     setIsOpen(!isOpen);
     if (!isOpen) {

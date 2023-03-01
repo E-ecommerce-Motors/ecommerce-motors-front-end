@@ -8,7 +8,6 @@ export interface Create {
     typeVehicle: string;
     userId: number;
     announcementImgs: IAnnouncementImages[]
-    
   }
   export interface IAnnouncementImages{
     create: ICreateImg[];
@@ -16,5 +15,6 @@ export interface Create {
 
   export interface ICreateImg{
     coverImage: string;
+    imageGallery: string[];
   }
 

@@ -24,7 +24,8 @@ import { Create } from "../../interfaces/announcement";
 
 export const CreateAnnouncementModal = () => {
   const [change, setChange] = useState(true);
-  const [coverImage, setCoverImage] = useState<string>();
+  const [coverImage, setCoverImage] = useState<string>(String);
+  const [imageGallery, setImageGallery] = useState<string[]>([""]);
 
   const schema = yup.object().shape({
     title: yup.string().required(),
@@ -35,6 +36,16 @@ export const CreateAnnouncementModal = () => {
     typeAnnouncement: yup.string().required(),
     typeVehicle: yup.string().required(),
   });
+
+  function handleInputChange(event: any) {
+    const inputId = event.target.id;
+    const inputValue = event.target.value;
+    const newImageGallery = [...imageGallery];
+    newImageGallery[inputId] = inputValue;
+    
+    setImageGallery(newImageGallery);
+    
+  }
 
   const {
     register,
@@ -49,7 +60,7 @@ export const CreateAnnouncementModal = () => {
     data.userId = 1;
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
-    data.announcementImgs = {create:{coverImage}};
+    data.announcementImgs = { create: { coverImage, imageGallery } };
 
     CreateAnn(data);
   };
@@ -317,15 +328,17 @@ export const CreateAnnouncementModal = () => {
               />
             }
           </Single>
-          {/* {additionalFields.map((element: string, index: number) => (
+          {additionalFields.map((element: string, index: number) => (
             <div key={index + 1}>
               <Title>{`URL da imagem ${index + 2}:`}</Title>
               <Input
+                
+                id={`${index}`}
                 width={"big"}
                 placeholder={`URL da imagem ${index + 2}`}
-                {...register("img")}
-                value={img}
-                onChange={(e) => handleAdditionalFieldChange(index, e)}
+                // {...register("create:imageGallery")}
+                
+                onChange={handleInputChange}
               />
             </div>
           ))}
@@ -334,7 +347,7 @@ export const CreateAnnouncementModal = () => {
             <button type="button" onClick={handleAddFieldsClick}>
               Adicionar mais campos
             </button>
-          )} */}
+          )}
           <ButtonBig
             bg={theme.colors.brand1}
             button={theme.button.big}
