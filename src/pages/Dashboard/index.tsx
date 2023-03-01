@@ -4,7 +4,7 @@ import { Carousel } from "../../shared/components/Carousel";
 import { VehiclesFilter } from "../../shared/components/VehiclesFilter";
 import { CarouselAuction } from "../../shared/components/CarouselAuction";
 import { Footer } from "../../shared/components/Footer";
-
+import { CreateComment } from "../../shared/components/CommentCreate";
 
 export const Dashboard = () => {
   return (
@@ -14,6 +14,7 @@ export const Dashboard = () => {
       <CarouselAuction />
       <Carousel type={"car"} />
       <Carousel type={"motorcycle"} />
+      <CreateComment user={"Lucas Galvs"} />
       <Footer />
     </ContentDashboard>
   );

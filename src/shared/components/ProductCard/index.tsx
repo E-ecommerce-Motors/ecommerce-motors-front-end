@@ -3,7 +3,7 @@ import { refType } from "@mui/utils";
 import { useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
 import { ButtonBig } from "../Button/styles";
-import { EditAnnouncement } from "../Modal/editAnnouncement";
+import { EditAnnouncement } from "../Modal/EditAnnouncement";
 import { ProductCardAuction } from "../ProductCardAuction";
 import {
   Heading7,
