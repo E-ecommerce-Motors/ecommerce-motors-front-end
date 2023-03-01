@@ -49,7 +49,6 @@ export const CreateAnnouncementModal = () => {
     data.announcementImgs = { create: { coverImage, imageGallery } };
 
     CreateAnn(data);
-    
   };
 
   const {
