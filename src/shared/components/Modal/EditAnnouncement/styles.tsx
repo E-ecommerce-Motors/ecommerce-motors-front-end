@@ -46,7 +46,6 @@ export const Heading = styled.h2`
 `;
 
 export const Content = styled.form`
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
