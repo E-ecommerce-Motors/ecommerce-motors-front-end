@@ -96,6 +96,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
 
   const { UpdateAnn } = updateAuth();
 
+  //
   const submit = (data: Update) => {
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
