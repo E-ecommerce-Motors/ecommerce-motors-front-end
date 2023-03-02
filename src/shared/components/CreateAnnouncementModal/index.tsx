@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
 import { CloseButton, Container, ModalWrapper } from "./style";
 import { CreateAnnouncementContext } from "../../providers/AnnouncementContext";
-import { toast } from "react-toastify";
 import * as yup from "yup";
 import {
   Content,
@@ -19,36 +18,9 @@ import {
 } from "../Modal/editAnnouncement/styles";
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { api } from "../../services/api";
-
-interface Create {
-  title: string;
-  year: string;
-  mileage: number;
-  price: number;
-  description: string;
-  typeAnnouncement: string;
-  typeVehicle: string;
-  coverImage: string;
-  img: string | undefined;
-}
+import { Create } from "../../interfaces/announcement";
 
 export const CreateAnnouncementModal = () => {
-  const [change, setChange] = useState(true);
-  const [coverImage, setCoverImage] = useState<string>(String);
-
-  // const onSubmit = async (data: any) => {
-  //   api
-  //     .post("announcements", data)
-  //     .then((res) => {
-  //       toast.success("Aoba, bão?");
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error.response.data.message);
-  //     });
-  //   useState<string>();
-  // };
-
   const schema = yup.object().shape({
     title: yup.string().required(),
     year: yup.string().required(),
@@ -68,8 +40,12 @@ export const CreateAnnouncementModal = () => {
   });
 
   const submit = async (data: any) => {
+    console.log(data);
+    data.userId = 1;
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
+    data.announcementImgs = { create: { coverImage, imageGallery } };
+
     CreateAnn(data);
   };
 
@@ -91,11 +67,12 @@ export const CreateAnnouncementModal = () => {
     tA,
     setTA,
     handleAddFieldsClick,
-    handleAdditionalFieldChange,
     additionalFields,
     numAdditionalFields,
-    img,
-    setImg,
+    coverImage,
+    setCoverImage,
+    imageGallery,
+    handleInputChange,
   } = useContext(CreateAnnouncementContext);
 
   return (
@@ -207,7 +184,7 @@ export const CreateAnnouncementModal = () => {
                 value={year}
                 type="number"
                 onChange={(e) => {
-                  setYear(Number(e.target.value));
+                  setYear(e.target.value);
                 }}
               />
             </Single>
@@ -220,7 +197,7 @@ export const CreateAnnouncementModal = () => {
                 value={mileage}
                 type="number"
                 onChange={(e) => {
-                  setMileage(Number(e.target.value));
+                  setMileage(e.target.value);
                 }}
               />
             </Single>
@@ -233,7 +210,7 @@ export const CreateAnnouncementModal = () => {
                 value={price}
                 type="number"
                 onChange={(e) => {
-                  setPrice(Number(e.target.value));
+                  setPrice(e.target.value);
                 }}
               />
             </Single>
@@ -325,24 +302,24 @@ export const CreateAnnouncementModal = () => {
           )}
           <Single>
             <Title>Link da imagem 1</Title>
-            <Input
-              width={"big"}
-              {...register("coverImage")}
-              value={coverImage}
-              onChange={(e) => {
-                setCoverImage(String(e.target.value));
-              }}
-            />
+            {
+              <Input
+                width={"big"}
+                value={coverImage}
+                onChange={(e) => {
+                  setCoverImage(String(e.target.value));
+                }}
+              />
+            }
           </Single>
           {additionalFields.map((element: string, index: number) => (
             <div key={index + 1}>
               <Title>{`URL da imagem ${index + 2}:`}</Title>
               <Input
+                id={`${index}`}
                 width={"big"}
                 placeholder={`URL da imagem ${index + 2}`}
-                {...register("img")}
-                value={img}
-                onChange={(e) => handleAdditionalFieldChange(index, e)}
+                onChange={handleInputChange}
               />
             </div>
           ))}
@@ -363,7 +340,6 @@ export const CreateAnnouncementModal = () => {
             borderHover={theme.colors.brand2}
             colorHover={theme.colors.whiteFixed}
             disable="sim"
-            // disabled={change}
             type="submit"
           >
             Criar Anúncio

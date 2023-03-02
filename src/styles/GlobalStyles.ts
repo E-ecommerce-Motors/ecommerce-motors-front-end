@@ -24,6 +24,9 @@ export const GlobalStyles = createGlobalStyle`
     body{
         background-color: var(--whiteFixed);
     }
+    button{
+        cursor: pointer;
+    }
 
     :root{
 

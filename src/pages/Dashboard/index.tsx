@@ -1,20 +1,38 @@
 import { ContentDashboard } from "./styles";
+import { useContext, useEffect } from "react";
+import { api } from "../../shared/services/api";
+import { Footer } from "../../shared/components/Footer";
 import { NavBar } from "../../shared/components/NavBar";
 import { Carousel } from "../../shared/components/Carousel";
+import { UserContext } from "../../shared/providers/UserProvider";
 import { VehiclesFilter } from "../../shared/components/VehiclesFilter";
 import { CarouselAuction } from "../../shared/components/CarouselAuction";
-import { Footer } from "../../shared/components/Footer";
-import { CreateComment } from "../../shared/components/CommentCreate";
 
 export const Dashboard = () => {
+  const { userData, setUserData } = useContext(UserContext);
+
+  const token = localStorage.getItem("@MotorsShop:token");
+
+  useEffect(() => {
+    if (token) {
+      api
+        .get("user", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setUserData(res.data);
+        });
+    }
+    
+  }, []);
+
   return (
     <ContentDashboard>
-      <NavBar auth={"authenticated"} user={"Lucas Galvs"} />
-      <VehiclesFilter auth={"authenticated"} user={"Lucas Galvs"} />
+      <NavBar auth={"default"} user={"Gucas A"} />
+      <VehiclesFilter auth={"default"} user={"Lucas Galvs"} />
       <CarouselAuction />
       <Carousel type={"car"} />
       <Carousel type={"motorcycle"} />
-      <CreateComment user={"Lucas Galvs"} />
       <Footer />
     </ContentDashboard>
   );

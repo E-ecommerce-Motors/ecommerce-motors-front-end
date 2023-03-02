@@ -1,10 +1,7 @@
 import { Box, Modal } from "@mui/material";
-import { refType } from "@mui/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
-import { ButtonBig } from "../Button/styles";
-import { EditAnnouncement } from "../Modal/EditAnnouncement";
-import { ProductCardAuction } from "../ProductCardAuction";
+import { EditAnnouncement } from "../Modal/editAnnouncement";
 import {
   Heading7,
   Icon,

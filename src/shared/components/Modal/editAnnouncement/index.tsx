@@ -3,23 +3,22 @@ import { ButtonBig } from "../../Button/styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+import { updateAuth } from "../../../providers/authProvider";
 import {
+  Btn,
   Container,
   Content,
   FlexBtn,
   Header,
   Heading,
-  Title,
-  Type,
-  Input,
   Infos,
+  Input,
   Single,
   TextArea,
-  Btn,
+  Title,
+  Type,
 } from "./styles";
-import { useState } from "react";
-import { updateAuth } from "../../../providers/authProvider";
-import { Img } from "../../ProductCardAuction/styles";
 
 interface Announcement {
   id: number;
