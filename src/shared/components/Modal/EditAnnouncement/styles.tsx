@@ -88,7 +88,7 @@ export const FlexBtn = styled.div`
   width: 466px;
 `;
 
-export const Btn = styled.button`
+export const Btn = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -99,6 +99,7 @@ export const Btn = styled.button`
   width: 315px;
   min-height: 38px;
   max-height: 38px;
+  background: ${theme.colors.brand4};
   border: 1.5px solid ${theme.colors.brand4};
   border-radius: 4px;
   font-family: ${theme.fonts.inter};

@@ -17,14 +17,13 @@ import {
   TextArea,
   Btn,
 } from "./styles";
-import { api } from "../../../services/api";
 import { useState } from "react";
 import { updateAuth } from "../../../providers/authProvider";
 import { Img } from "../../ProductCardAuction/styles";
 
 interface Announcement {
   id: number;
-  img?: Array<any>;
+  img?: Img[];
   heading: string;
   text: string;
   saler: boolean;
@@ -38,7 +37,8 @@ interface Announcement {
 }
 
 interface Img {
-  announcementImgs: string;
+  coverImage: any;
+  imageGallery: Array<string>;
 }
 
 interface Props {
@@ -54,7 +54,8 @@ interface Update {
   description?: string;
   typeAnnouncement?: string;
   typeVehicle?: string;
-  announcementImgs?: Array<string>;
+  coverImage: any;
+  imageGallery: Array<string>;
 }
 
 export const EditAnnouncement = ({ announcement, close }: Props) => {
@@ -66,7 +67,12 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
   const [type, setType] = useState(announcement.type);
   const [tA, setTA] = useState(announcement.tA);
   const [change, setChange] = useState(true);
-  const [images, setImages] = useState(announcement.img);
+  const [coverImages, setCoverImages] = useState(
+    announcement.img ? announcement.img[0].coverImage : " "
+  );
+  const [images, setImages] = useState<string[]>(
+    announcement.img ? announcement.img[0].imageGallery : []
+  );
 
   const schema = yup.object().shape({
     title: yup.string().optional(),
@@ -76,7 +82,8 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     description: yup.string().optional(),
     typeAnnouncement: yup.string().optional(),
     typeVehicle: yup.string(),
-    announcementImgs: yup.array().optional(),
+    imageGallery: yup.array().optional(),
+    coverImages: yup.array().optional(),
   });
 
   const {
@@ -96,8 +103,23 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     images?.map((e) => {
       e != "" ? imageValidation.push(e) : "";
     });
-    data.announcementImgs = imageValidation;
-    UpdateAnn(data, announcement.id);
+    data.coverImage = coverImages;
+    data.imageGallery = images;
+
+    const update = {
+      mileage: data.mileage,
+      year: data.year,
+      description: data.description,
+      typeVehicle: data.typeVehicle,
+      typeAnnouncement: data.typeAnnouncement,
+      title: data.title,
+      price: data.price,
+    };
+    const upodateImage = {
+      coverImage: data.coverImage,
+      imageGallery: data.imageGallery,
+    };
+    UpdateAnn(update, announcement.id);
   };
 
   const handleIncrementClick = (data: string, index: number) => {
@@ -116,9 +138,9 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     if (newInput) {
       if (newInput?.length <= 5) {
         newInput?.push("");
-        setImages(newInput);
       }
     }
+    setImages(newInput);
   };
 
   return (
@@ -368,14 +390,22 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
             Não
           </ButtonBig>
         </FlexBtn>
+        <Single>
+          <Title>Imagem da capa</Title>
+          <Input
+            width={"big"}
+            value={coverImages}
+            placeholder={coverImages}
+            onChange={(element) => {
+              setChange(false);
+              setCoverImages(element.target.value);
+            }}
+          />
+        </Single>
         {images?.map((e: any, index: number) => {
           return (
             <Single key={index}>
-              {index == 0 ? (
-                <Title>Imagem da capa</Title>
-              ) : (
-                <Title>{index}° Imagem da galeria</Title>
-              )}
+              <Title>{index + 1}° Imagem da galeria</Title>
               <Input
                 width={"big"}
                 value={e}

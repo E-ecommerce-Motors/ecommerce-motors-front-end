@@ -22,7 +22,7 @@ import {
 } from "./styles";
 
 interface Props {
-  img?: Array<Img>;
+  img?: Img[];
   heading: string;
   text: string;
   saler: boolean;
@@ -37,7 +37,8 @@ interface Props {
 }
 
 interface Img {
-  announcementImgs: string;
+  coverImage: any;
+  imageGallery: Array<string>;
 }
 
 export const ProductCard = ({
@@ -74,6 +75,8 @@ export const ProductCard = ({
     id,
   };
 
+  console.log(img);
+
   const active: boolean = true;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -93,7 +96,7 @@ export const ProductCard = ({
         <Active saler={saler} active={active}>
           {active ? `Ativo` : "Inativo"}
         </Active>
-        <Img image={img ? img[0] : ""} />
+        <Img image={img ? img[0].coverImage : ""} />
       </ImgContainer>
       <Heading7>
         {heading.length > 41 ? `${heading.slice(0, 38)}...` : heading}

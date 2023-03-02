@@ -30,7 +30,7 @@ interface Create {
   typeAnnouncement: string;
   typeVehicle: string;
   coverImage: string;
-  img: string|undefined;
+  img: string | undefined;
 }
 
 export const CreateAnnouncementModal = () => {
@@ -68,7 +68,6 @@ export const CreateAnnouncementModal = () => {
   });
 
   const submit = async (data: any) => {
-    console.log(data);
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
     CreateAnn(data);
@@ -100,8 +99,8 @@ export const CreateAnnouncementModal = () => {
   } = useContext(CreateAnnouncementContext);
 
   return (
-      <ModalWrapper>
-    <Container>
+    <ModalWrapper>
+      <Container>
         <Header>
           <Heading>Criar anúncio</Heading>
           <CloseButton onClick={toggleModal} type="button">
@@ -336,8 +335,7 @@ export const CreateAnnouncementModal = () => {
             />
           </Single>
           {additionalFields.map((element: string, index: number) => (
-              
-            <div key={index+1}>
+            <div key={index + 1}>
               <Title>{`URL da imagem ${index + 2}:`}</Title>
               <Input
                 width={"big"}
@@ -345,7 +343,7 @@ export const CreateAnnouncementModal = () => {
                 {...register("img")}
                 value={img}
                 onChange={(e) => handleAdditionalFieldChange(index, e)}
-                />
+              />
             </div>
           ))}
 
@@ -371,7 +369,7 @@ export const CreateAnnouncementModal = () => {
             Criar Anúncio
           </ButtonBig>
         </Content>
-    </Container>
-      </ModalWrapper>
+      </Container>
+    </ModalWrapper>
   );
 };
