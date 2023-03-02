@@ -19,7 +19,7 @@ interface Announcement {
   description: string;
   typeVehicle: "car" | "motorcycle";
   typeAnnouncement: "sale" | "auction";
-  announcementImgs: Array<ImgCover>;
+  announcementImgs: ImgCover[];
 }
 
 interface Img {
@@ -28,6 +28,7 @@ interface Img {
 interface ImgCover {
   coverImage: any;
   imageGallery: Array<string>;
+  id: number;
 }
 
 export const Carousel = ({ type }: Props) => {

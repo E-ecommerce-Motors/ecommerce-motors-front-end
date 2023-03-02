@@ -36,6 +36,7 @@ interface Props {
 interface Img {
   coverImage: any;
   imageGallery: Array<string>;
+  id: number;
 }
 
 export const ProductCard = ({
