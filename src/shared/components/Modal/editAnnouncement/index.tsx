@@ -124,7 +124,6 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
         },
       },
     };
-    console.log(update);
 
     UpdateAnn(update, announcement.id);
   };
