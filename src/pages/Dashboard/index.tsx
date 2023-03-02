@@ -28,8 +28,8 @@ export const Dashboard = () => {
 
   return (
     <ContentDashboard>
-      <NavBar auth={"default"} user={"Gucas A"} />
-      <VehiclesFilter auth={"default"} user={"Lucas Galvs"} />
+      <NavBar auth={"authenticated"} user={"Gabriel Fray"} />
+      <VehiclesFilter auth={"authenticated"} user={"Lucas Galvs"} />
       <CarouselAuction />
       <Carousel type={"car"} />
       <Carousel type={"motorcycle"} />

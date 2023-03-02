@@ -7,7 +7,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 46px;
-width: 100vw;
+width: 100%;
 height: 550px;
 background-color: ${theme.colors.brand2};
 
