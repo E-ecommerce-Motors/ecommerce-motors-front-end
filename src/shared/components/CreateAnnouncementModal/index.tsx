@@ -15,7 +15,7 @@ import {
   Infos,
   Single,
   TextArea,
-} from "../Modal/editAnnouncement/styles";
+} from "../Modal/EditAnnouncement/styles";
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Create } from "../../interfaces/announcement";
