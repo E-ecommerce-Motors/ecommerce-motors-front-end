@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../providers/UserProvider";
 import {
   Container,
   Option,
@@ -23,8 +25,10 @@ interface Props {
 }
 
 export const NavBar = ({ auth, user }: Props) => {
-  //   const auth: string = "authenticated";
-  //   const user: string = "Lucas Galvs";
+  const { logout } = useContext(UserContext);
+
+    // const auth: string = "authenticated";
+    // const user: string = "Lucas Galvs";
   const name = user.split(" ");
   const [openProfile, setOpenProfile] = useState(false);
   const [navMobile, setNavMobile] = useState(false);
@@ -32,7 +36,7 @@ export const NavBar = ({ auth, user }: Props) => {
   return (
     <Container mobile={navMobile}>
       <ContainerMobile mobile={navMobile}>
-        <Text></Text>
+        <Text to="/"></Text>
         <Mobile>
           <input
             onClick={() => setNavMobile(!navMobile)}
@@ -51,8 +55,8 @@ export const NavBar = ({ auth, user }: Props) => {
         {auth == "default" ? (
           <>
             <Line />
-            <SignIn>Fazer Login</SignIn>
-            <SignUp>Cadastrar</SignUp>
+            <SignIn to="/session">Fazer Login</SignIn>
+            <SignUp to="/register">Cadastrar</SignUp>
           </>
         ) : (
           <>
@@ -69,7 +73,7 @@ export const NavBar = ({ auth, user }: Props) => {
                 <OptionsProfile>Editar Perfil</OptionsProfile>
                 <OptionsProfile>Editar Endereço</OptionsProfile>
                 <OptionsProfile>Minhas Compras</OptionsProfile>
-                <OptionsProfile>Sair</OptionsProfile>
+                <OptionsProfile onClick={() => logout()} >Sair</OptionsProfile>
               </MenuBox>
             </Profile>
           </>
