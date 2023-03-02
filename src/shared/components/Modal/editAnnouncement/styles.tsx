@@ -99,6 +99,7 @@ export const Btn = styled.button`
   width: 315px;
   min-height: 38px;
   max-height: 38px;
+  background: ${theme.colors.brand4};
   border: 1.5px solid ${theme.colors.brand4};
   border-radius: 4px;
   font-family: ${theme.fonts.inter};
