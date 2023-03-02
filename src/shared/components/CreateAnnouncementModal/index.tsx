@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
 import { CloseButton, Container, ModalWrapper } from "./style";
-import { CreateAnnouncementContext } from "../../providers/AnnouncementContext";
-import { toast } from "react-toastify";
+import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
 import * as yup from "yup";
 import {
   Content,
@@ -19,7 +18,6 @@ import {
 } from "../Modal/editAnnouncement/styles";
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { api } from "../../services/api";
 import { Create } from "../../interfaces/announcement";
 
 export const CreateAnnouncementModal = () => {
