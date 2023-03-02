@@ -88,7 +88,7 @@ export const FlexBtn = styled.div`
   width: 466px;
 `;
 
-export const Btn = styled.div`
+export const Btn = styled.button`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
