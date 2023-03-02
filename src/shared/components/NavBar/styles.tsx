@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
 
@@ -41,7 +42,7 @@ export const ContainerMobile = styled.div`
   }
 `;
 
-export const Text = styled.div`
+export const Text = styled(Link)`
   width: 153.02px;
   height: 26.34px;
   background-image: url(../../../../public/assets/motors-shop-dark.png);
@@ -80,7 +81,7 @@ export const Line = styled.div`
   }
 `;
 
-export const SignUp = styled.button`
+export const SignUp = styled(Link)`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -91,7 +92,7 @@ export const SignUp = styled.button`
   width: 133px;
   height: 48px;
   background: ${theme.colors.grey10};
-  border: 1.5px solid ${theme.colors.grey10};
+  border: 2px solid ${theme.colors.grey6};
   border-radius: 4px;
   flex: none;
   order: 5;
@@ -102,9 +103,11 @@ export const SignUp = styled.button`
   font-size: ${theme.size.body_1};
   line-height: 0px;
   color: ${theme.colors.grey2};
+  text-decoration: none;
   :hover {
-    border: 1.5px solid ${theme.colors.grey4};
-    color: ${theme.colors.grey0};
+    border: 1.5px solid ${theme.colors.brand1};
+    background-color: ${theme.colors.brand1};
+    color: ${theme.colors.whiteFixed};
   }
   @media (max-width: 1000px) {
     width: 80vw;
@@ -112,7 +115,7 @@ export const SignUp = styled.button`
   }
 `;
 
-export const SignIn = styled.button`
+export const SignIn = styled(Link)`
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -133,9 +136,9 @@ export const SignIn = styled.button`
   font-size: ${theme.size.body_1};
   line-height: 0px;
   color: ${theme.colors.grey2};
+  text-decoration: none;
   :hover {
-    border: 1.5px solid ${theme.colors.grey4};
-    color: ${theme.colors.grey0};
+    color: ${theme.colors.brand1};
   }
 
   @media (max-width: 1000px) {
@@ -229,7 +232,9 @@ export const User = styled.div`
   }
 `;
 
-export const OptionsProfile = styled.a`
+export const OptionsProfile = styled.button`
+  background-color: transparent;
+  border: none;
   width: max-content;
   height: 28px;
   font-family: ${theme.fonts.inter};

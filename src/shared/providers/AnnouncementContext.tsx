@@ -1,13 +1,12 @@
+import { api } from "../services/api";
+import { toast } from "react-toastify";
+import { Create } from "../interfaces/announcement";
 import React, {
   createContext,
   Dispatch,
   SetStateAction,
   useState,
 } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { Create } from "../interfaces/announcement";
-import { api } from "../services/api";
 
 type CreateAnnouncementContextType = {
   toggleModal: () => void;
@@ -100,8 +99,8 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
       .post(`announcements`, data)
       .then()
       .catch((response) => console.log(response));
-      toast.success("Anúncio criado com sucesso!")
-      toggleModal()
+    toast.success("Anúncio criado com sucesso!");
+    toggleModal();
   };
 
   return (
