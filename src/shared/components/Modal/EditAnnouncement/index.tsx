@@ -39,6 +39,7 @@ interface Announcement {
 interface Img {
   coverImage: any;
   imageGallery: Array<string>;
+  id: number;
 }
 
 interface Props {
@@ -114,11 +115,18 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
       typeAnnouncement: data.typeAnnouncement,
       title: data.title,
       price: data.price,
+      announcementImgs: {
+        update: {
+          where: { id: announcement.img ? announcement.img[0].id : "" },
+          data: {
+            coverImage: data.coverImage,
+            imageGallery: data.imageGallery,
+          },
+        },
+      },
     };
-    const upodateImage = {
-      coverImage: data.coverImage,
-      imageGallery: data.imageGallery,
-    };
+    console.log(update);
+
     UpdateAnn(update, announcement.id);
   };
 
