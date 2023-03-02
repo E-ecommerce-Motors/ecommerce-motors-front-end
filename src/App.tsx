@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { RoutesMain } from "./shared/routes";
-import CreateAnnouncementProvider from "./shared/providers/AnnouncementContext";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./shared/providers/UserProvider";
+import CreateAnnouncementProvider from "./shared/providers/AnnouncementContext";
 
 const App = () => {
   return (

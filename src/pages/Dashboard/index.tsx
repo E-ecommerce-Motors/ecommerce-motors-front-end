@@ -1,12 +1,12 @@
 import { ContentDashboard } from "./styles";
-import { NavBar } from "../../shared/components/NavBar";
-import { Carousel } from "../../shared/components/Carousel";
-import { VehiclesFilter } from "../../shared/components/VehiclesFilter";
-import { CarouselAuction } from "../../shared/components/CarouselAuction";
-import { Footer } from "../../shared/components/Footer";
 import { useContext, useEffect } from "react";
 import { api } from "../../shared/services/api";
+import { Footer } from "../../shared/components/Footer";
+import { NavBar } from "../../shared/components/NavBar";
+import { Carousel } from "../../shared/components/Carousel";
 import { UserContext } from "../../shared/providers/UserProvider";
+import { VehiclesFilter } from "../../shared/components/VehiclesFilter";
+import { CarouselAuction } from "../../shared/components/CarouselAuction";
 
 export const Dashboard = () => {
   const { userData, setUserData } = useContext(UserContext);

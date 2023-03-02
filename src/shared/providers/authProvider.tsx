@@ -22,9 +22,15 @@ interface Update {
   typeVehicle?: string;
 }
 
+interface Comment {
+  text: string;
+  userId: number;
+}
+
 interface ContextProps {
   getAnn: () => void;
   UpdateAnn: (data: Update, id: number) => void;
+  CreateComment: (data: Comment, id: number) => void;
   announcements: any;
 }
 
@@ -61,8 +67,17 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch((response) => console.log(response));
   };
 
+  const CreateComment = async (data: Comment, id: number) => {
+    await api
+      .post(`announcements/${id}/comments`, data)
+      .then((response) => console.log(response))
+      .catch((response) => console.log(response));
+  };
+
   return (
-    <UpdateContext.Provider value={{ getAnn, UpdateAnn, announcements }}>
+    <UpdateContext.Provider
+      value={{ getAnn, UpdateAnn, CreateComment, announcements }}
+    >
       {children}
     </UpdateContext.Provider>
   );
