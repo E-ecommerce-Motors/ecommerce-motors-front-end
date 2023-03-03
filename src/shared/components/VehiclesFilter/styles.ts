@@ -64,7 +64,7 @@ flex-direction: column;
 justify-content: space-around;
 margin-top: 50px;
 width: 90%;
-height: 400px;
+min-height: 300px;
 border-radius: 4px;
 background-color: ${theme.colors.whiteFixed};
 padding: 40px 0px 10px 29px;

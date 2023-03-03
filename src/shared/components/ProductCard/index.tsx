@@ -99,7 +99,7 @@ export const ProductCard = ({
           <Active saler={saler} active={active}>
             {active ? `Ativo` : "Inativo"}
           </Active>
-          <Img image={img ? img[0].coverImage : ""} />
+          {/* <Img image={img ? img[0].coverImage : ""} /> */}
         </ImgContainer>
       </Link>
       <Heading7>

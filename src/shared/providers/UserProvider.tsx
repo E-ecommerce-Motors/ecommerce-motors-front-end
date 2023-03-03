@@ -1,4 +1,10 @@
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -31,7 +37,7 @@ interface IUserContext {
 export const UserProvider = ({ children }: IProps) => {
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState<any>();
+  const [userData, setUserData] = useState<IUserData>({} as IUserData);
 
   const logout = () => {
     localStorage.clear();
@@ -94,28 +100,27 @@ export const UserProvider = ({ children }: IProps) => {
       .then((res) => {
         setUserData(res.data);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(() => {});
   };
 
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
 
     removeEmptyFields(data);
+
     api
       .patch(`user/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res: any) => {
+      .then((res) => {
         toast.success("Perfil atualizado com sucesso!", {
           toastId: 1,
         });
       })
 
-      .catch((err: any) => {
+      .catch((err) => {
         toast.error(err.response.data.message, {
           toastId: 1,
         });
