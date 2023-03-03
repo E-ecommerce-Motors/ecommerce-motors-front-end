@@ -35,10 +35,13 @@ export const VehiclesFilter = () => {
       .then((res) => {
         setUserData(res.data);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(() => {});
   }, [token]);
+
+  const user = userData || {};
+  const name = user.name ? user.name.split(" ") : [];
+  const icon1 = name[0] ? name[0].slice(0, 1) : "";
+  const icon2 = name[1] ? name[1].slice(0, 1) : "";
 
   return (
     <>
@@ -47,9 +50,7 @@ export const VehiclesFilter = () => {
         <ContentProfile>
           <Profile key={userData.id}>
             <User>
-              <Icon>
-                {userData.name ? userData.name.slice(0, 2).toUpperCase() : ""}
-              </Icon>
+              <Icon>{`${icon1}${icon2}`}</Icon>
               <Name>
                 <p>{userData.name}</p>
                 <span>
@@ -59,7 +60,12 @@ export const VehiclesFilter = () => {
                 </span>
               </Name>
             </User>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quis perspiciatis autem optio, eveniet cumque alias aliquam quam harum dolor facere ea. Dolorem, voluptates? Placeat sed voluptatibus enim praesentium voluptates!</p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quis
+              perspiciatis autem optio, eveniet cumque alias aliquam quam harum
+              dolor facere ea. Dolorem, voluptates? Placeat sed voluptatibus
+              enim praesentium voluptates!
+            </p>
             {userData.typeAccount === "advertiser" && (
               <ButtonBig
                 bg={theme.colors.whiteFixed}

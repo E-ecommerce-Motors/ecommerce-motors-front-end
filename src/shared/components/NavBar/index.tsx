@@ -19,20 +19,15 @@ import {
   ContainerMobile,
 } from "./styles";
 
-interface Props {
-  auth: "default" | "authenticated";
-  user: string;
-}
-
 export const NavBar = () => {
   const { logout, userData } = useContext(UserContext);
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
 
-  const user: any = userData ? userData : " ";
-  const name = userData ? user.name.split(" ") : "";
-  const icon1 = userData ? name[0].slice(0, 1) : "";
-  const icon2 = userData ? name[1].slice(0, 1) : "";
+  const user = userData || {};
+  const name = user.name ? user.name.split(" ") : [];
+  const icon1 = name[0] ? name[0].slice(0, 1) : "";
+  const icon2 = name[1] ? name[1].slice(0, 1) : "";
 
   const [openProfile, setOpenProfile] = useState(false);
   const [navMobile, setNavMobile] = useState(false);

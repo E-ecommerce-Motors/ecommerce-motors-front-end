@@ -1,4 +1,10 @@
-import { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -94,9 +100,7 @@ export const UserProvider = ({ children }: IProps) => {
       .then((res) => {
         setUserData(res.data);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(() => {});
   };
 
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
