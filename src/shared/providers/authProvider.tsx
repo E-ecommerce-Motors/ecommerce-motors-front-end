@@ -50,8 +50,6 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   const [announcements, setAnnouncements] = useState<any>([]);
   const [announcement, setAnnouncement] = useState<any>([]);
 
-  console.log(announcement);
-
   useEffect(() => {
     getAnn();
     retireAnnouncement(3);

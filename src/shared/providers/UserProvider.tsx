@@ -31,7 +31,7 @@ interface IUserContext {
 export const UserProvider = ({ children }: IProps) => {
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState<any>();
+  const [userData, setUserData] = useState<IUserData>({} as IUserData);
 
   const logout = () => {
     localStorage.clear();
@@ -103,19 +103,20 @@ export const UserProvider = ({ children }: IProps) => {
     const token = localStorage.getItem("@MotorsShop:token");
 
     removeEmptyFields(data);
+
     api
       .patch(`user/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res: any) => {
+      .then((res) => {
         toast.success("Perfil atualizado com sucesso!", {
           toastId: 1,
         });
       })
 
-      .catch((err: any) => {
+      .catch((err) => {
         toast.error(err.response.data.message, {
           toastId: 1,
         });
