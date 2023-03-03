@@ -88,12 +88,10 @@ export const Button = styled.button`
   width: 100%;
 `
 
-export const ErrorMessage = styled.p`
-display: flex;
-align-self: flex-start;
-padding: 5px 3px;
-position: absolute;
-font-weight: 600;
-font-size: .8rem;
-color: ${theme.colors.grey3};
+export const ButtonRetrivePassword = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: ${theme.size.body_1};
+  font-weight: ${theme.weight.body_2_500};
+  color: ${theme.colors.grey2};
 `;

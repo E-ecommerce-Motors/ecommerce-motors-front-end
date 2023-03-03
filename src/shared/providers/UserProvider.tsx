@@ -23,6 +23,12 @@ interface IUserContext {
 
   userData: IUserData;
 
+  setUserData: Dispatch<SetStateAction<IUserData>>;
+
+  recovery: boolean;
+
+  setRecovery: Dispatch<SetStateAction<boolean>>;
+
   showModal: any;
 
   setShowModal: Dispatch<SetStateAction<any>>;
@@ -30,9 +36,8 @@ interface IUserContext {
   closeModal: () => void;
 
   modalContent: any;
-  setModalContent: Dispatch<SetStateAction<any>>;
 
-  setUserData: Dispatch<SetStateAction<IUserData>>;
+  setModalContent: Dispatch<SetStateAction<any>>;
 
   onSubmitLogin: (data: ILoginData) => void;
 
@@ -40,17 +45,21 @@ interface IUserContext {
 
   onSubmitUpdate: (data: IUserUpdate, id: number) => void;
 
-  onSubmitDelete: (id: number) => void
+  onRecoveryPassword: (email: string) => void;
+
+  onSubmitDelete: (id: number) => void;
 
   getUser: () => void;
 
-  handleOpenModal: (modalContent: any)=> void
+  handleOpenModal: (modalContent: any) => void;
 }
 
 export const UserProvider = ({ children }: IProps) => {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState<IUserData>({} as IUserData);
+
+  const [recovery, setRecovery] = useState(false);
 
   const logout = () => {
     localStorage.clear();
@@ -118,7 +127,7 @@ export const UserProvider = ({ children }: IProps) => {
 
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  
+
   const handleOpenModal = (modalContent: any) => {
     setShowModal(true);
     setModalContent(modalContent);
@@ -177,6 +186,23 @@ export const UserProvider = ({ children }: IProps) => {
       logout()
   };
 
+  const onRecoveryPassword = (email: string) => {
+    api
+      .post("recovery", email)
+      .then(() => {
+        toast.success("A senha nova foi enviado no seu E-mail!", {
+          toastId: 1,
+        });
+        setRecovery(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          toastId: 1,
+        });
+      });
+  };
+
+
   // useEffect(() => {
   //   getUser();
   // }, []);
@@ -188,16 +214,19 @@ export const UserProvider = ({ children }: IProps) => {
         onSubmitLogin,
         onSubmitRegister,
         onSubmitUpdate,
+        onRecoveryPassword,
         onSubmitDelete,
-        userData,
         modalContent,
+        userData,
         setUserData,
+        recovery,
+        setRecovery,
         setModalContent,
         showModal,
         setShowModal,
         closeModal,
         getUser,
-        handleOpenModal
+        handleOpenModal,
       }}
     >
       {children}
