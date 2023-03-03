@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
+import { EditUserModal } from "../EditUserModal";
+import { GenericModal } from "../GenericModal/GenericModal";
 import {
   Container,
   Option,
@@ -19,11 +21,12 @@ import {
   ContainerMobile,
 } from "./styles";
 
+
+
 export const NavBar = () => {
-  const { logout, userData } = useContext(UserContext);
+  const { logout, userData, handleOpenModal, setModalContent, showModal, setShowModal, closeModal, modalContent } = useContext(UserContext);
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
-
   const user = userData || {};
   const name = user.name ? user.name.split(" ") : [];
   const icon1 = name[0] ? name[0].slice(0, 1) : "";
@@ -69,7 +72,7 @@ export const NavBar = () => {
                 open={openProfile}
                 onMouseLeave={() => setOpenProfile(false)}
               >
-                <OptionsProfile>Editar Perfil</OptionsProfile>
+                <OptionsProfile type="button" onClick={() => handleOpenModal(<GenericModal><EditUserModal/></GenericModal>)}>Editar Perfil</OptionsProfile>
                 <OptionsProfile>Editar Endereço</OptionsProfile>
                 <OptionsProfile>
                   {userData.typeAccount == "advertiser"
@@ -78,6 +81,7 @@ export const NavBar = () => {
                 </OptionsProfile>
                 <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
               </MenuBox>
+              {showModal && modalContent}
             </Profile>
           </>
         )}

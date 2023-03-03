@@ -15,10 +15,12 @@ import {
   Infos,
   Single,
   TextArea,
+  Btn,
 } from "../Modal/editAnnouncement/styles";
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Create } from "../../interfaces/announcement";
+import { UserContext } from "../../providers/UserProvider";
 
 export const CreateAnnouncementModal = () => {
   const schema = yup.object().shape({
@@ -30,6 +32,19 @@ export const CreateAnnouncementModal = () => {
     typeAnnouncement: yup.string().required(),
     typeVehicle: yup.string().required(),
   });
+
+  const {
+    onSubmitUpdate,
+    onSubmitDelete,
+    getUser,
+    userData,
+    showModal,
+    setShowModal,
+    handleOpenModal,
+    modalContent,
+    setModalContent,
+    closeModal,
+  } = useContext(UserContext);
 
   const {
     register,
@@ -79,7 +94,7 @@ export const CreateAnnouncementModal = () => {
       <Container>
         <Header>
           <Heading>Criar anúncio</Heading>
-          <CloseButton onClick={toggleModal} type="button">
+          <CloseButton onClick={closeModal} type="button">
             x
           </CloseButton>
         </Header>
@@ -324,25 +339,43 @@ export const CreateAnnouncementModal = () => {
           ))}
 
           {numAdditionalFields < 5 && (
-            <button type="button" onClick={handleAddFieldsClick}>
+            <Btn type="button" onClick={handleAddFieldsClick}>
               Adicionar mais campos
-            </button>
+            </Btn>
           )}
-          <ButtonBig
-            bg={theme.colors.brand1}
-            button={theme.button.big}
-            color={theme.colors.whiteFixed}
-            size={theme.size.button_big_text}
-            weight={theme.weight.button_big_text}
-            border={theme.colors.brand1}
-            bgHover={theme.colors.brand2}
-            borderHover={theme.colors.brand2}
-            colorHover={theme.colors.whiteFixed}
-            disable="sim"
-            type="submit"
-          >
-            Criar Anúncio
-          </ButtonBig>
+          <FlexBtn>
+            <ButtonBig
+              bg={theme.colors.brand1}
+              button={theme.button.big}
+              color={theme.colors.whiteFixed}
+              size={theme.size.button_big_text}
+              weight={theme.weight.button_big_text}
+              border={theme.colors.brand1}
+              bgHover={theme.colors.brand2}
+              borderHover={theme.colors.brand2}
+              colorHover={theme.colors.whiteFixed}
+              disable="sim"
+              type="button"
+            >
+              Cancelar
+            </ButtonBig>
+            <ButtonBig
+              bg={theme.colors.brand1}
+              button={theme.button.big}
+              color={theme.colors.whiteFixed}
+              size={theme.size.button_big_text}
+              weight={theme.weight.button_big_text}
+              border={theme.colors.brand1}
+              bgHover={theme.colors.brand2}
+              borderHover={theme.colors.brand2}
+              colorHover={theme.colors.whiteFixed}
+              disable="sim"
+              type="submit"
+              
+            >
+              Criar Anúncio
+            </ButtonBig>
+          </FlexBtn>
         </Content>
       </Container>
     </ModalWrapper>
