@@ -18,11 +18,11 @@ export const Background = styled.div`
   align-items: flex-start;
   justify-content: center;
   background-color: ${theme.colors.grey8};
-  width: 100vw;
+  width: 100%;
 `;
 
 export const BgBrand = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 500px;
   background-color: ${theme.colors.brand2};
   position: absolute;

@@ -23,6 +23,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.1",
+    "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.8.1",
     "react-toastify": "^9.1.1",
     "styled-components": "^5.3.6",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@types/react-input-mask": "^3.0.2",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^3.1.0",

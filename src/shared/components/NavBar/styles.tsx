@@ -191,7 +191,7 @@ export const Icon = styled.div`
 `;
 
 export const Name = styled.p`
-  width: 101px;
+  width: max-content;
   height: 28px;
   font-family: ${theme.fonts.inter};
   font-style: normal;

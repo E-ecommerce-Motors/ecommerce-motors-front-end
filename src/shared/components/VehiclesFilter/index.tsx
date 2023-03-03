@@ -1,6 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { theme } from "../../../styles/theme";
+import { IUserData } from "../../interfaces/user";
 import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
+import { UserContext } from "../../providers/UserProvider";
+import { api } from "../../services/api";
 import { ButtonBig } from "../Button/styles";
 import { CreateAnnouncementModal } from "../CreateAnnouncementModal";
 import {
@@ -13,19 +17,74 @@ import {
   Icon,
   Name,
 } from "./styles";
-interface Props {
-  auth: "default" | "authenticated";
-  user: string;
-}
-export const VehiclesFilter = ({ auth, user }: Props) => {
-  const name = user.split(" ");
+
+export const VehiclesFilter = () => {
+  const { userData, setUserData } = useContext(UserContext);
 
   const { toggleModal, isOpen } = useContext(CreateAnnouncementContext);
+
+  const token = localStorage.getItem("@MotorsShop:token");
+
+  useEffect(() => {
+    api
+      .get("user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .catch(() => {});
+  }, [token]);
+
+  const user = userData || {};
+  const name = user.name ? user.name.split(" ") : [];
+  const icon1 = name[0] ? name[0].slice(0, 1) : "";
+  const icon2 = name[1] ? name[1].slice(0, 1) : "";
 
   return (
     <>
       {isOpen && <CreateAnnouncementModal />}
-      {auth == "default" ? (
+      {token ? (
+        <ContentProfile>
+          <Profile key={userData.id}>
+            <User>
+              <Icon>{`${icon1}${icon2}`}</Icon>
+              <Name>
+                <p>{userData.name}</p>
+                <span>
+                  {userData.typeAccount === "buyer"
+                    ? "Comprador"
+                    : "Anunciante"}
+                </span>
+              </Name>
+            </User>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quis
+              perspiciatis autem optio, eveniet cumque alias aliquam quam harum
+              dolor facere ea. Dolorem, voluptates? Placeat sed voluptatibus
+              enim praesentium voluptates!
+            </p>
+            {userData.typeAccount === "advertiser" && (
+              <ButtonBig
+                bg={theme.colors.whiteFixed}
+                button={theme.button.big}
+                color={theme.colors.brand1}
+                border={theme.colors.brand1}
+                size={theme.size.button_medium_text}
+                weight={theme.weight.button_medium_text}
+                colorHover={theme.colors.whiteFixed}
+                bgHover={theme.colors.brand1}
+                borderHover={theme.colors.brand1}
+                onClick={() => toggleModal()}
+              >
+                Criar anúncio
+              </ButtonBig>
+            )}
+          </Profile>
+        </ContentProfile>
+      ) : (
         <ContentFilter>
           <ContentText>
             <h2>Velocidade e experiência em um lugar feito para você</h2>
@@ -60,36 +119,6 @@ export const VehiclesFilter = ({ auth, user }: Props) => {
             </ButtonBig>
           </ContentButtons>
         </ContentFilter>
-      ) : (
-        <ContentProfile>
-          <Profile>
-            <User>
-              <Icon>{`${name[0].slice(0, 1)}${name[1].slice(0, 1)}`}</Icon>
-              <Name>
-                <p>{user}</p>
-                <span>Anunciante</span>
-              </Name>
-            </User>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-              impedit earum est perferendis repellendus autem, vel reprehenderit
-            </p>
-            <ButtonBig
-              bg={theme.colors.whiteFixed}
-              button={theme.button.big}
-              color={theme.colors.brand1}
-              border={theme.colors.brand1}
-              size={theme.size.button_medium_text}
-              weight={theme.weight.button_medium_text}
-              colorHover={theme.colors.whiteFixed}
-              bgHover={theme.colors.brand1}
-              borderHover={theme.colors.brand1}
-              onClick={() => toggleModal()}
-            >
-              Criar anúncio
-            </ButtonBig>
-          </Profile>
-        </ContentProfile>
       )}
     </>
   );

@@ -55,7 +55,6 @@ export const CreateAnnouncementModal = () => {
   });
 
   const submit = async (data: any) => {
-    console.log(data);
     data.userId = 1;
     data.typeAnnouncement = tA;
     data.typeVehicle = type;

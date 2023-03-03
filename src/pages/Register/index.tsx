@@ -6,7 +6,7 @@ import { ContentRegister } from "./styles";
 export const Register = () => {
   return (
     <>
-      <NavBar auth={"default"} user={"Lucas Galvs"} />
+      <NavBar />
       <ContentRegister>
         <RegisterForm />
       </ContentRegister>

@@ -7,12 +7,20 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ILoginData, IProps, IUserData, IUserUpdate } from "../interfaces/user";
+import {
+  ILoginData,
+  IProps,
+  IRegisterData,
+  IUserData,
+  IUserUpdate,
+} from "../interfaces/user";
 import { api } from "../services/api";
 
 export const UserContext = createContext({} as IUserContext);
 
 interface IUserContext {
+  logout: () => void;
+
   userData: IUserData;
 
   showModal: any;
@@ -26,9 +34,9 @@ interface IUserContext {
 
   setUserData: Dispatch<SetStateAction<IUserData>>;
 
-  logout: () => void;
-
   onSubmitLogin: (data: ILoginData) => void;
+
+  onSubmitRegister: (data: IRegisterData) => void;
 
   onSubmitUpdate: (data: IUserUpdate, id: number) => void;
 
@@ -40,9 +48,9 @@ interface IUserContext {
 }
 
 export const UserProvider = ({ children }: IProps) => {
-  const [userData, setUserData] = useState<any>();
-
   const navigate = useNavigate();
+
+  const [userData, setUserData] = useState<IUserData>({} as IUserData);
 
   const logout = () => {
     localStorage.clear();
@@ -57,7 +65,7 @@ export const UserProvider = ({ children }: IProps) => {
 
         setTimeout(() => {
           navigate("/");
-        }, 1500);
+        }, 1000);
 
         toast.success("Logado com sucesso, redirecionando!", {
           toastId: 1,
@@ -65,6 +73,22 @@ export const UserProvider = ({ children }: IProps) => {
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
+          toastId: 1,
+        });
+      });
+  };
+
+  const onSubmitRegister = (data: IRegisterData) => {
+    api
+      .post("user", data)
+      .then(() => {
+        toast.success("Conta criada com sucesso!", {
+          toastId: 1,
+        });
+        navigate("/session");
+      })
+      .catch((err) => {
+        toast.error(err.message, {
           toastId: 1,
         });
       });
@@ -89,9 +113,7 @@ export const UserProvider = ({ children }: IProps) => {
       .then((res) => {
         setUserData(res.data);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(() => {});
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -110,19 +132,20 @@ export const UserProvider = ({ children }: IProps) => {
     const token = localStorage.getItem("@MotorsShop:token");
 
     removeEmptyFields(data);
+
     api
       .patch(`user/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res: any) => {
+      .then((res) => {
         toast.success("Perfil atualizado com sucesso!", {
           toastId: 1,
         });
       })
 
-      .catch((err: any) => {
+      .catch((err) => {
         toast.error(err.response.data.message, {
           toastId: 1,
         });
@@ -150,11 +173,16 @@ export const UserProvider = ({ children }: IProps) => {
       });
   };
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
         logout,
         onSubmitLogin,
+        onSubmitRegister,
         onSubmitUpdate,
         onSubmitDelete,
         userData,

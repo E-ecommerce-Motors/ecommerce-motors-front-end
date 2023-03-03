@@ -7,7 +7,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 46px;
-width: 100vw;
+width: 100%;
 height: 550px;
 background-color: ${theme.colors.brand2};
 
@@ -64,7 +64,7 @@ flex-direction: column;
 justify-content: space-around;
 margin-top: 50px;
 width: 90%;
-height: 400px;
+min-height: 300px;
 border-radius: 4px;
 background-color: ${theme.colors.whiteFixed};
 padding: 40px 0px 10px 29px;
@@ -73,6 +73,7 @@ padding: 40px 0px 10px 29px;
 export const User = styled.div`
 display: flex;
 flex-direction: column;
+gap: 15px;
 @media (max-width: 1000px) {
 }
 `;

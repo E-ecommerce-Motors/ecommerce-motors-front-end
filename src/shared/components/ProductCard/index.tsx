@@ -17,6 +17,7 @@ import {
   Saler,
   Name,
   Active,
+  Edit,
 } from "./styles";
 
 interface Props {
@@ -74,8 +75,6 @@ export const ProductCard = ({
     id,
   };
 
-  console.log(img);
-
   const active: boolean = true;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -91,15 +90,16 @@ export const ProductCard = ({
           <EditAnnouncement announcement={announcement} close={handleClose} />
         </Box>
       </Modal>
+
       <Link
         to={`/announcement/${announcement.id}`}
         style={{ textDecoration: "none" }}
       >
-        <ImgContainer onClick={handleOpen}>
+        <ImgContainer>
           <Active saler={saler} active={active}>
             {active ? `Ativo` : "Inativo"}
           </Active>
-          <Img image={img ? img[0].coverImage : ""} />
+          {/* <Img image={img ? img[0].coverImage : ""} /> */}
         </ImgContainer>
       </Link>
       <Heading7>
@@ -119,6 +119,7 @@ export const ProductCard = ({
         </Infos>
         <Price>{priceformat}</Price>
       </Footer>
+      <Edit onClick={handleOpen}>Editar</Edit>
     </Container>
   );
 };

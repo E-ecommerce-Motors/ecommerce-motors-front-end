@@ -6,18 +6,30 @@ export const ContentForm = styled.form`
   display: flex;
   flex-direction: column;
 
-  gap: 24px;
-  padding: 44px ;
+  gap: 1.875rem;
+  padding: 2.75rem ;
   width: 25rem;
-  min-height: 412px;
+  min-height: 25.75rem;
   background-color: ${theme.colors.whiteFixed};
   border-radius: .25rem;
 
+    section {
+      padding: .625rem 0rem;
+    }
     span {
       font-size: ${theme.size.body_1};
       font-weight: ${theme.weight.body_2_500};
       color: ${theme.colors.grey2};
     }
+
+    label {
+      color: ${theme.colors.grey0};
+      font-weight: ${theme.weight.body_2_500};
+    } 
+    h3 {
+      padding-bottom: 15px;
+    }
+    
 `
 
 export const LinkStyled = styled(Link)`
@@ -29,14 +41,14 @@ export const LinkStyled = styled(Link)`
   color: ${theme.colors.grey0} ;
   font-size: ${theme.size.button_big_text} ;
   font-weight: ${theme.weight.Heading_2_600} ;
-  border: 2px solid ${theme.colors.grey4};
-  border-radius: 4px;
-  height: 48px;
+  border: .125rem solid ${theme.colors.grey4};
+  border-radius: .25rem;
+  height: 3rem;
   width: 100%;
 
     :hover {
       background-color: ${theme.colors.brand1};
-      border: 2px solid${theme.colors.brand1};
+      border: .125rem solid${theme.colors.brand1};
       color: ${theme.colors.whiteFixed} ;
     };
 `
@@ -61,7 +73,7 @@ export const NotHaveAccount = styled.div`
 export const ContentInputs = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: .9375rem;
 `
 
 export const Button = styled.button`
@@ -69,20 +81,22 @@ export const Button = styled.button`
   color: ${theme.colors.whiteFixed} ;
   font-size: ${theme.size.button_big_text} ;
   font-weight: ${theme.weight.Heading_2_600} ;
-  border: 2px solid${theme.colors.brand1};
+  border: .125rem solid${theme.colors.brand1};
   border: none;
-  border-radius: 4px;
-  height: 48px;
+  border-radius: .25rem;
+  height: 3rem;
   width: 100%;
 
     :hover {
     };
 `
 
-export const ErrorMessage = styled.div`
-  color: rgba(218, 27, 27, 0.873);
-  font-size: 1rem;
-  display: flex;
-  align-self: flex-start;
-  padding: 7px 0 0 1.5rem;
+export const ErrorMessage = styled.p`
+display: flex;
+align-self: flex-start;
+padding: 5px 3px;
+position: absolute;
+font-weight: 600;
+font-size: .8rem;
+color: ${theme.colors.grey3};
 `;

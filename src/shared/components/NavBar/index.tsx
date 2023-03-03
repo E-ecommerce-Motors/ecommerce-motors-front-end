@@ -21,17 +21,17 @@ import {
   ContainerMobile,
 } from "./styles";
 
-interface Props {
-  auth: "default" | "authenticated";
-  user: string;
-}
 
-export const NavBar = ({ auth, user }: Props) => {
-  const { logout, modalContent, setModalContent, setShowModal, showModal, handleOpenModal } = useContext(UserContext);
 
-    // const auth: string = "authenticated";
-    // const user: string = "Lucas Galvs";
-  const name = user.split(" ");
+export const NavBar = () => {
+  const { logout, userData, handleOpenModal, setModalContent, showModal, setShowModal, closeModal, modalContent } = useContext(UserContext);
+  const token = localStorage.getItem("@MotorsShop:token");
+  const auth = token ? "authenticated" : "default";
+  const user = userData || {};
+  const name = user.name ? user.name.split(" ") : [];
+  const icon1 = name[0] ? name[0].slice(0, 1) : "";
+  const icon2 = name[1] ? name[1].slice(0, 1) : "";
+
   const [openProfile, setOpenProfile] = useState(false);
   const [navMobile, setNavMobile] = useState(false);
 
@@ -54,7 +54,7 @@ export const NavBar = ({ auth, user }: Props) => {
         <Option authenticaded={auth}>Motos</Option>
         <Option authenticaded={auth}>Leilão</Option>
 
-        {auth == "default" ? (
+        {!token ? (
           <>
             <Line />
             <SignIn to="/session">Fazer Login</SignIn>
@@ -65,8 +65,8 @@ export const NavBar = ({ auth, user }: Props) => {
             <Line />
             <Profile>
               <User onMouseOver={() => setOpenProfile(true)}>
-                <Icon>{`${name[0].slice(0, 1)}${name[1].slice(0, 1)}`}</Icon>
-                <Name>{user}</Name>
+                <Icon>{`${icon1}${icon2}`}</Icon>
+                <Name>{user.name}</Name>
               </User>
               <MenuBox
                 open={openProfile}
@@ -74,8 +74,12 @@ export const NavBar = ({ auth, user }: Props) => {
               >
                 <OptionsProfile type="button" onClick={() => handleOpenModal(<GenericModal><EditUserModal/></GenericModal>)}>Editar Perfil</OptionsProfile>
                 <OptionsProfile>Editar Endereço</OptionsProfile>
-                <OptionsProfile>Minhas Compras</OptionsProfile>
-                <OptionsProfile onClick={() => logout()} >Sair</OptionsProfile>
+                <OptionsProfile>
+                  {userData.typeAccount == "advertiser"
+                    ? "Meus Anúncios"
+                    : "Minhas Compras"}
+                </OptionsProfile>
+                <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
               </MenuBox>
               {showModal && modalContent}
             </Profile>
