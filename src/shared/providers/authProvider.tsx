@@ -50,8 +50,6 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   const [announcements, setAnnouncements] = useState<any>([]);
   const [announcement, setAnnouncement] = useState<any>([]);
 
-  console.log(announcement);
-
   useEffect(() => {
     getAnn();
     retireAnnouncement(3);
@@ -74,8 +72,13 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   };
 
   const CreateComment = async (data: Comment, id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
     await api
-      .post(`announcements/${id}/comments`, data)
+      .post(`announcements/${id}/comments`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => console.log(response))
       .catch((response) => console.log(response));
   };

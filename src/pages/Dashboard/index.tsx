@@ -23,12 +23,11 @@ export const Dashboard = () => {
           setUserData(res.data);
         });
     }
-    
   }, []);
 
   return (
     <ContentDashboard>
-      <NavBar auth={"default"} user={"Gucas A"} />
+      <NavBar />
       <VehiclesFilter auth={"default"} user={"Lucas Galvs"} />
       <CarouselAuction />
       <Carousel type={"car"} />

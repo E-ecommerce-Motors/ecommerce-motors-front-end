@@ -33,7 +33,7 @@ export const CreateComment = ({ user }: Props) => {
   const placeholder =
     "Carro muito confortável, foi uma ótima experiência de compra...";
 
-  const { CreateComment } = updateAuth();
+  const { CreateComment, retireAnnouncement } = updateAuth();
   const { id } = useParams();
   const name = user.split(" ");
 
@@ -53,6 +53,11 @@ export const CreateComment = ({ user }: Props) => {
     data.userId = 1;
     data.text = comment;
     CreateComment(data, Number(id));
+    reload();
+  };
+
+  const reload = () => {
+    retireAnnouncement(Number(id));
   };
 
   return (

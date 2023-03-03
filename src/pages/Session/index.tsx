@@ -6,7 +6,7 @@ import { ContentSession } from "./styles";
 export const Session = () => {
   return (
     <>
-      <NavBar auth="default" user={""} />
+      <NavBar />
       <ContentSession>
         <SessionForm />
       </ContentSession>

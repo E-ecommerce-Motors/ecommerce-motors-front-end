@@ -9,20 +9,25 @@ import { InfosAnnouncement } from "../../shared/components/BasicInfosAnnouncemen
 import { ImgAnnouncement } from "../../shared/components/ImgAnnouncementPage";
 import { updateAuth } from "../../shared/providers/authProvider";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ImgGalleryAnnouncement } from "../../shared/components/ImgAnnouncementGallery";
 import { SalerInfo } from "../../shared/components/SalerInfos";
+import { api } from "../../shared/services/api";
 
 export const AnnouncementPage = () => {
   const { retireAnnouncement } = updateAuth();
+  const [render, setRender] = useState<boolean>(false);
   const { id } = useParams();
   useEffect(() => {
     retireAnnouncement(Number(id));
-  }, []);
+    setTimeout(() => {
+      setRender(true);
+    }, 100);
+  }, [render == false]);
 
-  return (
+  return render ? (
     <>
-      <NavBar auth={"authenticated"} user={"Lucas Galvs"} />
+      <NavBar />
       <Background>
         <BgBrand />
         <Content>
@@ -39,5 +44,7 @@ export const AnnouncementPage = () => {
       </Background>
       <Footer />
     </>
+  ) : (
+    <></>
   );
 };

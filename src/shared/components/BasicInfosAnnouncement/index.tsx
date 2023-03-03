@@ -28,7 +28,7 @@ export const InfosAnnouncement = () => {
         <Footer>
           <Infos>
             <KM_Year>{announcement.year}</KM_Year>
-            <KM_Year>{announcement.mileage}</KM_Year>
+            <KM_Year>{announcement.mileage} KM</KM_Year>
           </Infos>
           <Price>{priceformat}</Price>
         </Footer>
