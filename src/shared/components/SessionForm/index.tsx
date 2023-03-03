@@ -24,20 +24,23 @@ export const SessionForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginData>({ resolver: yupResolver(formLoginSchema) });
-  
+
   return (
-    
     <ContentForm onSubmit={handleSubmit(onSubmitLogin)}>
       <Title>Login</Title>
       <ContentInputs>
-        <SubTitle>Usuário</SubTitle>
-        <Input placeholder="Digitar usuário" {...register("email")} />
-        <ErrorMessage>{errors.email?.message}</ErrorMessage>
-      </ContentInputs>
-      <ContentInputs>
-        <SubTitle>Senha</SubTitle>
-        <Input placeholder="Digitar senha" {...register("password")} />
-        <ErrorMessage>{errors.email?.message}</ErrorMessage>
+        <section>
+          <SubTitle>Email</SubTitle>
+          <Input placeholder="Digitar email" {...register("email")} />
+        </section>
+        <section>
+          <SubTitle>Senha</SubTitle>
+          <Input
+            type="password"
+            placeholder="Digitar senha"
+            {...register("password")}
+          />
+        </section>
       </ContentInputs>
       <ForgotPassword>
         <span>Esqueci minha senha</span>

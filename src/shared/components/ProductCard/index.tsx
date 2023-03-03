@@ -74,7 +74,6 @@ export const ProductCard = ({
     id,
   };
 
-  console.log(img);
 
   const active: boolean = true;
   const [open, setOpen] = useState(false);
@@ -91,6 +90,7 @@ export const ProductCard = ({
           <EditAnnouncement announcement={announcement} close={handleClose} />
         </Box>
       </Modal>
+
       <Link
         to={`/announcement/${announcement.id}`}
         style={{ textDecoration: "none" }}
