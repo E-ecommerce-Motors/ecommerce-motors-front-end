@@ -134,8 +134,10 @@ export const UserProvider = ({ children }: IProps) => {
   };
 
   const closeModal = () => {
-    setShowModal(false);
-  };
+    console.log(showModal)
+    setShowModal(false)
+    console.log(showModal)
+  }
 
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
@@ -180,6 +182,8 @@ export const UserProvider = ({ children }: IProps) => {
           toastId: 1,
         });
       });
+      closeModal()
+      logout()
   };
 
   const onRecoveryPassword = (email: string) => {
@@ -198,9 +202,10 @@ export const UserProvider = ({ children }: IProps) => {
       });
   };
 
-  useEffect(() => {
-    getUser();
-  }, []);
+
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
 
   return (
     <UserContext.Provider
