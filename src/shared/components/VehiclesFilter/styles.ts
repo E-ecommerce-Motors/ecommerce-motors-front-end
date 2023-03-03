@@ -64,7 +64,7 @@ flex-direction: column;
 justify-content: space-around;
 margin-top: 50px;
 width: 90%;
-min-height: 300px;
+min-height: 350px;
 border-radius: 4px;
 background-color: ${theme.colors.whiteFixed};
 padding: 40px 0px 10px 29px;
@@ -74,8 +74,6 @@ export const User = styled.div`
 display: flex;
 flex-direction: column;
 gap: 15px;
-@media (max-width: 1000px) {
-}
 `;
 
 export const Icon = styled.div`
@@ -110,3 +108,12 @@ color: ${theme.colors.grey1};
         border-radius: 4px;
     }
 `;
+
+export const Description = styled.p`
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+width: 95%;
+`

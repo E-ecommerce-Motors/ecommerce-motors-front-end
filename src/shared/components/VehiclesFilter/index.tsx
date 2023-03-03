@@ -16,6 +16,7 @@ import {
   User,
   Icon,
   Name,
+  Description,
 } from "./styles";
 
 export const VehiclesFilter = () => {
@@ -60,12 +61,7 @@ export const VehiclesFilter = () => {
                 </span>
               </Name>
             </User>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quis
-              perspiciatis autem optio, eveniet cumque alias aliquam quam harum
-              dolor facere ea. Dolorem, voluptates? Placeat sed voluptatibus
-              enim praesentium voluptates!
-            </p>
+            <Description>{userData.description}</Description>
             {userData.typeAccount === "advertiser" && (
               <ButtonBig
                 bg={theme.colors.whiteFixed}
