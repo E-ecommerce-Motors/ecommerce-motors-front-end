@@ -10,7 +10,7 @@ export interface ILoginData {
 }
 
 export interface IUserUpdate{
-  id: number;
+  id?: number;
   name?: string;
   email?: string;
   cpf?: string;

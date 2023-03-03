@@ -1,4 +1,10 @@
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ILoginData, IProps, IUserData, IUserUpdate } from "../interfaces/user";
@@ -15,7 +21,7 @@ interface IUserContext {
 
   onSubmitLogin: (data: ILoginData) => void;
 
-  onSubmitUpdate: (data: IUserUpdate) => void;
+  onSubmitUpdate: (data: IUserUpdate, id: number) => void;
 }
 
 export const UserProvider = ({ children }: IProps) => {
@@ -49,24 +55,36 @@ export const UserProvider = ({ children }: IProps) => {
       });
   };
 
-  const onSubmitUpdate = (data: IUserUpdate) => {
+  const removeEmptyFields = (data: any) => {
+    Object.keys(data).forEach((key) => {
+      if (data[key] === "" || data[key] == null) {
+        delete data[key];
+      }
+    });
+  };
+
+  const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+
+    removeEmptyFields(data);
     api
-    .patch("user", data)
-    .then((res)=> {
-      localStorage.getItem("@MotorShop:token")
+      .patch(`user/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res: any) => {
+        toast.success("Perfil atualizado com sucesso!", {
+          toastId: 1,
+        });
+      })
 
-      toast.success("Perfil atualizado com sucesso!", {
-        toastId: 1,
+      .catch((err: any) => {
+        toast.error(err.response.data.message, {
+          toastId: 1,
+        });
       });
-    })
-    .catch((err) => {
-      toast.error(err.response.data.message, {
-        toastId: 1,
-      });
-    })
-  }
-  
-
+  };
 
   return (
     <UserContext.Provider
