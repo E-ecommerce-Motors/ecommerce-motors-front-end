@@ -76,7 +76,11 @@ export const NavBar = () => {
               >
                 <OptionsProfile>Editar Perfil</OptionsProfile>
                 <OptionsProfile>Editar Endereço</OptionsProfile>
-                <OptionsProfile>Minhas Compras</OptionsProfile>
+                <OptionsProfile>
+                  {userData.typeAccount == "advertiser"
+                    ? "Meus Anúncios"
+                    : "Minhas Compras"}
+                </OptionsProfile>
                 <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
               </MenuBox>
             </Profile>
