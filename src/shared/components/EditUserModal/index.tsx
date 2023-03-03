@@ -32,7 +32,6 @@ interface User {
 }
 
 export const EditUserModal = () => {
-  const [user, setUser] = useState<IUserUpdate | undefined>();
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
@@ -48,7 +47,7 @@ export const EditUserModal = () => {
     birthdDate: yup.string().optional(),
     description: yup.string().optional(),
   });
-  const { onSubmitUpdate } = useContext(UserContext);
+  const { onSubmitUpdate, getUser, userData } = useContext(UserContext);
 
   const {
     register,
@@ -59,22 +58,12 @@ export const EditUserModal = () => {
   });
 
   const submit = async (data: IUserUpdate) => {
-    onSubmitUpdate(data, Number(user?.id));
+    onSubmitUpdate(data, userData?.id);
   };
 
   const token = localStorage.getItem("@MotorsShop:token");
   api
-    .get(`user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((res) => {
-      setUser(res.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  getUser()
 
   return (
     <ModalWrapper>

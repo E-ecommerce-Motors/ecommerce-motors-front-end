@@ -22,6 +22,8 @@ interface IUserContext {
   onSubmitLogin: (data: ILoginData) => void;
 
   onSubmitUpdate: (data: IUserUpdate, id: number) => void;
+
+  getUser: ()=> void
 }
 
 export const UserProvider = ({ children }: IProps) => {
@@ -63,6 +65,24 @@ export const UserProvider = ({ children }: IProps) => {
     });
   };
 
+  const getUser = () => {
+    
+
+    const token = localStorage.getItem("@MotorsShop:token");
+    api
+    .get(`user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setUserData(res.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
 
@@ -88,7 +108,7 @@ export const UserProvider = ({ children }: IProps) => {
 
   return (
     <UserContext.Provider
-      value={{ logout, onSubmitLogin, onSubmitUpdate, userData, setUserData }}
+      value={{ logout, onSubmitLogin, onSubmitUpdate, userData, setUserData, getUser}}
     >
       {children}
     </UserContext.Provider>
