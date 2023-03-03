@@ -15,6 +15,15 @@ export const UserContext = createContext({} as IUserContext);
 interface IUserContext {
   userData: IUserData;
 
+  showModal: any;
+
+  setShowModal: Dispatch<SetStateAction<any>>;
+
+  closeModal: () => void;
+
+  modalContent: any;
+  setModalContent: Dispatch<SetStateAction<any>>;
+
   setUserData: Dispatch<SetStateAction<IUserData>>;
 
   logout: () => void;
@@ -23,7 +32,11 @@ interface IUserContext {
 
   onSubmitUpdate: (data: IUserUpdate, id: number) => void;
 
-  getUser: ()=> void
+  onSubmitDelete: (id: number) => void
+
+  getUser: () => void;
+
+  handleOpenModal: (modalContent: any)=> void
 }
 
 export const UserProvider = ({ children }: IProps) => {
@@ -66,21 +79,31 @@ export const UserProvider = ({ children }: IProps) => {
   };
 
   const getUser = () => {
-    
-
     const token = localStorage.getItem("@MotorsShop:token");
     api
-    .get(`user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((res) => {
-      setUserData(res.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .get(`user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  
+  const handleOpenModal = (modalContent: any) => {
+    setShowModal(true);
+    setModalContent(modalContent);
+  };
+
+  const closeModal = () => {
+    setShowModal(false)
   }
 
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
@@ -105,10 +128,45 @@ export const UserProvider = ({ children }: IProps) => {
         });
       });
   };
+  const onSubmitDelete = async (id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+
+    api
+      .delete(`user/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res: any) => {
+        toast.success("Perfil excluído com sucesso!", {
+          toastId: 1,
+        });
+      })
+
+      .catch((err: any) => {
+        toast.error(err.response.data.message, {
+          toastId: 1,
+        });
+      });
+  };
 
   return (
     <UserContext.Provider
-      value={{ logout, onSubmitLogin, onSubmitUpdate, userData, setUserData, getUser}}
+      value={{
+        logout,
+        onSubmitLogin,
+        onSubmitUpdate,
+        onSubmitDelete,
+        userData,
+        modalContent,
+        setUserData,
+        setModalContent,
+        showModal,
+        setShowModal,
+        closeModal,
+        getUser,
+        handleOpenModal
+      }}
     >
       {children}
     </UserContext.Provider>

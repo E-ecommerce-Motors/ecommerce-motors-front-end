@@ -29,6 +29,7 @@ interface Comment {
 
 export const CreateComment = ({ user }: Props) => {
   const [comment, setComment] = useState<string>("");
+  const token = localStorage.getItem("@MotorsShop:token");
   const placeholder =
     "Carro muito confortável, foi uma ótima experiência de compra...";
 
@@ -51,17 +52,20 @@ export const CreateComment = ({ user }: Props) => {
   const submit = (data: Comment) => {
     data.userId = 1;
     data.text = comment;
-    const id = 2;
-    CreateComment(data, id);
+    CreateComment(data, Number(id));
   };
 
   return (
     <Container>
       <Content onSubmit={handleSubmit(submit)}>
-        <User>
-          <Icon>{`${name[0].slice(0, 1)}${name[1].slice(0, 1)}`}</Icon>
-          <Name>{user}</Name>
-        </User>
+        {token ? (
+          <User>
+            <Icon>{`${name[0].slice(0, 1)}${name[1].slice(0, 1)}`}</Icon>
+            <Name>{user}</Name>
+          </User>
+        ) : (
+          <></>
+        )}
         <TextArea>
           <Text
             value={comment}
@@ -83,6 +87,7 @@ export const CreateComment = ({ user }: Props) => {
             colorHover={theme.colors.whiteFixed}
             style={{ position: "absolute" }}
             type="submit"
+            disabled={token ? false : true}
           >
             Comentar
           </ButtonBig>

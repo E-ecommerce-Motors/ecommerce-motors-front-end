@@ -29,9 +29,11 @@ interface Comment {
 
 interface ContextProps {
   getAnn: () => void;
+  retireAnnouncement: (id: number) => void;
   UpdateAnn: (data: Update, id: number) => void;
   CreateComment: (data: Comment, id: number) => void;
   announcements: any;
+  announcement: any;
 }
 
 const UpdateContext = createContext<ContextProps>({} as ContextProps);
@@ -46,9 +48,13 @@ const updateAuth = () => {
 
 const UpdateProvider = ({ children }: ChildrenProp) => {
   const [announcements, setAnnouncements] = useState<any>([]);
+  const [announcement, setAnnouncement] = useState<any>([]);
+
+  console.log(announcement);
 
   useEffect(() => {
     getAnn();
+    retireAnnouncement(3);
   }, []);
 
   const getAnn = async () => {
@@ -74,9 +80,23 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch((response) => console.log(response));
   };
 
+  const retireAnnouncement = async (id: number) => {
+    await api
+      .get(`announcements/${id}`)
+      .then((response) => setAnnouncement(response.data))
+      .catch((response) => console.log(response));
+  };
+
   return (
     <UpdateContext.Provider
-      value={{ getAnn, UpdateAnn, CreateComment, announcements }}
+      value={{
+        getAnn,
+        UpdateAnn,
+        CreateComment,
+        retireAnnouncement,
+        announcements,
+        announcement,
+      }}
     >
       {children}
     </UpdateContext.Provider>

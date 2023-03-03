@@ -27,6 +27,10 @@ import { IUserUpdate } from "../../interfaces/user";
 import { api } from "../../services/api";
 import { ErrorMessage } from "../SessionForm/styles";
 import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
+import DeleteAnnouncementModal from "../DeleteAnnouncementModal";
+import { DeleteUserModal } from "../DeleteUserModal";
+import { Modal } from "@mui/material";
+import { GenericModal } from "../GenericModal/GenericModal";
 
 interface User {
   id: number;
@@ -48,9 +52,8 @@ export const EditUserModal = () => {
     birthdDate: yup.string().optional(),
     description: yup.string().optional(),
   });
-  const { onSubmitUpdate, getUser, userData } = useContext
+  const { onSubmitUpdate, getUser, userData, showModal, setShowModal, handleOpenModal, modalContent, setModalContent, closeModal } = useContext
   (UserContext);
-  const { toggleModal, isOpen } = useContext(CreateAnnouncementContext);
 
   const {
     register,
@@ -63,9 +66,8 @@ export const EditUserModal = () => {
   const submit = async (data: IUserUpdate) => {
     onSubmitUpdate(data, userData?.id);
   };
-
-  const token = localStorage.getItem("@MotorsShop:token");
-  api
+  
+  
   getUser()
 
   return (
@@ -73,14 +75,14 @@ export const EditUserModal = () => {
       <Container>
         <Header>
           <Heading>Editar perfil</Heading>
-          <CloseButton type="button">x</CloseButton>
+          <CloseButton type="button" onClick={setModalContent}>x</CloseButton>
         </Header>
         <Content onSubmit={handleSubmit(submit)}>
           <Type>Informações pessoais</Type>
 
           <Title>Nome:</Title>
           <Input
-            placeholder={"Digite o novo nome de usuário"}
+            placeholder={userData?.name}
             width={"big"}
             {...register("name")}
             value={name}
@@ -92,7 +94,7 @@ export const EditUserModal = () => {
           <ErrorMessage>{errors.name?.message}</ErrorMessage>
           <Title>Email:</Title>
           <Input
-            placeholder={"Digite seu novo email"}
+            placeholder={userData?.email}
             width={"big"}
             {...register("email")}
             value={email}
@@ -104,7 +106,7 @@ export const EditUserModal = () => {
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
           <Title>CPF:</Title>
           <Input
-            placeholder={"Digite seu novo cpf"}
+            placeholder={userData?.cpf}
             width={"big"}
             {...register("cpf")}
             value={cpf}
@@ -116,7 +118,7 @@ export const EditUserModal = () => {
           <ErrorMessage>{errors.cpf?.message}</ErrorMessage>
           <Title>Celular:</Title>
           <Input
-            placeholder={"Digite seu celular"}
+            placeholder={userData?.phone}
             width={"big"}
             {...register("phone")}
             value={phone}
@@ -128,7 +130,7 @@ export const EditUserModal = () => {
           <ErrorMessage>{errors.phone?.message}</ErrorMessage>
           <Title>Data de Nascimento:</Title>
           <Input
-            placeholder={"Digite sua data de nascimento"}
+            placeholder={userData?.birthDate}
             width={"big"}
             {...register("birthDate")}
             value={birthDate}
@@ -140,7 +142,7 @@ export const EditUserModal = () => {
           <ErrorMessage>{errors.birthDate?.message}</ErrorMessage>
           <Title>Descrição</Title>
           <TextArea
-            placeholder={"Digite a descrição"}
+            placeholder={userData?.description}
             {...register("description")}
             value={description}
             onChange={(e) => {
@@ -159,8 +161,10 @@ export const EditUserModal = () => {
               bgHover={theme.colors.grey5}
               borderHover={theme.colors.grey5}
               colorHover={theme.colors.grey2}
+              type="button"
+              onClick={closeModal}
             >
-              Excluir anúncio
+              Cancelar
             </ButtonBig>
             <ButtonBig
               bg={theme.colors.brand1}
@@ -181,8 +185,25 @@ export const EditUserModal = () => {
               }
             >
               Salvar alterações
-            </ButtonBig>
+            </ButtonBig> 
           </FlexBtn>
+          <ButtonBig
+              bg={theme.colors.alert1}
+              button={theme.button.big}
+              color={theme.colors.whiteFixed}
+              size={theme.size.button_big_text}
+              weight={theme.weight.button_big_text}
+              border={theme.colors.alert1}
+              bgHover={theme.colors.alert1}
+              borderHover={theme.colors.alert1}
+              colorHover={theme.colors.whiteFixed}
+              style={{ width: '100%' }}
+              type="button"
+              onClick={() => handleOpenModal(<GenericModal><DeleteUserModal/></GenericModal>)}
+            >
+              Excluir perfil
+            </ButtonBig>
+            {showModal && modalContent}
         </Content>
       </Container>
     </ModalWrapper>

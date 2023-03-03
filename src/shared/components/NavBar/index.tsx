@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
+import { EditUserModal } from "../EditUserModal";
+import { GenericModal } from "../GenericModal/GenericModal";
 import {
   Container,
   Option,
@@ -25,7 +27,7 @@ interface Props {
 }
 
 export const NavBar = ({ auth, user }: Props) => {
-  const { logout } = useContext(UserContext);
+  const { logout, modalContent, setModalContent, setShowModal, showModal, handleOpenModal } = useContext(UserContext);
 
     // const auth: string = "authenticated";
     // const user: string = "Lucas Galvs";
@@ -70,11 +72,12 @@ export const NavBar = ({ auth, user }: Props) => {
                 open={openProfile}
                 onMouseLeave={() => setOpenProfile(false)}
               >
-                <OptionsProfile>Editar Perfil</OptionsProfile>
+                <OptionsProfile type="button" onClick={() => handleOpenModal(<GenericModal><EditUserModal/></GenericModal>)}>Editar Perfil</OptionsProfile>
                 <OptionsProfile>Editar Endereço</OptionsProfile>
                 <OptionsProfile>Minhas Compras</OptionsProfile>
                 <OptionsProfile onClick={() => logout()} >Sair</OptionsProfile>
               </MenuBox>
+              {showModal && modalContent}
             </Profile>
           </>
         )}

@@ -215,6 +215,7 @@ export const MenuBox = styled.div`
   background: ${theme.colors.grey9};
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+  z-index: 2;
   @media (max-width: 1000px) {
     position: relative;
     top: 15px;
