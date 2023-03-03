@@ -26,6 +26,7 @@ import { Create } from "../../interfaces/announcement";
 import { IUserUpdate } from "../../interfaces/user";
 import { api } from "../../services/api";
 import { ErrorMessage } from "../SessionForm/styles";
+import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
 
 interface User {
   id: number;
@@ -47,7 +48,9 @@ export const EditUserModal = () => {
     birthdDate: yup.string().optional(),
     description: yup.string().optional(),
   });
-  const { onSubmitUpdate, getUser, userData } = useContext(UserContext);
+  const { onSubmitUpdate, getUser, userData } = useContext
+  (UserContext);
+  const { toggleModal, isOpen } = useContext(CreateAnnouncementContext);
 
   const {
     register,
