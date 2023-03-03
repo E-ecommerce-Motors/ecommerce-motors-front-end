@@ -86,9 +86,6 @@ export const Button = styled.button`
   border-radius: .25rem;
   height: 3rem;
   width: 100%;
-
-    :hover {
-    };
 `
 
 export const ErrorMessage = styled.p`

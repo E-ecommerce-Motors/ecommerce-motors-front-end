@@ -25,8 +25,10 @@ import {
 
 export const NavBar = () => {
   const { logout, userData, handleOpenModal, setModalContent, showModal, setShowModal, closeModal, modalContent } = useContext(UserContext);
+  
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
+
   const user = userData || {};
   const name = user.name ? user.name.split(" ") : [];
   const icon1 = name[0] ? name[0].slice(0, 1) : "";
