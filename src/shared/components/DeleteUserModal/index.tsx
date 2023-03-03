@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
 import { UserContext, UserProvider } from "../../providers/UserProvider";
@@ -29,10 +29,6 @@ import { ErrorMessage } from "../SessionForm/styles";
 import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
 import { GenericModal } from "../GenericModal/GenericModal";
 
-interface User {
-  id: number;
-}
-
 export const DeleteUserModal = () => {
   
 
@@ -54,7 +50,7 @@ export const DeleteUserModal = () => {
       <Container>
         <Header>
           <Heading>Editar perfil</Heading>
-          <CloseButton type="button" onClick={closeModal}>x</CloseButton>
+          <CloseButton onClick={closeModal} type="button">x</CloseButton>
         </Header>
         <Content onSubmit={handleSubmit(submit)}>
           <Type>Atenção!</Type>
@@ -89,11 +85,7 @@ export const DeleteUserModal = () => {
               colorHover={theme.colors.whiteFixed}
               disable="sim"
               type="submit"
-              onClick={() =>
-                setTimeout(() => {
-                  close();
-                }, 200)
-              }
+              
             >
               Excluir Perfil
             </ButtonBig>

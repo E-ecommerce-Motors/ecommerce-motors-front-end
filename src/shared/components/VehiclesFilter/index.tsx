@@ -7,6 +7,7 @@ import { UserContext } from "../../providers/UserProvider";
 import { api } from "../../services/api";
 import { ButtonBig } from "../Button/styles";
 import { CreateAnnouncementModal } from "../CreateAnnouncementModal";
+import { GenericModal } from "../GenericModal/GenericModal";
 import {
   ContentButtons,
   ContentFilter,
@@ -20,7 +21,7 @@ import {
 } from "./styles";
 
 export const VehiclesFilter = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { onSubmitUpdate, onSubmitDelete, getUser, userData, showModal, setShowModal, handleOpenModal, modalContent, setModalContent, closeModal, setUserData } = useContext(UserContext);
 
   const { toggleModal, isOpen } = useContext(CreateAnnouncementContext);
 
@@ -49,20 +50,20 @@ export const VehiclesFilter = () => {
       {isOpen && <CreateAnnouncementModal />}
       {token ? (
         <ContentProfile>
-          <Profile key={userData.id}>
+          <Profile key={userData?.id}>
             <User>
               <Icon>{`${icon1}${icon2}`}</Icon>
               <Name>
-                <p>{userData.name}</p>
+                <p>{userData?.name}</p>
                 <span>
-                  {userData.typeAccount === "buyer"
+                  {userData?.typeAccount === "buyer"
                     ? "Comprador"
                     : "Anunciante"}
                 </span>
               </Name>
             </User>
-            <Description>{userData.description}</Description>
-            {userData.typeAccount === "advertiser" && (
+            <Description>{userData?.description}</Description>
+            {userData?.typeAccount === "advertiser" && (
               <ButtonBig
                 bg={theme.colors.whiteFixed}
                 button={theme.button.big}
@@ -73,7 +74,7 @@ export const VehiclesFilter = () => {
                 colorHover={theme.colors.whiteFixed}
                 bgHover={theme.colors.brand1}
                 borderHover={theme.colors.brand1}
-                onClick={() => toggleModal()}
+                onClick={() => handleOpenModal(<GenericModal><CreateAnnouncementModal/></GenericModal>)}
               >
                 Criar anúncio
               </ButtonBig>
