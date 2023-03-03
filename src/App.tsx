@@ -10,7 +10,7 @@ const App = () => {
   return (
     <CreateAnnouncementProvider>
       <UserProvider>
-        <EditUserModal />
+        {/* <EditUserModal /> */}
         <ToastContainer
           position={"top-right"}
           autoClose={1000}
