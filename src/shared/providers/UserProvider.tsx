@@ -122,6 +122,10 @@ export const UserProvider = ({ children }: IProps) => {
       });
   };
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <UserContext.Provider
       value={{

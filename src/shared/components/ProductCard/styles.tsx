@@ -170,3 +170,23 @@ export const Active = styled.div`
     props.active ? theme.colors.brand1 : theme.colors.grey4};
   visibility: ${(props: Props) => (props.saler ? "visible" : "hidden")};
 `;
+
+export const Edit = styled.button`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  width: 80px;
+  height: 38px;
+  border: 1.5px solid ${theme.colors.grey1};
+  border-radius: 4px;
+  font-family: ${theme.fonts.inter};
+  font-style: normal;
+  font-weight: ${theme.weight.button_medium_text};
+  font-size: ${theme.size.button_medium_text};
+  line-height: 0px;
+  color: ${theme.colors.grey1};
+`;
