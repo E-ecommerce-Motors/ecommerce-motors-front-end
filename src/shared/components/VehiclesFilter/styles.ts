@@ -73,6 +73,7 @@ padding: 40px 0px 10px 29px;
 export const User = styled.div`
 display: flex;
 flex-direction: column;
+gap: 15px;
 @media (max-width: 1000px) {
 }
 `;

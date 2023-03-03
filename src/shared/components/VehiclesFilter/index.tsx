@@ -71,8 +71,7 @@ export const VehiclesFilter = ({ auth, user }: Props) => {
               </Name>
             </User>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-              impedit earum est perferendis repellendus autem, vel reprehenderit
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius culpa consectetur modi est sapiente sed ab non amet suscipit minus eum, aperiam eveniet explicabo a labore dolores incidunt, magni dicta!
             </p>
             <ButtonBig
               bg={theme.colors.whiteFixed}
