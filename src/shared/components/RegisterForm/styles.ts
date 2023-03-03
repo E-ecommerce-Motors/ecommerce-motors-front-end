@@ -1,6 +1,19 @@
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
 
+interface Props {
+  bg: string;
+  color: string;
+  border: string;
+  bgHover?: string;
+  colorHover?: string;
+  borderHover?: string;
+  bgFocus?: string;
+  colorFocus?: string;
+  borderFocus?: string;
+  disable?: string;
+}
+
 export const ContentForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -11,6 +24,10 @@ export const ContentForm = styled.form`
   min-height: 101rem;
   background-color: ${theme.colors.whiteFixed};
   border-radius: .25rem;
+  
+  h3 {
+      padding-bottom: 15px;
+    }
 
   h4 {
     font-family: ${theme.fonts.inter};
@@ -25,7 +42,7 @@ export const ContentForm = styled.form`
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    gap: 15px;
+    gap: 25px;
   }
 `
 export const Input = styled.input`
@@ -122,4 +139,33 @@ export const ButtonTypeAccount = styled.button`
   font-weight: ${theme.weight.Heading_2_600};
 
   
+`
+export const Button = styled.button`
+  background-color: ${(props: Props) => props.bg};
+  color: ${(props: Props) => props.color};
+  font-size: ${theme.size.button_big_text} ;
+  font-weight: ${theme.weight.Heading_2_600} ;
+  border: 2px solid ${(props: Props) => props.border};
+  border-radius: 4px;
+  height: 48px;
+  width: 100%;
+
+    :hover {
+      background-color: ${(props: Props) => props.bgHover};
+      color: ${(props: Props) => props.colorHover};
+      border: 2px solid ${(props: Props) => props.borderHover};
+    };
+
+    :disabled {
+      background-color: ${(props: Props) =>
+    props.disable ? "#B0A6f0" : "#CED4DA"};
+      color: ${(props: Props) => (props.disable ? "#EDEAFD" : "#FFFFFF")};
+      border: ${(props: Props) => (props.disable ? "#B0A6f0" : "#CED4DA")};
+    }
+    :focus {
+      background-color: ${(props: Props) => props.bgHover};
+      color: ${(props: Props) => props.colorHover};
+      border: 2px solid ${(props: Props) => props.borderHover};
+    }
+    
 `
