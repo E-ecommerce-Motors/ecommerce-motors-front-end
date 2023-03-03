@@ -25,6 +25,8 @@ import {
 
 export const NavBar = () => {
   const { logout, userData, handleOpenModal, setModalContent, showModal, setShowModal, closeModal, modalContent } = useContext(UserContext);
+  const [openProfile, setOpenProfile] = useState(false);
+  const [navMobile, setNavMobile] = useState(false);
   
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
@@ -34,11 +36,10 @@ export const NavBar = () => {
   const icon1 = name[0] ? name[0].slice(0, 1) : "";
   const icon2 = name[1] ? name[1].slice(0, 1) : "";
 
-  const [openProfile, setOpenProfile] = useState(false);
-  const [navMobile, setNavMobile] = useState(false);
 
   return (
     <Container mobile={navMobile}>
+      
       <ContainerMobile mobile={navMobile}>
         <Text to="/"></Text>
         <Mobile>
@@ -68,25 +69,28 @@ export const NavBar = () => {
             <Profile>
               <User onMouseOver={() => setOpenProfile(true)}>
                 <Icon>{`${icon1}${icon2}`}</Icon>
-                <Name>{user.name}</Name>
+                <Name>{user?.name}</Name>
               </User>
               <MenuBox
                 open={openProfile}
                 onMouseLeave={() => setOpenProfile(false)}
-              >
+                >
                 <OptionsProfile type="button" onClick={() => handleOpenModal(<GenericModal><EditUserModal/></GenericModal>)}>Editar Perfil</OptionsProfile>
+                
                 <OptionsProfile>Editar Endereço</OptionsProfile>
                 <OptionsProfile>
-                  {userData.typeAccount == "advertiser"
+                  {userData?.typeAccount == "advertiser"
                     ? "Meus Anúncios"
                     : "Minhas Compras"}
                 </OptionsProfile>
                 <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
+                
               </MenuBox>
-              {showModal && modalContent}
             </Profile>
           </>
-        )}
+          
+          )
+          }
       </Urls>
     </Container>
   );

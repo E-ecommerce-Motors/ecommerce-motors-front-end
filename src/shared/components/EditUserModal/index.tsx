@@ -203,8 +203,8 @@ export const EditUserModal = () => {
             >
               Excluir perfil
             </ButtonBig>
-            {showModal && modalContent}
         </Content>
+            {showModal && modalContent}
       </Container>
     </ModalWrapper>
   );
