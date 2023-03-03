@@ -90,6 +90,7 @@ export const ProductCard = ({
           <EditAnnouncement announcement={announcement} close={handleClose} />
         </Box>
       </Modal>
+
       <Link
         to={`/announcement/${announcement.id}`}
         style={{ textDecoration: "none" }}

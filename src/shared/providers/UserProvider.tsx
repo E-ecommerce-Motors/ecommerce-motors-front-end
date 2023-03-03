@@ -1,25 +1,27 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ILoginData, IProps, IUserData, IUserUpdate } from "../interfaces/user";
+import {
+  ILoginData,
+  IProps,
+  IRegisterData,
+  IUserData,
+  IUserUpdate,
+} from "../interfaces/user";
 import { api } from "../services/api";
 
 export const UserContext = createContext({} as IUserContext);
 
 interface IUserContext {
+  logout: () => void;
+
   userData: IUserData;
 
   setUserData: Dispatch<SetStateAction<IUserData>>;
 
-  logout: () => void;
-
   onSubmitLogin: (data: ILoginData) => void;
+
+  onSubmitRegister: (data: IRegisterData) => void;
 
   onSubmitUpdate: (data: IUserUpdate, id: number) => void;
 
@@ -27,9 +29,9 @@ interface IUserContext {
 }
 
 export const UserProvider = ({ children }: IProps) => {
-  const [userData, setUserData] = useState<any>();
-
   const navigate = useNavigate();
+
+  const [userData, setUserData] = useState<any>();
 
   const logout = () => {
     localStorage.clear();
@@ -44,7 +46,7 @@ export const UserProvider = ({ children }: IProps) => {
 
         setTimeout(() => {
           navigate("/");
-        }, 1500);
+        }, 1000);
 
         toast.success("Logado com sucesso, redirecionando!", {
           toastId: 1,
@@ -52,6 +54,22 @@ export const UserProvider = ({ children }: IProps) => {
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
+          toastId: 1,
+        });
+      });
+  };
+
+  const onSubmitRegister = (data: IRegisterData) => {
+    api
+      .post("user", data)
+      .then(() => {
+        toast.success("Conta criada com sucesso!", {
+          toastId: 1,
+        });
+        navigate("/session");
+      })
+      .catch((err) => {
+        toast.error(err.message, {
           toastId: 1,
         });
       });
@@ -113,6 +131,7 @@ export const UserProvider = ({ children }: IProps) => {
       value={{
         logout,
         onSubmitLogin,
+        onSubmitRegister,
         onSubmitUpdate,
         userData,
         setUserData,

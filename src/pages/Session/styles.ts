@@ -7,5 +7,5 @@ export const ContentSession = styled.div`
   align-items: center;
   background-color: ${theme.colors.grey8};
   width: 100%;
-  height: 83.1vh;
+  height: calc(100vh - 160px);
 `

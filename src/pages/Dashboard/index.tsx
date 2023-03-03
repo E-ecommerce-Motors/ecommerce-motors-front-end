@@ -1,10 +1,7 @@
 import { ContentDashboard } from "./styles";
-import { useContext, useEffect } from "react";
-import { api } from "../../shared/services/api";
 import { Footer } from "../../shared/components/Footer";
 import { NavBar } from "../../shared/components/NavBar";
 import { Carousel } from "../../shared/components/Carousel";
-import { UserContext } from "../../shared/providers/UserProvider";
 import { VehiclesFilter } from "../../shared/components/VehiclesFilter";
 import { CarouselAuction } from "../../shared/components/CarouselAuction";
 

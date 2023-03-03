@@ -10,35 +10,65 @@ import React, {
 
 type CreateAnnouncementContextType = {
   toggleModal: () => void;
+
   isOpen: boolean;
+
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+
   CreateAnn: any;
+
   year: number | string;
+
   setYear: Dispatch<SetStateAction<number | string>>;
+
   mileage: number | string;
+
   setMileage: Dispatch<SetStateAction<number | string>>;
+
   title: string | undefined;
+
   setTitle: Dispatch<SetStateAction<string>>;
+
   price: number | string;
+
   setPrice: Dispatch<SetStateAction<number | string>>;
+
   description: string | undefined;
+
   setDescription: Dispatch<SetStateAction<string | undefined>>;
+
   type: string | undefined;
+
   setType: Dispatch<SetStateAction<string>>;
+  
   tA: string | undefined;
+
   setTA: Dispatch<SetStateAction<string>>;
+
   handleAddFieldsClick: () => void;
+
   handleAdditionalFieldChange: any;
+
   additionalFields: any;
+
   setAdditionalFields: any;
+
   numAdditionalFields: number;
+
   setNumAdditionalFields: any;
+
   img: string[];
+
   setImg: Dispatch<SetStateAction<string[]>>;
+
   coverImage: string;
+
   setCoverImage: Dispatch<SetStateAction<string>>;
+
   imageGallery: string[];
+
   setImageGallery: Dispatch<SetStateAction<string[]>>;
+
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -51,18 +81,31 @@ export const CreateAnnouncementContext = createContext(
 );
 
 export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
+
   const [isOpen, setIsOpen] = useState(false);
+
   const [numAdditionalFields, setNumAdditionalFields] = useState(Number);
+
   const [additionalFields, setAdditionalFields] = useState<string[]>([]);
+
   const [year, setYear] = useState<number | string>("");
+
   const [mileage, setMileage] = useState<number | string>("");
+
   const [title, setTitle] = useState<string>("");
+
   const [price, setPrice] = useState<number | string>("");
+
   const [description, setDescription] = useState<string | undefined>("");
+
   const [type, setType] = useState<string>("car");
+
   const [tA, setTA] = useState<string>("sale");
+
   const [img, setImg] = useState<string[]>([""]);
+
   const [coverImage, setCoverImage] = useState<string>("");
+  
   const [imageGallery, setImageGallery] = useState<string[]>([""]);
 
   const handleAddFieldsClick = () => {
