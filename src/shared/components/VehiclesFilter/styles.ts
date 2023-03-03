@@ -8,7 +8,7 @@ justify-content: center;
 align-items: center;
 gap: 46px;
 width: 100%;
-height: 550px;
+height: 550px !important;
 background-color: ${theme.colors.brand2};
 
     @media(min-width: 768px){
@@ -54,7 +54,7 @@ display: flex;
 justify-content: center;
 margin-bottom: 150px;
 width: 100%;
-height: 200px;
+height: 300px;
 background-color: ${theme.colors.brand1};
 `
 
@@ -62,7 +62,7 @@ export const Profile = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: space-around;
-margin-top: 50px;
+margin-top: 125px;
 width: 90%;
 min-height: 350px;
 border-radius: 4px;

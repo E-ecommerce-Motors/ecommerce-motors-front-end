@@ -4,6 +4,7 @@ import { theme } from "../../styles/theme";
 export const ContentRegister = styled.div`
   display: flex;
   justify-content: center;
-  padding: 45px  0px 100px 0px ;
+  padding: 9.375rem  0rem 6.25rem 0rem ;
   background-color: ${theme.colors.grey8};
+  width: 100%;
 `
