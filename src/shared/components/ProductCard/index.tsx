@@ -2,6 +2,7 @@ import { Box, Modal } from "@mui/material";
 import { useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
 import { EditAnnouncement } from "../Modal/editAnnouncement";
+import { Link } from "react-router-dom";
 import {
   Heading7,
   Icon,
@@ -89,14 +90,20 @@ export const ProductCard = ({
           <EditAnnouncement announcement={announcement} close={handleClose} />
         </Box>
       </Modal>
-      <ImgContainer onClick={handleOpen}>
-        <Active saler={saler} active={active}>
-          {active ? `Ativo` : "Inativo"}
-        </Active>
-        {/* <Img image={img ? img[0].coverImage : ""} /> */}
-      </ImgContainer>
+
+      <Link
+        to={`/announcement/${announcement.id}`}
+        style={{ textDecoration: "none" }}
+      >
+        <ImgContainer onClick={handleOpen}>
+          <Active saler={saler} active={active}>
+            {active ? `Ativo` : "Inativo"}
+          </Active>
+          <Img image={img ? img[0].coverImage : ""} />
+        </ImgContainer>
+      </Link>
       <Heading7>
-        {heading.length > 41 ? `${heading.slice(0, 38)}...` : heading}
+        {heading.length > 31 ? `${heading.slice(0, 31)}...` : heading}
       </Heading7>
       <Paragraph>
         {text.length > 74 ? `${text.slice(0, 71)}...` : text}
