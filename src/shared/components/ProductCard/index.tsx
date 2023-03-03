@@ -73,7 +73,6 @@ export const ProductCard = ({
     id,
   };
 
-  console.log(img);
 
   const active: boolean = true;
   const [open, setOpen] = useState(false);
@@ -94,7 +93,7 @@ export const ProductCard = ({
         <Active saler={saler} active={active}>
           {active ? `Ativo` : "Inativo"}
         </Active>
-        <Img image={img ? img[0].coverImage : ""} />
+        {/* <Img image={img ? img[0].coverImage : ""} /> */}
       </ImgContainer>
       <Heading7>
         {heading.length > 41 ? `${heading.slice(0, 38)}...` : heading}

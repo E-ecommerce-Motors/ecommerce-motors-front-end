@@ -1,24 +1,31 @@
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ILoginData, IProps, IUserData } from "../interfaces/user";
+import {
+  ILoginData,
+  IProps,
+  IRegisterData,
+  IUserData,
+} from "../interfaces/user";
 import { api } from "../services/api";
 
 export const UserContext = createContext({} as IUserContext);
 
 interface IUserContext {
-  userData: IUserData;
-
-  setUserData: Dispatch<SetStateAction<IUserData>>;
-
   logout: () => void;
 
   onSubmitLogin: (data: ILoginData) => void;
+
+  onSubmitRegister: (data: IRegisterData) => void;
 }
 
 export const UserProvider = ({ children }: IProps) => {
-  const [userData, setUserData] = useState<any>();
-
   const navigate = useNavigate();
 
   const logout = () => {
@@ -34,7 +41,7 @@ export const UserProvider = ({ children }: IProps) => {
 
         setTimeout(() => {
           navigate("/");
-        }, 1500);
+        }, 1000);
 
         toast.success("Logado com sucesso, redirecionando!", {
           toastId: 1,
@@ -46,10 +53,26 @@ export const UserProvider = ({ children }: IProps) => {
         });
       });
   };
+
+  const onSubmitRegister = (data: IRegisterData) => {
+    console.log(data);
+    api
+      .post("user", data)
+      .then(() => {
+        toast.success("Conta criada com sucesso!", {
+          toastId: 1,
+        });
+        navigate("/session");
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          toastId: 1,
+        });
+      });
+  };
+
   return (
-    <UserContext.Provider
-      value={{ logout, onSubmitLogin, userData, setUserData }}
-    >
+    <UserContext.Provider value={{ logout, onSubmitLogin, onSubmitRegister }}>
       {children}
     </UserContext.Provider>
   );

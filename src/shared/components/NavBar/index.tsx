@@ -27,8 +27,6 @@ interface Props {
 export const NavBar = ({ auth, user }: Props) => {
   const { logout } = useContext(UserContext);
 
-    // const auth: string = "authenticated";
-    // const user: string = "Lucas Galvs";
   const name = user.split(" ");
   const [openProfile, setOpenProfile] = useState(false);
   const [navMobile, setNavMobile] = useState(false);
