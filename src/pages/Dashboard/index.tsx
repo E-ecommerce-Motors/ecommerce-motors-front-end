@@ -6,9 +6,10 @@ import { VehiclesFilter } from "../../shared/components/VehiclesFilter";
 import { CarouselAuction } from "../../shared/components/CarouselAuction";
 
 export const Dashboard = () => {
+  
   return (
     <ContentDashboard>
-      <NavBar auth={"default"} user={"Gabriel Fray"} />
+      <NavBar />
       <VehiclesFilter />
       <CarouselAuction />
       <Carousel type={"car"} />

@@ -30,7 +30,10 @@ export const ImgGalleryAnnouncement = () => {
         {announcement.announcementImgs[0].imageGallery.map(
           (element: any, index: number) => {
             return (
-              <>
+              <div key={index}>
+                <ImgBox onClick={handleOpen}>
+                  <Img image={element} />
+                </ImgBox>
                 <Modal open={open} onClose={handleClose}>
                   <Box>
                     <ModalContainer>
@@ -49,10 +52,7 @@ export const ImgGalleryAnnouncement = () => {
                     </ModalContainer>
                   </Box>
                 </Modal>
-                <ImgBox key={index} onClick={handleOpen}>
-                  <Img image={element} />
-                </ImgBox>
-              </>
+              </div>
             );
           }
         )}

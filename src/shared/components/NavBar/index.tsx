@@ -24,10 +24,16 @@ interface Props {
   user: string;
 }
 
-export const NavBar = ({ auth, user }: Props) => {
-  const { logout } = useContext(UserContext);
+export const NavBar = () => {
+  const { logout, userData } = useContext(UserContext);
+  const token = localStorage.getItem("@MotorsShop:token");
+  const auth = token ? "authenticated" : "default";
 
-  const name = user.split(" ");
+  const user: any = userData ? userData : " ";
+  const name = userData ? user.name.split(" ") : "";
+  const icon1 = userData ? name[0].slice(0, 1) : "";
+  const icon2 = userData ? name[1].slice(0, 1) : "";
+
   const [openProfile, setOpenProfile] = useState(false);
   const [navMobile, setNavMobile] = useState(false);
 
@@ -50,7 +56,7 @@ export const NavBar = ({ auth, user }: Props) => {
         <Option authenticaded={auth}>Motos</Option>
         <Option authenticaded={auth}>Leilão</Option>
 
-        {auth == "default" ? (
+        {!token ? (
           <>
             <Line />
             <SignIn to="/session">Fazer Login</SignIn>
@@ -61,8 +67,8 @@ export const NavBar = ({ auth, user }: Props) => {
             <Line />
             <Profile>
               <User onMouseOver={() => setOpenProfile(true)}>
-                <Icon>{`${name[0].slice(0, 1)}${name[1].slice(0, 1)}`}</Icon>
-                <Name>{user}</Name>
+                <Icon>{`${icon1}${icon2}`}</Icon>
+                <Name>{user.name}</Name>
               </User>
               <MenuBox
                 open={openProfile}
@@ -71,7 +77,7 @@ export const NavBar = ({ auth, user }: Props) => {
                 <OptionsProfile>Editar Perfil</OptionsProfile>
                 <OptionsProfile>Editar Endereço</OptionsProfile>
                 <OptionsProfile>Minhas Compras</OptionsProfile>
-                <OptionsProfile onClick={() => logout()} >Sair</OptionsProfile>
+                <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
               </MenuBox>
             </Profile>
           </>
