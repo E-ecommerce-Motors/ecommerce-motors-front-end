@@ -9,6 +9,16 @@ export interface ILoginData {
   password: string;
 }
 
+export interface IUserUpdate{
+  id?: number;
+  name?: string;
+  email?: string;
+  cpf?: string;
+  phone?: string;
+  birthDate?: string;
+  description?: string;
+}
+
 export interface IUserData {
   id: number;
   name: string;

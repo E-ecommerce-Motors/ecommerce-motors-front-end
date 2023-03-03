@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
 import { CloseButton, Container, ModalWrapper } from "./style";
-import { CreateAnnouncementContext } from "../../providers/AnnouncementContext";
+import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
 import * as yup from "yup";
 import {
   Content,

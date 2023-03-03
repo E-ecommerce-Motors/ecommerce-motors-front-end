@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { theme } from "../../../styles/theme";
-import { CreateAnnouncementContext } from "../../providers/AnnouncementContext";
+import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
 import { ButtonBig } from "../Button/styles";
 import { CreateAnnouncementModal } from "../CreateAnnouncementModal";
 import {
