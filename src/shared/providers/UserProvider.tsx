@@ -127,7 +127,6 @@ export const UserProvider = ({ children }: IProps) => {
   const closeModal = () => {
     console.log(showModal)
     setShowModal(false)
-    console.log(showModal)
   }
 
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
