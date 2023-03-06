@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
 import { CloseButton, Container, ModalWrapper } from "./style";
-import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
+import { AnnouncementContext } from "../../providers/AnnouncementProvider";
 import * as yup from "yup";
 import {
   Content,
@@ -87,14 +87,15 @@ export const CreateAnnouncementModal = () => {
     setCoverImage,
     imageGallery,
     handleInputChange,
-  } = useContext(CreateAnnouncementContext);
+  } = useContext(AnnouncementContext);
 
   return (
     <ModalWrapper>
       <Container>
         <Header>
           <Heading>Criar anúncio</Heading>
-          <CloseButton type="button" onClick={closeModal}>x
+          <CloseButton type="button" onClick={closeModal}>
+            x
           </CloseButton>
         </Header>
         <Content onSubmit={handleSubmit(submit)}>
@@ -371,7 +372,6 @@ export const CreateAnnouncementModal = () => {
               colorHover={theme.colors.whiteFixed}
               disable="sim"
               type="submit"
-              
             >
               Criar Anúncio
             </ButtonBig>
