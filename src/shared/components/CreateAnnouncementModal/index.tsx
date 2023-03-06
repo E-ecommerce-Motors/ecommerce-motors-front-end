@@ -44,6 +44,7 @@ export const CreateAnnouncementModal = () => {
     modalContent,
     setModalContent,
     closeModal,
+    setUserData
   } = useContext(UserContext);
 
   const {
@@ -55,14 +56,14 @@ export const CreateAnnouncementModal = () => {
   });
 
   const submit = async (data: any) => {
-    data.userId = 1;
+    // data.userId = userData?.id;
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
     data.announcementImgs = { create: { coverImage, imageGallery } };
 
-    CreateAnn(data);
+    CreateAnn(console.log(data));
   };
-
+getUser()
   const {
     toggleModal,
     CreateAnn,

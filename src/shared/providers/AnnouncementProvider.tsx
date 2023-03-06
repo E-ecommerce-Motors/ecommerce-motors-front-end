@@ -139,9 +139,18 @@ export const AnnouncementProvider = ({ children }: ChildrenProp) => {
   const CreateAnn = async (data: Create) => {
     await api
       .post(`announcements`, data)
-      .then()
-      .catch((response) => console.log(response));
-    toast.success("Anúncio criado com sucesso!");
+      .then(() => {
+        toast.success("Anúncio criado com sucesso!",
+         {
+          toastId: 1,
+        });
+        toggleModal();
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          toastId: 1,
+        });
+      });
     toggleModal();
   };
 
