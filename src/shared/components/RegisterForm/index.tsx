@@ -1,12 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { theme } from "../../../styles/theme";
 import { IRegisterData } from "../../interfaces/user";
 import { UserContext } from "../../providers/UserProvider";
 import { formRegisterSchema } from "../../schemas/user";
 import { Title } from "../Carousel/styles";
-import { ErrorMessage } from "../SessionForm/styles";
 import {
   Button,
   ContentAdress,
@@ -21,6 +20,18 @@ import {
 export const RegisterForm = () => {
   const { onSubmitRegister } = useContext(UserContext);
 
+  const [button1Active, setButton1Active] = useState(false);
+  const [button2Active, setButton2Active] = useState(false);
+
+  function handleButtonClick(button: any) {
+    if (button === "button1") {
+      setButton1Active(true);
+      setButton2Active(false);
+    } else if (button === "button2") {
+      setButton2Active(true);
+      setButton1Active(false);
+    }
+  }
   const {
     register,
     handleSubmit,
@@ -46,7 +57,7 @@ export const RegisterForm = () => {
         </section>
         <section>
           <SubTitle>CPF</SubTitle>
-          <Input  placeholder="000.000.000-00" {...register("cpf")} />
+          <Input placeholder="000.000.000-00" {...register("cpf")} />
         </section>
         <section>
           <SubTitle>Celular</SubTitle>
@@ -111,9 +122,11 @@ export const RegisterForm = () => {
             colorFocus={theme.colors.whiteFixed}
             borderFocus={theme.colors.brand1}
             type="button"
+            className={button1Active === true ? "selected-button" : ""}
             onClick={() => {
               setValue("typeAccount", "buyer");
               setValue("isSaler", false);
+              handleButtonClick("button1");
             }}
           >
             Comprador
@@ -129,9 +142,11 @@ export const RegisterForm = () => {
             colorFocus={theme.colors.whiteFixed}
             borderFocus={theme.colors.brand1}
             type="button"
+            className={`${button2Active === true ? "selected-button" : ""}`}
             onClick={() => {
               setValue("typeAccount", "advertiser");
               setValue("isSaler", true);
+              handleButtonClick("button2");
             }}
           >
             Anunciante
@@ -140,11 +155,19 @@ export const RegisterForm = () => {
       </section>
       <section>
         <SubTitle>Senha</SubTitle>
-        <Input placeholder="Digitar senha" {...register("password")} />
+        <Input
+          placeholder="Digitar senha"
+          type="password"
+          {...register("password")}
+        />
       </section>
       <section>
         <SubTitle>Confirmar Senha</SubTitle>
-        <Input placeholder="Confirmar senha" {...register("confirmPassword")} />
+        <Input
+          placeholder="Confirmar senha"
+          type="password"
+          {...register("confirmPassword")}
+        />
       </section>
 
       <div>
