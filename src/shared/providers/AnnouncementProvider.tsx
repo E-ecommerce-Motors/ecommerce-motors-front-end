@@ -40,7 +40,7 @@ type CreateAnnouncementContextType = {
   type: string | undefined;
 
   setType: Dispatch<SetStateAction<string>>;
-  
+
   tA: string | undefined;
 
   setTA: Dispatch<SetStateAction<string>>;
@@ -76,12 +76,11 @@ interface ChildrenProp {
   children: React.ReactNode;
 }
 
-export const CreateAnnouncementContext = createContext(
+export const AnnouncementContext = createContext(
   {} as CreateAnnouncementContextType
 );
 
-export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
-
+export const AnnouncementProvider = ({ children }: ChildrenProp) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [numAdditionalFields, setNumAdditionalFields] = useState(Number);
@@ -105,7 +104,7 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
   const [img, setImg] = useState<string[]>([""]);
 
   const [coverImage, setCoverImage] = useState<string>("");
-  
+
   const [imageGallery, setImageGallery] = useState<string[]>([""]);
 
   const handleAddFieldsClick = () => {
@@ -147,7 +146,7 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
   };
 
   return (
-    <CreateAnnouncementContext.Provider
+    <AnnouncementContext.Provider
       value={{
         toggleModal,
         isOpen,
@@ -183,8 +182,8 @@ export const CreateAnnouncementProvider = ({ children }: ChildrenProp) => {
       }}
     >
       {children}
-    </CreateAnnouncementContext.Provider>
+    </AnnouncementContext.Provider>
   );
 };
 
-export default CreateAnnouncementProvider;
+export default AnnouncementProvider;

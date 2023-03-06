@@ -1,12 +1,7 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
-import { useNavigate } from "react-router-dom";
+import { api } from "../services/api";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { createContext, Dispatch, SetStateAction, useState } from "react";
 import {
   ILoginData,
   IProps,
@@ -14,7 +9,6 @@ import {
   IUserData,
   IUserUpdate,
 } from "../interfaces/user";
-import { api } from "../services/api";
 
 export const UserContext = createContext({} as IUserContext);
 
@@ -52,6 +46,14 @@ interface IUserContext {
   getUser: () => void;
 
   handleOpenModal: (modalContent: any) => void;
+
+  handleOpen: () => void;
+
+  handleClose: () => void;
+
+  open: boolean;
+
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const UserProvider = ({ children }: IProps) => {
@@ -60,6 +62,14 @@ export const UserProvider = ({ children }: IProps) => {
   const [userData, setUserData] = useState<IUserData>({} as IUserData);
 
   const [recovery, setRecovery] = useState(false);
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const logout = () => {
     localStorage.clear();
@@ -132,12 +142,9 @@ export const UserProvider = ({ children }: IProps) => {
     setShowModal(true);
     setModalContent(modalContent);
   };
-
   const closeModal = () => {
-    console.log(showModal)
     setShowModal(false)
   }
-
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
 
@@ -149,10 +156,11 @@ export const UserProvider = ({ children }: IProps) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => {
+      .then(() => {
         toast.success("Perfil atualizado com sucesso!", {
           toastId: 1,
         });
+        handleClose();
       })
 
       .catch((err) => {
@@ -170,19 +178,19 @@ export const UserProvider = ({ children }: IProps) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res: any) => {
+      .then(() => {
         toast.success("Perfil excluído com sucesso!", {
           toastId: 1,
         });
       })
 
-      .catch((err: any) => {
+      .catch((err) => {
         toast.error(err.response.data.message, {
           toastId: 1,
         });
       });
-      closeModal()
-      logout()
+    closeModal();
+    logout();
   };
 
   const onRecoveryPassword = (email: string) => {
@@ -200,11 +208,6 @@ export const UserProvider = ({ children }: IProps) => {
         });
       });
   };
-
-
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
 
   return (
     <UserContext.Provider
@@ -226,6 +229,10 @@ export const UserProvider = ({ children }: IProps) => {
         closeModal,
         getUser,
         handleOpenModal,
+        handleOpen,
+        handleClose,
+        open,
+        setOpen,
       }}
     >
       {children}
