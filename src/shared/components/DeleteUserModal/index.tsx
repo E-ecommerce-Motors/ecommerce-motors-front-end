@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
 import { UserContext, UserProvider } from "../../providers/UserProvider";
@@ -20,10 +20,6 @@ import { ButtonBig } from ".././Button/styles";
 
 import { IUserUpdate } from "../../interfaces/user";
 
-interface User {
-  id: number;
-}
-
 export const DeleteUserModal = () => {
   const {
     onSubmitUpdate,
@@ -44,6 +40,7 @@ export const DeleteUserModal = () => {
   };
 
   return (
+
     <Container>
       <Header>
         <SectionTitle>Deletar usúario</SectionTitle>
@@ -82,5 +79,6 @@ export const DeleteUserModal = () => {
         </FlexBtn>
       </Content>
     </Container>
+
   );
 };

@@ -79,7 +79,7 @@ export const EditUserModal = () => {
   getUser();
 
   return (
-    // <ModalWrapper>
+
     <Container>
       <Header>
         <Heading>Editar perfil</Heading>
@@ -221,6 +221,6 @@ export const EditUserModal = () => {
         </ButtonBig>
       </Content>
     </Container>
-    // </ModalWrapper>
+
   );
 };

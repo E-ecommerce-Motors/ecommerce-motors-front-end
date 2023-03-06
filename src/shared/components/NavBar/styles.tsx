@@ -13,6 +13,7 @@ export const Container = styled.section`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
   padding: 0px 60px;
   width: 100%;
   height: 80px;

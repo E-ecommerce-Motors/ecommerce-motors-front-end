@@ -86,17 +86,12 @@ export const Button = styled.button`
   border-radius: .25rem;
   height: 3rem;
   width: 100%;
-
-    :hover {
-    };
 `
 
-export const ErrorMessage = styled.p`
-display: flex;
-align-self: flex-start;
-padding: 5px 3px;
-position: absolute;
-font-weight: 600;
-font-size: .8rem;
-color: ${theme.colors.grey3};
+export const ButtonRetrivePassword = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: ${theme.size.body_1};
+  font-weight: ${theme.weight.body_2_500};
+  color: ${theme.colors.grey2};
 `;

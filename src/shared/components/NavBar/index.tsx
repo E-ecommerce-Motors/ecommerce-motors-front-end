@@ -24,6 +24,7 @@ import {
 import { EditUser } from "../Modal/editUser";
 
 export const NavBar = () => {
+
   const {
     logout,
     userData,
@@ -36,13 +37,12 @@ export const NavBar = () => {
   } = useContext(UserContext);
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
+
   const user = userData || {};
   const name = user.name ? user.name.split(" ") : [];
   const icon1 = name[0] ? name[0].slice(0, 1) : "";
   const icon2 = name[1] ? name[1].slice(0, 1) : "";
 
-  const [openProfile, setOpenProfile] = useState(false);
-  const [navMobile, setNavMobile] = useState(false);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -52,6 +52,7 @@ export const NavBar = () => {
 
   return (
     <Container mobile={navMobile}>
+      
       <ContainerMobile mobile={navMobile}>
         <Text to="/"></Text>
         <Mobile>
@@ -81,11 +82,12 @@ export const NavBar = () => {
             <Profile>
               <User onMouseOver={() => setOpenProfile(true)}>
                 <Icon>{`${icon1}${icon2}`}</Icon>
-                <Name>{user.name}</Name>
+                <Name>{user?.name}</Name>
               </User>
               <MenuBox
                 open={openProfile}
                 onMouseLeave={() => setOpenProfile(false)}
+
               >
                 <OptionsProfile type="button" onClick={handleOpen}>
                   Editar Perfil
@@ -95,18 +97,21 @@ export const NavBar = () => {
                     <EditUser />
                   </Box>
                 </Modal>
+
                 <OptionsProfile>Editar Endereço</OptionsProfile>
                 <OptionsProfile>
-                  {userData.typeAccount == "advertiser"
+                  {userData?.typeAccount == "advertiser"
                     ? "Meus Anúncios"
                     : "Minhas Compras"}
                 </OptionsProfile>
                 <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
+                
               </MenuBox>
-              {showModal && modalContent}
             </Profile>
           </>
-        )}
+          
+          )
+          }
       </Urls>
     </Container>
   );
