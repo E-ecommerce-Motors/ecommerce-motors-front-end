@@ -94,7 +94,7 @@ export const CreateAnnouncementModal = () => {
       <Container>
         <Header>
           <Heading>Criar anúncio</Heading>
-          <CloseButton type="button" onClick={closeModal}>x
+          <CloseButton type="button" onClick={()=> toggleModal()}>x
           </CloseButton>
         </Header>
         <Content onSubmit={handleSubmit(submit)}>
@@ -355,7 +355,7 @@ export const CreateAnnouncementModal = () => {
               colorHover={theme.colors.whiteFixed}
               disable="sim"
               type="button"
-              onClick={closeModal}
+              onClick={() => toggleModal()}
             >
               Cancelar
             </ButtonBig>

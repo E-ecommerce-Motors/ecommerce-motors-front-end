@@ -25,7 +25,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Create } from "../../interfaces/announcement";
 import { IUserUpdate } from "../../interfaces/user";
 import { api } from "../../services/api";
-import { ErrorMessage } from "../SessionForm/styles";
 import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
 import DeleteAnnouncementModal from "../DeleteAnnouncementModal";
 import { DeleteUserModal } from "../DeleteUserModal";
@@ -101,7 +100,6 @@ export const EditUserModal = () => {
             setName(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.name?.message}</ErrorMessage>
         <Title>Email:</Title>
         <Input
           placeholder={userData?.email}
@@ -113,7 +111,6 @@ export const EditUserModal = () => {
             setEmail(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.email?.message}</ErrorMessage>
         <Title>CPF:</Title>
         <Input
           placeholder={userData?.cpf}
@@ -125,7 +122,6 @@ export const EditUserModal = () => {
             setCpf(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.cpf?.message}</ErrorMessage>
         <Title>Celular:</Title>
         <Input
           placeholder={userData?.phone}
@@ -137,7 +133,6 @@ export const EditUserModal = () => {
             setPhone(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.phone?.message}</ErrorMessage>
         <Title>Data de Nascimento:</Title>
         <Input
           placeholder={userData?.birthDate}
@@ -149,7 +144,6 @@ export const EditUserModal = () => {
             setBirthDate(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.birthDate?.message}</ErrorMessage>
         <Title>Descrição</Title>
         <TextArea
           placeholder={userData?.description}
@@ -159,7 +153,6 @@ export const EditUserModal = () => {
             setDescription(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <FlexBtn>
           <ButtonBig
             bg={theme.colors.grey6}
