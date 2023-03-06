@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
 import { EditUserModal } from "../EditUserModal";
 import { GenericModal } from "../GenericModal/GenericModal";
+import { Box, Modal } from "@mui/material";
 import {
   Container,
   Option,
@@ -20,14 +21,20 @@ import {
   Mobile,
   ContainerMobile,
 } from "./styles";
-
-
+import { EditUser } from "../Modal/editUser";
 
 export const NavBar = () => {
-  const { logout, userData, handleOpenModal, setModalContent, showModal, setShowModal, closeModal, modalContent } = useContext(UserContext);
-  const [openProfile, setOpenProfile] = useState(false);
-  const [navMobile, setNavMobile] = useState(false);
-  
+
+  const {
+    logout,
+    userData,
+    handleOpenModal,
+    setModalContent,
+    showModal,
+    setShowModal,
+    closeModal,
+    modalContent,
+  } = useContext(UserContext);
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
 
@@ -36,6 +43,12 @@ export const NavBar = () => {
   const icon1 = name[0] ? name[0].slice(0, 1) : "";
   const icon2 = name[1] ? name[1].slice(0, 1) : "";
 
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Container mobile={navMobile}>
@@ -74,9 +87,17 @@ export const NavBar = () => {
               <MenuBox
                 open={openProfile}
                 onMouseLeave={() => setOpenProfile(false)}
-                >
-                <OptionsProfile type="button" onClick={() => handleOpenModal(<GenericModal><EditUserModal/></GenericModal>)}>Editar Perfil</OptionsProfile>
-                
+
+              >
+                <OptionsProfile type="button" onClick={handleOpen}>
+                  Editar Perfil
+                </OptionsProfile>
+                <Modal open={open} onClose={handleClose}>
+                  <Box>
+                    <EditUser />
+                  </Box>
+                </Modal>
+
                 <OptionsProfile>Editar Endereço</OptionsProfile>
                 <OptionsProfile>
                   {userData?.typeAccount == "advertiser"
