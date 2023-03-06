@@ -18,16 +18,16 @@ import {
 } from "./styles";
 
 export const VehiclesFilter = () => {
-  const { userData, getUser, handleOpenModal } = useContext(UserContext);
+  const { userData, getUser } = useContext(UserContext);
 
-  const { isOpen } = useContext(AnnouncementContext);
+  const { isOpen, toggleModal } = useContext(AnnouncementContext);
 
   const token = localStorage.getItem("@MotorsShop:token");
 
   useEffect(() => {
     getUser();
   }, [userData]);
-  
+
   const user = userData || {};
   const name = user.name ? user.name.split(" ") : [];
   const icon1 = name[0] ? name[0].slice(0, 1) : "";
