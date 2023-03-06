@@ -1,12 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
-import { UserContext, UserProvider } from "../../providers/UserProvider";
-import {
-  CloseButton,
-  Container,
-  ModalWrapper,
-} from "../CreateAnnouncementModal/style";
+import { UserContext } from "../../providers/UserProvider";
+import { CloseButton, Container } from "../CreateAnnouncementModal/style";
 import * as yup from "yup";
 import {
   Content,
@@ -16,25 +12,13 @@ import {
   Title,
   Type,
   Input,
-  Infos,
-  Single,
   TextArea,
 } from "../Modal/editAnnouncement/styles";
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Create } from "../../interfaces/announcement";
 import { IUserUpdate } from "../../interfaces/user";
-import { api } from "../../services/api";
-import { ErrorMessage } from "../SessionForm/styles";
-import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
-import DeleteAnnouncementModal from "../DeleteAnnouncementModal";
 import { DeleteUserModal } from "../DeleteUserModal";
-import { Modal } from "@mui/material";
 import { GenericModal } from "../GenericModal/GenericModal";
-
-interface User {
-  id: number;
-}
 
 export const EditUserModal = () => {
   const [name, setName] = useState("");
@@ -56,10 +40,7 @@ export const EditUserModal = () => {
     onSubmitUpdate,
     getUser,
     userData,
-    showModal,
-    setShowModal,
     handleOpenModal,
-    modalContent,
     setModalContent,
     closeModal,
   } = useContext(UserContext);
@@ -79,13 +60,10 @@ export const EditUserModal = () => {
   getUser();
 
   return (
-
     <Container>
       <Header>
         <Heading>Editar perfil</Heading>
-        <CloseButton type="button" onClick={setModalContent}>
-          x
-        </CloseButton>
+        <CloseButton type="button" onClick={setModalContent}></CloseButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Informações pessoais</Type>
@@ -101,7 +79,6 @@ export const EditUserModal = () => {
             setName(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.name?.message}</ErrorMessage>
         <Title>Email:</Title>
         <Input
           placeholder={userData?.email}
@@ -113,7 +90,6 @@ export const EditUserModal = () => {
             setEmail(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.email?.message}</ErrorMessage>
         <Title>CPF:</Title>
         <Input
           placeholder={userData?.cpf}
@@ -125,7 +101,6 @@ export const EditUserModal = () => {
             setCpf(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.cpf?.message}</ErrorMessage>
         <Title>Celular:</Title>
         <Input
           placeholder={userData?.phone}
@@ -137,7 +112,6 @@ export const EditUserModal = () => {
             setPhone(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.phone?.message}</ErrorMessage>
         <Title>Data de Nascimento:</Title>
         <Input
           placeholder={userData?.birthDate}
@@ -149,7 +123,6 @@ export const EditUserModal = () => {
             setBirthDate(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.birthDate?.message}</ErrorMessage>
         <Title>Descrição</Title>
         <TextArea
           placeholder={userData?.description}
@@ -159,7 +132,6 @@ export const EditUserModal = () => {
             setDescription(e.target.value);
           }}
         />
-        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <FlexBtn>
           <ButtonBig
             bg={theme.colors.grey6}
@@ -221,6 +193,5 @@ export const EditUserModal = () => {
         </ButtonBig>
       </Content>
     </Container>
-
   );
 };
