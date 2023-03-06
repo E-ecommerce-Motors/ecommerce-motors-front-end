@@ -56,12 +56,12 @@ export const CreateAnnouncementModal = () => {
   });
 
   const submit = async (data: any) => {
-    // data.userId = userData?.id;
+    data.userId = userData?.id;
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
     data.announcementImgs = { create: { coverImage, imageGallery } };
 
-    CreateAnn(console.log(data));
+    CreateAnn(data);
   };
 getUser()
   const {
