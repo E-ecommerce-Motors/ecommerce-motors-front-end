@@ -1,13 +1,10 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { theme } from "../../../styles/theme";
-import { IUserData } from "../../interfaces/user";
-import { CreateAnnouncementContext } from "../../providers/AnnouncementProvider";
-import { UserContext } from "../../providers/UserProvider";
-import { api } from "../../services/api";
 import { ButtonBig } from "../Button/styles";
-import { CreateAnnouncementModal } from "../CreateAnnouncementModal";
+import { useContext, useEffect } from "react";
+import { theme } from "../../../styles/theme";
+import { UserContext } from "../../providers/UserProvider";
 import { GenericModal } from "../GenericModal/GenericModal";
+import { CreateAnnouncementModal } from "../CreateAnnouncementModal";
+import { AnnouncementContext } from "../../providers/AnnouncementProvider";
 import {
   ContentButtons,
   ContentFilter,
@@ -21,25 +18,16 @@ import {
 } from "./styles";
 
 export const VehiclesFilter = () => {
-  const { onSubmitUpdate, onSubmitDelete, getUser, userData, showModal, setShowModal, handleOpenModal, modalContent, setModalContent, closeModal, setUserData } = useContext(UserContext);
+  const { userData, getUser, handleOpenModal } = useContext(UserContext);
 
-  const { toggleModal, isOpen } = useContext(CreateAnnouncementContext);
+  const { isOpen, toggleModal } = useContext(AnnouncementContext);
 
   const token = localStorage.getItem("@MotorsShop:token");
 
   useEffect(() => {
-    api
-      .get("user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUserData(res.data);
-      })
-      .catch(() => {});
-  }, [token]);
-
+    getUser();
+  }, [userData]);
+  
   const user = userData || {};
   const name = user.name ? user.name.split(" ") : [];
   const icon1 = name[0] ? name[0].slice(0, 1) : "";

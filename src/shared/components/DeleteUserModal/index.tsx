@@ -1,30 +1,16 @@
 import { useContext } from "react";
-import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
-import { UserContext, UserProvider } from "../../providers/UserProvider";
-import { CloseButton } from "../CreateAnnouncementModal/style";
-import * as yup from "yup";
-import {
-  FlexBtn,
-  Header,
-  Heading,
-  Title,
-  Type,
-  Input,
-  Infos,
-  Single,
-  TextArea,
-} from "../Modal/editAnnouncement/styles";
-import { Button, Container, Content, Para, SectionTitle } from "./styles";
+import { theme } from "../../../styles/theme";
 import { ButtonBig } from ".././Button/styles";
-
 import { IUserUpdate } from "../../interfaces/user";
+import { UserContext } from "../../providers/UserProvider";
+import { CloseButton } from "../CreateAnnouncementModal/style";
+import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
+import { Button, Container, Content, Para, SectionTitle } from "./styles";
 
 export const DeleteUserModal = () => {
   const {
-    onSubmitUpdate,
     onSubmitDelete,
-    getUser,
     userData,
 
     logout,
@@ -40,7 +26,6 @@ export const DeleteUserModal = () => {
   };
 
   return (
-
     <Container>
       <Header>
         <SectionTitle>Deletar usúario</SectionTitle>
@@ -79,6 +64,5 @@ export const DeleteUserModal = () => {
         </FlexBtn>
       </Content>
     </Container>
-
   );
 };
