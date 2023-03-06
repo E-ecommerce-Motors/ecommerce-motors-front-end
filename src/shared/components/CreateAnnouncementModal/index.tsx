@@ -32,20 +32,7 @@ export const CreateAnnouncementModal = () => {
     typeAnnouncement: yup.string().required(),
     typeVehicle: yup.string().required(),
   });
-
-  const {
-    onSubmitUpdate,
-    onSubmitDelete,
-    getUser,
-    userData,
-    showModal,
-    setShowModal,
-    handleOpenModal,
-    modalContent,
-    setModalContent,
-    closeModal,
-  } = useContext(UserContext);
-
+  
   const {
     register,
     handleSubmit,
