@@ -137,21 +137,20 @@ export const AnnouncementProvider = ({ children }: ChildrenProp) => {
   };
 
   const CreateAnn = async (data: Create) => {
+    const token = localStorage.getItem("@MotorsShop:token");
     await api
-      .post(`announcements`, data)
+      .post(`announcements`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(() => {
-        toast.success("Anúncio criado com sucesso!",
-         {
-          toastId: 1,
-        });
+        toast.success("Anúncio criado com sucesso!");
         toggleModal();
       })
-      .catch((err) => {
-        toast.error(err.response.data.message, {
-          toastId: 1,
-        });
+      .catch((error) => {
+        console.log(error);
       });
-    toggleModal();
   };
 
   return (

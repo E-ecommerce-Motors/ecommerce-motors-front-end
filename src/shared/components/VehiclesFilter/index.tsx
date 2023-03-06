@@ -18,7 +18,7 @@ import {
 } from "./styles";
 
 export const VehiclesFilter = () => {
-  const { userData, getUser, handleOpenModal } = useContext(UserContext);
+  const { userData, getUser } = useContext(UserContext);
 
   const { isOpen, toggleModal } = useContext(AnnouncementContext);
 
@@ -27,7 +27,7 @@ export const VehiclesFilter = () => {
   useEffect(() => {
     getUser();
   }, [userData]);
-  
+
   const user = userData || {};
   const name = user.name ? user.name.split(" ") : [];
   const icon1 = name[0] ? name[0].slice(0, 1) : "";

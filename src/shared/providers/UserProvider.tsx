@@ -142,11 +142,9 @@ export const UserProvider = ({ children }: IProps) => {
     setShowModal(true);
     setModalContent(modalContent);
   };
-
   const closeModal = () => {
-    setShowModal(false);
-  };
-
+    setShowModal(false)
+  }
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
 

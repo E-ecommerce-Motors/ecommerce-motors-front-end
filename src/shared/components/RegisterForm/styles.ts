@@ -24,6 +24,12 @@ export const ContentForm = styled.form`
   min-height: 101rem;
   background-color: ${theme.colors.whiteFixed};
   border-radius: .25rem;
+
+  .selected-button {
+    background-color: ${theme.colors.brand1};
+    color: ${theme.colors.whiteFixed};
+    border: 2px solid ${theme.colors.brand1};
+  }
   
   h3 {
       padding-bottom: 15px;
@@ -162,10 +168,7 @@ export const Button = styled.button`
       color: ${(props: Props) => (props.disable ? "#EDEAFD" : "#FFFFFF")};
       border: ${(props: Props) => (props.disable ? "#B0A6f0" : "#CED4DA")};
     }
-    :focus {
-      background-color: ${(props: Props) => props.bgHover};
-      color: ${(props: Props) => props.colorHover};
-      border: 2px solid ${(props: Props) => props.borderHover};
-    }
+
+    
     
 `
