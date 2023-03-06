@@ -135,18 +135,16 @@ export const UserProvider = ({ children }: IProps) => {
       .catch(() => {});
   };
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true);
   const [modalContent, setModalContent] = useState(null);
 
   const handleOpenModal = (modalContent: any) => {
     setShowModal(true);
     setModalContent(modalContent);
   };
-
   const closeModal = () => {
-    setShowModal(false);
-  };
-
+    setShowModal(false)
+  }
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
 

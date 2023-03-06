@@ -62,13 +62,7 @@ export const VehiclesFilter = () => {
                 colorHover={theme.colors.whiteFixed}
                 bgHover={theme.colors.brand1}
                 borderHover={theme.colors.brand1}
-                onClick={() =>
-                  handleOpenModal(
-                    <GenericModal>
-                      <CreateAnnouncementModal />
-                    </GenericModal>
-                  )
-                }
+                onClick={() => toggleModal()}
               >
                 Criar anúncio
               </ButtonBig>
