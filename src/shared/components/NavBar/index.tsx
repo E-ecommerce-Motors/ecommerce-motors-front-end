@@ -43,7 +43,8 @@ export const NavBar = () => {
   const icon1 = name[0] ? name[0].slice(0, 1) : "";
   const icon2 = name[1] ? name[1].slice(0, 1) : "";
 
-
+  const [openProfile, setOpenProfile] = useState(false);
+  const [navMobile, setNavMobile] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
