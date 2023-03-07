@@ -18,21 +18,25 @@ export const ContentForm = styled.form`
   display: flex;
   flex-direction: column;
 
-  gap: 20px;
-  padding: 44px ;
+  gap: 1.25rem;
+  padding: 2rem ;
   width: 25rem;
   min-height: 101rem;
   background-color: ${theme.colors.whiteFixed};
   border-radius: .25rem;
 
+    @media(min-width: 425px){
+      padding: 2.5rem;
+    }
+
   .selected-button {
     background-color: ${theme.colors.brand1};
     color: ${theme.colors.whiteFixed};
-    border: 2px solid ${theme.colors.brand1};
+    border: .125rem solid ${theme.colors.brand1};
   }
   
   h3 {
-      padding-bottom: 15px;
+      padding-bottom: .9375rem;
     }
 
   h4 {
@@ -48,25 +52,25 @@ export const ContentForm = styled.form`
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    gap: 25px;
+    gap: 1.5625rem;
   }
 `
 export const Input = styled.input`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0px 16px;
+  padding: 0rem 1rem;
   width: 100%;
-  min-height: 48px;
-  max-height: 48px;
-  gap: 10px;
-  border: 1.5px solid ${theme.colors.grey7};
-  border-radius: 4px;
+  min-height: 3rem;
+  max-height: 3rem;
+  gap: .625rem;
+  border: .0938rem solid ${theme.colors.grey7};
+  border-radius: .25rem;
   font-family: ${theme.fonts.inter};
   font-style: normal;
   font-weight: ${theme.weight.input_placeholder};
   font-size: ${theme.size.input_placeholder};
-  line-height: 0px;
+  line-height: 0rem;
   color: ${theme.colors.grey3};
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -81,7 +85,7 @@ export const Input = styled.input`
     font-style: normal;
     font-weight: ${theme.weight.input_placeholder};
     font-size: ${theme.size.input_placeholder};
-    line-height: 0px;
+    line-height: 0rem;
     color: ${theme.colors.grey3};
   }
 `;
@@ -107,28 +111,37 @@ export const TextArea = styled.textarea`
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-height: 80px;
-  max-height: 150px;
-  max-width: 315px;
-  min-width: 315px;
-  padding: 8px 16px 8px 16px;
+  min-height: 5rem;
+  max-height: 9.375rem;
+  min-width: 16rem;
+  max-width: 16rem;
+  padding: .5rem 1rem .5rem 1rem;
   box-sizing: border-box;
-  border: 1.5px solid ${theme.colors.grey7};
-  border-radius: 4px;
-  gap: 10px;
+  border: .0938rem solid ${theme.colors.grey7};
+  border-radius: .25rem;
+  gap: .625rem;
   font-family: ${theme.fonts.inter};
   font-style: normal;
   font-weight: ${theme.weight.input_placeholder};
   font-size: ${theme.size.input_placeholder};
   color: ${theme.colors.grey3};
   ::placeholder {
-    gap: 10px;
+    gap: .625rem;
     font-family: ${theme.fonts.inter};
     font-style: normal;
     font-weight: ${theme.weight.input_placeholder};
     font-size: ${theme.size.input_placeholder};
     color: ${theme.colors.grey3};
-  }
+  } 
+     @media(min-width: 375px){
+      min-width: 19rem;
+      max-width: 19rem;
+    }
+
+    @media(min-width: 425px){
+      min-width: 20rem;
+      max-width: 20rem;
+    }
 `;
 
 export const ContentButton = styled.div`
@@ -151,15 +164,15 @@ export const Button = styled.button`
   color: ${(props: Props) => props.color};
   font-size: ${theme.size.button_big_text} ;
   font-weight: ${theme.weight.Heading_2_600} ;
-  border: 2px solid ${(props: Props) => props.border};
-  border-radius: 4px;
-  height: 48px;
+  border: .125rem solid ${(props: Props) => props.border};
+  border-radius: .25rem;
+  height: 3rem;
   width: 100%;
 
     :hover {
       background-color: ${(props: Props) => props.bgHover};
       color: ${(props: Props) => props.colorHover};
-      border: 2px solid ${(props: Props) => props.borderHover};
+      border: .125rem solid ${(props: Props) => props.borderHover};
     };
 
     :disabled {

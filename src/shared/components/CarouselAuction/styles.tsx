@@ -12,13 +12,13 @@ export const Auction = styled.div`
   flex-direction: column;
   gap: 30px;
   width: 100vw;
-  height: 458px;
+  min-height: 30rem;
   flex: none;
   order: 0;
   flex-grow: 0;
-  padding: 0px 40px;
-  @media (max-width: 1000px) {
-    padding-left: 30px;
+  padding: 0px 15px;
+  @media (min-width: 1000px) {
+    padding: 0px 40px;
   }
 `;
 

@@ -78,34 +78,40 @@ export const RegisterForm = () => {
       <h4>Informações de endereço</h4>
       <section>
         <SubTitle>CEP</SubTitle>
-        <Input placeholder="00000.000" />
+        <Input placeholder="00000.000" {...register("address.cep")} />
       </section>
       <ContentAdress>
         <Div>
           <section>
             <SubTitle>Estado</SubTitle>
-            <Input placeholder="Digitar estado" />
+            <Input
+              placeholder="Digitar estado"
+              {...register("address.state")}
+            />
           </section>
         </Div>
         <Div>
           <section>
             <SubTitle>Cidade</SubTitle>
-            <Input placeholder="Digitar cidade" />
+            <Input placeholder="Digitar cidade" {...register("address.city")} />
           </section>
         </Div>
       </ContentAdress>
       <section>
         <SubTitle>Rua</SubTitle>
-        <Input placeholder="Digitar rua" />
+        <Input placeholder="Digitar rua" {...register("address.street")} />
       </section>
       <ContentAdress>
         <section>
           <SubTitle>Número</SubTitle>
-          <Input placeholder="Digitar número" />
+          <Input placeholder="Digitar número" type="number" {...register("address.number")} />
         </section>
         <section>
           <SubTitle>Complemento</SubTitle>
-          <Input placeholder="Ex: apart 307" />
+          <Input
+            placeholder="Ex: apart 307"
+            {...register("address.complement")}
+          />
         </section>
       </ContentAdress>
       <section>
