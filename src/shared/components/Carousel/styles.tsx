@@ -9,6 +9,9 @@ export interface Props {
 }
 
 export const Auction = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   width: max-content;
   height: 458px;
   flex: none;
@@ -33,7 +36,6 @@ export const Frame = styled.div`
   width: max-content;
   height: 388px;
   left: 0px;
-  top: 100px;
   overflow-x: scroll;
   display: flex;
   flex-direction: row;

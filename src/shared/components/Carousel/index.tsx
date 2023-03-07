@@ -6,6 +6,7 @@ import { updateAuth } from "../../providers/authProvider";
 
 interface Props {
   type: "car" | "motorcycle";
+  id: "car" | "motorcycle";
 }
 
 interface Announcement {
@@ -31,7 +32,7 @@ interface ImgCover {
   id: number;
 }
 
-export const Carousel = ({ type }: Props) => {
+export const Carousel = ({ type, id }: Props) => {
   const saler: boolean = true;
   const name: string = "Antonio";
 
@@ -50,7 +51,7 @@ export const Carousel = ({ type }: Props) => {
   });
 
   return (
-    <Container>
+    <Container id={id}>
       <Auction>
         <Title>{type == "car" ? "Carros" : "Motos"}</Title>
         <Frame>
