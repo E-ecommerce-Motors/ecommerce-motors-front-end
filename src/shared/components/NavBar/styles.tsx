@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 export interface Props {
   authenticaded?: string;
@@ -50,6 +51,7 @@ export const Text = styled(Link)`
 `;
 
 export const Option = styled.a`
+  text-decoration: none;
   width: 52px;
   height: 28px;
   font-family: ${theme.fonts.inter};

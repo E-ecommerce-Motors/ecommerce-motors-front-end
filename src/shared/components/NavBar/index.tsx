@@ -19,7 +19,6 @@ import {
   ContainerMobile,
 } from "./styles";
 import { EditUser } from "../Modal/editUser";
-import { AnnouncementContext } from "../../providers/AnnouncementProvider";
 
 export const NavBar = () => {
   const { logout, userData, handleOpen, handleClose, open } =
@@ -36,6 +35,17 @@ export const NavBar = () => {
   const [openProfile, setOpenProfile] = useState(false);
   const [navMobile, setNavMobile] = useState(false);
 
+  const handleScroll = (anchorId: string, offset: number = 0) => {
+    const anchor = document.getElementById(anchorId);
+    if (anchor) {
+      window.scrollTo({ top: anchor.offsetTop + offset, behavior: "smooth" });
+    }
+  };
+
+  function handleClick(id: string, offset: number) {
+    handleScroll(id, offset);
+  }
+
   return (
     <Container mobile={navMobile}>
       <ContainerMobile mobile={navMobile}>
@@ -51,9 +61,24 @@ export const NavBar = () => {
         </Mobile>
       </ContainerMobile>
       <Urls authenticaded={auth} mobile={navMobile}>
-        <Option authenticaded={auth}>Carros</Option>
-        <Option authenticaded={auth}>Motos</Option>
-        <Option authenticaded={auth}>Leilão</Option>
+        <Option
+          authenticaded={auth}
+          onClick={() => handleClick("car", 900)}
+        >
+          Carros
+        </Option>
+        <Option
+          authenticaded={auth}
+          onClick={() => handleClick("motorcycle", 1400)}
+        >
+          Motos
+        </Option>
+        <Option
+          authenticaded={auth}
+          onClick={() => handleClick("auction", 0)}
+        >
+          Leilão
+        </Option>
 
         {!token ? (
           <>

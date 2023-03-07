@@ -4,17 +4,19 @@ import { theme } from "../../../styles/theme";
 export interface Props {
   authenticaded?: string;
   open?: boolean;
-  mobile?: boolean
-  
+  mobile?: boolean;
 }
 
 export const Auction = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   width: 100vw;
   height: 458px;
   flex: none;
   order: 0;
   flex-grow: 0;
-  padding-left: 60px;
+  padding: 0px 40px;
   @media (max-width: 1000px) {
     padding-left: 30px;
   }
@@ -37,7 +39,6 @@ export const Frame = styled.div`
   width: 96vw;
   height: 388px;
   left: 0px;
-  top: 100px;
   overflow-x: scroll;
   display: flex;
   flex-direction: row;

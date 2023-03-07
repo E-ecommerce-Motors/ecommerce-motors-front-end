@@ -2,7 +2,6 @@ import { ButtonBig } from "../Button/styles";
 import { useContext, useEffect } from "react";
 import { theme } from "../../../styles/theme";
 import { UserContext } from "../../providers/UserProvider";
-import { GenericModal } from "../GenericModal/GenericModal";
 import { CreateAnnouncementModal } from "../CreateAnnouncementModal";
 import { AnnouncementContext } from "../../providers/AnnouncementProvider";
 import {
@@ -30,8 +29,19 @@ export const VehiclesFilter = () => {
 
   const user = userData || {};
   const name = user.name ? user.name.split(" ") : [];
-  const icon1 = name[0] ? name[0].slice(0, 1) : "";
-  const icon2 = name[1] ? name[1].slice(0, 1) : "";
+  const icon1 = name[0] ? name[0].slice(0, 1).toUpperCase() : "";
+  const icon2 = name[1] ? name[1].slice(0, 1).toUpperCase() : "";
+
+  const handleScroll = (anchorId: string, offset: number = 0) => {
+    const anchor = document.getElementById(anchorId);
+    if (anchor) {
+      window.scrollTo({ top: anchor.offsetTop + offset, behavior: "smooth" });
+    }
+  };
+
+  function handleClick(id: string, offset: number) {
+    handleScroll(id, offset);
+  }
 
   return (
     <>
@@ -77,6 +87,7 @@ export const VehiclesFilter = () => {
           </ContentText>
           <ContentButtons>
             <ButtonBig
+              id="car"
               bg={theme.colors.brand2}
               button={theme.button.big}
               color={theme.colors.whiteFixed}
@@ -86,10 +97,12 @@ export const VehiclesFilter = () => {
               colorHover={theme.colors.grey0}
               bgHover={theme.colors.whiteFixed}
               borderHover={theme.colors.whiteFixed}
+              onClick={() => handleClick("car", 900)}
             >
               Carros
             </ButtonBig>
             <ButtonBig
+              id="motorcycle"
               bg={theme.colors.brand2}
               button={theme.button.big}
               color={theme.colors.whiteFixed}
@@ -99,6 +112,7 @@ export const VehiclesFilter = () => {
               colorHover={theme.colors.grey0}
               bgHover={theme.colors.whiteFixed}
               borderHover={theme.colors.whiteFixed}
+              onClick={() => handleClick("motorcycle", 1400)}
             >
               Motos
             </ButtonBig>
