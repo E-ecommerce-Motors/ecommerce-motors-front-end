@@ -32,7 +32,21 @@ export const CreateAnnouncementModal = () => {
     typeAnnouncement: yup.string().required(),
     typeVehicle: yup.string().required(),
   });
-  
+
+  const {
+    onSubmitUpdate,
+    onSubmitDelete,
+    getUser,
+    userData,
+    showModal,
+    setShowModal,
+    handleOpenModal,
+    modalContent,
+    setModalContent,
+    closeModal,
+    setUserData
+  } = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -42,14 +56,14 @@ export const CreateAnnouncementModal = () => {
   });
 
   const submit = async (data: any) => {
-    data.userId = 1;
+    data.userId = userData?.id;
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
     data.announcementImgs = { create: { coverImage, imageGallery } };
 
     CreateAnn(data);
   };
-
+getUser()
   const {
     toggleModal,
     CreateAnn,

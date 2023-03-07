@@ -145,7 +145,9 @@ export const AnnouncementProvider = ({ children }: ChildrenProp) => {
         },
       })
       .then(() => {
-        toast.success("Anúncio criado com sucesso!");
+        toast.success("Anúncio criado com sucesso!", {
+          toastId: 1,
+        });
         toggleModal();
       })
       .catch((error) => {
