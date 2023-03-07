@@ -9,7 +9,7 @@ export interface ILoginData {
   password: string;
 }
 
-export interface IUserUpdate{
+export interface IUserUpdate {
   id?: number;
   name?: string;
   email?: string;
@@ -37,6 +37,15 @@ interface typeAccountOptions {
   typeAccount: "advertiser" | "buyer";
 }
 
+interface IAddress {
+  cep: string;
+  state: string;
+  city: string;
+  street: string;
+  number: number;
+  complement?: string;
+}
+
 export interface IRegisterData {
   name: string;
   email: string;
@@ -48,4 +57,5 @@ export interface IRegisterData {
   isSaler: boolean;
   password: string;
   confirmPassword: string;
+  address: IAddress;
 }
