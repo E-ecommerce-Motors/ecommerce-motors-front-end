@@ -5,12 +5,10 @@ export interface Props {
   authenticaded?: string;
   open?: boolean;
   mobile?: boolean;
-  
 }
 
 export const Auction = styled.div`
   width: max-content;
-  height: 458px;
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -27,11 +25,18 @@ export const Container = styled.section`
   align-items: flex-start;
   padding: 100px 0px;
   gap: 10px;
+
+  @media (max-width: 1000px) {
+    overflow-x: scroll;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 export const Frame = styled.div`
   position: relative;
   width: max-content;
-  height: 388px;
+  /* height: 388px; */
   left: 0px;
   top: 100px;
   overflow-x: scroll;
@@ -54,4 +59,13 @@ export const Title = styled.h2`
   font-weight: ${theme.weight.Heading_5_600};
   line-height: 30px;
   color: #000000;
+`;
+
+export const Message = styled.p`
+  font-family: ${theme.fonts.inter};
+  font-size: ${theme.size.Heading_6};
+  font-weight: ${theme.weight.Heading_6_600};
+  font-style: normal;
+  line-height: 30px;
+  color: ${theme.colors.grey6};
 `;

@@ -19,6 +19,14 @@ export const Container = styled.section`
   padding: 28px 44px;
   gap: 8px;
   margin-bottom: 20px;
+  @media (max-width: 1320px) {
+    width: 90%;
+  }
+  @media (max-width: 780px) {
+    padding: 28px;
+    width: 351px;
+    height: 326.91px;
+  }
 `;
 
 export const Content = styled.div`
@@ -30,6 +38,14 @@ export const Content = styled.div`
   gap: 41px;
   width: 658px;
   height: 137.39px;
+  @media (max-width: 1320px) {
+    width: 620px;
+  }
+  @media (max-width: 780px) {
+    gap: 71px;
+    width: 295px;
+    height: 224.91px;
+  }
 `;
 
 // ///////////////////////////////////////////////////////////////////
@@ -41,7 +57,7 @@ export const KM_Year = styled.div`
   align-items: center;
   padding: 4px 8px;
   gap: 10px;
-  width: 57px;
+  width: max-content;
   height: 32px;
   font-size: ${theme.size.body_2};
   font-weight: ${theme.weight.body_2_500};
@@ -66,9 +82,21 @@ export const Price = styled.span`
 export const Footer = styled.section`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 645px;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 1320px) {
+    width: 80%;
+  }
+  @media (max-width: 780px) {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 32px;
+    width: 113px;
+    height: 89.91px;
+  }
 `;
 
 export const Infos = styled.aside`
@@ -77,6 +105,13 @@ export const Infos = styled.aside`
   align-items: flex-start;
   justify-content: space-between;
   width: 19%;
+  @media (max-width: 1320px) {
+    width: 23%;
+  }
+  @media (max-width: 780px) {
+    width: 113px;
+    height: 32px;
+  }
 `;
 
 // /////////////////////////////////////////////////////////////////////
@@ -90,4 +125,11 @@ export const Heading7 = styled.h2`
   color: ${theme.colors.grey1};
   width: 658px;
   height: 32.39px;
+  @media (max-width: 1320px) {
+    width: 80%;
+  }
+  @media (max-width: 780px) {
+    width: 303px;
+    height: 32px;
+  }
 `;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Auction, Frame, Title } from "./styles";
+import { Container, Auction, Frame, Title, Message } from "./styles";
 import { ProductCard } from "../ProductCard";
 import { api } from "../../services/api";
 import { updateAuth } from "../../providers/authProvider";
@@ -20,11 +20,9 @@ interface Announcement {
   typeVehicle: "car" | "motorcycle";
   typeAnnouncement: "sale" | "auction";
   announcementImgs: ImgCover[];
+  user: any;
 }
 
-interface Img {
-  announcementImgs: ImgCover;
-}
 interface ImgCover {
   coverImage: any;
   imageGallery: Array<string>;
@@ -41,6 +39,8 @@ export const Carousel = ({ type }: Props) => {
     getAnn;
   }, []);
 
+  console.log(announcements);
+
   const typeFilter: Announcement[] = [];
 
   announcements.map((element: Announcement) => {
@@ -50,30 +50,49 @@ export const Carousel = ({ type }: Props) => {
   });
 
   return (
-    <Container>
+    <Container
+      style={
+        type == "motorcycle"
+          ? { marginBottom: "60px" }
+          : { marginBottom: "0px" }
+      }
+    >
       <Auction>
         <Title>{type == "car" ? "Carros" : "Motos"}</Title>
-        <Frame>
-          {typeFilter.map((element: Announcement, index: number) => {
-            let date = element.year.split("-");
+        <Frame
+          style={
+            typeFilter.length == 0
+              ? { height: "max-content" }
+              : { height: "400px" }
+          }
+        >
+          {typeFilter.length == 0 ? (
+            <Message>
+              Não há itens a serem mostrados nessa sessão no momento...
+            </Message>
+          ) : (
+            typeFilter.map((element: Announcement, index: number) => {
+              let date = element.year.split("-");
 
-            return (
-              <ProductCard
-                id={element.id}
-                km={element.mileage}
-                heading={element.title}
-                name={name}
-                saler={saler}
-                price={element.price}
-                text={element.description}
-                key={index}
-                year={Number(date[0])}
-                type={element.typeVehicle}
-                tA={element.typeAnnouncement}
-                img={element.announcementImgs}
-              />
-            );
-          })}
+              return (
+                <ProductCard
+                  id={element.id}
+                  km={element.mileage}
+                  heading={element.title}
+                  name={element.user.name}
+                  saler={element.user.isSaler}
+                  user={element.user.id}
+                  price={element.price}
+                  text={element.description}
+                  key={index}
+                  year={Number(date[0])}
+                  type={element.typeVehicle}
+                  tA={element.typeAnnouncement}
+                  img={element.announcementImgs}
+                />
+              );
+            })
+          )}
         </Frame>
       </Auction>
     </Container>

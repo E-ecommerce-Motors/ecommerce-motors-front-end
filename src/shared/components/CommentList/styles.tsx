@@ -17,6 +17,14 @@ export const Container = styled.section`
   padding: 36px 44px;
   gap: 24px;
   margin-bottom: 20px;
+  @media (max-width: 1320px) {
+    width: 90%;
+  }
+  @media (max-width: 780px) {
+    padding: 36px 28px;
+    width: 351px;
+    height: max-content;
+  }
 `;
 
 export const Content = styled.form`
@@ -68,13 +76,20 @@ export const User = styled.div`
 export const TextArea = styled.p`
   box-sizing: border-box;
   width: 663px;
-  height: 72px;
+  min-height: 72px;
   font-family: ${theme.fonts.inter};
   font-style: normal;
   font-weight: ${theme.weight.body_2_400};
   font-size: ${theme.size.body_2};
   line-height: 24px;
   color: ${theme.colors.grey2};
+  @media (max-width: 1320px) {
+    width: 483px;
+  }
+  @media (max-width: 780px) {
+    width: 283px;
+    max-height: 168px;
+  }
 `;
 
 export const Time = styled.p`
@@ -99,6 +114,9 @@ export const Frame = styled.div`
   overflow-x: scroll;
   ::-webkit-scrollbar {
     display: none;
+  }
+  @media (max-width: 1320px) {
+    width: 483px;
   }
 `;
 

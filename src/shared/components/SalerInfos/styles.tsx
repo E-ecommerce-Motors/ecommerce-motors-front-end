@@ -16,6 +16,15 @@ export const Container = styled.section`
   align-items: center;
   padding: 36px 44px;
   gap: 32px;
+  @media (max-width: 1320px) {
+    width: 90%;
+  }
+  @media (max-width: 780px) {
+    padding: 40px 28px;
+    gap: 28px;
+    width: 351px;
+    height: 398px;
+  }
 `;
 
 export const SectionTitle = styled.h2`
@@ -56,4 +65,8 @@ export const Icon = styled.div`
   background: ${theme.colors.brand2};
   border-radius: 150px;
   flex-grow: 0;
+  @media (max-width: 780px) {
+    width: 77px;
+    height: 77px;
+  }
 `;

@@ -55,6 +55,8 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
     retireAnnouncement(3);
   }, []);
 
+  console.log(announcement);
+
   const getAnn = async () => {
     await api
       .get("announcements")
@@ -65,8 +67,13 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   };
 
   const UpdateAnn = async (data: Update, id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
     await api
-      .patch(`announcements/${id}`, data)
+      .patch(`announcements/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then()
       .catch((response) => console.log(response));
   };

@@ -37,6 +37,7 @@ export const Img = styled.div`
   width: 262px;
   height: 150.28px;
   background-image: url(${(props: Props) => props.image});
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
   transition: 0.5s;
@@ -60,7 +61,7 @@ export const Heading7 = styled.h2`
 
 export const Paragraph = styled.p`
   width: 312px;
-  height: 48px;
+  min-height: 48px;
   font-family: ${theme.fonts.inter};
   font-style: normal;
   font-weight: ${theme.weight.body_2_400};
@@ -141,7 +142,7 @@ export const Saler = styled.aside`
 `;
 
 export const Name = styled.p`
-  width: 68px;
+  width: max-content;
   height: 24px;
   font-family: ${theme.fonts.inter};
   font-style: normal;
@@ -178,8 +179,9 @@ export const Edit = styled.button`
   justify-content: center;
   align-items: center;
   padding: 12px 20px;
+  margin-top: -2px;
   gap: 10px;
-  width: 80px;
+  width: max-content;
   height: 38px;
   border: 1.5px solid ${theme.colors.grey1};
   border-radius: 4px;
@@ -189,4 +191,11 @@ export const Edit = styled.button`
   font-size: ${theme.size.button_medium_text};
   line-height: 0px;
   color: ${theme.colors.grey1};
+`;
+
+export const FooterBtn = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 195px;
 `;

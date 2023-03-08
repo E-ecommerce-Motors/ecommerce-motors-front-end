@@ -1,7 +1,13 @@
 import { api } from "../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import {
   ILoginData,
   IProps,
@@ -66,6 +72,10 @@ export const UserProvider = ({ children }: IProps) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -143,8 +153,8 @@ export const UserProvider = ({ children }: IProps) => {
     setModalContent(modalContent);
   };
   const closeModal = () => {
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
   const onSubmitUpdate = async (data: IUserUpdate, id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
 

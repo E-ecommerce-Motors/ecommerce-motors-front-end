@@ -11,31 +11,29 @@ import {
 } from "./styles";
 import { ButtonBig } from "../Button/styles";
 import { theme } from "../../../styles/theme";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { updateAuth } from "../../providers/authProvider";
 import { useParams } from "react-router-dom";
-
-interface Props {
-  user: string;
-}
+import { UserContext } from "../../providers/UserProvider";
 
 interface Comment {
   text: string;
   userId: number;
 }
 
-export const CreateComment = ({ user }: Props) => {
+export const CreateComment = () => {
   const [comment, setComment] = useState<string>("");
   const token = localStorage.getItem("@MotorsShop:token");
   const placeholder =
     "Carro muito confortável, foi uma ótima experiência de compra...";
 
   const { CreateComment, retireAnnouncement } = updateAuth();
+  const { userData } = useContext(UserContext);
   const { id } = useParams();
-  const name = user.split(" ");
+  const name = userData.name ? userData.name.split(" ") : "";
 
   const schema = yup.object().shape({
     text: yup.string(),
@@ -66,7 +64,7 @@ export const CreateComment = ({ user }: Props) => {
         {token ? (
           <User>
             <Icon>{`${name[0].slice(0, 1)}${name[1].slice(0, 1)}`}</Icon>
-            <Name>{user}</Name>
+            <Name>{userData.name}</Name>
           </User>
         ) : (
           <></>
@@ -90,7 +88,7 @@ export const CreateComment = ({ user }: Props) => {
             bgHover={theme.colors.brand2}
             borderHover={theme.colors.brand2}
             colorHover={theme.colors.whiteFixed}
-            style={{ position: "absolute" }}
+            // style={{ position: "absolute", marginTop: "100px" }}
             type="submit"
             disabled={token ? false : true}
           >

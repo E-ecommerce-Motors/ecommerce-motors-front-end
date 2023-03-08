@@ -4,8 +4,7 @@ import { theme } from "../../../styles/theme";
 export interface Props {
   authenticaded?: string;
   open?: boolean;
-  mobile?: boolean
-  
+  mobile?: boolean;
 }
 
 export const Auction = styled.div`
@@ -15,6 +14,9 @@ export const Auction = styled.div`
   order: 0;
   flex-grow: 0;
   padding-left: 60px;
+  @media (max-width: 1650px) {
+    height: max-content;
+  }
   @media (max-width: 1000px) {
     padding-left: 30px;
   }

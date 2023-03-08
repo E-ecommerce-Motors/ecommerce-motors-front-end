@@ -1,5 +1,5 @@
 import { Box, Modal } from "@mui/material";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
 import { EditAnnouncement } from "../Modal/editAnnouncement";
 import { Link } from "react-router-dom";
@@ -18,7 +18,10 @@ import {
   Name,
   Active,
   Edit,
+  FooterBtn,
 } from "./styles";
+import { style } from "@mui/system";
+import { UserContext } from "../../providers/UserProvider";
 
 interface Props {
   img?: Img[];
@@ -33,6 +36,7 @@ interface Props {
   type: string;
   id: number;
   tA: "sale" | "auction";
+  user: any;
 }
 
 interface Img {
@@ -53,13 +57,21 @@ export const ProductCard = ({
   type,
   id,
   tA,
+  user,
 }: Props) => {
   const priceformat: string = price.toLocaleString(`pt-BR`, {
     style: "currency",
     currency: "BRL",
   });
 
+  const [owner, setOwner] = useState(false);
+
   const { getAnn } = updateAuth();
+  const { userData } = useContext(UserContext);
+
+  useEffect(() => {
+    userData.id == user ? setOwner(true) : setOwner(false);
+  }, []);
 
   const announcement = {
     img,
@@ -96,9 +108,13 @@ export const ProductCard = ({
         style={{ textDecoration: "none" }}
       >
         <ImgContainer>
-          <Active saler={saler} active={active}>
-            {active ? `Ativo` : "Inativo"}
-          </Active>
+          {owner ? (
+            <Active saler={saler} active={active}>
+              {active ? `Ativo` : "Inativo"}
+            </Active>
+          ) : (
+            <></>
+          )}
           <Img image={img ? img[0].coverImage : ""} />
         </ImgContainer>
       </Link>
@@ -119,7 +135,19 @@ export const ProductCard = ({
         </Infos>
         <Price>{priceformat}</Price>
       </Footer>
-      <Edit onClick={handleOpen}>Editar</Edit>
+      {owner ? (
+        <FooterBtn>
+          <Edit onClick={handleOpen}>Editar</Edit>{" "}
+          <Link
+            to={`/announcement/${announcement.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Edit>Ver como</Edit>
+          </Link>
+        </FooterBtn>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

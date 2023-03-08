@@ -42,7 +42,7 @@ export const RetireAnnouncement = () => {
       timePass.push(
         +(time / msInDay).toFixed(1) > 30
           ? `há ${(time / msInDay).toFixed()} mês`
-          : `há ${(time / msInDay).toFixed()} mêses`
+          : `há ${(time / msInDay).toFixed()} dias`
       );
     }
   };

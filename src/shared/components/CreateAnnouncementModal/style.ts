@@ -5,14 +5,19 @@ export const Container = styled.section`
   position: absolute;
   width: 520px;
   height: 100vh;
-  left: 40%;
-  z-index: 11;
+  left: 50%;
+  transform: translate(-50%);
   background: ${theme.colors.whiteFixed};
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: scale(0.9);
+  justify-content: center;
+  @media (max-width: 666px) {
+    padding: 0px 16px 32px;
+    gap: 37px;
+    width: 346px;
+  }
 `;
 
 export const SelectableButton = styled.button<{ isSelected?: boolean }>`
@@ -39,7 +44,6 @@ export const ModalWrapper = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 11;
-  
 `;
 
 export const ModalContent = styled.div`
@@ -57,27 +61,24 @@ export const ModalContent = styled.div`
   max-width: 520px;
   gap: 20px;
   z-index: 10;
-  &::-webkit-scrollbar-track
-{
-	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
-  margin: 3px;
-}
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    margin: 3px;
+  }
 
-&::-webkit-scrollbar
-{
-	width: 7px;
-	background-color: #F5F5F5;
-  margin: 3px;
-}
+  &::-webkit-scrollbar {
+    width: 7px;
+    background-color: #f5f5f5;
+    margin: 3px;
+  }
 
-&::-webkit-scrollbar-thumb
-{
-	border-radius: 5px;
-	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: lightgrey;
-}
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: lightgrey;
+  }
 
   .headerContent {
     display: flex;

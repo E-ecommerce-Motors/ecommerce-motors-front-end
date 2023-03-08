@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../providers/UserProvider";
 import { Box, Modal } from "@mui/material";
 import {
@@ -20,10 +20,12 @@ import {
 } from "./styles";
 import { EditUser } from "../Modal/editUser";
 import { AnnouncementContext } from "../../providers/AnnouncementProvider";
+import { updateAuth } from "../../providers/authProvider";
 
 export const NavBar = () => {
-  const { logout, userData, handleOpen, handleClose, open } =
+  const { logout, userData, handleOpen, handleClose, open, getUser } =
     useContext(UserContext);
+  const { retireAnnouncement } = updateAuth();
 
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
@@ -35,6 +37,10 @@ export const NavBar = () => {
 
   const [openProfile, setOpenProfile] = useState(false);
   const [navMobile, setNavMobile] = useState(false);
+
+  useEffect(() => {
+    getUser;
+  }, []);
 
   return (
     <Container mobile={navMobile}>
