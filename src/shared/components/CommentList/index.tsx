@@ -10,13 +10,7 @@ import {
   TextArea,
   Ball,
 } from "./styles";
-import { useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
-import { useParams } from "react-router-dom";
-
-interface Props {
-  user: string;
-}
 
 export const RetireAnnouncement = () => {
   const { announcement } = updateAuth();
@@ -47,6 +41,11 @@ export const RetireAnnouncement = () => {
     }
   };
 
+  const user = announcement.user.name || {};
+  const name = user ? user.split(" ") : "";
+  const icon1 = name[0] ? name[0].slice(0, 1).toUpperCase() : "";
+  const icon2 = name[1] ? name[1].slice(0, 1).toUpperCase() : "";
+
   return (
     <Container>
       <SectionTitle>Comentários</SectionTitle>
@@ -56,10 +55,7 @@ export const RetireAnnouncement = () => {
           return (
             <Content key={index}>
               <User>
-                <Icon>{`${element.comment.user.name[0].slice(
-                  0,
-                  1
-                )}${element.comment.user.name[1].slice(0, 1)}`}</Icon>
+                <Icon>{`${icon1}${icon2}`}</Icon>
                 <Name>{element.comment.user.name}</Name>
                 <Ball />
                 <Time>{timePass[index]}</Time>

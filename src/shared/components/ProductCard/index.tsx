@@ -20,7 +20,6 @@ import {
   Edit,
   FooterBtn,
 } from "./styles";
-import { style } from "@mui/system";
 import { UserContext } from "../../providers/UserProvider";
 
 interface Props {
@@ -66,7 +65,7 @@ export const ProductCard = ({
 
   const [owner, setOwner] = useState(false);
 
-  const { getAnn } = updateAuth();
+  const { open, handleOpen, handleClose } = updateAuth();
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
@@ -88,12 +87,6 @@ export const ProductCard = ({
   };
 
   const active: boolean = true;
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    getAnn();
-    setOpen(false);
-  };
 
   return (
     <Container>

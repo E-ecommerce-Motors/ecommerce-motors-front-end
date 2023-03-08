@@ -83,6 +83,9 @@ export const UserProvider = ({ children }: IProps) => {
 
   const logout = () => {
     localStorage.clear();
+    toast.success("Deslogado com sucesso!", {
+      toastId: 1,
+    });
     navigate("/");
   };
 
@@ -92,9 +95,7 @@ export const UserProvider = ({ children }: IProps) => {
       .then((res) => {
         localStorage.setItem("@MotorsShop:token", res.data.token);
 
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
+        navigate("/");
 
         toast.success("Logado com sucesso, redirecionando!", {
           toastId: 1,

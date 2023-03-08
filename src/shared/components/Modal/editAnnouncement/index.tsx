@@ -1,13 +1,14 @@
-import { theme } from "../../../../styles/theme";
-import { ButtonBig } from "../../Button/styles";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { IconButton } from "@mui/material";
+import { ButtonBig } from "../../Button/styles";
+import { theme } from "../../../../styles/theme";
+import CloseIcon from "@mui/icons-material/Close";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { updateAuth } from "../../../providers/authProvider";
 import {
   Btn,
-  CloseButton,
   Container,
   Content,
   FlexBtn,
@@ -95,7 +96,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     resolver: yupResolver(schema),
   });
 
-  const { UpdateAnn } = updateAuth();
+  const { UpdateAnn, handleClose } = updateAuth();
 
   const submit = (data: Update) => {
     data.typeAnnouncement = tA;
@@ -154,7 +155,9 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     <Container>
       <Header>
         <Heading>Editar anúncio</Heading>
-        <CloseButton type="button">x</CloseButton>
+        <IconButton  onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Tipo de anúncio</Type>

@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
-import { CloseButton, Container, ModalWrapper } from "./style";
+import { Container } from "./style";
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+
 import { AnnouncementContext } from "../../providers/AnnouncementProvider";
 import * as yup from "yup";
 import {
@@ -21,7 +24,6 @@ import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Create } from "../../interfaces/announcement";
 import { UserContext } from "../../providers/UserProvider";
-import { Modal } from "@mui/material";
 
 export const CreateAnnouncementModal = () => {
   const schema = yup.object().shape({
@@ -34,19 +36,7 @@ export const CreateAnnouncementModal = () => {
     typeVehicle: yup.string().required(),
   });
 
-  const {
-    onSubmitUpdate,
-    onSubmitDelete,
-    getUser,
-    userData,
-    showModal,
-    setShowModal,
-    handleOpenModal,
-    modalContent,
-    setModalContent,
-    closeModal,
-    setUserData,
-  } = useContext(UserContext);
+  const { getUser, userData } = useContext(UserContext);
 
   const {
     register,
@@ -95,9 +85,9 @@ export const CreateAnnouncementModal = () => {
     <Container>
       <Header>
         <Heading>Criar anúncio</Heading>
-        <CloseButton type="button" onClick={() => toggleModal()}>
-          x
-        </CloseButton>
+        <IconButton type="button" onClick={() => toggleModal()}>
+          <CloseIcon />
+        </IconButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Tipo de anúncio</Type>
