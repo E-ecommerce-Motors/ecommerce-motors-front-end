@@ -1,7 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
-import { Container } from "./style";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -18,12 +17,15 @@ import {
   Infos,
   Single,
   TextArea,
+  Container,
   Btn,
 } from "../Modal/editAnnouncement/styles";
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Create } from "../../interfaces/announcement";
 import { UserContext } from "../../providers/UserProvider";
+import { updateAuth } from "../../providers/authProvider";
+import { DataRouterStateContext } from "react-router/dist/lib/context";
 
 export const CreateAnnouncementModal = () => {
   const schema = yup.object().shape({
@@ -37,6 +39,7 @@ export const CreateAnnouncementModal = () => {
   });
 
   const { getUser, userData } = useContext(UserContext);
+  const { getAnn } = updateAuth();
 
   const {
     register,
@@ -54,7 +57,15 @@ export const CreateAnnouncementModal = () => {
 
     CreateAnn(data);
   };
-  getUser();
+
+  useEffect(() => {
+    getAnn()
+  });
+
+  useEffect(() => {
+    getUser();
+  }, []);
+  
   const {
     toggleModal,
     CreateAnn,
@@ -80,7 +91,7 @@ export const CreateAnnouncementModal = () => {
     imageGallery,
     handleInputChange,
   } = useContext(AnnouncementContext);
-
+  
   return (
     <Container>
       <Header>
