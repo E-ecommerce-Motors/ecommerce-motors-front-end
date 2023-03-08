@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
 import { UserContext } from "../../providers/UserProvider";
@@ -17,9 +17,6 @@ import {
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IUserUpdate } from "../../interfaces/user";
-import { api } from "../../services/api";
-
-import DeleteAnnouncementModal from "../DeleteAnnouncementModal";
 import { DeleteUserModal } from "../DeleteUserModal";
 import { GenericModal } from "../GenericModal/GenericModal";
 
@@ -60,7 +57,9 @@ export const EditUserModal = () => {
     onSubmitUpdate(data, userData?.id);
   };
 
-  getUser();
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <Container>

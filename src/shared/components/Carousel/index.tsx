@@ -40,7 +40,6 @@ export const Carousel = ({ type, id }: Props) => {
     getAnn;
   }, []);
 
-  console.log(announcements);
 
   const typeFilter: Announcement[] = [];
 
@@ -51,13 +50,13 @@ export const Carousel = ({ type, id }: Props) => {
   });
 
   return (
-
     <Container
       style={
         type == "motorcycle"
           ? { marginBottom: "60px" }
           : { marginBottom: "0px" }
       }
+    >
       <Auction>
         <Title>{type == "car" ? "Carros" : "Motos"}</Title>
         <Frame
