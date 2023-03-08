@@ -5,9 +5,11 @@ import { theme } from "../../../styles/theme";
 export const ContentForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   gap: 1.875rem;
-  padding: 2.75rem ;
+  padding: 2.75rem;
+  margin-top: 80px;
   width: 25rem;
   min-height: 25.75rem;
   background-color: ${theme.colors.whiteFixed};

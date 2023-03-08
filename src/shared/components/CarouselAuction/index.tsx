@@ -31,7 +31,7 @@ export const CarouselAuction = () => {
     "Lorem Ipsum is simply dummy text of the printing and typesetti industry.Lorem...aaaaaaa";
 
   return (
-    <Container>
+    <Container id="auction">
       <Auction>
         <Title>Leilão</Title>
         <Frame>

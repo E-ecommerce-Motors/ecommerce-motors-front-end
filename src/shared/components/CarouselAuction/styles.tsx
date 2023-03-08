@@ -8,11 +8,15 @@ export interface Props {
 }
 
 export const Auction = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   width: 100vw;
-  height: 458px;
+  min-height: 30rem;
   flex: none;
   order: 0;
   flex-grow: 0;
+
   padding-left: 60px;
   @media (max-width: 1650px) {
     height: max-content;
@@ -39,7 +43,6 @@ export const Frame = styled.div`
   width: 96vw;
   height: 388px;
   left: 0px;
-  top: 100px;
   overflow-x: scroll;
   display: flex;
   flex-direction: row;
