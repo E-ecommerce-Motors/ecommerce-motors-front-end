@@ -150,8 +150,7 @@ export const AnnouncementProvider = ({ children }: ChildrenProp) => {
         });
         toggleModal();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
       });
   };
 

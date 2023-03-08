@@ -55,15 +55,13 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
     retireAnnouncement(3);
   }, []);
 
-  console.log(announcement);
-
   const getAnn = async () => {
     await api
       .get("announcements")
       .then((response) =>
         setAnnouncements(JSON.parse(response.request.response))
       )
-      .catch((response) => console.log(response));
+      .catch(() => {});
   };
 
   const UpdateAnn = async (data: Update, id: number) => {
@@ -75,7 +73,7 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         },
       })
       .then()
-      .catch((response) => console.log(response));
+      .catch(() => {});
   };
 
   const CreateComment = async (data: Comment, id: number) => {
@@ -86,15 +84,15 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response))
-      .catch((response) => console.log(response));
+      .then(() => {})
+      .catch(() => {});
   };
 
   const retireAnnouncement = async (id: number) => {
     await api
       .get(`announcements/${id}`)
       .then((response) => setAnnouncement(response.data))
-      .catch((response) => console.log(response));
+      .catch(() => {});
   };
 
   return (
