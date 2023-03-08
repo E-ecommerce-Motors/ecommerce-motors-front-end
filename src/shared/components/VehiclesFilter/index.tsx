@@ -1,5 +1,5 @@
 import { ButtonBig } from "../Button/styles";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { theme } from "../../../styles/theme";
 import { UserContext } from "../../providers/UserProvider";
 import { CreateAnnouncementModal } from "../CreateAnnouncementModal";
@@ -15,6 +15,7 @@ import {
   Name,
   Description,
 } from "./styles";
+import { Box, Modal } from "@mui/material";
 
 export const VehiclesFilter = () => {
   const { userData, getUser } = useContext(UserContext);
@@ -45,7 +46,13 @@ export const VehiclesFilter = () => {
 
   return (
     <>
-      {isOpen && <CreateAnnouncementModal />}
+      {isOpen && (
+        <Modal open={isOpen} onClose={toggleModal}>
+          <Box>
+            <CreateAnnouncementModal />
+          </Box>
+        </Modal>
+      )}
       {token ? (
         <ContentProfile>
           <Profile key={userData?.id}>

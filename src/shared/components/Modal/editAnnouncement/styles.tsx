@@ -4,21 +4,26 @@ import { theme } from "../../../../styles/theme";
 interface Props {
   width: string;
   height?: string;
+  price?: boolean;
 }
 
 export const Container = styled.section`
   position: absolute;
   width: 520px;
   height: 100vh;
-  left: 40%;
-
+  left: 50%;
+  transform: translate(-50%);
   background: ${theme.colors.whiteFixed};
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform: scale(0.9);
+  @media (max-width: 666px) {
+    padding: 0px 16px 32px;
+    gap: 37px;
+    width: 346px;
+  }
 `;
 export const Header = styled.div`
   display: flex;
@@ -29,6 +34,11 @@ export const Header = styled.div`
   gap: 302px;
   width: 520px;
   height: 56px;
+  @media (max-width: 666px) {
+    padding: 16px 0px;
+    width: 314px;
+    gap: 150px;
+  }
 `;
 
 export const Heading = styled.h2`
@@ -58,6 +68,11 @@ export const Content = styled.form`
     display: none;
   }
   margin-bottom: 25px;
+  @media (max-width: 666px) {
+    width: 314px;
+    padding: 0px;
+    gap: 24px;
+  }
 `;
 
 export const Type = styled.h3`
@@ -86,6 +101,9 @@ export const FlexBtn = styled.div`
   padding: 0px;
   gap: 9px;
   width: 466px;
+  @media (max-width: 666px) {
+    width: 314px;
+  }
 `;
 
 export const Btn = styled.button`
@@ -143,10 +161,14 @@ export const Input = styled.input`
     line-height: 0px;
     color: ${theme.colors.grey3};
   }
+  @media (max-width: 666px) {
+    width: ${(props: Props) =>
+      props.price == true || props.width == "big" ? "314px" : "148px"};
+  }
 `;
 
 export const TextArea = styled.textarea`
-box-sizing: border-box;
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -179,6 +201,11 @@ export const Infos = styled.div`
   flex-direction: row;
   width: 466px;
   justify-content: space-between;
+  @media (max-width: 666px) {
+    width: 314px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Single = styled.div`
@@ -186,4 +213,18 @@ export const Single = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 18px;
+  @media (max-width: 666px) {
+    gap: 9px;
+  }
+`;
+
+export const CloseButton = styled.button`
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  outline: none;
+  color: ${theme.colors.grey4};
 `;

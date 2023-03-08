@@ -16,6 +16,16 @@ export const Container = styled.section`
   align-items: flex-start;
   padding: 36px 44px;
   gap: 24px;
+  @media (max-width: 1320px) {
+    width: 90%;
+  }
+  @media (max-width: 780px) {
+    padding: 36px 28px;
+    gap: 32px;
+    justify-content: center;
+    width: 351px;
+    height: 325px;
+  }
 `;
 
 export const Content = styled.form`
@@ -74,6 +84,9 @@ export const TextArea = styled.p`
   font-size: ${theme.size.body_2};
   line-height: 24px;
   color: ${theme.colors.grey2};
+  @media (max-width: 1320px) {
+    width: 90%;
+  }
 `;
 
 export const Time = styled.p`

@@ -16,6 +16,13 @@ export const Container = styled.section`
   align-items: flex-start;
   padding: 36px 44px;
   gap: 32px;
+  @media (max-width: 1320px) {
+    width: 90%;
+  }
+  @media (max-width: 780px) {
+    width: 351px;
+    height: 359px;
+  }
 `;
 
 export const Img = styled.div`
@@ -35,6 +42,10 @@ export const ImgBox = styled.div`
   height: 108px;
   background: ${theme.colors.grey7};
   border-radius: 4px;
+  @media (max-width: 780px) {
+    width: 90px;
+    height: 90px;
+  }
 `;
 export const ImgCont = styled.div`
   width: 352px;
@@ -42,6 +53,15 @@ export const ImgCont = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 0fr);
   gap: 10px;
+  @media (max-width: 1320px) {
+    width: 90%;
+    grid-template-columns: repeat(4, 0fr);
+  }
+  @media (max-width: 780px) {
+    width: 281px;
+    height: 230px;
+    grid-template-columns: repeat(3, 0fr);
+  }
 `;
 
 export const SectionTitle = styled.h2`

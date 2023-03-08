@@ -44,6 +44,8 @@ export const ButtonBig = styled.button`
       props.disable ? "#B0A6f0" : "#CED4DA"};
     color: ${(props: Props) => (props.disable ? "#EDEAFD" : "#FFFFFF")};
     border: ${(props: Props) => (props.disable ? "#B0A6f0" : "#CED4DA")};
-    
+  }
+  @media (max-width: 666px) {
+    max-width: 152.5px;
   }
 `;

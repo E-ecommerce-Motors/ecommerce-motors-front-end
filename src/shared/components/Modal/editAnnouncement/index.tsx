@@ -7,6 +7,7 @@ import { useState } from "react";
 import { updateAuth } from "../../../providers/authProvider";
 import {
   Btn,
+  CloseButton,
   Container,
   Content,
   FlexBtn,
@@ -153,6 +154,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     <Container>
       <Header>
         <Heading>Editar anúncio</Heading>
+        <CloseButton type="button">x</CloseButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Tipo de anúncio</Type>
@@ -271,8 +273,9 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
             />
           </Single>
           <Single>
-            <Title>Preço</Title>
+            <Title>{tA == "sale" ? "Preço" : "Lance inicial"}</Title>
             <Input
+              price={true}
               placeholder={`R$ ${announcement.price}`}
               width={"none"}
               {...register("price")}

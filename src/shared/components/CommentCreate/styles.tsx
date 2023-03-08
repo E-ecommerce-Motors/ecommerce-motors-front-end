@@ -16,12 +16,26 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1320px) {
+    width: 90%;
+  }
+  @media (max-width: 780px) {
+    width: 351px;
+    height: 414px;
+  }
 `;
 
 export const Content = styled.form`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  @media (max-width: 780px) {
+    align-items: flex-start;
+    padding: 36px 26px;
+    gap: 24px;
+    width: 351px;
+    height: 414px;
+  }
 `;
 export const Icon = styled.div`
   display: flex;
@@ -76,30 +90,61 @@ export const TextArea = styled.div`
   align-items: flex-end;
   justify-content: flex-end;
   padding: 0px 5px 5px 0px;
+  @media (max-width: 1320px) {
+    width: 483px;
+  }
+  @media (max-width: 780px) {
+    width: 284px;
+    height: 228px;
+    align-items: flex-start;
+    border: none;
+    justify-content: flex-start;
+  }
 `;
 
 export const Text = styled.textarea`
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 665px;
   height: 126px;
   border: none;
   border-radius: 4px;
+  gap: 10px;
   font-family: ${theme.fonts.inter};
   font-style: normal;
   font-weight: ${theme.weight.input_placeholder};
   font-size: ${theme.size.input_placeholder};
-  line-height: 0px;
   color: ${theme.colors.grey3};
   padding: 20px;
   outline: none;
   line-break: auto;
+  resize: none;
   ::placeholder {
     font-family: ${theme.fonts.inter};
     font-style: normal;
     font-weight: ${theme.weight.input_placeholder};
     font-size: ${theme.size.input_placeholder};
-    line-height: 0px;
+
     color: ${theme.colors.grey3};
+    position: absolute;
+    left: 20px;
+    top: 20px;
+
+    @media (max-width: 1320px) {
+      font-weight: ${theme.weight.input_label};
+      font-size: ${theme.size.input_label};
+    }
+  }
+  @media (max-width: 1320px) {
+    width: 483px;
+  }
+  @media (max-width: 780px) {
+    width: 284px;
+    height: 128px;
+    margin-bottom: 10px;
+    border: 1.5px solid ${theme.colors.grey7};
   }
 `;
 
@@ -107,6 +152,7 @@ export const Options = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   padding: 0px;
   gap: 8px;
 `;

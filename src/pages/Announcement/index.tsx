@@ -2,7 +2,7 @@ import { CreateComment } from "../../shared/components/CommentCreate";
 import { Footer } from "../../shared/components/Footer";
 import { NavBar } from "../../shared/components/NavBar";
 import { RegisterForm } from "../../shared/components/RegisterForm";
-import { Content, Background, BgBrand } from "./styles";
+import { Content, Background, BgBrand, Allcontet } from "./styles";
 import { RetireAnnouncement } from "../../shared/components/CommentList";
 import { DescriptionAnnouncement } from "../../shared/components/description";
 import { InfosAnnouncement } from "../../shared/components/BasicInfosAnnouncement";
@@ -30,17 +30,21 @@ export const AnnouncementPage = () => {
       <NavBar />
       <Background>
         <BgBrand />
-        <Content>
-          <ImgAnnouncement />
-          <InfosAnnouncement />
-          <DescriptionAnnouncement />
-          <RetireAnnouncement />
-          <CreateComment user={"Lucas Galvs"} />
-        </Content>
-        <Content>
-          <ImgGalleryAnnouncement />
-          <SalerInfo />
-        </Content>
+        <Allcontet>
+          <Content>
+            <ImgAnnouncement />
+            <InfosAnnouncement />
+            <DescriptionAnnouncement />
+          </Content>
+          <Content>
+            <ImgGalleryAnnouncement />
+            <SalerInfo />
+          </Content>
+          <Content>
+            <RetireAnnouncement />
+            <CreateComment />
+          </Content>
+        </Allcontet>
       </Background>
       <Footer />
     </>

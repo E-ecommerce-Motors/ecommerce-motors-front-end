@@ -12,6 +12,13 @@ export const Container = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 1320px) {
+    width: 90%;
+  }
+  @media (max-width: 780px) {
+    width: 351px;
+    height: 355px;
+  }
 `;
 
 export const Img = styled.div`
@@ -20,4 +27,8 @@ export const Img = styled.div`
   background-image: url(${(props: Props) => props.image});
   background-repeat: no-repeat;
   background-size: contain;
+  @media (max-width: 780px) {
+    width: 293.97px;
+    height: 252.96px;
+  }
 `;

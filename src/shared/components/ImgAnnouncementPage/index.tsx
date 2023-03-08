@@ -4,7 +4,7 @@ import { updateAuth } from "../../providers/authProvider";
 import { useParams } from "react-router-dom";
 
 export const ImgAnnouncement = () => {
-  const { announcement } = updateAuth();
+  const { announcement, retireAnnouncement } = updateAuth();
 
   return (
     <Container>
