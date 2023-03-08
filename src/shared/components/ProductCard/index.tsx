@@ -65,7 +65,7 @@ export const ProductCard = ({
 
   const [owner, setOwner] = useState(false);
 
-  const { open, handleOpen, handleClose } = updateAuth();
+  const { openModal, handleOpenModal, handleCloseModal } = updateAuth();
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
@@ -90,9 +90,12 @@ export const ProductCard = ({
 
   return (
     <Container>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openModal} onClose={handleCloseModal}>
         <Box>
-          <EditAnnouncement announcement={announcement} close={handleClose} />
+          <EditAnnouncement
+            announcement={announcement}
+            close={handleCloseModal}
+          />
         </Box>
       </Modal>
 
@@ -130,7 +133,7 @@ export const ProductCard = ({
       </Footer>
       {owner ? (
         <FooterBtn>
-          <Edit onClick={handleOpen}>Editar</Edit>{" "}
+          <Edit onClick={handleOpenModal}>Editar</Edit>
           <Link
             to={`/announcement/${announcement.id}`}
             style={{ textDecoration: "none" }}

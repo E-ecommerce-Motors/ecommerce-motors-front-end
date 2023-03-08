@@ -41,13 +41,13 @@ interface ContextProps {
 
   announcement: any;
 
-  handleOpen: () => void;
+  handleOpenModal: () => void;
 
-  handleClose: () => void;
+  handleCloseModal: () => void;
 
-  open: boolean;
+  openModal: boolean;
 
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const UpdateContext = createContext<ContextProps>({} as ContextProps);
@@ -109,11 +109,11 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => {});
   };
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => {
     getAnn();
-    setOpen(false);
+    setOpenModal(false);
   };
 
   return (
@@ -125,10 +125,10 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         retireAnnouncement,
         announcements,
         announcement,
-        open,
-        setOpen,
-        handleOpen,
-        handleClose,
+        openModal,
+        setOpenModal,
+        handleOpenModal,
+        handleCloseModal,
       }}
     >
       {children}

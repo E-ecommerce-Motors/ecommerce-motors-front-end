@@ -1,20 +1,20 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { IconButton } from "@mui/material";
 import { theme } from "../../../styles/theme";
 import { ButtonBig } from ".././Button/styles";
+import CloseIcon from "@mui/icons-material/Close";
 import { IUserUpdate } from "../../interfaces/user";
 import { UserContext } from "../../providers/UserProvider";
 import { CloseButton } from "../CreateAnnouncementModal/style";
 import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
 import { Button, Container, Content, Para, SectionTitle } from "./styles";
+import { updateAuth } from "../../providers/authProvider";
 
 export const DeleteUserModal = () => {
-  const {
-    onSubmitDelete,
-    userData,
+  const { onSubmitDelete, userData, logout } = useContext(UserContext);
 
-    logout,
-  } = useContext(UserContext);
+  const { handleCloseModal } = updateAuth();
 
   const {
     handleSubmit,
@@ -29,7 +29,9 @@ export const DeleteUserModal = () => {
     <Container>
       <Header>
         <SectionTitle>Deletar usúario</SectionTitle>
-        <CloseButton type="button">x</CloseButton>
+        <IconButton onClick={handleCloseModal}>
+          <CloseIcon />
+        </IconButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Atenção!</Type>
@@ -38,7 +40,7 @@ export const DeleteUserModal = () => {
           alterações não poderão ser desfeitas.
         </Para>
         <FlexBtn style={{ marginBottom: "20px" }}>
-          <Button>Cancelar</Button>
+          <Button onClick={handleCloseModal}>Cancelar</Button>
           <ButtonBig
             bg={theme.colors.alert2}
             button={theme.button.big}

@@ -50,7 +50,7 @@ export const EditUser = () => {
     resolver: yupResolver(schema),
   });
 
-  const { open, handleOpen } = updateAuth();
+  const { openModal, handleOpenModal, handleCloseModal } = updateAuth();
 
   const { handleClose } = useContext(UserContext);
 
@@ -129,12 +129,12 @@ export const EditUser = () => {
           }}
         />
         <FlexBtn>
-          <Modal open={open} onClose={handleClose}>
+          <Modal open={openModal} onClose={handleCloseModal}>
             <Box>
               <DeleteUserModal />
             </Box>
           </Modal>
-          <Button onClick={handleOpen}>Deletar Usuario</Button>
+          <Button onClick={handleOpenModal}>Deletar Usuário</Button>
           <ButtonBig
             bg={theme.colors.brand1}
             button={theme.button.big}

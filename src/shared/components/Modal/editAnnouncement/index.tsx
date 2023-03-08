@@ -96,7 +96,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     resolver: yupResolver(schema),
   });
 
-  const { UpdateAnn, handleClose } = updateAuth();
+  const { UpdateAnn, handleCloseModal: handleClose } = updateAuth();
 
   const submit = (data: Update) => {
     data.typeAnnouncement = tA;
@@ -155,7 +155,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     <Container>
       <Header>
         <Heading>Editar anúncio</Heading>
-        <IconButton  onClick={handleClose}>
+        <IconButton onClick={handleClose}>
           <CloseIcon />
         </IconButton>
       </Header>

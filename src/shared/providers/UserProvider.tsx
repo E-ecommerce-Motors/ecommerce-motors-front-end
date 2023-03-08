@@ -220,6 +220,31 @@ export const UserProvider = ({ children }: IProps) => {
       });
   };
 
+  const onSubmitUpdateAddress = async (data: IUserUpdate, id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+
+    removeEmptyFields(data);
+
+    api
+      .patch(`user/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        toast.success("Perfil atualizado com sucesso!", {
+          toastId: 1,
+        });
+        handleClose();
+      })
+
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          toastId: 1,
+        });
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
