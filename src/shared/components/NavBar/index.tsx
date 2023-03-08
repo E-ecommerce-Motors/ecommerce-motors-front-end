@@ -41,17 +41,16 @@ export const NavBar = () => {
     getUser;
   }, []);
 
-  const handleScroll = (anchorId: string, offset: number = 0) => {
+  const handleScroll = (anchorId: string) => {
     const anchor = document.getElementById(anchorId);
     if (anchor) {
-      window.scrollTo({ top: anchor.offsetTop + offset, behavior: "smooth" });
+      window.scrollTo({ top: anchor.offsetTop, behavior: "smooth" });
     }
   };
 
-  function handleClick(id: string, offset: number) {
-    handleScroll(id, offset);
+  function handleClick(id: string) {
+    handleScroll(id);
   }
-
 
   return (
     <Container mobile={navMobile}>
@@ -68,22 +67,13 @@ export const NavBar = () => {
         </Mobile>
       </ContainerMobile>
       <Urls authenticaded={auth} mobile={navMobile}>
-        <Option
-          authenticaded={auth}
-          onClick={() => handleClick("car", 900)}
-        >
+        <Option authenticaded={auth} onClick={() => handleClick("car")}>
           Carros
         </Option>
-        <Option
-          authenticaded={auth}
-          onClick={() => handleClick("motorcycle", 1400)}
-        >
+        <Option authenticaded={auth} onClick={() => handleClick("motorcycle")}>
           Motos
         </Option>
-        <Option
-          authenticaded={auth}
-          onClick={() => handleClick("auction", 0)}
-        >
+        <Option authenticaded={auth} onClick={() => handleClick("auction")}>
           Leilão
         </Option>
 

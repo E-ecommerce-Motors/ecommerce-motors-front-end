@@ -33,12 +33,10 @@ export const DeleteUserModal = () => {
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Atenção!</Type>
-
         <Para>
           Você tem certeza que deseja excluir sua conta permanentemente? essas
           alterações não poderão ser desfeitas.
         </Para>
-
         <FlexBtn style={{ marginBottom: "20px" }}>
           <Button>Cancelar</Button>
           <ButtonBig

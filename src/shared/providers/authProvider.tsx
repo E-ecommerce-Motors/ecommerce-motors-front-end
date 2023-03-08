@@ -1,7 +1,8 @@
 import {
   createContext,
+  Dispatch,
   ReactNode,
-  useCallback,
+  SetStateAction,
   useContext,
   useEffect,
   useState,
@@ -29,11 +30,24 @@ interface Comment {
 
 interface ContextProps {
   getAnn: () => void;
+
   retireAnnouncement: (id: number) => void;
+
   UpdateAnn: (data: Update, id: number) => void;
+
   CreateComment: (data: Comment, id: number) => void;
+
   announcements: any;
+
   announcement: any;
+
+  handleOpen: () => void;
+
+  handleClose: () => void;
+
+  open: boolean;
+
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const UpdateContext = createContext<ContextProps>({} as ContextProps);
@@ -52,7 +66,7 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
 
   useEffect(() => {
     getAnn();
-    retireAnnouncement(3);
+    retireAnnouncement(1);
   }, []);
 
   const getAnn = async () => {
@@ -95,6 +109,13 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => {});
   };
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    getAnn();
+    setOpen(false);
+  };
+
   return (
     <UpdateContext.Provider
       value={{
@@ -104,6 +125,10 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         retireAnnouncement,
         announcements,
         announcement,
+        open,
+        setOpen,
+        handleOpen,
+        handleClose,
       }}
     >
       {children}

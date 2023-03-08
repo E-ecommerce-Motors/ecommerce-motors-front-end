@@ -33,7 +33,6 @@ export const CreateComment = () => {
   const { CreateComment, retireAnnouncement } = updateAuth();
   const { userData } = useContext(UserContext);
   const { id } = useParams();
-  const name = userData.name ? userData.name.split(" ") : "";
 
   const schema = yup.object().shape({
     text: yup.string(),
@@ -58,12 +57,17 @@ export const CreateComment = () => {
     retireAnnouncement(Number(id));
   };
 
+  const user = userData || {};
+  const name = user.name ? user.name.split(" ") : [];
+  const icon1 = name[0] ? name[0].slice(0, 1).toUpperCase() : "";
+  const icon2 = name[1] ? name[1].slice(0, 1).toUpperCase() : "";
+
   return (
     <Container>
       <Content onSubmit={handleSubmit(submit)}>
         {token ? (
           <User>
-            <Icon>{`${name[0].slice(0, 1)}${name[1].slice(0, 1)}`}</Icon>
+            <Icon>{`${icon1}${icon2}`}</Icon>
             <Name>{userData.name}</Name>
           </User>
         ) : (

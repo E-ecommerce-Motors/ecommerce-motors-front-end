@@ -40,7 +40,6 @@ export const Carousel = ({ type, id }: Props) => {
     getAnn;
   }, []);
 
-
   const typeFilter: Announcement[] = [];
 
   announcements.map((element: Announcement) => {
@@ -51,6 +50,7 @@ export const Carousel = ({ type, id }: Props) => {
 
   return (
     <Container
+      id={id}
       style={
         type == "motorcycle"
           ? { marginBottom: "60px" }

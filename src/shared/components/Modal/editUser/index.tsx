@@ -1,29 +1,29 @@
-import { theme } from "../../../../styles/theme";
-import { ButtonBig } from "../../Button/styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { IconButton } from "@mui/material";
+import { Box, Modal } from "@mui/material";
 import { useContext, useState } from "react";
+import { ButtonBig } from "../../Button/styles";
+import { theme } from "../../../../styles/theme";
+import CloseIcon from "@mui/icons-material/Close";
+import { Button } from "../../DeleteUserModal/styles";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { IUserUpdate } from "../../../interfaces/user";
+import { DeleteUserModal } from "../../DeleteUserModal";
 import { updateAuth } from "../../../providers/authProvider";
+import { UserContext } from "../../../providers/UserProvider";
 import {
-  Btn,
   Container,
   Content,
   FlexBtn,
   Header,
   Heading,
-  Infos,
   Input,
-  Single,
   TextArea,
   Title,
   Type,
 } from "../editAnnouncement/styles";
-import { UserContext } from "../../../providers/UserProvider";
-import { IUserUpdate } from "../../../interfaces/user";
-import { Box, Modal } from "@mui/material";
-import { DeleteUserModal } from "../../DeleteUserModal";
-import { Button } from "../../DeleteUserModal/styles";
+
 export const EditUser = () => {
   const { userData, onSubmitUpdate, getUser } = useContext(UserContext);
   const [name, setName] = useState("");
@@ -50,20 +50,22 @@ export const EditUser = () => {
     resolver: yupResolver(schema),
   });
 
+  const { open, handleOpen } = updateAuth();
+
+  const { handleClose } = useContext(UserContext);
+
   const submit = async (data: IUserUpdate) => {
     onSubmitUpdate(data, userData?.id);
     getUser();
   };
 
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <Container>
       <Header>
         <Heading>Editar perfil</Heading>
+        <IconButton onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Informações pessoais</Type>
