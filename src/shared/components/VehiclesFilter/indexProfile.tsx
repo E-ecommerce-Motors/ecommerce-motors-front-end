@@ -15,7 +15,6 @@ import {
   Name,
   Description,
 } from "./styles";
-import { Box, Modal } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { updateAuth } from "../../providers/authProvider";
 

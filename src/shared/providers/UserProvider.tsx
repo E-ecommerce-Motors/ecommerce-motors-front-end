@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import {
+  IAddressUpdate,
   ILoginData,
   IProps,
   IRegisterData,
@@ -60,6 +61,16 @@ interface IUserContext {
   open: boolean;
 
   setOpen: Dispatch<SetStateAction<boolean>>;
+
+  handleOpenAddress: () => void;
+
+  handleCloseAddress: () => void;
+
+  openAddress: boolean;
+
+  setOpenAddress: Dispatch<SetStateAction<boolean>>;
+
+  onSubmitUpdateAddress: (data: IAddressUpdate) => void;
 }
 
 export const UserProvider = ({ children }: IProps) => {
@@ -73,12 +84,20 @@ export const UserProvider = ({ children }: IProps) => {
 
   const handleOpen = () => setOpen(true);
 
+  const [openAddress, setOpenAddress] = useState(false);
+
+  const handleOpenAddress = () => setOpenAddress(true);
+
   useEffect(() => {
     getUser();
   }, []);
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCloseAddress = () => {
+    setOpenAddress(false);
   };
 
   const logout = () => {
@@ -171,15 +190,15 @@ export const UserProvider = ({ children }: IProps) => {
         toast.success("Perfil atualizado com sucesso!", {
           toastId: 1,
         });
-        handleClose();
+        handleCloseAddress();
       })
-
       .catch((err) => {
         toast.error(err.response.data.message, {
           toastId: 1,
         });
       });
   };
+
   const onSubmitDelete = async (id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
 
@@ -194,7 +213,6 @@ export const UserProvider = ({ children }: IProps) => {
           toastId: 1,
         });
       })
-
       .catch((err) => {
         toast.error(err.response.data.message, {
           toastId: 1,
@@ -212,6 +230,30 @@ export const UserProvider = ({ children }: IProps) => {
           toastId: 1,
         });
         setRecovery(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          toastId: 1,
+        });
+      });
+  };
+
+  const onSubmitUpdateAddress = async (data: IAddressUpdate) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+
+    removeEmptyFields(data);
+
+    api
+      .patch(`address`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        toast.success("Endereço atualizado com sucesso!", {
+          toastId: 1,
+        });
+        handleClose();
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
@@ -244,6 +286,11 @@ export const UserProvider = ({ children }: IProps) => {
         handleClose,
         open,
         setOpen,
+        openAddress,
+        setOpenAddress,
+        handleOpenAddress,
+        handleCloseAddress,
+        onSubmitUpdateAddress,
       }}
     >
       {children}
