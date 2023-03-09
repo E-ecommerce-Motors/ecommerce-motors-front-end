@@ -47,7 +47,7 @@ export const CreateComment = () => {
   });
 
   const submit = (data: Comment) => {
-    data.userId = 1;
+    data.userId = userData.id;
     data.text = comment;
     CreateComment(data, Number(id));
     reload();
