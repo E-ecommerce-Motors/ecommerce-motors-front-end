@@ -190,7 +190,7 @@ export const UserProvider = ({ children }: IProps) => {
         toast.success("Perfil atualizado com sucesso!", {
           toastId: 1,
         });
-        handleCloseAddress();
+        handleClose();
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
@@ -253,7 +253,7 @@ export const UserProvider = ({ children }: IProps) => {
         toast.success("Endereço atualizado com sucesso!", {
           toastId: 1,
         });
-        handleClose();
+        handleCloseAddress();
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
