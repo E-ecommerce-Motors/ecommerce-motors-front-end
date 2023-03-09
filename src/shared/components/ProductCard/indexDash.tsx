@@ -2,7 +2,7 @@ import { Box, Modal } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
 import { EditAnnouncement } from "../Modal/editAnnouncement";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Heading7,
   Icon,
@@ -45,7 +45,7 @@ interface Img {
   id: number;
 }
 
-export const ProductCard = ({
+export const ProductCardPersonal = ({
   img,
   heading,
   text,
@@ -65,20 +65,17 @@ export const ProductCard = ({
   });
 
   const [owner, setOwner] = useState(false);
+  const { userId } = useParams();
 
-<<<<<<< HEAD
-  const { openModal, handleOpenModal, handleCloseModal } = updateAuth();
-=======
   const { open, handleOpen, handleOpenEdit, handleClose, announcement } =
     updateAuth();
->>>>>>> 05a8c657a2512557b33e75fc6a086af0b4bd7621
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
-    if (!userData) {
+    if (!userId) {
       setOwner(false);
     } else {
-      userData.id == user ? setOwner(true) : setOwner(false);
+      userData.id == Number(userId) ? setOwner(true) : setOwner(false);
     }
   }, []);
 
@@ -100,12 +97,9 @@ export const ProductCard = ({
 
   return (
     <Container>
-      <Modal open={openModal} onClose={handleCloseModal}>
+      <Modal open={open} onClose={handleClose}>
         <Box>
-          <EditAnnouncement
-            announcement={announcement}
-            close={handleCloseModal}
-          />
+          <EditAnnouncement announcement={announcement} close={handleClose} />
         </Box>
       </Modal>
 
@@ -114,13 +108,6 @@ export const ProductCard = ({
         style={{ textDecoration: "none" }}
       >
         <ImgContainer>
-          {owner ? (
-            <Active saler={saler} active={active}>
-              {active ? `Ativo` : "Inativo"}
-            </Active>
-          ) : (
-            <></>
-          )}
           <Img image={img ? img[0].coverImage : ""} />
         </ImgContainer>
       </Link>
@@ -141,12 +128,11 @@ export const ProductCard = ({
         </Infos>
         <Price>{priceformat}</Price>
       </Footer>
-<<<<<<< HEAD
       {owner ? (
         <FooterBtn>
-          <Edit onClick={handleOpenModal}>Editar</Edit>
+          <Edit onClick={() => handleOpenEdit(announcementRe.id)}>Editar</Edit>{" "}
           <Link
-            to={`/announcement/${announcement.id}`}
+            to={`/announcement/${announcementRe.id}`}
             style={{ textDecoration: "none" }}
           >
             <Edit>Ver como</Edit>
@@ -155,8 +141,6 @@ export const ProductCard = ({
       ) : (
         <></>
       )}
-=======
->>>>>>> 05a8c657a2512557b33e75fc6a086af0b4bd7621
     </Container>
   );
 };

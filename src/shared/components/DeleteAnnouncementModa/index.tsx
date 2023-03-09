@@ -1,42 +1,40 @@
+import { Dispatch, SetStateAction, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { IconButton } from "@mui/material";
 import { theme } from "../../../styles/theme";
-import { ButtonBig } from ".././Button/styles";
-import CloseIcon from "@mui/icons-material/Close";
+import { ButtonBig } from "../Button/styles";
 import { IUserUpdate } from "../../interfaces/user";
-import { updateAuth } from "../../providers/authProvider";
 import { UserContext } from "../../providers/UserProvider";
-import { Button, Container, Content, Para, SectionTitle } from "./styles";
+import { CloseButton } from "../CreateAnnouncementModal/style";
 import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
-import { useContext } from "react";
+import { Button, Container, Content, Para, SectionTitle } from "./styles";
+import { updateAuth } from "../../providers/authProvider";
 
-export const DeleteUserModal = () => {
-  const { onSubmitDelete, userData, logout } = useContext(UserContext);
-
-  const { handleCloseDelete } = updateAuth();
-
+export const DeleteAnnModal = (id: any) => {
+  const { handleCloseDelete, deleteAnnouncement } = updateAuth();
   const {
     handleSubmit,
     formState: { errors },
   } = useForm<IUserUpdate>();
 
+  console.log(id);
+
   const submit = async () => {
-    onSubmitDelete(userData?.id);
+    deleteAnnouncement(id.id);
   };
 
   return (
     <Container>
       <Header>
-        <SectionTitle>Deletar usúario</SectionTitle>
-        <IconButton onClick={handleCloseDelete}>
-          <CloseIcon />
-        </IconButton>
+        <SectionTitle>Excluir anúncio</SectionTitle>
+        <CloseButton type="button" onClick={handleCloseDelete}>
+          x
+        </CloseButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
-        <Type>Atenção!</Type>
+        <Type>Tem certeza que deseja remover este anúncio?</Type>
         <Para>
-          Você tem certeza que deseja excluir sua conta permanentemente? essas
-          alterações não poderão ser desfeitas.
+          Essa ação não pode ser desfeita. Isso excluirá permanentemente sua
+          conta e removerá seus dados de nossos servidores.
         </Para>
         <FlexBtn style={{ marginBottom: "20px" }}>
           <Button onClick={handleCloseDelete}>Cancelar</Button>
@@ -54,11 +52,11 @@ export const DeleteUserModal = () => {
             type="submit"
             onClick={() =>
               setTimeout(() => {
-                logout();
+                handleCloseDelete();
               }, 200)
             }
           >
-            Excluir Perfil
+            Sim, Excluir anúncio
           </ButtonBig>
         </FlexBtn>
       </Content>

@@ -20,6 +20,8 @@ import {
 } from "./styles";
 import { EditUser } from "../Modal/editUser";
 import { EditAddress } from "../Modal/EditAddress";
+import { updateAuth } from "../../providers/authProvider";
+import { Link } from "react-router-dom";
 
 export const NavBar = () => {
   const {
@@ -30,8 +32,6 @@ export const NavBar = () => {
     open,
     getUser,
     openAddress,
-    handleOpenAddress,
-    handleCloseAddress,
   } = useContext(UserContext);
 
   const token = localStorage.getItem("@MotorsShop:token");
@@ -95,14 +95,11 @@ export const NavBar = () => {
           <>
             <Line />
             <Profile>
-              <User onMouseOver={() => setOpenProfile(true)}>
+              <User onClick={() => setOpenProfile(!openProfile)}>
                 <Icon>{`${icon1}${icon2}`}</Icon>
                 <Name>{user?.name}</Name>
               </User>
-              <MenuBox
-                open={openProfile}
-                onMouseLeave={() => setOpenProfile(false)}
-              >
+              <MenuBox open={openProfile}>
                 <OptionsProfile type="button" onClick={handleOpen}>
                   Editar Perfil
                 </OptionsProfile>
@@ -111,20 +108,21 @@ export const NavBar = () => {
                     <EditUser />
                   </Box>
                 </Modal>
-
-                <OptionsProfile type="button" onClick={handleOpenAddress}>
-                  Editar Endereço
-                </OptionsProfile>
-                <Modal open={openAddress} onClose={handleCloseAddress}>
-                  <Box>
-                    <EditAddress />
-                  </Box>
-                </Modal>
-                <OptionsProfile>
-                  {userData?.typeAccount == "advertiser"
-                    ? "Meus Anúncios"
-                    : "Minhas Compras"}
-                </OptionsProfile>
+                <OptionsProfile>Editar Endereço</OptionsProfile>
+                <Link
+                  to={
+                    userData?.typeAccount == "advertiser"
+                      ? `/${userData.id}/myAnnouncements`
+                      : `/${userData.id}/myShopping`
+                  }
+                  style={{ textDecoration: "none" }}
+                >
+                  <OptionsProfile>
+                    {userData?.typeAccount == "advertiser"
+                      ? "Meus Anúncios"
+                      : "Minhas Compras"}
+                  </OptionsProfile>
+                </Link>
                 <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
               </MenuBox>
             </Profile>

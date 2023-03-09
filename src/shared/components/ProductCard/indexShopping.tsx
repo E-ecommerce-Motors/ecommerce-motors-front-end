@@ -2,7 +2,7 @@ import { Box, Modal } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
 import { EditAnnouncement } from "../Modal/editAnnouncement";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Heading7,
   Icon,
@@ -45,7 +45,7 @@ interface Img {
   id: number;
 }
 
-export const ProductCard = ({
+export const ProductCardShooping = ({
   img,
   heading,
   text,
@@ -64,24 +64,6 @@ export const ProductCard = ({
     currency: "BRL",
   });
 
-  const [owner, setOwner] = useState(false);
-
-<<<<<<< HEAD
-  const { openModal, handleOpenModal, handleCloseModal } = updateAuth();
-=======
-  const { open, handleOpen, handleOpenEdit, handleClose, announcement } =
-    updateAuth();
->>>>>>> 05a8c657a2512557b33e75fc6a086af0b4bd7621
-  const { userData } = useContext(UserContext);
-
-  useEffect(() => {
-    if (!userData) {
-      setOwner(false);
-    } else {
-      userData.id == user ? setOwner(true) : setOwner(false);
-    }
-  }, []);
-
   const announcementRe = {
     img,
     tA,
@@ -96,31 +78,13 @@ export const ProductCard = ({
     id,
   };
 
-  const active: boolean = true;
-
   return (
     <Container>
-      <Modal open={openModal} onClose={handleCloseModal}>
-        <Box>
-          <EditAnnouncement
-            announcement={announcement}
-            close={handleCloseModal}
-          />
-        </Box>
-      </Modal>
-
       <Link
         to={`/announcement/${announcementRe.id}`}
         style={{ textDecoration: "none" }}
       >
         <ImgContainer>
-          {owner ? (
-            <Active saler={saler} active={active}>
-              {active ? `Ativo` : "Inativo"}
-            </Active>
-          ) : (
-            <></>
-          )}
           <Img image={img ? img[0].coverImage : ""} />
         </ImgContainer>
       </Link>
@@ -141,22 +105,6 @@ export const ProductCard = ({
         </Infos>
         <Price>{priceformat}</Price>
       </Footer>
-<<<<<<< HEAD
-      {owner ? (
-        <FooterBtn>
-          <Edit onClick={handleOpenModal}>Editar</Edit>
-          <Link
-            to={`/announcement/${announcement.id}`}
-            style={{ textDecoration: "none" }}
-          >
-            <Edit>Ver como</Edit>
-          </Link>
-        </FooterBtn>
-      ) : (
-        <></>
-      )}
-=======
->>>>>>> 05a8c657a2512557b33e75fc6a086af0b4bd7621
     </Container>
   );
 };

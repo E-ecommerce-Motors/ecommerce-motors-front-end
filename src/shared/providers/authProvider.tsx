@@ -35,19 +35,29 @@ interface ContextProps {
 
   UpdateAnn: (data: Update, id: number) => void;
 
+  deleteAnnouncement: (id: number) => void;
+
   CreateComment: (data: Comment, id: number) => void;
 
   announcements: any;
 
   announcement: any;
 
-  handleOpenModal: () => void;
+  shopping: any;
 
-  handleCloseModal: () => void;
+  setShopping: Dispatch<SetStateAction<any>>;
 
-  openModal: boolean;
+  handleOpenEdit: (id: number) => void;
 
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+
+  handleOpenDelete: () => void;
+
+  handleCloseDelete: () => void;
+
+  openDelete: boolean;
+
+  setOpenDelete: Dispatch<SetStateAction<boolean>>;
 }
 
 const UpdateContext = createContext<ContextProps>({} as ContextProps);
@@ -63,11 +73,16 @@ const updateAuth = () => {
 const UpdateProvider = ({ children }: ChildrenProp) => {
   const [announcements, setAnnouncements] = useState<any>([]);
   const [announcement, setAnnouncement] = useState<any>([]);
+  const [shopping, setShopping] = useState<any>([]);
 
   useEffect(() => {
     getAnn();
     retireAnnouncement(1);
   }, []);
+
+  const [openDelete, setOpenDelete] = useState(false);
+  const handleCloseDelete = () => setOpenDelete(false);
+  const handleOpenDelete = () => setOpenDelete(true);
 
   const getAnn = async () => {
     await api
@@ -108,12 +123,27 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .then((response) => setAnnouncement(response.data))
       .catch(() => {});
   };
+  const deleteAnnouncement = async (id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    await api
+      .delete(`announcements/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then()
+      .catch(() => {});
+  };
 
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => {
-    getAnn();
-    setOpenModal(false);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+
+  const handleOpenEdit = (id: number) => {
+    retireAnnouncement(id);
+    setTimeout(() => {
+      handleOpen();
+    }, 100);
   };
 
   return (
@@ -122,13 +152,18 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         getAnn,
         UpdateAnn,
         CreateComment,
+        deleteAnnouncement,
         retireAnnouncement,
         announcements,
         announcement,
-        openModal,
-        setOpenModal,
-        handleOpenModal,
-        handleCloseModal,
+        shopping,
+        setShopping,
+        setOpen,
+        handleOpenEdit,
+        handleCloseDelete,
+        handleOpenDelete,
+        openDelete,
+        setOpenDelete,
       }}
     >
       {children}
