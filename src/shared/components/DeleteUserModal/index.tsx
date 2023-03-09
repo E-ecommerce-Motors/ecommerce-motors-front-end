@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { IconButton } from "@mui/material";
 import { theme } from "../../../styles/theme";
@@ -6,9 +7,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { IUserUpdate } from "../../interfaces/user";
 import { updateAuth } from "../../providers/authProvider";
 import { UserContext } from "../../providers/UserProvider";
-import { Button, Container, Content, Para, SectionTitle } from "./styles";
 import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
-import { useContext } from "react";
+import { Button, Container, Content, Para, SectionTitle } from "./styles";
 
 export const DeleteUserModal = () => {
   const { onSubmitDelete, userData, logout } = useContext(UserContext);

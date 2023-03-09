@@ -102,9 +102,6 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     resolver: yupResolver(schema),
   });
 
-<<<<<<< HEAD
-  const { UpdateAnn, handleCloseModal: handleClose } = updateAuth();
-=======
   const {
     UpdateAnn,
     handleClose,
@@ -112,7 +109,6 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     handleOpenDelete,
     openDelete,
   } = updateAuth();
->>>>>>> 05a8c657a2512557b33e75fc6a086af0b4bd7621
 
   const submit = (data: Update) => {
     setTimeout(() => {

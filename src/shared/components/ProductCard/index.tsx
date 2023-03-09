@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { Box, Modal } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
+import { UserContext } from "../../providers/UserProvider";
 import { EditAnnouncement } from "../Modal/editAnnouncement";
-import { Link } from "react-router-dom";
 import {
   Heading7,
   Icon,
@@ -20,8 +21,6 @@ import {
   Edit,
   FooterBtn,
 } from "./styles";
-import { UserContext } from "../../providers/UserProvider";
-import { boolean } from "yup";
 
 interface Props {
   img?: Img[];
@@ -66,12 +65,9 @@ export const ProductCard = ({
 
   const [owner, setOwner] = useState(false);
 
-<<<<<<< HEAD
-  const { openModal, handleOpenModal, handleCloseModal } = updateAuth();
-=======
-  const { open, handleOpen, handleOpenEdit, handleClose, announcement } =
+  const { announcement, handleCloseModal, openModal, handleOpenModal } =
     updateAuth();
->>>>>>> 05a8c657a2512557b33e75fc6a086af0b4bd7621
+
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
@@ -141,7 +137,6 @@ export const ProductCard = ({
         </Infos>
         <Price>{priceformat}</Price>
       </Footer>
-<<<<<<< HEAD
       {owner ? (
         <FooterBtn>
           <Edit onClick={handleOpenModal}>Editar</Edit>
@@ -155,8 +150,6 @@ export const ProductCard = ({
       ) : (
         <></>
       )}
-=======
->>>>>>> 05a8c657a2512557b33e75fc6a086af0b4bd7621
     </Container>
   );
 };
