@@ -22,7 +22,7 @@ import {
   Type,
 } from "./styles";
 import { Box, Modal } from "@mui/material";
-import { DeleteAnnModal } from "../../DeleteAnnouncementModa";
+import { DeleteAnnModal } from "../../DeleteAnnouncementModal";
 
 interface Announcement {
   id: number;
