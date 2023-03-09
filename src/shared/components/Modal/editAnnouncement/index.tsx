@@ -450,7 +450,12 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
           );
         })}
 
-        <Btn onClick={() => handleIncrementImages()}>
+        <Btn
+          onClick={(e) => {
+            e.preventDefault();
+            handleIncrementImages();
+          }}
+        >
           Adicionar campo para imagem da galeria
         </Btn>
         <FlexBtn>

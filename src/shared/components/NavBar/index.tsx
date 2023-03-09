@@ -21,10 +21,22 @@ import {
 import { EditUser } from "../Modal/editUser";
 import { updateAuth } from "../../providers/authProvider";
 import { Link } from "react-router-dom";
+import { IUserData } from "../../interfaces/user";
+import { EditAddress } from "../Modal/editAdress";
 
 export const NavBar = () => {
-  const { logout, userData, handleOpen, handleClose, open, getUser } =
-    useContext(UserContext);
+  const {
+    logout,
+    userData,
+    setUserData,
+    handleOpen,
+    handleClose,
+    open,
+    getUser,
+    openAdress,
+    setOpenAdress,
+    handleOpenAdress,
+  } = useContext(UserContext);
   const { retireAnnouncement } = updateAuth();
 
   const token = localStorage.getItem("@MotorsShop:token");
@@ -39,7 +51,7 @@ export const NavBar = () => {
   const [navMobile, setNavMobile] = useState(false);
 
   useEffect(() => {
-    getUser;
+    getUser();
   }, []);
 
   const handleScroll = (anchorId: string) => {
@@ -92,7 +104,10 @@ export const NavBar = () => {
                 <Icon>{`${icon1}${icon2}`}</Icon>
                 <Name>{user?.name}</Name>
               </User>
-              <MenuBox open={openProfile}>
+              <MenuBox
+                open={openProfile}
+                onMouseLeave={() => setOpenProfile(!openProfile)}
+              >
                 <OptionsProfile type="button" onClick={handleOpen}>
                   Editar Perfil
                 </OptionsProfile>
@@ -102,7 +117,14 @@ export const NavBar = () => {
                   </Box>
                 </Modal>
 
-                <OptionsProfile>Editar Endereço</OptionsProfile>
+                <OptionsProfile onClick={handleOpenAdress}>
+                  Editar Endereço
+                </OptionsProfile>
+                <Modal open={openAdress} onClose={() => setOpenAdress(false)}>
+                  <Box>
+                    <EditAddress />
+                  </Box>
+                </Modal>
                 <Link
                   to={
                     userData?.typeAccount == "advertiser"
@@ -117,7 +139,13 @@ export const NavBar = () => {
                       : "Minhas Compras"}
                   </OptionsProfile>
                 </Link>
-                <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
+                <OptionsProfile
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  Sair
+                </OptionsProfile>
               </MenuBox>
             </Profile>
           </>
