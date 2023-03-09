@@ -32,6 +32,8 @@ export const NavBar = () => {
     open,
     getUser,
     openAddress,
+    handleOpenAddress,
+    handleCloseAddress,
   } = useContext(UserContext);
 
   const token = localStorage.getItem("@MotorsShop:token");
@@ -100,15 +102,22 @@ export const NavBar = () => {
                 <Name>{user?.name}</Name>
               </User>
               <MenuBox open={openProfile}>
-                <OptionsProfile type="button" onClick={handleOpen}>
+                <OptionsProfile type="button" onClick={() => handleOpen()}>
                   Editar Perfil
                 </OptionsProfile>
-                <Modal open={open} onClose={handleClose}>
+                <Modal open={open} onClose={() => handleClose()}>
                   <Box>
                     <EditUser />
                   </Box>
                 </Modal>
-                <OptionsProfile>Editar Endereço</OptionsProfile>
+                <OptionsProfile onClick={() => handleOpenAddress()}>
+                  Editar Endereço
+                </OptionsProfile>
+                <Modal open={openAddress} onClose={() => handleCloseAddress()}>
+                  <Box>
+                    <EditAddress />
+                  </Box>
+                </Modal>
                 <Link
                   to={
                     userData?.typeAccount == "advertiser"
