@@ -31,15 +31,21 @@ interface Comment {
 interface ContextProps {
   getAnn: () => void;
 
+  getComments: (id: number) => void;
+
   retireAnnouncement: (id: number) => void;
 
   UpdateAnn: (data: Update, id: number) => void;
 
   CreateComment: (data: Comment, id: number) => void;
 
+  editComment: (data: any, id: number, commentId: number) => void;
+
   announcements: any;
 
   announcement: any;
+
+  comments: any;
 
   handleOpen: () => void;
 
@@ -63,6 +69,7 @@ const updateAuth = () => {
 const UpdateProvider = ({ children }: ChildrenProp) => {
   const [announcements, setAnnouncements] = useState<any>([]);
   const [announcement, setAnnouncement] = useState<any>([]);
+  const [comments, setComments] = useState<any>([]);
 
   useEffect(() => {
     getAnn();
@@ -75,6 +82,18 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .then((response) =>
         setAnnouncements(JSON.parse(response.request.response))
       )
+      .catch(() => {});
+  };
+
+  const getComments = async (id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    await api
+      .get(`announcements/${id}/comments`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => setComments(JSON.parse(response.request.response)))
       .catch(() => {});
   };
 
@@ -103,8 +122,13 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   };
 
   const retireAnnouncement = async (id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
     await api
-      .get(`announcements/${id}`)
+      .get(`announcements/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => setAnnouncement(response.data))
       .catch(() => {});
   };
@@ -132,11 +156,14 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
     <UpdateContext.Provider
       value={{
         getAnn,
+        getComments,
         UpdateAnn,
         CreateComment,
+        editComment,
         retireAnnouncement,
         announcements,
         announcement,
+        comments,
         open,
         setOpen,
         handleOpen,
