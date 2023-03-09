@@ -95,7 +95,7 @@ export const KM_Year = styled.div`
   align-items: center;
   padding: 4px 8px;
   gap: 10px;
-  width: 57px;
+  width: max-content;
   height: 32px;
   font-size: ${theme.size.body_2};
   font-weight: ${theme.weight.body_2_500};

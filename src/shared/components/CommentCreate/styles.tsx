@@ -121,12 +121,12 @@ export const Text = styled.textarea`
   outline: none;
   line-break: auto;
   resize: none;
+  background-color: ${theme.colors.grey10};
   ::placeholder {
     font-family: ${theme.fonts.inter};
     font-style: normal;
     font-weight: ${theme.weight.input_placeholder};
     font-size: ${theme.size.input_placeholder};
-
     color: ${theme.colors.grey3};
     position: absolute;
     left: 20px;
@@ -138,7 +138,7 @@ export const Text = styled.textarea`
     }
   }
   @media (max-width: 1320px) {
-    width: 483px;
+    width: 473px;
   }
   @media (max-width: 780px) {
     width: 284px;

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
-import AnchorLink from "react-anchor-link-smooth-scroll";
 
 export interface Props {
   authenticaded?: string;
@@ -231,6 +230,9 @@ export const User = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  :hover {
+    cursor: pointer;
+  }
   @media (max-width: 1000px) {
     justify-content: flex-start;
   }

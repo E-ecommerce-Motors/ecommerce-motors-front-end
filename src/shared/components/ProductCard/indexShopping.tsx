@@ -2,7 +2,7 @@ import { Box, Modal } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
 import { EditAnnouncement } from "../Modal/editAnnouncement";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Heading7,
   Icon,
@@ -45,7 +45,7 @@ interface Img {
   id: number;
 }
 
-export const ProductCard = ({
+export const ProductCardShooping = ({
   img,
   heading,
   text,
@@ -64,20 +64,6 @@ export const ProductCard = ({
     currency: "BRL",
   });
 
-  const [owner, setOwner] = useState(false);
-
-  const { open, handleOpen, handleOpenEdit, handleClose, announcement } =
-    updateAuth();
-  const { userData } = useContext(UserContext);
-
-  useEffect(() => {
-    if (!userData) {
-      setOwner(false);
-    } else {
-      userData.id == user ? setOwner(true) : setOwner(false);
-    }
-  }, []);
-
   const announcementRe = {
     img,
     tA,
@@ -92,28 +78,13 @@ export const ProductCard = ({
     id,
   };
 
-  const active: boolean = true;
-
   return (
     <Container>
-      <Modal open={open} onClose={handleClose}>
-        <Box>
-          <EditAnnouncement announcement={announcement} close={handleClose} />
-        </Box>
-      </Modal>
-
       <Link
         to={`/announcement/${announcementRe.id}`}
         style={{ textDecoration: "none" }}
       >
         <ImgContainer>
-          {owner ? (
-            <Active saler={saler} active={active}>
-              {active ? `Ativo` : "Inativo"}
-            </Active>
-          ) : (
-            <></>
-          )}
           <Img image={img ? img[0].coverImage : ""} />
         </ImgContainer>
       </Link>
