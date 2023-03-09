@@ -3,12 +3,12 @@ import { ProductCard } from "../ProductCard";
 import { api } from "../../services/api";
 import { User } from "../NavBar/styles";
 import { ProductCardAuction } from "../ProductCardAuction";
+import { updateAuth } from "../../providers/authProvider";
+import { Message } from "../Carousel/styles";
+import { useParams } from "react-router-dom";
 
-interface Props {
-  type: "car" | "motorcycle";
-}
-
-interface User {
+interface Announcement {
+  id: number;
   name: string;
   saler?: boolean;
   title: string;
@@ -17,69 +17,61 @@ interface User {
   price: number;
   description: string;
   typeVehicle: "car" | "motorcycle";
+  typeAnnouncement: "sale" | "auction";
+  announcementImgs: ImgCover[];
+  user: any;
+  userId?: number;
+}
+
+interface ImgCover {
+  coverImage: any;
+  imageGallery: Array<string>;
+  id: number;
 }
 
 export const CarouselAuction = () => {
-  const saler: boolean = true;
-  const name: string = "Antonio";
+  const { userId } = useParams();
 
-  const heading: string = "Product title stays here - max 1 linesssss";
-  const km: number = 2;
-  const year: number = 2019;
-  const price: number = 22345.56;
-  const text: string =
-    "Lorem Ipsum is simply dummy text of the printing and typesetti industry.Lorem...aaaaaaa";
+  const { getAnn, announcements } = updateAuth();
 
-  return (
+  const auctionFilter: Announcement[] = [];
+
+  announcements.map((element: Announcement) => {
+    const profileFilter: Announcement[] = [];
+    if (userId) {
+      element.userId == Number(userId) ? profileFilter.push(element) : {};
+    } else if (element.typeAnnouncement == "auction") {
+      auctionFilter.push(element);
+    }
+    profileFilter.map((element: Announcement) => {
+      if (element.typeAnnouncement == "auction") {
+        auctionFilter.push(element);
+      }
+    });
+  });
+
+  return userId && auctionFilter.length == 0 ? (
+    <></>
+  ) : (
     <Container id="auction">
       <Auction>
         <Title>Leilão</Title>
         <Frame>
-          <ProductCardAuction
-            heading={heading}
-            km={km}
-            year={year}
-            price={price}
-            name={name}
-            text={text}
-            saler={saler}
-          />
-          <ProductCardAuction
-            heading={heading}
-            km={km}
-            year={year}
-            price={price}
-            name={name}
-            text={text}
-            saler={saler}
-          />
-          <ProductCardAuction
-            heading={heading}
-            km={km}
-            year={year}
-            price={price}
-            name={name}
-            text={text}
-            saler={saler}
-          />
-          <ProductCardAuction
-            heading={heading}
-            km={km}
-            year={year}
-            price={price}
-            name={name}
-            text={text}
-            saler={saler}
-          />
-          <ProductCardAuction
-            heading={heading}
-            km={km}
-            year={year}
-            price={price}
-            name={name}
-            text={text}
-            saler={saler}
-          />
+          {auctionFilter.map((element: Announcement, index: number) => {
+            return (
+              <ProductCardAuction
+                img={element.announcementImgs[0]}
+                key={index}
+                heading={element.title}
+                km={element.mileage}
+                year={element.year}
+                price={element.price}
+                name={element.user.name}
+                text={element.description}
+                saler={element.saler}
+              />
+            );
+          })}
         </Frame>
       </Auction>
     </Container>

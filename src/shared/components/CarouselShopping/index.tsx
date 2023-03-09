@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
 import { Container, Auction, Frame, Title, Message } from "./styles";
-import { ProductCard } from "../ProductCard";
-import { api } from "../../services/api";
 import { updateAuth } from "../../providers/authProvider";
 import { useParams } from "react-router-dom";
-import { ProductCardPersonal } from "../ProductCard/indexDash";
+import { ProductCardShooping } from "../ProductCard/indexShopping";
 
 interface Props {
   type: "car" | "motorcycle";
   id: "car" | "motorcycle";
+}
+interface Shopping {
+  shopping: Announcement;
+  id: number;
 }
 
 interface Announcement {
@@ -33,26 +34,16 @@ interface ImgCover {
   id: number;
 }
 
-export const Carousel = ({ type, id }: Props) => {
-  const { getAnn, announcements } = updateAuth();
+export const CarouselShopping = ({ type, id }: Props) => {
+  const { getAnn, shopping } = updateAuth();
   const { userId } = useParams();
 
   const typeFilter: Announcement[] = [];
 
-  announcements.map((element: Announcement) => {
-    const profileFilter: Announcement[] = [];
-    if (userId) {
-      element.userId == Number(userId) ? profileFilter.push(element) : {};
-    } else {
-      if (element.typeVehicle == type) {
-        typeFilter.push(element);
-      }
+  shopping.map((element: Shopping) => {
+    if (element.shopping.typeVehicle == type) {
+      typeFilter.push(element.shopping);
     }
-    profileFilter.map((element: Announcement) => {
-      if (element.typeVehicle == type) {
-        typeFilter.push(element);
-      }
-    });
   });
 
   return (
@@ -81,24 +72,8 @@ export const Carousel = ({ type, id }: Props) => {
             typeFilter.map((element: Announcement, index: number) => {
               let date = element.year.split("-");
 
-              return userId ? (
-                <ProductCardPersonal
-                  id={element.id}
-                  km={element.mileage}
-                  heading={element.title}
-                  name={element.user.name}
-                  saler={element.user.isSaler}
-                  user={element.user.id}
-                  price={element.price}
-                  text={element.description}
-                  key={index}
-                  year={Number(date[0])}
-                  type={element.typeVehicle}
-                  tA={element.typeAnnouncement}
-                  img={element.announcementImgs}
-                />
-              ) : (
-                <ProductCard
+              return (
+                <ProductCardShooping
                   id={element.id}
                   km={element.mileage}
                   heading={element.title}

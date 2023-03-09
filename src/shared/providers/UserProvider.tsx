@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import {
+  IAddressUpdate,
   ILoginData,
   IProps,
   IRegisterData,
@@ -59,22 +60,34 @@ interface IUserContext {
 
   open: boolean;
 
+  openAdress: boolean;
+
   setOpen: Dispatch<SetStateAction<boolean>>;
+
+  setOpenAdress: Dispatch<SetStateAction<boolean>>;
+
+  handleOpenAdress: () => void;
+
+  onSubmitUpdateAddress: (data: IAddressUpdate) => void;
 }
 
 export const UserProvider = ({ children }: IProps) => {
   const navigate = useNavigate();
+  const [iToken, setToken] = useState(
+    localStorage.getItem("@MotorsShop:token") || ""
+  );
 
   const [userData, setUserData] = useState<IUserData>({} as IUserData);
 
   const [recovery, setRecovery] = useState(false);
 
   const [open, setOpen] = useState(false);
-
+  const [openAdress, setOpenAdress] = useState(false);
+  const handleOpenAdress = () => setOpenAdress(true);
   const handleOpen = () => setOpen(true);
 
   useEffect(() => {
-    getUser();
+    getUser;
   }, []);
 
   const handleClose = () => {
@@ -89,13 +102,20 @@ export const UserProvider = ({ children }: IProps) => {
     navigate("/");
   };
 
+  const redirectLogin = () => {
+    getUser();
+    setTimeout(() => {
+      navigate("/");
+    }, 200);
+  };
+
   const onSubmitLogin = (data: ILoginData) => {
     api
       .post("session", data)
       .then((res) => {
         localStorage.setItem("@MotorsShop:token", res.data.token);
 
-        navigate("/");
+        redirectLogin();
 
         toast.success("Logado com sucesso, redirecionando!", {
           toastId: 1,
@@ -134,16 +154,18 @@ export const UserProvider = ({ children }: IProps) => {
 
   const getUser = () => {
     const token = localStorage.getItem("@MotorsShop:token");
-    api
-      .get(`user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUserData(res.data);
-      })
-      .catch(() => {});
+    token
+      ? api
+          .get(`user`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setUserData(res.data);
+          })
+          .catch(() => {})
+      : "";
   };
 
   const [showModal, setShowModal] = useState(true);
@@ -220,6 +242,30 @@ export const UserProvider = ({ children }: IProps) => {
       });
   };
 
+  const onSubmitUpdateAddress = async (data: IAddressUpdate) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+
+    removeEmptyFields(data);
+
+    api
+      .patch(`address`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        toast.success("Endereço atualizado com sucesso!", {
+          toastId: 1,
+        });
+        setOpenAdress(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          toastId: 1,
+        });
+      });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -244,6 +290,10 @@ export const UserProvider = ({ children }: IProps) => {
         handleClose,
         open,
         setOpen,
+        handleOpenAdress,
+        openAdress,
+        setOpenAdress,
+        onSubmitUpdateAddress,
       }}
     >
       {children}

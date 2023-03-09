@@ -27,9 +27,9 @@ interface Props {
   img?: any;
   heading: string;
   text: string;
-  saler: boolean;
+  saler?: boolean;
   km: number;
-  year: number;
+  year: string;
   price: number;
   name: string;
   active?: boolean;
@@ -78,7 +78,7 @@ export const ProductCardAuction = ({
           </Container>
         </Content>
         <ImgContainer />
-        <Img />
+        <Img image={img.coverImage} />
         <Bg />
       </Card>
       <Button>

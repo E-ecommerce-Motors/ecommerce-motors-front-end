@@ -32,6 +32,7 @@ export interface IUserData {
   password: string;
   createdAt: Date;
   updatedAt: Date;
+  Address?: IAddress;
 }
 interface typeAccountOptions {
   typeAccount: "advertiser" | "buyer";
@@ -42,7 +43,7 @@ interface IAddress {
   state: string;
   city: string;
   street: string;
-  number: number;
+  number: string;
   complement?: string;
 }
 
@@ -59,3 +60,5 @@ export interface IRegisterData {
   confirmPassword: string;
   address: IAddress;
 }
+
+export interface IAddressUpdate extends IAddress {}

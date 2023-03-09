@@ -21,20 +21,22 @@ import {
   Title,
   Type,
 } from "./styles";
+import { Box, Modal } from "@mui/material";
+import { DeleteAnnModal } from "../../DeleteAnnouncementModa";
 
 interface Announcement {
   id: number;
-  img?: Img[];
-  heading: string;
-  text: string;
+  announcementImgs?: Img[];
+  title: string;
+  description: string;
   saler: boolean;
-  km: number;
+  mileage: number;
   year: number;
   price: number;
   name: string;
   active?: boolean;
-  type: string;
-  tA: string;
+  typeVehicle: string;
+  typeAnnouncement: string;
 }
 
 interface Img {
@@ -61,24 +63,28 @@ interface Update {
 }
 
 export const EditAnnouncement = ({ announcement, close }: Props) => {
-  const [title, setTitle] = useState(announcement.heading);
+  const [title, setTitle] = useState(announcement.title);
   const [year, setYear] = useState(announcement.year);
-  const [mileage, setMileage] = useState(announcement.km);
+  const [mileage, setMileage] = useState(announcement.mileage);
   const [price, setPrice] = useState(announcement.price);
-  const [description, setDescription] = useState(announcement.text);
-  const [type, setType] = useState(announcement.type);
-  const [tA, setTA] = useState(announcement.tA);
+  const [description, setDescription] = useState(announcement.description);
+  const [type, setType] = useState(announcement.typeVehicle);
+  const [tA, setTA] = useState(announcement.typeAnnouncement);
   const [change, setChange] = useState(true);
   const [coverImages, setCoverImages] = useState(
-    announcement.img ? announcement.img[0].coverImage : " "
+    announcement.announcementImgs
+      ? announcement.announcementImgs[0].coverImage
+      : " "
   );
   const [images, setImages] = useState<string[]>(
-    announcement.img ? announcement.img[0].imageGallery : []
+    announcement.announcementImgs
+      ? announcement.announcementImgs[0].imageGallery
+      : []
   );
 
   const schema = yup.object().shape({
     title: yup.string().optional(),
-    year: yup.string().optional(),
+    year: yup.string().min(4).max(4).optional(),
     mileage: yup.number().notRequired(),
     price: yup.number().optional(),
     description: yup.string().optional(),
@@ -96,9 +102,18 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     resolver: yupResolver(schema),
   });
 
-  const { UpdateAnn, handleClose } = updateAuth();
+  const {
+    UpdateAnn,
+    handleClose,
+    handleCloseDelete,
+    handleOpenDelete,
+    openDelete,
+  } = updateAuth();
 
   const submit = (data: Update) => {
+    setTimeout(() => {
+      close();
+    }, 100);
     data.typeAnnouncement = tA;
     data.typeVehicle = type;
     const imageValidation: Array<string> = [];
@@ -118,7 +133,11 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
       price: data.price,
       announcementImgs: {
         update: {
-          where: { id: announcement.img ? announcement.img[0].id : "" },
+          where: {
+            id: announcement.announcementImgs
+              ? announcement.announcementImgs[0].id
+              : "",
+          },
           data: {
             coverImage: data.coverImage,
             imageGallery: data.imageGallery,
@@ -155,7 +174,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
     <Container>
       <Header>
         <Heading>Editar anúncio</Heading>
-        <IconButton  onClick={handleClose}>
+        <IconButton onClick={handleClose}>
           <CloseIcon />
         </IconButton>
       </Header>
@@ -237,7 +256,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
         <Type>Informações do veículo</Type>
         <Title>Título</Title>
         <Input
-          placeholder={announcement.heading}
+          placeholder={announcement.title}
           width={"big"}
           {...register("title")}
           value={title}
@@ -264,7 +283,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
           <Single>
             <Title>Quilometragem</Title>
             <Input
-              placeholder={`${announcement.km} km`}
+              placeholder={`${announcement.mileage} km`}
               width={"none"}
               {...register("mileage")}
               value={mileage}
@@ -293,7 +312,7 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
         </Infos>
         <Title>Descrição</Title>
         <TextArea
-          placeholder={announcement.text}
+          placeholder={announcement.description}
           {...register("description")}
           value={description}
           onChange={(e) => {
@@ -431,10 +450,20 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
           );
         })}
 
-        <Btn onClick={() => handleIncrementImages()}>
+        <Btn
+          onClick={(e) => {
+            e.preventDefault();
+            handleIncrementImages();
+          }}
+        >
           Adicionar campo para imagem da galeria
         </Btn>
         <FlexBtn>
+          <Modal open={openDelete} onClose={handleCloseDelete}>
+            <Box>
+              <DeleteAnnModal id={announcement.id} />
+            </Box>
+          </Modal>
           <ButtonBig
             bg={theme.colors.grey6}
             button={theme.button.big}
@@ -445,6 +474,10 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
             bgHover={theme.colors.grey5}
             borderHover={theme.colors.grey5}
             colorHover={theme.colors.grey2}
+            onClick={(e) => {
+              e.preventDefault();
+              handleOpenDelete();
+            }}
           >
             Excluir anúncio
           </ButtonBig>
@@ -461,11 +494,6 @@ export const EditAnnouncement = ({ announcement, close }: Props) => {
             disabled={change}
             disable="sim"
             type="submit"
-            onClick={() =>
-              setTimeout(() => {
-                close();
-              }, 200)
-            }
           >
             Salvar alterações
           </ButtonBig>

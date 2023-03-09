@@ -11,9 +11,12 @@ import {
   Ball,
 } from "./styles";
 import { updateAuth } from "../../providers/authProvider";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export const RetireAnnouncement = () => {
-  const { announcement } = updateAuth();
+  const { announcement, retireAnnouncement } = updateAuth();
+  const { id } = useParams();
 
   const msInDay = 24 * 60 * 60 * 1000;
   const msInHour = 60 * 60 * 1000;
@@ -27,7 +30,7 @@ export const RetireAnnouncement = () => {
     const time = +now - +date;
 
     if (time >= 1000 && time < 60000) {
-      timePass.push(`há ${(time / msInSeconds).toFixed()} segundos`);
+      timePass.push(`há menos de 1 minuto`);
     } else if (time >= 60000 && time < 3600000) {
       timePass.push(`há ${(time / msInMinutes).toFixed()} minutos`);
     } else if (time >= 3600000 && time < 86400000) {
@@ -58,7 +61,9 @@ export const RetireAnnouncement = () => {
                 <Icon>{`${icon1}${icon2}`}</Icon>
                 <Name>{element.comment.user.name}</Name>
                 <Ball />
-                <Time>{timePass[index]}</Time>
+                <Time>
+                  {timePass[index] ? timePass[index] : "há menos de 1 minuto"}
+                </Time>
               </User>
               <TextArea>{element.comment.text}</TextArea>
             </Content>
