@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
+export interface Props {
+  image?: any;
+}
 
 export const Card = styled.section`
   width: 735px;
@@ -78,9 +81,10 @@ export const Img = styled.div`
   width: 581.96px;
   height: 315.11px;
   order: 0;
-  background-image: url(/assets/land-rover-range-rover-car-png-25.png);
+  background-image: url(${(props: Props) => props.image});
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center center;
   @media (max-width: 1650px) {
     width: 287px;
     height: 155.4px;
@@ -143,8 +147,9 @@ export const KM_Year = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4px 8px;
+  margin-right: 5px;
   gap: 10px;
-  width: 51px;
+  width: max-content;
   height: 32px;
   font-size: ${theme.size.body_2};
   font-weight: ${theme.weight.body_2_500};
@@ -185,7 +190,7 @@ export const Infos = styled.aside`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  width: 17.5%;
+  width: max-content;
 `;
 
 export const Saler = styled.aside`

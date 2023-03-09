@@ -49,8 +49,7 @@ export const EditUser = () => {
   } = useForm<any>({
     resolver: yupResolver(schema),
   });
-
-  const { open, handleOpen } = updateAuth();
+  const { handleCloseDelete, handleOpenDelete, openDelete } = updateAuth();
 
   const { handleClose } = useContext(UserContext);
 
@@ -129,12 +128,12 @@ export const EditUser = () => {
           }}
         />
         <FlexBtn>
-          <Modal open={open} onClose={handleClose}>
+          <Modal open={openDelete} onClose={handleCloseDelete}>
             <Box>
               <DeleteUserModal />
             </Box>
           </Modal>
-          <Button onClick={handleOpen}>Deletar Usuario</Button>
+          <Button onClick={handleOpenDelete}>Deletar Usuario</Button>
           <ButtonBig
             bg={theme.colors.brand1}
             button={theme.button.big}

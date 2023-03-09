@@ -7,19 +7,29 @@ import {
   KM_Year,
   Price,
 } from "./styles";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
 import { useParams } from "react-router-dom";
 import { ButtonBig } from "../Button/styles";
 import { theme } from "../../../styles/theme";
+import { UserContext } from "../../providers/UserProvider";
 
 export const InfosAnnouncement = () => {
-  const { announcement } = updateAuth();
+  const { announcement, setShopping, shopping } = updateAuth();
+  const { userData } = useContext(UserContext);
 
   const priceformat: string = announcement.price.toLocaleString(`pt-BR`, {
     style: "currency",
     currency: "BRL",
   });
+
+  const handleShopping = () => {
+    const data = {
+      id: userData.id,
+      shopping: announcement,
+    };
+    setShopping([...shopping, data]);
+  };
 
   return (
     <Container>
@@ -44,6 +54,7 @@ export const InfosAnnouncement = () => {
         borderHover={theme.colors.brand2}
         colorHover={theme.colors.whiteFixed}
         style={{ width: "100px" }}
+        onClick={handleShopping}
       >
         Comprar
       </ButtonBig>

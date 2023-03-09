@@ -20,6 +20,7 @@ import {
 } from "./styles";
 import { EditUser } from "../Modal/editUser";
 import { updateAuth } from "../../providers/authProvider";
+import { Link } from "react-router-dom";
 
 export const NavBar = () => {
   const { logout, userData, handleOpen, handleClose, open, getUser } =
@@ -87,14 +88,11 @@ export const NavBar = () => {
           <>
             <Line />
             <Profile>
-              <User onMouseOver={() => setOpenProfile(true)}>
+              <User onClick={() => setOpenProfile(!openProfile)}>
                 <Icon>{`${icon1}${icon2}`}</Icon>
                 <Name>{user?.name}</Name>
               </User>
-              <MenuBox
-                open={openProfile}
-                onMouseLeave={() => setOpenProfile(false)}
-              >
+              <MenuBox open={openProfile}>
                 <OptionsProfile type="button" onClick={handleOpen}>
                   Editar Perfil
                 </OptionsProfile>
@@ -105,11 +103,20 @@ export const NavBar = () => {
                 </Modal>
 
                 <OptionsProfile>Editar Endereço</OptionsProfile>
-                <OptionsProfile>
-                  {userData?.typeAccount == "advertiser"
-                    ? "Meus Anúncios"
-                    : "Minhas Compras"}
-                </OptionsProfile>
+                <Link
+                  to={
+                    userData?.typeAccount == "advertiser"
+                      ? `/${userData.id}/myAnnouncements`
+                      : `/${userData.id}/myShopping`
+                  }
+                  style={{ textDecoration: "none" }}
+                >
+                  <OptionsProfile>
+                    {userData?.typeAccount == "advertiser"
+                      ? "Meus Anúncios"
+                      : "Minhas Compras"}
+                  </OptionsProfile>
+                </Link>
                 <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
               </MenuBox>
             </Profile>

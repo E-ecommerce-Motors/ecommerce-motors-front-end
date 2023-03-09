@@ -16,9 +16,11 @@ import {
   Description,
 } from "./styles";
 import { Box, Modal } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 export const VehiclesFilter = () => {
   const { userData, getUser } = useContext(UserContext);
+  const { userId } = useParams();
 
   const { isOpen, toggleModal } = useContext(AnnouncementContext);
 
@@ -68,7 +70,7 @@ export const VehiclesFilter = () => {
               </Name>
             </User>
             <Description>{userData?.description}</Description>
-            {userData?.typeAccount === "advertiser" && (
+            {userData?.typeAccount === "advertiser" && userId ? (
               <ButtonBig
                 bg={theme.colors.whiteFixed}
                 button={theme.button.big}
@@ -83,6 +85,8 @@ export const VehiclesFilter = () => {
               >
                 Criar anúncio
               </ButtonBig>
+            ) : (
+              <></>
             )}
           </Profile>
         </ContentProfile>
