@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { IconButton } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ButtonBig } from "../../Button/styles";
 import { theme } from "../../../../styles/theme";
 import CloseIcon from "@mui/icons-material/Close";
@@ -30,27 +30,24 @@ export const EditAddress = () => {
   const [birthDate, setBirthDate] = useState("");
   const [description, setDescription] = useState("");
 
-  const schema = yup.object().shape({
-    name: yup.string().optional(),
-    email: yup.string().optional(),
-    cpf: yup.string().optional(),
-    phone: yup.string().optional(),
-    birthdDate: yup.string().optional(),
-    description: yup.string().optional(),
-  });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<IAddressUpdate>({});
 
   const submit = async (data: IAddressUpdate) => {
     onSubmitUpdateAddress(data);
     getUser();
   };
+
+  const token = localStorage.getItem("@MotorsShop:token");
+
+  useEffect(() => {
+    if (token) {
+      getUser();
+    }
+  }, [token]);
 
   return (
     <Container>
@@ -65,51 +62,35 @@ export const EditAddress = () => {
         <AddressContent>
           <Title>CEP</Title>
           <Input
-            placeholder={userData.name}
+            placeholder={userData.Address?.cep}
             width={"big"}
-            {...register("name")}
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
+            {...register("cep")}
           />
         </AddressContent>
         <ContentInput>
           <AddressContent>
             <Title>Estado</Title>
             <Input
-              placeholder={userData.email}
+              placeholder={userData.Address?.state}
               width={"medium"}
-              {...register("email")}
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              {...register("state")}
             />
           </AddressContent>
           <AddressContent>
             <Title>Cidade</Title>
             <Input
-              placeholder={userData.cpf}
+              placeholder={userData.Address?.city}
               width={"medium"}
-              {...register("cpf")}
-              value={cpf}
-              onChange={(e) => {
-                setCpf(e.target.value);
-              }}
+              {...register("city")}
             />
           </AddressContent>
         </ContentInput>
         <AddressContent>
           <Title>Rua</Title>
           <Input
-            placeholder={userData.phone}
+            placeholder={userData.Address?.street}
             width={"big"}
-            {...register("phone")}
-            value={phone}
-            onChange={(e) => {
-              setPhone(e.target.value);
-            }}
+            {...register("street")}
           />
         </AddressContent>
 
@@ -117,25 +98,17 @@ export const EditAddress = () => {
           <AddressContent>
             <Title>Número</Title>
             <Input
-              placeholder={userData.birthDate}
+              placeholder={userData.Address?.number}
               width={"medium"}
-              {...register("birthDate")}
-              value={birthDate}
-              onChange={(e) => {
-                setBirthDate(e.target.value);
-              }}
+              {...register("number")}
             />
           </AddressContent>
           <AddressContent>
             <Title>Complememento</Title>
             <Input
-              placeholder={userData.description}
+              placeholder={userData.Address?.complement}
               width={"medium"}
-              {...register("description")}
-              value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
+              {...register("complement")}
             />
           </AddressContent>
         </ContentInput>
