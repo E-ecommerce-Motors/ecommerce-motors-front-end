@@ -7,9 +7,7 @@ import {
   KM_Year,
   Price,
 } from "./styles";
-import { useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
-import { useParams } from "react-router-dom";
 import { ButtonBig } from "../Button/styles";
 import { theme } from "../../../styles/theme";
 

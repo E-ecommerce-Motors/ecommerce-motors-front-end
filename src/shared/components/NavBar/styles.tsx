@@ -152,8 +152,7 @@ export const SignIn = styled(Link)`
 export const Urls = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: ${(props: Props) =>
-    props.authenticaded == "default" ? "flex-end" : "center"};
+  justify-content: flex-end;
   align-items: center;
   padding: 0px;
   gap: 44px;

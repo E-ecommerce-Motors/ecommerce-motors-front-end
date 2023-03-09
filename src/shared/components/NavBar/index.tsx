@@ -19,11 +19,20 @@ import {
   ContainerMobile,
 } from "./styles";
 import { EditUser } from "../Modal/editUser";
-import { updateAuth } from "../../providers/authProvider";
+import { EditAddress } from "../Modal/EditAddress";
 
 export const NavBar = () => {
-  const { logout, userData, handleOpen, handleClose, open, getUser } =
-    useContext(UserContext);
+  const {
+    logout,
+    userData,
+    handleOpen,
+    handleClose,
+    open,
+    getUser,
+    openAddress,
+    handleOpenAddress,
+    handleCloseAddress,
+  } = useContext(UserContext);
 
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
@@ -38,7 +47,7 @@ export const NavBar = () => {
 
   useEffect(() => {
     getUser;
-  }, []);
+  }, [token]);
 
   const handleScroll = (anchorId: string) => {
     const anchor = document.getElementById(anchorId);
@@ -103,7 +112,14 @@ export const NavBar = () => {
                   </Box>
                 </Modal>
 
-                <OptionsProfile>Editar Endereço</OptionsProfile>
+                <OptionsProfile type="button" onClick={handleOpenAddress}>
+                  Editar Endereço
+                </OptionsProfile>
+                <Modal open={openAddress} onClose={handleCloseAddress}>
+                  <Box>
+                    <EditAddress />
+                  </Box>
+                </Modal>
                 <OptionsProfile>
                   {userData?.typeAccount == "advertiser"
                     ? "Meus Anúncios"

@@ -59,3 +59,7 @@ export interface IRegisterData {
   confirmPassword: string;
   address: IAddress;
 }
+
+export interface IAddressUpdate extends IAddress {
+  
+}
