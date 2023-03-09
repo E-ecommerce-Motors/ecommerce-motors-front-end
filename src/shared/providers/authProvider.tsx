@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { api } from "../services/api";
+import { UserContext } from "./UserProvider";
 
 interface ChildrenProp {
   children: ReactNode;
@@ -36,6 +37,7 @@ interface ContextProps {
   UpdateAnn: (data: Update, id: number) => void;
 
   deleteAnnouncement: (id: number) => void;
+  DeleteComment: (id: number, idComment: number) => void;
 
   CreateComment: (data: Comment, id: number) => void;
 
@@ -62,6 +64,8 @@ interface ContextProps {
   handleCloseDelete: () => void;
 
   openDelete: boolean;
+
+  UpdateComment: (idComment: number, id: number, data: string) => void;
 
   setOpenDelete: Dispatch<SetStateAction<boolean>>;
 }
@@ -123,6 +127,32 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => {});
   };
 
+  const DeleteComment = async (idComment: number, id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    await api
+      .delete(`announcements/${id}/comments/${idComment}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  const UpdateComment = async (idComment: number, id: number, dataT: any) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    const data = { data: dataT };
+
+    await api
+      .patch(`announcements/${id}/comments/${idComment}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {})
+      .catch(() => {});
+  };
+
   const retireAnnouncement = async (id: number) => {
     await api
       .get(`announcements/${id}`)
@@ -157,6 +187,8 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   return (
     <UpdateContext.Provider
       value={{
+        DeleteComment,
+        UpdateComment,
         getAnn,
         UpdateAnn,
         CreateComment,

@@ -94,6 +94,10 @@ export const ProductCard = ({
 
   const active: boolean = true;
 
+  const name1 = name ? name.split(" ") : "";
+  const icon1 = name1[0] ? name1[0].slice(0, 1).toUpperCase() : "";
+  const icon2 = name1[1] ? name1[1].slice(0, 1).toUpperCase() : "";
+
   return (
     <Container>
       <Modal open={open} onClose={handleClose}>
@@ -124,7 +128,7 @@ export const ProductCard = ({
         {text.length > 74 ? `${text.slice(0, 71)}...` : text}
       </Paragraph>
       <Saler>
-        <Icon>{name.slice(0, 1)}</Icon>
+        <Icon>{`${icon1}${icon2}`}</Icon>
         <Name>{name}</Name>
       </Saler>
       <Footer>
