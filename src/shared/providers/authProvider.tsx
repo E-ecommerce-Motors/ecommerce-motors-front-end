@@ -109,6 +109,18 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => {});
   };
 
+  const editComment = async (data: Comment, id: number, commentId: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    await api
+      .post(`announcements/${id}/comments/${commentId}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {})
+      .catch(() => {});
+  };
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
