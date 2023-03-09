@@ -42,7 +42,7 @@ export const Header = styled.div`
 `;
 
 export const Heading = styled.h2`
-  width: 116px;
+  width: 130px;
   height: 20px;
   font-family: ${theme.fonts.lexend};
   font-style: normal;
@@ -87,7 +87,7 @@ export const Type = styled.h3`
 export const Title = styled.label`
   font-family: ${theme.fonts.inter};
   font-style: normal;
-  font-weight: ${theme.weight.input_label};
+  font-weight: ${theme.weight.Heading_3_600};
   font-size: ${theme.size.input_label};
   line-height: 17px;
   color: ${theme.colors.grey1};
@@ -96,10 +96,9 @@ export const Title = styled.label`
 export const FlexBtn = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-end;
   padding: 0px;
-  gap: 9px;
+  gap: 17px;
   width: 466px;
   @media (max-width: 666px) {
     width: 314px;
@@ -228,3 +227,4 @@ export const CloseButton = styled.button`
   outline: none;
   color: ${theme.colors.grey4};
 `;
+

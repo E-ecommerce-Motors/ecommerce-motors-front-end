@@ -86,12 +86,20 @@ export const UserProvider = ({ children }: IProps) => {
   const handleOpenAdress = () => setOpenAdress(true);
   const handleOpen = () => setOpen(true);
 
+  const [openAddress, setOpenAddress] = useState(false);
+
+  const handleOpenAddress = () => setOpenAddress(true);
+
   useEffect(() => {
     getUser;
   }, []);
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCloseAddress = () => {
+    setOpenAddress(false);
   };
 
   const logout = () => {
@@ -195,13 +203,13 @@ export const UserProvider = ({ children }: IProps) => {
         });
         handleClose();
       })
-
       .catch((err) => {
         toast.error(err.response.data.message, {
           toastId: 1,
         });
       });
   };
+
   const onSubmitDelete = async (id: number) => {
     const token = localStorage.getItem("@MotorsShop:token");
 
@@ -216,7 +224,6 @@ export const UserProvider = ({ children }: IProps) => {
           toastId: 1,
         });
       })
-
       .catch((err) => {
         toast.error(err.response.data.message, {
           toastId: 1,

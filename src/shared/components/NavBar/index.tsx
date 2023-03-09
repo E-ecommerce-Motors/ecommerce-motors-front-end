@@ -19,6 +19,7 @@ import {
   ContainerMobile,
 } from "./styles";
 import { EditUser } from "../Modal/editUser";
+import { EditAddress } from "../Modal/EditAddress";
 import { updateAuth } from "../../providers/authProvider";
 import { Link } from "react-router-dom";
 import { IUserData } from "../../interfaces/user";
@@ -39,6 +40,7 @@ export const NavBar = () => {
   } = useContext(UserContext);
   const { retireAnnouncement } = updateAuth();
 
+
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
 
@@ -53,6 +55,7 @@ export const NavBar = () => {
   useEffect(() => {
     getUser();
   }, []);
+
 
   const handleScroll = (anchorId: string) => {
     const anchor = document.getElementById(anchorId);
@@ -116,7 +119,6 @@ export const NavBar = () => {
                     <EditUser />
                   </Box>
                 </Modal>
-
                 <OptionsProfile onClick={handleOpenAdress}>
                   Editar Endereço
                 </OptionsProfile>

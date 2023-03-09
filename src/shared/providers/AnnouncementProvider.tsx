@@ -129,11 +129,6 @@ export const AnnouncementProvider = ({ children }: ChildrenProp) => {
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
-    if (!isOpen) {
-      // document.body.style.overflow = "hidden";
-    } else {
-      // document.body.style.overflow = "scroll";
-    }
   };
 
   const CreateAnn = async (data: Create) => {
@@ -150,8 +145,7 @@ export const AnnouncementProvider = ({ children }: ChildrenProp) => {
         });
         toggleModal();
       })
-      .catch(() => {
-      });
+      .catch(() => {});
   };
 
   return (

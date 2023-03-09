@@ -1,3 +1,8 @@
+import { useContext, useEffect } from "react";
+import { ButtonBig } from "../Button/styles";
+import { theme } from "../../../styles/theme";
+import { updateAuth } from "../../providers/authProvider";
+import { UserContext } from "../../providers/UserProvider";
 import {
   Container,
   Content,
@@ -7,12 +12,6 @@ import {
   KM_Year,
   Price,
 } from "./styles";
-import { useContext, useEffect, useState } from "react";
-import { updateAuth } from "../../providers/authProvider";
-import { useParams } from "react-router-dom";
-import { ButtonBig } from "../Button/styles";
-import { theme } from "../../../styles/theme";
-import { UserContext } from "../../providers/UserProvider";
 
 export const InfosAnnouncement = () => {
   const { announcement, setShopping, shopping } = updateAuth();

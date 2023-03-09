@@ -43,6 +43,9 @@ interface ContextProps {
 
   announcement: any;
 
+  handleOpenModal: () => void;
+
+  handleCloseModal: () => void;
   shopping: any;
 
   setShopping: Dispatch<SetStateAction<any>>;
@@ -53,7 +56,9 @@ interface ContextProps {
 
   handleClose: () => void;
 
-  open: boolean;
+  openModal: boolean;
+
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
 
   setOpen: Dispatch<SetStateAction<boolean>>;
 
@@ -141,8 +146,18 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => {});
   };
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => setOpenModal(true);
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
+  
   const handleOpenEdit = (id: number) => {
     retireAnnouncement(id);
     setTimeout(() => {
@@ -151,7 +166,7 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   };
   const handleClose = () => {
     getAnn();
-    setOpen(false);
+    setOpenModal(false);
   };
 
   return (
@@ -164,7 +179,10 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         retireAnnouncement,
         announcements,
         announcement,
-        open,
+        openModal,
+        setOpenModal,
+        handleOpenModal,
+        handleCloseModal,
         shopping,
         setShopping,
         setOpen,

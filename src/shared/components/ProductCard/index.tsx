@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { Box, Modal } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
+import { UserContext } from "../../providers/UserProvider";
 import { EditAnnouncement } from "../Modal/editAnnouncement";
-import { Link } from "react-router-dom";
 import {
   Heading7,
   Icon,
@@ -20,8 +21,6 @@ import {
   Edit,
   FooterBtn,
 } from "./styles";
-import { UserContext } from "../../providers/UserProvider";
-import { boolean } from "yup";
 
 interface Props {
   img?: Img[];
@@ -66,8 +65,9 @@ export const ProductCard = ({
 
   const [owner, setOwner] = useState(false);
 
-  const { open, handleOpen, handleOpenEdit, handleClose, announcement } =
+  const { announcement, handleCloseModal, openModal, handleOpenModal } =
     updateAuth();
+
   const { userData } = useContext(UserContext);
 
   useEffect(() => {
@@ -96,9 +96,12 @@ export const ProductCard = ({
 
   return (
     <Container>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={openModal} onClose={handleCloseModal}>
         <Box>
-          <EditAnnouncement announcement={announcement} close={handleClose} />
+          <EditAnnouncement
+            announcement={announcement}
+            close={handleCloseModal}
+          />
         </Box>
       </Modal>
 
@@ -134,6 +137,19 @@ export const ProductCard = ({
         </Infos>
         <Price>{priceformat}</Price>
       </Footer>
+      {owner ? (
+        <FooterBtn>
+          <Edit onClick={handleOpenModal}>Editar</Edit>
+          <Link
+            to={`/announcement/${announcement.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Edit>Ver como</Edit>
+          </Link>
+        </FooterBtn>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

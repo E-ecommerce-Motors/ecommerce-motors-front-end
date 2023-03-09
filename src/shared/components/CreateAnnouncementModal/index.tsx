@@ -59,13 +59,13 @@ export const CreateAnnouncementModal = () => {
   };
 
   useEffect(() => {
-    getAnn()
+    getAnn();
   });
 
   useEffect(() => {
     getUser();
   }, []);
-  
+
   const {
     toggleModal,
     CreateAnn,
@@ -91,7 +91,7 @@ export const CreateAnnouncementModal = () => {
     imageGallery,
     handleInputChange,
   } = useContext(AnnouncementContext);
-  
+
   return (
     <Container>
       <Header>

@@ -1,17 +1,20 @@
-import { Dispatch, SetStateAction, useContext } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { IconButton } from "@mui/material";
 import { theme } from "../../../styles/theme";
 import { ButtonBig } from ".././Button/styles";
+import CloseIcon from "@mui/icons-material/Close";
 import { IUserUpdate } from "../../interfaces/user";
+import { updateAuth } from "../../providers/authProvider";
 import { UserContext } from "../../providers/UserProvider";
-import { CloseButton } from "../CreateAnnouncementModal/style";
 import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
 import { Button, Container, Content, Para, SectionTitle } from "./styles";
-import { updateAuth } from "../../providers/authProvider";
 
 export const DeleteUserModal = () => {
   const { onSubmitDelete, userData, logout } = useContext(UserContext);
+
   const { handleCloseDelete } = updateAuth();
+
   const {
     handleSubmit,
     formState: { errors },
@@ -25,9 +28,9 @@ export const DeleteUserModal = () => {
     <Container>
       <Header>
         <SectionTitle>Deletar usúario</SectionTitle>
-        <CloseButton type="button" onClick={handleCloseDelete}>
-          x
-        </CloseButton>
+        <IconButton onClick={handleCloseDelete}>
+          <CloseIcon />
+        </IconButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Atenção!</Type>
