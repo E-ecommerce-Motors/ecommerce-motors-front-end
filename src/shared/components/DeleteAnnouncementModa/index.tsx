@@ -16,7 +16,6 @@ export const DeleteAnnModal = (id: any) => {
     formState: { errors },
   } = useForm<IUserUpdate>();
 
-  console.log(id);
 
   const submit = async () => {
     deleteAnnouncement(id.id);

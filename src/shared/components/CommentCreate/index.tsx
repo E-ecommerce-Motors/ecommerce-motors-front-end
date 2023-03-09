@@ -54,7 +54,10 @@ export const CreateComment = () => {
   };
 
   const reload = () => {
-    retireAnnouncement(Number(id));
+    setTimeout(() => {
+      retireAnnouncement(Number(id));
+    }, 300);
+    setComment("");
   };
 
   const user = userData || {};

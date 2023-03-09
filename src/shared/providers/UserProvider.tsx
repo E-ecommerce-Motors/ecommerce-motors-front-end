@@ -60,28 +60,30 @@ interface IUserContext {
 
   open: boolean;
 
+  openAdress: boolean;
+
   setOpen: Dispatch<SetStateAction<boolean>>;
 
-  handleOpenAddress: () => void;
+  setOpenAdress: Dispatch<SetStateAction<boolean>>;
 
-  handleCloseAddress: () => void;
-
-  openAddress: boolean;
-
-  setOpenAddress: Dispatch<SetStateAction<boolean>>;
+  handleOpenAdress: () => void;
 
   onSubmitUpdateAddress: (data: IAddressUpdate) => void;
 }
 
 export const UserProvider = ({ children }: IProps) => {
   const navigate = useNavigate();
+  const [iToken, setToken] = useState(
+    localStorage.getItem("@MotorsShop:token") || ""
+  );
 
   const [userData, setUserData] = useState<IUserData>({} as IUserData);
 
   const [recovery, setRecovery] = useState(false);
 
   const [open, setOpen] = useState(false);
-
+  const [openAdress, setOpenAdress] = useState(false);
+  const handleOpenAdress = () => setOpenAdress(true);
   const handleOpen = () => setOpen(true);
 
   const [openAddress, setOpenAddress] = useState(false);
@@ -89,7 +91,7 @@ export const UserProvider = ({ children }: IProps) => {
   const handleOpenAddress = () => setOpenAddress(true);
 
   useEffect(() => {
-    getUser();
+    getUser;
   }, []);
 
   const handleClose = () => {
@@ -108,13 +110,20 @@ export const UserProvider = ({ children }: IProps) => {
     navigate("/");
   };
 
+  const redirectLogin = () => {
+    getUser();
+    setTimeout(() => {
+      navigate("/");
+    }, 200);
+  };
+
   const onSubmitLogin = (data: ILoginData) => {
     api
       .post("session", data)
       .then((res) => {
         localStorage.setItem("@MotorsShop:token", res.data.token);
 
-        navigate("/");
+        redirectLogin();
 
         toast.success("Logado com sucesso, redirecionando!", {
           toastId: 1,
@@ -153,16 +162,18 @@ export const UserProvider = ({ children }: IProps) => {
 
   const getUser = () => {
     const token = localStorage.getItem("@MotorsShop:token");
-    api
-      .get(`user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUserData(res.data);
-      })
-      .catch(() => {});
+    token
+      ? api
+          .get(`user`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setUserData(res.data);
+          })
+          .catch(() => {})
+      : "";
   };
 
   const [showModal, setShowModal] = useState(true);
@@ -253,7 +264,7 @@ export const UserProvider = ({ children }: IProps) => {
         toast.success("Endereço atualizado com sucesso!", {
           toastId: 1,
         });
-        handleCloseAddress();
+        setOpenAdress(false);
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
@@ -286,10 +297,9 @@ export const UserProvider = ({ children }: IProps) => {
         handleClose,
         open,
         setOpen,
-        openAddress,
-        setOpenAddress,
-        handleOpenAddress,
-        handleCloseAddress,
+        handleOpenAdress,
+        openAdress,
+        setOpenAdress,
         onSubmitUpdateAddress,
       }}
     >

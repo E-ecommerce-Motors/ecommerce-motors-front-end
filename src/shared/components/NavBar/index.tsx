@@ -22,19 +22,24 @@ import { EditUser } from "../Modal/editUser";
 import { EditAddress } from "../Modal/EditAddress";
 import { updateAuth } from "../../providers/authProvider";
 import { Link } from "react-router-dom";
+import { IUserData } from "../../interfaces/user";
+import { EditAddress } from "../Modal/editAdress";
 
 export const NavBar = () => {
   const {
     logout,
     userData,
+    setUserData,
     handleOpen,
     handleClose,
     open,
     getUser,
-    openAddress,
-    handleOpenAddress,
-    handleCloseAddress,
+    openAdress,
+    setOpenAdress,
+    handleOpenAdress,
   } = useContext(UserContext);
+  const { retireAnnouncement } = updateAuth();
+
 
   const token = localStorage.getItem("@MotorsShop:token");
   const auth = token ? "authenticated" : "default";
@@ -48,8 +53,9 @@ export const NavBar = () => {
   const [navMobile, setNavMobile] = useState(false);
 
   useEffect(() => {
-    getUser;
-  }, [token]);
+    getUser();
+  }, []);
+
 
   const handleScroll = (anchorId: string) => {
     const anchor = document.getElementById(anchorId);
@@ -101,7 +107,10 @@ export const NavBar = () => {
                 <Icon>{`${icon1}${icon2}`}</Icon>
                 <Name>{user?.name}</Name>
               </User>
-              <MenuBox open={openProfile}>
+              <MenuBox
+                open={openProfile}
+                onMouseLeave={() => setOpenProfile(!openProfile)}
+              >
                 <OptionsProfile type="button" onClick={handleOpen}>
                   Editar Perfil
                 </OptionsProfile>
@@ -110,10 +119,10 @@ export const NavBar = () => {
                     <EditUser />
                   </Box>
                 </Modal>
-                <OptionsProfile onClick={handleOpenAddress}>
+                <OptionsProfile onClick={handleOpenAdress}>
                   Editar Endereço
                 </OptionsProfile>
-                <Modal open={openAddress} onClose={handleCloseAddress}>
+                <Modal open={openAdress} onClose={() => setOpenAdress(false)}>
                   <Box>
                     <EditAddress />
                   </Box>
@@ -132,7 +141,13 @@ export const NavBar = () => {
                       : "Minhas Compras"}
                   </OptionsProfile>
                 </Link>
-                <OptionsProfile onClick={() => logout()}>Sair</OptionsProfile>
+                <OptionsProfile
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  Sair
+                </OptionsProfile>
               </MenuBox>
             </Profile>
           </>

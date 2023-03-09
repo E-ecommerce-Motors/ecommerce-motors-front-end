@@ -37,7 +37,6 @@ interface ImgCover {
 export const CarouselShopping = ({ type, id }: Props) => {
   const { getAnn, shopping } = updateAuth();
   const { userId } = useParams();
-  console.log(shopping);
 
   const typeFilter: Announcement[] = [];
 
