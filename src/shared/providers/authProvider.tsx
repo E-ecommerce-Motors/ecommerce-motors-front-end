@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { api } from "../services/api";
+import { UserContext } from "./UserProvider";
 
 interface ChildrenProp {
   children: ReactNode;
@@ -31,18 +32,25 @@ interface Comment {
 interface ContextProps {
   getAnn: () => void;
 
+  getComments: (id: number) => void;
+
   retireAnnouncement: (id: number) => void;
 
   UpdateAnn: (data: Update, id: number) => void;
 
   deleteAnnouncement: (id: number) => void;
+  DeleteComment: (id: number, idComment: number) => void;
 
   CreateComment: (data: Comment, id: number) => void;
+
+  editComment: (data: any, id: number, commentId: number) => void;
 
   announcements: any;
 
   announcement: any;
 
+  comments: any;
+  
   shopping: any;
 
   setShopping: Dispatch<SetStateAction<any>>;
@@ -63,6 +71,8 @@ interface ContextProps {
 
   openDelete: boolean;
 
+  UpdateComment: (idComment: number, id: number, data: string) => void;
+
   setOpenDelete: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -79,6 +89,7 @@ const updateAuth = () => {
 const UpdateProvider = ({ children }: ChildrenProp) => {
   const [announcements, setAnnouncements] = useState<any>([]);
   const [announcement, setAnnouncement] = useState<any>([]);
+  const [comments, setComments] = useState<any>([]);
   const [shopping, setShopping] = useState<any>([]);
 
   useEffect(() => {
@@ -96,6 +107,18 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .then((response) =>
         setAnnouncements(JSON.parse(response.request.response))
       )
+      .catch(() => {});
+  };
+
+  const getComments = async (id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    await api
+      .get(`announcements/${id}/comments`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => setComments(JSON.parse(response.request.response)))
       .catch(() => {});
   };
 
@@ -123,9 +146,40 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => {});
   };
 
-  const retireAnnouncement = async (id: number) => {
+  const DeleteComment = async (idComment: number, id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
     await api
-      .get(`announcements/${id}`)
+      .delete(`announcements/${id}/comments/${idComment}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  const UpdateComment = async (idComment: number, id: number, dataT: any) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    const data = { data: dataT };
+
+    await api
+      .patch(`announcements/${id}/comments/${idComment}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  const retireAnnouncement = async (id: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    await api
+      .get(`announcements/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => setAnnouncement(response.data))
       .catch(() => {});
   };
@@ -138,6 +192,18 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         },
       })
       .then()
+      .catch(() => {});
+  };
+
+  const editComment = async (data: Comment, id: number, commentId: number) => {
+    const token = localStorage.getItem("@MotorsShop:token");
+    await api
+      .post(`announcements/${id}/comments/${commentId}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {})
       .catch(() => {});
   };
 
@@ -157,13 +223,18 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   return (
     <UpdateContext.Provider
       value={{
+        DeleteComment,
+        UpdateComment,
         getAnn,
+        getComments,
         UpdateAnn,
         CreateComment,
+        editComment,
         deleteAnnouncement,
         retireAnnouncement,
         announcements,
         announcement,
+        comments,
         open,
         shopping,
         setShopping,

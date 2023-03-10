@@ -92,6 +92,26 @@ export const TextArea = styled.p`
   }
 `;
 
+export const TextAreaInput = styled.input`
+  box-sizing: border-box;
+  width: 663px;
+  min-height: 72px;
+  font-family: ${theme.fonts.inter};
+  font-style: normal;
+  font-weight: ${theme.weight.body_2_400};
+  font-size: ${theme.size.body_2};
+  line-height: 24px;
+  padding-bottom: 20px;
+  color: ${theme.colors.grey2};
+  @media (max-width: 1320px) {
+    width: 483px;
+  }
+  @media (max-width: 780px) {
+    width: 283px;
+    max-height: 168px;
+  }
+`;
+
 export const Time = styled.p`
   font-family: ${theme.fonts.inter};
   font-style: normal;
@@ -135,4 +155,22 @@ export const Ball = styled.div`
   height: 4px;
   background: ${theme.colors.grey4};
   border-radius: 150px;
+`;
+
+export const Delete = styled.div`
+  width: max-content;
+  background: transparent;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 402px;
+  width: 100%;
+
+  @media (max-width: 1320px) {
+    width: 483px;
+  }
 `;

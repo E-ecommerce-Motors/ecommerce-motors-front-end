@@ -4,7 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { UserContext, UserProvider } from "./shared/providers/UserProvider";
 import AnnouncementProvider from "./shared/providers/AnnouncementProvider";
-import { EditUserModal } from "./shared/components/EditUserModal";
+
+import { CommentEdit } from "./shared/components/CommentEdit";
 
 const App = () => {
   return (
