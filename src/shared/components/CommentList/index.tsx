@@ -9,14 +9,33 @@ import {
   Content,
   TextArea,
   Ball,
+  Delete,
+  Header,
+  TextAreaInput,
 } from "./styles";
 import { updateAuth } from "../../providers/authProvider";
-import { useEffect } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
 import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../providers/UserProvider";
+import EditIcon from "@mui/icons-material/Edit";
+import Modal from "@mui/material/Modal";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+interface Comment {
+  text: string;
+  userId: number;
+}
 
 export const RetireAnnouncement = () => {
-  const { announcement, retireAnnouncement } = updateAuth();
+  const { announcement, retireAnnouncement, DeleteComment, UpdateComment } =
+    updateAuth();
   const { id } = useParams();
+  const { userData } = useContext(UserContext);
+  const [editText, setEditText] = useState("");
 
   const msInDay = 24 * 60 * 60 * 1000;
   const msInHour = 60 * 60 * 1000;
@@ -44,28 +63,88 @@ export const RetireAnnouncement = () => {
     }
   };
 
+  const schema = yup.object().shape({
+    text: yup.string(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Comment>({
+    resolver: yupResolver(schema),
+  });
+
   const user = announcement.user.name || {};
-  const name = user ? user.split(" ") : "";
-  const icon1 = name[0] ? name[0].slice(0, 1).toUpperCase() : "";
-  const icon2 = name[1] ? name[1].slice(0, 1).toUpperCase() : "";
+
+  const deleteComment = (index: number) => {
+    const idComment = announcement.intermediarys[index].id;
+    DeleteComment(idComment, Number(id));
+    reload();
+  };
+  const submit = (index: number) => {
+    const idComment = announcement.intermediarys[index].id;
+    const data: any = { text: editText };
+    UpdateComment(idComment, Number(id), data);
+    reload();
+  };
+
+  const reload = () => {
+    setTimeout(() => {
+      retireAnnouncement(Number(id));
+    }, 300);
+  };
 
   return (
     <Container>
       <SectionTitle>Comentários</SectionTitle>
       <Frame>
         {announcement.intermediarys.map((element: any, index: number) => {
+          const [edit, setEdit] = useState(false);
           calcTime(element.comment.createdAt);
+          const name = element.comment.user.name
+            ? element.comment.user.name.split(" ")
+            : "";
+          const icon1 = name[0] ? name[0].slice(0, 1).toUpperCase() : "";
+          const icon2 = name[1] ? name[1].slice(0, 1).toUpperCase() : "";
           return (
             <Content key={index}>
-              <User>
-                <Icon>{`${icon1}${icon2}`}</Icon>
-                <Name>{element.comment.user.name}</Name>
-                <Ball />
-                <Time>
-                  {timePass[index] ? timePass[index] : "há menos de 1 minuto"}
-                </Time>
-              </User>
-              <TextArea>{element.comment.text}</TextArea>
+              <Header>
+                <User>
+                  <Icon>{`${icon1}${icon2}`}</Icon>
+                  <Name>{element.comment.user.name}</Name>
+                  <Ball />
+                  <Time>
+                    {timePass[index] ? timePass[index] : "há menos de 1 minuto"}
+                  </Time>
+                </User>
+                {userData.id == element.comment.userId ? (
+                  <Delete>
+                    <IconButton onClick={() => setEdit(true)}>
+                      <EditIcon style={{ width: "14px", height: "14px" }} />
+                    </IconButton>
+                    <IconButton onClick={() => deleteComment(index)}>
+                      <DeleteIcon style={{ width: "14px", height: "14px" }} />
+                    </IconButton>
+                  </Delete>
+                ) : (
+                  <></>
+                )}
+              </Header>
+              {edit ? (
+                <TextAreaInput
+                  placeholder={element.comment.text}
+                  value={editText}
+                  {...register("text")}
+                  onChange={(e) => setEditText(e.target.value)}
+                  onBlur={() => {
+                    setEdit(false);
+                    submit(index);
+                  }}
+                />
+              ) : (
+                <TextArea>{element.comment.text}</TextArea>
+              )}
             </Content>
           );
         })}

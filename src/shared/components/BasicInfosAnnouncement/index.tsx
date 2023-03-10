@@ -17,6 +17,7 @@ import { UserContext } from "../../providers/UserProvider";
 export const InfosAnnouncement = () => {
   const { announcement, setShopping, shopping } = updateAuth();
   const { userData } = useContext(UserContext);
+  const token = localStorage.getItem("@MotorsShop:token");
 
   const priceformat: string = announcement.price.toLocaleString(`pt-BR`, {
     style: "currency",
@@ -55,6 +56,7 @@ export const InfosAnnouncement = () => {
         colorHover={theme.colors.whiteFixed}
         style={{ width: "100px" }}
         onClick={handleShopping}
+        disabled={token ? false : true}
       >
         Comprar
       </ButtonBig>

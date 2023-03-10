@@ -49,6 +49,10 @@ export const ProductCardAuction = ({
     currency: "BRL",
   });
 
+  const name1 = name ? name.split(" ") : "";
+  const icon1 = name1[0] ? name1[0].slice(0, 1).toUpperCase() : "";
+  const icon2 = name1[1] ? name1[1].slice(0, 1).toUpperCase() : "";
+
   return (
     <Product>
       <Card>
@@ -65,7 +69,7 @@ export const ProductCardAuction = ({
               {text.length > 86 ? `${text.slice(0, 84)}...` : text}
             </Paragraph>
             <Saler>
-              <Icon>{name.slice(0, 1)}</Icon>
+              <Icon>{`${icon1}${icon2}`}</Icon>
               <Name>{name}</Name>
             </Saler>
             <Footer>
