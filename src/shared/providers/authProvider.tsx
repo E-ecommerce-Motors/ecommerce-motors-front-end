@@ -7,6 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "react-toastify";
 import { api } from "../services/api";
 import { UserContext } from "./UserProvider";
 
@@ -39,6 +40,7 @@ interface ContextProps {
   UpdateAnn: (data: Update, id: number) => void;
 
   deleteAnnouncement: (id: number) => void;
+  
   DeleteComment: (id: number, idComment: number) => void;
 
   CreateComment: (data: Comment, id: number) => void;
@@ -50,7 +52,7 @@ interface ContextProps {
   announcement: any;
 
   comments: any;
-  
+
   shopping: any;
 
   setShopping: Dispatch<SetStateAction<any>>;
@@ -86,6 +88,8 @@ const updateAuth = () => {
   return context;
 };
 
+const token = localStorage.getItem("@MotorsShop:token");
+
 const UpdateProvider = ({ children }: ChildrenProp) => {
   const [announcements, setAnnouncements] = useState<any>([]);
   const [announcement, setAnnouncement] = useState<any>([]);
@@ -107,11 +111,10 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .then((response) =>
         setAnnouncements(JSON.parse(response.request.response))
       )
-      .catch(() => {});
+      .catch(() => { });
   };
 
   const getComments = async (id: number) => {
-    const token = localStorage.getItem("@MotorsShop:token");
     await api
       .get(`announcements/${id}/comments`, {
         headers: {
@@ -119,47 +122,51 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         },
       })
       .then((response) => setComments(JSON.parse(response.request.response)))
-      .catch(() => {});
+      .catch(() => { });
   };
 
   const UpdateAnn = async (data: Update, id: number) => {
-    const token = localStorage.getItem("@MotorsShop:token");
     await api
       .patch(`announcements/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then()
-      .catch(() => {});
+      .then(() => {
+        toast.success("Anúncio editado com sucesso!", {
+          toastId: 1,
+        });
+      })
+      .catch(() => { });
   };
 
   const CreateComment = async (data: Comment, id: number) => {
-    const token = localStorage.getItem("@MotorsShop:token");
     await api
       .post(`announcements/${id}/comments`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {})
-      .catch(() => {});
+      .then(() => {
+        toast.info("Anúncio deletado", {
+          toastId: 1,
+        });
+      })
+      .catch((error) => { console.log(error) });
   };
 
   const DeleteComment = async (idComment: number, id: number) => {
-    const token = localStorage.getItem("@MotorsShop:token");
     await api
       .delete(`announcements/${id}/comments/${idComment}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {})
-      .catch(() => {});
+      .then(() => { })
+      .catch(() => { });
   };
 
   const UpdateComment = async (idComment: number, id: number, dataT: any) => {
-    const token = localStorage.getItem("@MotorsShop:token");
     const data = { data: dataT };
 
     await api
@@ -168,12 +175,11 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {})
-      .catch(() => {});
+      .then(() => { })
+      .catch(() => { });
   };
 
   const retireAnnouncement = async (id: number) => {
-    const token = localStorage.getItem("@MotorsShop:token");
     await api
       .get(`announcements/${id}`, {
         headers: {
@@ -181,10 +187,10 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         },
       })
       .then((response) => setAnnouncement(response.data))
-      .catch(() => {});
+      .catch(() => { });
   };
+
   const deleteAnnouncement = async (id: number) => {
-    const token = localStorage.getItem("@MotorsShop:token");
     await api
       .delete(`announcements/${id}`, {
         headers: {
@@ -192,23 +198,24 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
         },
       })
       .then()
-      .catch(() => {});
+      .catch(() => { });
   };
 
   const editComment = async (data: Comment, id: number, commentId: number) => {
-    const token = localStorage.getItem("@MotorsShop:token");
     await api
       .post(`announcements/${id}/comments/${commentId}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {})
-      .catch(() => {});
+      .then(() => { })
+      .catch(() => { });
   };
 
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
+
   const handleOpenEdit = (id: number) => {
     retireAnnouncement(id);
     setTimeout(() => {
