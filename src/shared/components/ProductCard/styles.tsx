@@ -191,6 +191,12 @@ export const Edit = styled.button`
   font-size: ${theme.size.button_medium_text};
   line-height: 0px;
   color: ${theme.colors.grey1};
+
+    :hover{
+      background-color: ${theme.colors.brand2};
+      border: 1.5px solid ${theme.colors.brand2};
+      color: ${theme.colors.whiteFixed};
+    }
 `;
 
 export const FooterBtn = styled.div`

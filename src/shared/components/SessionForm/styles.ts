@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
-import 'animate.css';
 
 export const ContentForm = styled.form`
   display: flex;
@@ -15,10 +14,13 @@ export const ContentForm = styled.form`
   min-height: 25.75rem;
   background-color: ${theme.colors.whiteFixed};
   border-radius: .25rem;
+  animation: bounceIn 1s;
+
 
     section {
       padding: .625rem 0rem;
     }
+
     span {
       font-size: ${theme.size.body_1};
       font-weight: ${theme.weight.body_2_500};
@@ -35,7 +37,7 @@ export const ContentForm = styled.form`
     
 `
 
-export const LinkStyled = styled(Link)`
+export const LinkStyled = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -28,9 +28,8 @@ export const SessionForm = () => {
     box.current?.classList.add("animate__animated", "animate__bounceOut");
     setTimeout(() => {
       navigate("/register");
-    }, 500);
+    }, 700);
   };
-
 
   const { onSubmitLogin, setRecovery, recovery } = useContext(UserContext);
 
@@ -71,7 +70,7 @@ export const SessionForm = () => {
         <NotHaveAccount>
           <p>Ainda não possui conta?</p>
         </NotHaveAccount>
-        <LinkStyled to="/register">Cadastrar</LinkStyled>
+        <LinkStyled onClick={handleOut}>Cadastrar</LinkStyled>
       </ContentForm>
     </div>
   );

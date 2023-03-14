@@ -3,7 +3,6 @@ import { theme } from "../../../styles/theme";
 import { useForm } from "react-hook-form";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-
 import { AnnouncementContext } from "../../providers/AnnouncementProvider";
 import * as yup from "yup";
 import {
@@ -19,7 +18,7 @@ import {
   TextArea,
   Container,
   Btn,
-} from "../Modal/editAnnouncement/styles";
+} from "../Modal/EditAnnouncement/styles";
 import { ButtonBig } from ".././Button/styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Create } from "../../interfaces/announcement";
@@ -65,7 +64,7 @@ export const CreateAnnouncementModal = () => {
   useEffect(() => {
     getUser();
   }, []);
-  
+
   const {
     toggleModal,
     CreateAnn,
@@ -91,7 +90,7 @@ export const CreateAnnouncementModal = () => {
     imageGallery,
     handleInputChange,
   } = useContext(AnnouncementContext);
-  
+
   return (
     <Container>
       <Header>

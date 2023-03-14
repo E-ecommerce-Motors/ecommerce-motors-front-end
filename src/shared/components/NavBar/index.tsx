@@ -18,11 +18,10 @@ import {
   Mobile,
   ContainerMobile,
 } from "./styles";
-import { EditUser } from "../Modal/editUser";
+import { EditUser } from "../Modal/EditUser";
 import { updateAuth } from "../../providers/authProvider";
 import { Link } from "react-router-dom";
-import { IUserData } from "../../interfaces/user";
-import { EditAddress } from "../Modal/editAdress";
+import { EditAddress } from "../Modal/EditAddress";
 
 export const NavBar = () => {
   const {
@@ -54,7 +53,6 @@ export const NavBar = () => {
     getUser();
   }, []);
 
-<<<<<<< HEAD
   const handleScroll = (anchorId: string, offset: number = 0) => {
     const anchor = document.getElementById(anchorId);
     if (anchor) {
@@ -64,17 +62,6 @@ export const NavBar = () => {
 
   function handleClick(id: string, offset: number) {
     handleScroll(id, offset);
-=======
-  const handleScroll = (anchorId: string) => {
-    const anchor = document.getElementById(anchorId);
-    if (anchor) {
-      window.scrollTo({ top: anchor.offsetTop, behavior: "smooth" });
-    }
-  };
-
-  function handleClick(id: string) {
-    handleScroll(id);
->>>>>>> 6d8e03dafbcf3a0806cb4913734b7c8d412e34e2
   }
 
   return (
@@ -92,7 +79,6 @@ export const NavBar = () => {
         </Mobile>
       </ContainerMobile>
       <Urls authenticaded={auth} mobile={navMobile}>
-<<<<<<< HEAD
         <Option authenticaded={auth} onClick={() => handleClick("car", 1500)}>
           Carros
         </Option>
@@ -102,18 +88,6 @@ export const NavBar = () => {
         <Option authenticaded={auth} onClick={() => handleClick("auction", 0)}>
           Leilão
         </Option>
-=======
-        <Option authenticaded={auth} onClick={() => handleClick("car")}>
-          Carros
-        </Option>
-        <Option authenticaded={auth} onClick={() => handleClick("motorcycle")}>
-          Motos
-        </Option>
-        <Option authenticaded={auth} onClick={() => handleClick("auction")}>
-          Leilão
-        </Option>
-
->>>>>>> 6d8e03dafbcf3a0806cb4913734b7c8d412e34e2
         {!token ? (
           <>
             <Line />
@@ -128,7 +102,7 @@ export const NavBar = () => {
                 <Icon>{`${icon1}${icon2}`}</Icon>
                 <Name>{user?.name}</Name>
               </User>
-              <MenuBox
+              <MenuBox 
                 open={openProfile}
                 onMouseLeave={() => setOpenProfile(!openProfile)}
               >

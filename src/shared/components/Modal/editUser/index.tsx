@@ -22,7 +22,7 @@ import {
   TextArea,
   Title,
   Type,
-} from "../editAnnouncement/styles";
+} from "../EditAnnouncement/styles";
 
 export const EditUser = () => {
   const { userData, onSubmitUpdate, getUser } = useContext(UserContext);

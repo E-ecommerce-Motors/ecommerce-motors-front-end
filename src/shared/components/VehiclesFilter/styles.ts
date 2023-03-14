@@ -4,33 +4,50 @@ import { theme } from "../../../styles/theme";
 
 
 export const ContentFilter = styled.div`
-position: relative;
-padding-top: 56.25%;
 display: flex;
 flex-direction: column;
+justify-content: center;
 align-items: center;
+gap: 46px;
+width: 100%;
+height: 550px;
+background-color: ${theme.colors.brand2};
 
+    .react-player {
+        display: none;
+    }
 
     @media(min-width: 768px){
-        height: 400px;
+        background-color: transparent;
+        position: relative;
+        padding-top: 56.25%;
+
+        .react-player {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     }
-    .react-player {
-        position: absolute;
-        top: 0;
-        left: 0;
-    
-    }
+   
    
 `
 
 export const ContentText = styled.div`
-position: absolute;
-top: 35%;
-z-index: 1;
 display: flex;
 flex-direction: column;
 align-items: center;
-gap: 25px;
+width: 750px;
+gap: 21px;
+
+    @media(min-width: 768px){
+        position: absolute;
+        top: 25%;
+        z-index: 1;
+    }
+     @media(min-width: 1024px) {
+        top: 30%;
+     }
 
     h2 {
         color: ${theme.colors.brand4};
@@ -53,16 +70,19 @@ gap: 25px;
 `
 
 export const ContentButtons = styled.div`
-position: absolute;
-z-index:1;
-top: 50%;
 display: flex;
 flex-direction: column;
 gap: 21px;
 
     @media(min-width: 768px) {
         flex-direction: row;
+        position: absolute;
+        z-index:1;
+        top: 60%;
     }
+     @media(min-width: 1024px) {
+        top: 50%;
+     }
 `
 
 export const ContentProfile = styled.div`

@@ -3,7 +3,7 @@ import { Footer } from "../../shared/components/Footer";
 import { NavBar } from "../../shared/components/NavBar";
 import { Content, Background, BgBrand, Allcontet } from "./styles";
 import { RetireAnnouncement } from "../../shared/components/CommentList";
-import { DescriptionAnnouncement } from "../../shared/components/description";
+import { DescriptionAnnouncement } from "../../shared/components/Description";
 import { InfosAnnouncement } from "../../shared/components/BasicInfosAnnouncement";
 import { ImgAnnouncement } from "../../shared/components/ImgAnnouncementPage";
 import { updateAuth } from "../../shared/providers/authProvider";

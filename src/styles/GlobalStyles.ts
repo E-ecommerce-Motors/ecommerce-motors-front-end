@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import "@fontsource/inter";
+import 'animate.css';
 
 export const GlobalStyles = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
@@ -34,7 +35,7 @@ export const GlobalStyles = createGlobalStyle`
     input:-webkit-autofill {
         -webkit-text-fill-color: #000 !important;
     }
-    
+
     :root{
 
         /* ========   HEADING   ======== */

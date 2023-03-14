@@ -59,6 +59,8 @@ export const Container = styled.section`
   justify-content: center;
   padding: 0px 16px 0px;
   gap: 24px;
+  animation: fadeIn 1s;
+
 
   @media (min-width: 768px) {
     width: 520px;
