@@ -1,37 +1,27 @@
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import TextFieldInput from "./shared/components/TextFieldInput";
-import { NavBar } from "./shared/components/navBar";
+import { RoutesMain } from "./shared/routes";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { UserContext, UserProvider } from "./shared/providers/UserProvider";
+import AnnouncementProvider from "./shared/providers/AnnouncementProvider";
 
+import { CommentEdit } from "./shared/components/CommentEdit";
 
 const App = () => {
   return (
-    <>
-      <TextFieldInput
-        placeholderText="textarea"
-        labelText="textarea"
-        maxRowsNumber={4}
-        inputHeight={130}
-        multilineOption={true}
-      />
-      <TextFieldInput
-        placeholderText="textarea"
-        labelText="textarea"
-        maxRowsNumber={4}
-        inputHeight={130}
-        multilineOption={true}
-      />
-
-      <ToastContainer
-        position={"top-right"}
-        autoClose={1000}
-        hideProgressBar={false}
-        closeOnClick={true}
-        pauseOnHover={true}
-        draggable={true}
-      />
-      <NavBar auth={"authenticated"} user={"Lucas Galvs"} />
-    </>
+    <AnnouncementProvider>
+      <UserProvider>
+        <ToastContainer
+          position={"top-right"}
+          autoClose={1000}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+        />
+        <RoutesMain></RoutesMain>
+      </UserProvider>
+    </AnnouncementProvider>
   );
 };
 

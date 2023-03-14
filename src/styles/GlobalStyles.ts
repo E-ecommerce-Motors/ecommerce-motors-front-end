@@ -24,6 +24,16 @@ export const GlobalStyles = createGlobalStyle`
     body{
         background-color: var(--whiteFixed);
     }
+    button{
+        cursor: pointer;
+    }
+     input:-webkit-autofill {
+    box-shadow: 0 0 0 30px #fff inset;
+
+    }
+    input:-webkit-autofill {
+        -webkit-text-fill-color: #000 !important;
+    }
 
     :root{
 
@@ -116,5 +126,6 @@ export const GlobalStyles = createGlobalStyle`
         --random11: #5700E3;
         --random12: #30007D;
     }
+    
     
 `;
