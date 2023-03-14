@@ -1,7 +1,9 @@
+import { Dispatch, SetStateAction, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { theme } from "../../../styles/theme";
 import { ButtonBig } from "../Button/styles";
 import { IUserUpdate } from "../../interfaces/user";
+import { UserContext } from "../../providers/UserProvider";
 import { CloseButton } from "../CreateAnnouncementModal/style";
 import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
 import { Button, Container, Content, Para, SectionTitle } from "./styles";

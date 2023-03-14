@@ -60,7 +60,6 @@ export const VehiclesFilter = () => {
       )}
       {token ? (
         <ContentProfile>
-
           <Profile key={userData?.id}>
             <User>
               <Icon>{`${icon1}${icon2}`}</Icon>
@@ -90,8 +89,8 @@ export const VehiclesFilter = () => {
                 Criar anúncio
               </ButtonBig>
             ) : (
-              <>
-              </>
+
+              <></>
             )}
           </Profile>
         </ContentProfile>
@@ -105,6 +104,7 @@ export const VehiclesFilter = () => {
             <ButtonBig
               id="car"
               bg={theme.colors.invi}
+
               button={theme.button.big}
               color={theme.colors.whiteFixed}
               border={theme.colors.whiteFixed}
@@ -114,6 +114,7 @@ export const VehiclesFilter = () => {
               bgHover={theme.colors.whiteFixed}
               borderHover={theme.colors.whiteFixed}
               onClick={() => handleClick("car", 1500)}
+
             >
               Carros
             </ButtonBig>
@@ -133,7 +134,7 @@ export const VehiclesFilter = () => {
               Motos
             </ButtonBig>
           </ContentButtons>
-            <ReactPlayer url="https://res.cloudinary.com/dbls3oj3f/video/upload/v1678763893/carvideo1_gmrmde.mp4"
+          <ReactPlayer url="https://res.cloudinary.com/dbls3oj3f/video/upload/v1678763893/carvideo1_gmrmde.mp4"
             controls={false}
             playing={true}
             loop={true}

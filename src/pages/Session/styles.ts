@@ -11,5 +11,4 @@ export const ContentSession = styled.div`
     @media(min-width: 768px){
       height: calc(100vh - 80px)
     }
-
 `
