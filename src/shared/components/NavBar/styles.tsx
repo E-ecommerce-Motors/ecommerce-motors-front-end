@@ -14,12 +14,14 @@ export const Container = styled.section`
   justify-content: space-between;
   align-items: center;
   position: fixed;
-  padding: 0px 60px;
+  padding: 0px 30px;
   width: 100%;
   height: 80px;
   background: ${theme.colors.grey10};
   border-bottom: 2px solid ${theme.colors.grey6};
   z-index: 10;
+  animation: fadeInDown 1s;
+
   @media (max-width: 1000px) {
     flex-direction: ${(props: Props) => (props.mobile ? "column" : "row")};
     height: ${(props: Props) => (props.mobile ? "100vh" : "80px")};
@@ -216,12 +218,27 @@ export const MenuBox = styled.div`
   top: 70px;
   background: ${theme.colors.grey9};
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
+  border-radius: 5px;
   z-index: 2;
+  background-color: #ffffff;
+  padding: 10px;
+
+  ::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 47px;
+  margin-left: -20px;
+  border-top: 0px solid transparent;
+  border-bottom: 20px solid #ffffff;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  }
+
   @media (max-width: 1000px) {
     position: relative;
     top: 15px;
-    width: 88vw;
+    width: 81vw;
   }
 `;
 

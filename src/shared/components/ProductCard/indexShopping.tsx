@@ -1,7 +1,7 @@
 import { Box, Modal } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { updateAuth } from "../../providers/authProvider";
-import { EditAnnouncement } from "../Modal/editAnnouncement";
+import { EditAnnouncement } from "../Modal/EditAnnouncement";
 import { Link, useParams } from "react-router-dom";
 import {
   Heading7,

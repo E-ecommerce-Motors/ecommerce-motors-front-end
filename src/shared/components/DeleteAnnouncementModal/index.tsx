@@ -1,13 +1,14 @@
-import { Dispatch, SetStateAction, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { theme } from "../../../styles/theme";
 import { ButtonBig } from "../Button/styles";
 import { IUserUpdate } from "../../interfaces/user";
-import { UserContext } from "../../providers/UserProvider";
 import { CloseButton } from "../CreateAnnouncementModal/style";
-import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
+import { FlexBtn, Header, Type } from "../Modal/EditAnnouncement/styles";
 import { Button, Container, Content, Para, SectionTitle } from "./styles";
 import { updateAuth } from "../../providers/authProvider";
+import { IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+
 
 export const DeleteAnnModal = (id: any) => {
   const { handleCloseDelete, deleteAnnouncement } = updateAuth();
@@ -25,9 +26,9 @@ export const DeleteAnnModal = (id: any) => {
     <Container>
       <Header>
         <SectionTitle>Excluir anúncio</SectionTitle>
-        <CloseButton type="button" onClick={handleCloseDelete}>
-          x
-        </CloseButton>
+        <IconButton onClick={handleCloseDelete}>
+          <CloseIcon />
+        </IconButton>
       </Header>
       <Content onSubmit={handleSubmit(submit)}>
         <Type>Tem certeza que deseja remover este anúncio?</Type>

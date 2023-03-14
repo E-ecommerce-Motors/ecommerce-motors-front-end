@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { IconButton } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { ButtonBig } from "../../Button/styles";
 import { theme } from "../../../../styles/theme";
 import CloseIcon from "@mui/icons-material/Close";
@@ -17,18 +17,11 @@ import {
   Heading,
   Title,
   Type,
-} from "../editAnnouncement/styles";
+} from "../EditAnnouncement/styles";
 
 export const EditAddress = () => {
   const { userData, onSubmitUpdateAddress, getUser, setOpenAdress } =
     useContext(UserContext);
-
-  const [name, setName] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [description, setDescription] = useState("");
 
   const {
     register,

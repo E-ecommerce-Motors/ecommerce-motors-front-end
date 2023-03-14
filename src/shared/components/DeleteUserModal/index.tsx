@@ -5,7 +5,7 @@ import { ButtonBig } from ".././Button/styles";
 import { IUserUpdate } from "../../interfaces/user";
 import { UserContext } from "../../providers/UserProvider";
 import { CloseButton } from "../CreateAnnouncementModal/style";
-import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
+import { FlexBtn, Header, Type } from "../Modal/EditAnnouncement/styles";
 import { Button, Container, Content, Para, SectionTitle } from "./styles";
 import { updateAuth } from "../../providers/authProvider";
 

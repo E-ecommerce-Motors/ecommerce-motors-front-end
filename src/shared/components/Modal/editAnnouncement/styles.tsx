@@ -19,6 +19,8 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  animation: fadeIn 1s;
+
   @media (max-width: 666px) {
     padding: 0px 16px 32px;
     gap: 37px;
@@ -42,7 +44,7 @@ export const Header = styled.div`
 `;
 
 export const Heading = styled.h2`
-  width: 116px;
+  width: 130px;
   height: 20px;
   font-family: ${theme.fonts.lexend};
   font-style: normal;
@@ -68,6 +70,7 @@ export const Content = styled.form`
     display: none;
   }
   margin-bottom: 25px;
+
   @media (max-width: 666px) {
     width: 314px;
     padding: 0px;
