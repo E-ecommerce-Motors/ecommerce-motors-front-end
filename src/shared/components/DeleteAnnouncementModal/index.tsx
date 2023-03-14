@@ -1,40 +1,64 @@
-import { useState } from "react";
-import { api } from "../../services/api";
+import { Dispatch, SetStateAction, useContext } from "react";
+import { useForm } from "react-hook-form";
+import { theme } from "../../../styles/theme";
+import { ButtonBig } from "../Button/styles";
+import { IUserUpdate } from "../../interfaces/user";
+import { UserContext } from "../../providers/UserProvider";
+import { CloseButton } from "../CreateAnnouncementModal/style";
+import { FlexBtn, Header, Type } from "../Modal/editAnnouncement/styles";
+import { Button, Container, Content, Para, SectionTitle } from "./styles";
+import { updateAuth } from "../../providers/authProvider";
 
-const DeleteAnnouncementModal = ({ id }: { id: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const DeleteAnnModal = (id: any) => {
+  const { handleCloseDelete, deleteAnnouncement } = updateAuth();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUserUpdate>();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      await api.delete(`announcements/${id}`);
-      setIsOpen(false);
-    } catch (error) {
-      console.error(error);
-    }
+
+  const submit = async () => {
+    deleteAnnouncement(id.id);
   };
 
   return (
-    <>
-      <button className="normalButton" onClick={() => setIsOpen(true)}>
-        Excluir Anúncio
-      </button>
-      {isOpen && (
-        <div className="modalWrapper">
-          <div className="modalContent">
-            <h4>Tem certeza que deseja excluir este anúncio?</h4>
-            <form onSubmit={handleSubmit}>
-              <input type="hidden" name="id" value={id} />
-              <div className="createCancel">
-                <button type="submit">Confirmar Exclusão</button>
-                <button onClick={() => setIsOpen(false)}>Cancelar</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-    </>
+    <Container>
+      <Header>
+        <SectionTitle>Excluir anúncio</SectionTitle>
+        <CloseButton type="button" onClick={handleCloseDelete}>
+          x
+        </CloseButton>
+      </Header>
+      <Content onSubmit={handleSubmit(submit)}>
+        <Type>Tem certeza que deseja remover este anúncio?</Type>
+        <Para>
+          Essa ação não pode ser desfeita. Isso excluirá permanentemente sua
+          conta e removerá seus dados de nossos servidores.
+        </Para>
+        <FlexBtn style={{ marginBottom: "20px" }}>
+          <Button onClick={handleCloseDelete}>Cancelar</Button>
+          <ButtonBig
+            bg={theme.colors.alert2}
+            button={theme.button.big}
+            color={theme.colors.alert1}
+            size={theme.size.button_big_text}
+            weight={theme.weight.button_big_text}
+            border={theme.colors.alert2}
+            bgHover={theme.colors.alert3}
+            borderHover={theme.colors.alert3}
+            colorHover={theme.colors.alert1}
+            disable="sim"
+            type="submit"
+            onClick={() =>
+              setTimeout(() => {
+                handleCloseDelete();
+              }, 200)
+            }
+          >
+            Sim, Excluir anúncio
+          </ButtonBig>
+        </FlexBtn>
+      </Content>
+    </Container>
   );
 };
-
-export default DeleteAnnouncementModal;

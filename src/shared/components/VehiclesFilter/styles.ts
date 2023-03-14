@@ -1,22 +1,32 @@
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
 
+
+
 export const ContentFilter = styled.div`
+position: relative;
+padding-top: 56.25%;
 display: flex;
 flex-direction: column;
-justify-content: center;
 align-items: center;
-gap: 46px;
-width: 100%;
-height: 550px !important;
-background-color: ${theme.colors.brand2};
+
 
     @media(min-width: 768px){
         height: 400px;
     }
+    .react-player {
+        position: absolute;
+        top: 0;
+        left: 0;
+    
+    }
+   
 `
 
 export const ContentText = styled.div`
+position: absolute;
+top: 35%;
+z-index: 1;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -27,6 +37,8 @@ gap: 25px;
         font-weight: ${theme.weight.Heading_1_700};
         font-size: ${theme.size.Heading_3};
         text-align: center;
+       
+
         @media(min-width: 768px){
         font-size: ${theme.size.Heading_};
         }
@@ -36,10 +48,14 @@ gap: 25px;
         font-weight: ${theme.weight.body_1_400};
         font-size: ${theme.size.body_2};
         text-align: center;
+       
     }
 `
 
 export const ContentButtons = styled.div`
+position: absolute;
+z-index:1;
+top: 50%;
 display: flex;
 flex-direction: column;
 gap: 21px;

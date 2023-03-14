@@ -24,6 +24,7 @@ export const ContentForm = styled.form`
   min-height: 101rem;
   background-color: ${theme.colors.whiteFixed};
   border-radius: .25rem;
+  animation: fadeIn 1s;
 
     @media(min-width: 425px){
       padding: 2.5rem;

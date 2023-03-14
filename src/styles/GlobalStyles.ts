@@ -34,6 +34,7 @@ export const GlobalStyles = createGlobalStyle`
     input:-webkit-autofill {
         -webkit-text-fill-color: #000 !important;
     }
+    
     :root{
 
         /* ========   HEADING   ======== */
@@ -127,4 +128,4 @@ export const GlobalStyles = createGlobalStyle`
     }
     
     
-`;
+`

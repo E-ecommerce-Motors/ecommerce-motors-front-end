@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
+import 'animate.css';
 
 export const ContentForm = styled.form`
   display: flex;

@@ -16,8 +16,22 @@ import {
   NotHaveAccount,
 } from "./styles";
 import { RecoveryPassword } from "../RecoveryPassword";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SessionForm = () => {
+  const box = useRef<HTMLDivElement>(null);
+
+  const navigate = useNavigate();
+
+  const handleOut = () => {
+    box.current?.classList.add("animate__animated", "animate__bounceOut");
+    setTimeout(() => {
+      navigate("/register");
+    }, 500);
+  };
+
+
   const { onSubmitLogin, setRecovery, recovery } = useContext(UserContext);
 
   const {
@@ -27,9 +41,9 @@ export const SessionForm = () => {
   } = useForm<ILoginData>({ resolver: yupResolver(formLoginSchema) });
 
   return (
-    <>
+    <div ref={box}>
       {recovery && <RecoveryPassword />}
-      <ContentForm onSubmit={handleSubmit(onSubmitLogin)}>
+      <ContentForm onSubmit={handleSubmit(onSubmitLogin)} >
         <Title>Login</Title>
         <ContentInputs>
           <section>
@@ -59,6 +73,6 @@ export const SessionForm = () => {
         </NotHaveAccount>
         <LinkStyled to="/register">Cadastrar</LinkStyled>
       </ContentForm>
-    </>
+    </div>
   );
 };
