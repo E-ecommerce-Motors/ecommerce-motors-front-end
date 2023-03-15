@@ -73,7 +73,7 @@ export const VehiclesFilter = () => {
               </Name>
             </User>
             <Description>{userData?.description}</Description>
-            {userData?.typeAccount === "advertiser" && userId ? (
+            {userData?.typeAccount === "advertiser" ? (
               <ButtonBig
                 bg={theme.colors.whiteFixed}
                 button={theme.button.big}

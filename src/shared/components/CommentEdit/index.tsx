@@ -43,7 +43,6 @@ export const CommentEdit = () => {
   const getThem = async () => {
     useEffect(() => {
       setAnnData(announcements);
-      console.log(annData);
     }, []);
   };
   const {
@@ -79,11 +78,6 @@ export const CommentEdit = () => {
   ) => {
     setCommentText(event.target.value);
   };
-
-  // useEffect(() => {
-  //   setAnnData(announcements);
-  //   console.log(annData);
-  // }, []);
 
   if (isEditing) {
     return (

@@ -8,6 +8,7 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import {
   IAddressUpdate,
   ILoginData,
@@ -72,7 +73,9 @@ interface IUserContext {
 }
 
 export const UserProvider = ({ children }: IProps) => {
+
   const navigate = useNavigate();
+  
   const [iToken, setToken] = useState(
     localStorage.getItem("@MotorsShop:token") || ""
   );

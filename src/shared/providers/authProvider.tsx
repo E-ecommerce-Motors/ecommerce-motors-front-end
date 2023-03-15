@@ -40,7 +40,7 @@ interface ContextProps {
   UpdateAnn: (data: Update, id: number) => void;
 
   deleteAnnouncement: (id: number) => void;
-  
+
   DeleteComment: (id: number, idComment: number) => void;
 
   CreateComment: (data: Comment, id: number) => void;
@@ -105,8 +105,8 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
   const handleCloseDelete = () => setOpenDelete(false);
   const handleOpenDelete = () => setOpenDelete(true);
 
-  const getAnn = async () => {
-    await api
+  const getAnn = () => {
+    api
       .get("announcements")
       .then((response) =>
         setAnnouncements(JSON.parse(response.request.response))
@@ -114,8 +114,8 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => { });
   };
 
-  const getComments = async (id: number) => {
-    await api
+  const getComments = (id: number) => {
+    api
       .get(`announcements/${id}/comments`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -125,8 +125,8 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => { });
   };
 
-  const UpdateAnn = async (data: Update, id: number) => {
-    await api
+  const UpdateAnn = (data: Update, id: number) => {
+    api
       .patch(`announcements/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -140,23 +140,23 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => { });
   };
 
-  const CreateComment = async (data: Comment, id: number) => {
-    await api
+  const CreateComment = (data: Comment, id: number) => {
+    api
       .post(`announcements/${id}/comments`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then(() => {
-        toast.info("Anúncio deletado", {
+        toast.info("Comentário criado", {
           toastId: 1,
         });
       })
-      .catch((error) => { console.log(error) });
+      .catch(() => {  });
   };
 
-  const DeleteComment = async (idComment: number, id: number) => {
-    await api
+  const DeleteComment = (idComment: number, id: number) => {
+    api
       .delete(`announcements/${id}/comments/${idComment}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -166,10 +166,9 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => { });
   };
 
-  const UpdateComment = async (idComment: number, id: number, dataT: any) => {
+  const UpdateComment = (idComment: number, id: number, dataT: any) => {
     const data = { data: dataT };
-
-    await api
+    api
       .patch(`announcements/${id}/comments/${idComment}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -179,8 +178,8 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => { });
   };
 
-  const retireAnnouncement = async (id: number) => {
-    await api
+  const retireAnnouncement = (id: number) => {
+    api
       .get(`announcements/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -190,15 +189,23 @@ const UpdateProvider = ({ children }: ChildrenProp) => {
       .catch(() => { });
   };
 
-  const deleteAnnouncement = async (id: number) => {
-    await api
+  const deleteAnnouncement = (id: number) => {
+    api
       .delete(`announcements/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then()
-      .catch(() => { });
+      .then(() => {
+        toast.info("Anúncio deletado!", {
+          toastId: 1,
+        });
+      })
+      .catch((err) => {
+        toast.error(err.message, {
+          toastId: 1,
+        });
+      });
   };
 
   const editComment = async (data: Comment, id: number, commentId: number) => {

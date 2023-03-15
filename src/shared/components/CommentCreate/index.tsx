@@ -45,20 +45,22 @@ export const CreateComment = () => {
   } = useForm<Comment>({
     resolver: yupResolver(schema),
   });
-
-  const submit = (data: Comment) => {
-    data.userId = userData.id;
-    data.text = comment;
-    CreateComment(data, Number(id));
-    reload();
-  };
-
+  
   const reload = () => {
     setTimeout(() => {
       retireAnnouncement(Number(id));
     }, 300);
     setComment("");
   };
+
+  const submit = (data: Comment) => {
+    console.log(data)
+    data.userId = userData.id;
+    data.text = comment;
+    CreateComment(data, Number(id));
+    reload();
+  };
+
 
   const user = userData || {};
   const name = user.name ? user.name.split(" ") : [];
@@ -95,7 +97,6 @@ export const CreateComment = () => {
             bgHover={theme.colors.brand2}
             borderHover={theme.colors.brand2}
             colorHover={theme.colors.whiteFixed}
-            // style={{ position: "absolute", marginTop: "100px" }}
             type="submit"
             disabled={token ? false : true}
           >
