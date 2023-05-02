@@ -14,7 +14,7 @@ export const Footer = () => {
   return (
     <ContentFooter>
       <img
-        src="../../../../src/assets/motors-shop-white.png"
+        src="https://res.cloudinary.com/dbls3oj3f/image/upload/v1683061544/motors-shop-white_wd3tam.png"
         alt="motors-shop-logo"
       />
       <p>© 2022 - Todos os direitos reservados.</p>

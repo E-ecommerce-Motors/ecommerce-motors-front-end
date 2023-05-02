@@ -40,7 +40,7 @@ export const ContainerMobile = styled.div`
   border-bottom: 0px solid ${theme.colors.grey6};
   @media (max-width: 1000px) {
     border-bottom: ${(props: Props) =>
-      props.mobile ? "2px solid #DEE2E6" : "0px"};
+    props.mobile ? "2px solid #DEE2E6" : "0px"};
     padding: ${(props: Props) => (props.mobile ? "0px 30px" : "0px")};
   }
 `;
@@ -48,7 +48,7 @@ export const ContainerMobile = styled.div`
 export const Text = styled(Link)`
   width: 153.02px;
   height: 26.34px;
-  background-image: url(../../../../src/assets/motors-shop-dark.png);
+  background-image: url(https://res.cloudinary.com/dbls3oj3f/image/upload/v1683061533/motors-shop-dark_npys1n.png);
 `;
 
 export const Option = styled.a`
